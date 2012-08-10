@@ -1,0 +1,4 @@
+http://commons.wikimedia.org/wiki/Category:SVG_chess_pieces/Standard_transparent
+http://moscow2012.fide.com/en/live?g=20120530
+http://raphaeljs.com/reference.html
+http://www.alistapart.com/articles/using-svg-for-flexible-scalable-and-fun-backgrounds-part-ii/
