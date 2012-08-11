@@ -22,4 +22,5 @@ $(JSDOC_FILE): jschess.js
 
 .PHONY: clean
 clean:
+	$(info doing [$@])
 	-@rm -rf $(JSDOC) $(JSOUT) 
