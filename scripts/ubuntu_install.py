@@ -6,6 +6,7 @@
 import subprocess
 packs=[
 	'yui-compressor',
+	'jsdoc-toolkit',
 ]
 args=['sudo','apt-get','install']
 args.extend(packs)
