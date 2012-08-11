@@ -7,17 +7,28 @@
 		<!--script src="jschess-0.1.min.js"></script-->
 		<script src="jschess.js"></script>
 		<script>
+			var board
 			function init() {
-				new ChessBoard({
+				board=new ChessBoard({
 					id:'myid',
 				})
 			}
 			window.onload=init
+			$(document).ready(function() {
+				$('#mybutton1').click(function() {
+					board.doSomething1()
+				})
+				$('#mybutton2').click(function() {
+					board.doSomething2()
+				})
+			})
 		</script>
 	</head>
 	<body style="background:yellow">
 		This is my chess board
 		<div id="myid">
 		</div>
+		<button id="mybutton1">do1</button>
+		<button id="mybutton2">do2</button>
 	</body>
 </html>
