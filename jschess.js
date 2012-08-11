@@ -1,3 +1,7 @@
+/**
+	Creates a new Board
+	@constructor 
+*/ 
 function ChessBoard() {
 }
 
