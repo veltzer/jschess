@@ -1,0 +1,5 @@
+Make a frame around the board.
+	like in the championship: http://moscow2012.fide.com/en/live?g=20120530
+Add move control like in the moscow championship.
+Add zoom in and zoom out buttons.
+Add the moves in a text box to the right.
