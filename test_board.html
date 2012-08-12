@@ -15,11 +15,17 @@
 			}
 			window.onload=init
 			$(document).ready(function() {
-				$('#mybutton1').click(function() {
-					board.doSomething1()
+				$('#putrooks').click(function() {
+					board.putrooks()
 				})
-				$('#mybutton2').click(function() {
-					board.doSomething2()
+				$('#moverooks').click(function() {
+					board.moverooks()
+				})
+				$('#flip').click(function() {
+					board.flip()
+				})
+				$('#dump').click(function() {
+					board.dump()
 				})
 			})
 		</script>
@@ -28,7 +34,9 @@
 		This is my chess board
 		<div id="myid">
 		</div>
-		<button id="mybutton1">do1</button>
-		<button id="mybutton2">do2</button>
+		<button id="putrooks">putrooks</button>
+		<button id="moverooks">moverooks</button>
+		<button id="flip">flip</button>
+		<button id="dump">dump</button>
 	</body>
 </html>

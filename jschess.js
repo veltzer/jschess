@@ -1,16 +1,34 @@
 /**
 	Create a position object
+	@class represents a position on the board
 	@constructor
+	@param x x co-ordinate
+	@param y y co-ordinate
 */
 function Position(x,y) {
 	this.x=x
 	this.y=y
 }
 
+/**
+	@class represents a position + graphics
+	@constructor
+	@param gr graphics (raphael) for the piece
+	@param pos position for the piece
+*/
+function Piece(gr,pos) {
+	this.gr=gr
+	this.pos=pos
+}
+Piece.prototype.toString=function() {
+	return "wow"
+}
 
 /**
 	Creates a new Board
+	@class a whole board to play with
 	@constructor 
+	@param config configuration for this board
 */ 
 function ChessBoard(config) {
 	// lets get the configs out
@@ -19,16 +37,51 @@ function ChessBoard(config) {
 		throw 'no id'
 	}
 	// values with defaults
-	config['size']=config['size'] || 600
-	config['black_color']=config['black_color'] || '819faa'
-	config['white_color']=config['white_color'] || 'ffffff'
+	config['size']=config['size'] || 600 // size of the board
+	config['black_color']=config['black_color'] || '819faa' // color of the black squares
+	config['white_color']=config['white_color'] || 'ffffff' // color of the white squares
+	config['flipview']=config['flipview'] || false // is the board flipped
+	config['ms']=config['ms'] || 350 // ms for moving animation
 	// store the config
 	this.config=config
+	// get RW vars from the config
+	this.flipview=this.config['flipview']
 	// real code starts here
-	this.drawFull()
+	this.raphaelPrep()
+	this.drawBoard()
+	this.piecesInit()
 }
 
-ChessBoard.prototype.drawFull=function() {
+// methods to handle pieces start here
+ChessBoard.prototype.piecesInit=function() {
+	this.pieces=[]
+}
+ChessBoard.prototype.piecesAdd=function(gr,pos) {
+	this.pieces.push(new Piece(gr,pos))
+}
+ChessBoard.prototype.piecesGetAtPos=function(pos) {
+	for(i in this.pieces) {
+		var piece=this.pieces[i]
+		var p=piece.pos
+		if(p.x==pos.x && p.y==pos.y) {
+			return piece
+		}
+	}
+	throw 'no piece at pos '+pos
+}
+/**
+	Debug function
+*/
+ChessBoard.prototype.piecesDump=function() {
+	for(i in this.pieces) {
+		console.log(this.pieces[i])
+	}
+}
+
+/**
+	Prepare the raphael paper so we could do graphics
+*/
+ChessBoard.prototype.raphaelPrep=function() {
 	// async way
 	/*
 	var widget=this
@@ -39,9 +92,11 @@ ChessBoard.prototype.drawFull=function() {
 	*/
 	// sync way
 	this.paper=Raphael(this.config['id'],this.config['size'],this.config['size'])
-	this.drawBoard()
 }
 
+/**
+	Draw the board (which and black squares)
+*/
 ChessBoard.prototype.drawBoard=function() {
 	this.square=this.config['size']/8
 	for(var x=0;x<8;x++) {
@@ -60,7 +115,11 @@ ChessBoard.prototype.drawBoard=function() {
 	}
 }
 
-ChessBoard.prototype.createRook=function() {
+/**
+	Creates graphics for a rook
+	@param pos at which position to create
+*/
+ChessBoard.prototype.createRook=function(pos) {
 	var el1=this.paper.path('M 9,39 L 36,39 L 36,36 L 9,36 L 9,39 z')
 	el1.attr({'stroke-linecap':'butt'})
 	var el2=this.paper.path('M 12,36 L 12,32 L 33,32 L 33,36 L 12,36 z')
@@ -76,37 +135,70 @@ ChessBoard.prototype.createRook=function() {
 	var el7=this.paper.path('M 11,14 L 34,14')
 	el7.attr({'fill':'none','stroke':'#000000','stroke-linejoin':'miter'})
 	// lets add them all to the set
-	var piece=this.paper.set()
-	piece.push(el1,el2,el3,el4,el5,el6,el7)
-	return piece;
+	var gr=this.paper.set()
+	gr.push(el1,el2,el3,el4,el5,el6,el7)
+	// lets add the piece
+	this.piecesAdd(gr,pos)
+	this.moveGrToPos(gr,pos,0)
 }
 
 /**
 	Translates position (0..7,0..7) to pixels
 */
 ChessBoard.prototype.posToPixels=function(pos) {
-	return new Position(pos.x*this.square,(7-pos.y)*this.square)
-}
-ChessBoard.prototype.placePiece=function(piece,pos) {
-	this.movePiece(piece,pos,0)
+	if(this.flipview==true) {
+		return new Position((7-pos.x)*this.square,pos.y*this.square)
+	} else {
+		return new Position(pos.x*this.square,(7-pos.y)*this.square)
+	}
 }
 
-ChessBoard.prototype.movePiece=function(piece,pos,ms) {
+ChessBoard.prototype.moveGrToPos=function(gr,pos,ms) {
 	var pixelPos=this.posToPixels(pos)
-	piece.forEach(function(el) {
+	gr.forEach(function(el) {
 		var m=Raphael.matrix()
 		m.translate(pixelPos.x,pixelPos.y)
 		el.animate({transform: m.toTransformString()},ms)
 	},this)
 }
-// testing code starts here
-ChessBoard.prototype.doSomething1=function() {
-	rook1=this.createRook()
-	rook2=this.createRook()
-	this.placePiece(rook1,new Position(0,0))
-	this.placePiece(rook2,new Position(7,0))
+ChessBoard.prototype.movePiece=function(posFrom,posTo) {
+	var piece=this.piecesGetAtPos(posFrom)
+	this.moveGrToPos(piece.gr,posTo,this.config['ms'])
+	piece.pos=posTo
 }
-ChessBoard.prototype.doSomething2=function() {
-	this.movePiece(rook1,new Position(0,4),350)
-	this.movePiece(rook2,new Position(7,4),350)
+/**
+	Flips the board (see it from the other side)
+*/
+ChessBoard.prototype.flip=function() {
+	if(this.flipview==true) {
+		this.flipview=false
+	} else {
+		this.flipview=true
+	}
+	this.redraw()
+}
+/**
+	Debug function
+*/
+ChessBoard.prototype.dump=function() {
+	this.piecesDump()
+}
+/**
+	Redraw the entire board
+*/
+ChessBoard.prototype.redraw=function() {
+	for(i in this.pieces) {
+		var piece=this.pieces[i]
+		this.moveGrToPos(piece.gr,piece.pos,0)
+	}
+}
+
+// testing code starts here
+ChessBoard.prototype.putrooks=function() {
+	this.createRook(new Position(0,0))
+	this.createRook(new Position(7,0))
+}
+ChessBoard.prototype.moverooks=function() {
+	this.movePiece(new Position(0,0),new Position(0,4))
+	this.movePiece(new Position(7,0),new Position(7,4))
 }
