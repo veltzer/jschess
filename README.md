@@ -7,8 +7,8 @@ and more.
 
 Technologies used
 -----------------
-* Raphael javascript library (http://raphaeljs.com).*
-* jQuery javascript library (http://jquery.com).*
+* Raphael javascript library (http://raphaeljs.com).
+* jQuery javascript library (http://jquery.com).
 
 What makes jschess different?
 -----------------------------
