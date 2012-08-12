@@ -21,7 +21,7 @@ function Piece(gr,pos) {
 	this.pos=pos
 }
 Piece.prototype.toString=function() {
-	return "wow"
+	return 'the toString method still has to be written'
 }
 
 /**
