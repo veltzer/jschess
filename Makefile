@@ -1,13 +1,14 @@
 VER:=0.1
 JSDOC:=jsdoc
 JSDOC_FILE:=$(JSDOC)/index.html
-JSOUT:=jschess-$(VER).min.js
+JSMIN:=out/jschess-$(VER).min.js
 
 .PHONY: all
-all: $(JSOUT) $(JSDOC_FILE) 
+all: $(JSMIN) $(JSDOC_FILE) 
 
-$(JSOUT): jschess.js
+$(JSMIN): jschess.js
 	$(info doing [$@])
+	@-mkdir $(dir $@) 2> /dev/null || exit 0
 	@yui-compressor $< -o $@
 
 .PHONY: jsdoc
@@ -17,11 +18,11 @@ jsdoc: $(JSDOC)/index.html
 $(JSDOC_FILE): jschess.js
 	$(info doing [$@])
 	@-rm -rf $(JSDOC)
-	@-mkdir $(JSDOC) 2> /dev/null
+	@-mkdir $(dir $@) 2> /dev/null || exit 0
 	@jsdoc -d=$(JSDOC) jschess.js 1> /dev/null
 
 
 .PHONY: clean
 clean:
 	$(info doing [$@])
-	-@rm -rf $(JSDOC) $(JSOUT) 
+	-@rm -rf $(JSDOC) $(JSMIN) 
