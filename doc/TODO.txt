@@ -1,3 +1,6 @@
+make a "make install" target to setup a site for jschess with demos.
+	link to it from the README.md file.
+Make the pieces zoom in and out according to the board size.
 Make a frame around the board.
 	like in the championship: http://moscow2012.fide.com/en/live?g=20120530
 Add move control like in the moscow championship.
