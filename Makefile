@@ -16,6 +16,7 @@ jsdoc: $(JSDOC)/index.html
 
 $(JSDOC_FILE): jschess.js
 	$(info doing [$@])
+	@-rm -rf $(JSDOC)
 	@-mkdir $(JSDOC) 2> /dev/null
 	@jsdoc -d=$(JSDOC) jschess.js 1> /dev/null
 
