@@ -1,30 +1,4 @@
 /**
-	Create a position object
-	@class represents a position on the board
-	@constructor
-	@param x x co-ordinate
-	@param y y co-ordinate
-*/
-function Position(x,y) {
-	this.x=x
-	this.y=y
-}
-
-/**
-	@class represents a position + graphics
-	@constructor
-	@param gr graphics (raphael) for the piece
-	@param pos position for the piece
-*/
-function Piece(gr,pos) {
-	this.gr=gr
-	this.pos=pos
-}
-Piece.prototype.toString=function() {
-	return 'the toString method still has to be written'
-}
-
-/**
 	Creates a new Board
 	@class a whole board to play with
 	@constructor 
