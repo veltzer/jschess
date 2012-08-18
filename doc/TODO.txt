@@ -1,4 +1,6 @@
 make the pieces have gradients properly.
+make the pieces be drawn with the right sized pen according to the frame size.
+	(find out how to do that...)
 make the pieces move at constant speed (when moving a piece calculate the distance it needs to move
 	and the time from the distance/speed, speed should be the parameter at construction at units
 	of squares per second).
