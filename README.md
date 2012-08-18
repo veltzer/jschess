@@ -10,11 +10,16 @@ Technologies used
 * Raphael javascript library (http://raphaeljs.com).
 * jQuery javascript library (http://jquery.com).
 
+Demo
+----
+Is at my machine at (http://veltzer.net/jschess).
+
 What makes jschess different?
 -----------------------------
 * pure javascript.
 * no images - totally scalable graphics.
 * as a result of being pure javascript totally controllable programatically.
 * looks best
+* sits on top of good infrastructure (raphaeljs).
 
 Mark Veltzer, 2012, mark.veltzer@gmail.com
