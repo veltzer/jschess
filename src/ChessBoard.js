@@ -118,6 +118,15 @@ ChessBoard.prototype.createPiece=function(pieceType) {
 		pieceDesc.add(new PathAndAttributes('M 11,14 L 34,14',{'stroke-linejoin':'miter'}))
 		return pieceDesc 
 	}
+	if(pieceType=='knight') {
+		var pieceDesc=new PieceDesc(45)
+		//pieceDesc.add(new PathAndAttributes('M 22,10 C 32.5,11 38.5,18 38,39 L 15,39 C 15,30 25,32.5 23,18',{}))
+		//pieceDesc.add(new PathAndAttributes('M 24,18 C 24.38,20.91 18.45,25.37 16,27 C 13,29 13.18,31.34 11,31 C 9.958,30.06 12.41,27.96 11,28 C 10,28 11.19,29.23 10,30 C 9,30 5.997,31 6,26 C 6,24 12,14 12,14 C 12,14 13.89,12.1 14,10.5 C 13.27,9.506 13.5,8.5 13.5,7.5 C 14.5,6.5 16.5,10 16.5,10 L 18.5,10 C 18.5,10 19.28,8.008 21,7 C 22,7 22,10 22,10',{}))
+		pieceDesc.add(new PathAndAttributes('M 22,10 C 32.5,11 38.5,18 38,39 L 15,39 C 15,30 25,32.5 23,18 24,18 C 24.38,20.91 18.45,25.37 16,27 C 13,29 13.18,31.34 11,31 C 9.958,30.06 12.41,27.96 11,28 C 10,28 11.19,29.23 10,30 C 9,30 5.997,31 6,26 C 6,24 12,14 12,14 C 12,14 13.89,12.1 14,10.5 C 13.27,9.506 13.5,8.5 13.5,7.5 C 14.5,6.5 16.5,10 16.5,10 L 18.5,10 C 18.5,10 19.28,8.008 21,7 C 22,7 22,10 22,10',{}))
+		pieceDesc.add(new PathAndAttributes('M 9.5 25.5 A 0.5 0.5 0 1 1 8.5,25.5 A 0.5 0.5 0 1 1 9.5 25.5 z',{}))
+		pieceDesc.add(new PathAndAttributes('M 15 15.5 A 0.5 1.5 0 1 1  14,15.5 A 0.5 1.5 0 1 1  15 15.5 z',{}))
+		return pieceDesc 
+	}
 	throw 'unknown piece '+pieceType
 }
 ChessBoard.prototype.putPiece=function(pieceType,pos) {
@@ -134,7 +143,8 @@ ChessBoard.prototype.putPiece=function(pieceType,pos) {
 		'stroke-width': width,
 		'stroke':this.config['pencolor'],
 		// the first 0 is the direction of the gradient in degrees (0 is horizontal)
-		'fill': '0-#fff:0-#aaa:100',
+		//'fill': '0-#fff:0-#ccc:100',
+		'fill': '0-#fff:0-#fff:50-#999:100',
 		// this is not the right way to make it hidden
 		//'opacity':0,
 	}
@@ -248,8 +258,14 @@ ChessBoard.prototype.movePieceByPos=function(fromPos,toPos) {
 ChessBoard.prototype.putrooks=function() {
 	this.putPiece('rook',new Position(0,0))
 	this.putPiece('rook',new Position(7,0))
+	this.putPiece('knight',new Position(1,0))
+	this.putPiece('knight',new Position(6,0))
 }
 ChessBoard.prototype.moverooks=function() {
 	this.movePieceByPos(new Position(0,0),new Position(0,4))
 	this.movePieceByPos(new Position(7,0),new Position(7,4))
+}
+ChessBoard.prototype.moveknights=function() {
+	this.movePieceByPos(new Position(1,0),new Position(2,2))
+	this.movePieceByPos(new Position(6,0),new Position(5,2))
 }
