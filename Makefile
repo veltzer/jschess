@@ -57,4 +57,4 @@ debug:
 install: all
 	sudo rm -rf $(WEB_DIR)
 	sudo mkdir $(WEB_DIR)
-	sudo cp -r index.html $(TP_FOLDER) $(SRC_FOLDER) $(WEB_DIR)
+	sudo cp -r index.html $(TP_FOLDER) $(SRC_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
