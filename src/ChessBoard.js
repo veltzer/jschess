@@ -16,6 +16,7 @@ function ChessBoard(config) {
 	config['white_color']=config['white_color'] || 'ffffff' // color of the white squares
 	config['flipview']=config['flipview'] || false // is the board flipped
 	config['ms']=config['ms'] || 350 // ms for moving animation
+	config['pencolor']=config['pencolor'] || 'black'
 	// store the config
 	this.config=config
 	// get RW vars from the config
@@ -95,24 +96,46 @@ ChessBoard.prototype.drawBoard=function() {
 	Creates graphics for a rook
 	@param pos at which position to create
 */
+unite=function(h1,h2) {
+	var ret={}
+	for(var x in h1) {
+		ret[x]=h1[x]
+	}
+	for(var x in h2) {
+		ret[x]=h2[x]
+	}
+	return ret
+}
 ChessBoard.prototype.createRook=function(pos) {
-	var el1=this.paper.path('M 9,39 L 36,39 L 36,36 L 9,36 L 9,39 z')
-	el1.attr({'stroke-linecap':'butt'})
-	var el2=this.paper.path('M 12,36 L 12,32 L 33,32 L 33,36 L 12,36 z')
-	el2.attr({'stroke-linecap':'butt'})
-	var el3=this.paper.path('M 11,14 L 11,9 L 15,9 L 15,11 L 20,11 L 20,9 L 25,9 L 25,11 L 30,11 L 30,9 L 34,9 L 34,14')
-	el3.attr({'stroke-linecap':'butt'})
-	var el4=this.paper.path('M 34,14 L 31,17 L 14,17 L 11,14')
-	el4.attr({})
-	var el5=this.paper.path('M 31,17 L 31,29.5 L 14,29.5 L 14,17')
-	el5.attr({'stroke-linecap':'butt','stroke-linejoin':'miter'})
-	var el6=this.paper.path('M 31,29.5 L 32.5,32 L 12.5,32 L 14,29.5')
-	el6.attr({})
-	var el7=this.paper.path('M 11,14 L 34,14')
-	el7.attr({'fill':'none','stroke':'#000000','stroke-linejoin':'miter'})
-	// lets add them all to the set
+	var width=this.config['size']/240.0
+	var stdatt={
+		'stroke-width': width,
+		'stroke':this.config['pencolor'],
+		// the first 0 is the direction of the gradient in degrees (0 is horizontal)
+		'fill': '0-#fff:0-#aaa:100',
+	}
 	var gr=this.paper.set()
-	gr.push(el1,el2,el3,el4,el5,el6,el7)
+	var el1=this.paper.path('M 9,39 L 36,39 L 36,36 L 9,36 L 9,39 z')
+	el1.attr(unite(stdatt,{'stroke-linecap':'butt'}))
+	gr.push(el1)
+	var el2=this.paper.path('M 12,36 L 12,32 L 33,32 L 33,36 L 12,36 z')
+	el2.attr(unite(stdatt,{'stroke-linecap':'butt'}))
+	gr.push(el2)
+	var el3=this.paper.path('M 11,14 L 11,9 L 15,9 L 15,11 L 20,11 L 20,9 L 25,9 L 25,11 L 30,11 L 30,9 L 34,9 L 34,14')
+	el3.attr(unite(stdatt,{'stroke-linecap':'butt'}))
+	gr.push(el3)
+	var el4=this.paper.path('M 34,14 L 31,17 L 14,17 L 11,14')
+	el4.attr(unite(stdatt,{}))
+	gr.push(el4)
+	var el5=this.paper.path('M 31,17 L 31,29.5 L 14,29.5 L 14,17')
+	el5.attr(unite(stdatt,{'stroke-linecap':'butt','stroke-linejoin':'miter'}))
+	gr.push(el5)
+	var el6=this.paper.path('M 31,29.5 L 32.5,32 L 12.5,32 L 14,29.5')
+	el6.attr(unite(stdatt,{}))
+	gr.push(el6)
+	var el7=this.paper.path('M 11,14 L 34,14')
+	el7.attr(unite(stdatt,{'stroke-linejoin':'miter'}))
+	gr.push(el7)
 	// lets add the piece
 	var piece=this.piecesAdd(gr,new Position(7,7),45)
 	this.positionPiece(piece,pos)
