@@ -239,7 +239,7 @@ ChessBoard.prototype.redraw=function() {
 		this.positionPiece(piece,piece.pos)
 	}
 }
-ChessBoard.prototype.movePieceByPos(fromPos,toPos) {
+ChessBoard.prototype.movePieceByPos=function(fromPos,toPos) {
 	var piece=this.piecesGetAtPos(fromPos)
 	this.movePiece(piece,toPos)
 }
