@@ -1,0 +1,5 @@
+Avoiding flicker
+================
+In order to avoid flicker we create the pieces right at the right spot and in the right size.
+In order to do this we use the Raphael.transformPath(path, transform) and transform the paths
+of the shapes in advance to the right place.
