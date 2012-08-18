@@ -1,6 +1,3 @@
-when I put the rooks you can see the flicker that puts them on 0,0.
-	Find a way to avoid that flicker. Say create them in the right place from the start.
-	or maybe have them invisible and only show them when they reach their right place?
 make the pieces move at constant speed (when moving a piece calculate the distance it needs to move
 	and the time from the distance/speed, speed should be the parameter at construction at units
 	of squares per second).

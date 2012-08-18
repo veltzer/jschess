@@ -11,7 +11,7 @@ function ChessBoard(config) {
 		throw 'no id'
 	}
 	// values with defaults
-	config['size']=config['size'] || 600 // size of the board
+	config['size']=config['size'] || 300 // size of the board
 	config['black_color']=config['black_color'] || '819faa' // color of the black squares
 	config['white_color']=config['white_color'] || 'ffffff' // color of the white squares
 	config['flipview']=config['flipview'] || false // is the board flipped
@@ -32,8 +32,8 @@ function ChessBoard(config) {
 ChessBoard.prototype.piecesInit=function() {
 	this.pieces=[]
 }
-ChessBoard.prototype.piecesAdd=function(gr,pos,rect) {
-	var piece=new Piece(gr,pos,rect)
+ChessBoard.prototype.piecesAdd=function(gr,pos) {
+	var piece=new Piece(gr,pos)
 	this.pieces.push(piece)
 	return piece
 }
@@ -106,39 +106,53 @@ unite=function(h1,h2) {
 	}
 	return ret
 }
-ChessBoard.prototype.createRook=function(pos) {
+ChessBoard.prototype.createPiece=function(pieceType) {
+	if(pieceType=='rook') {
+		var pieceDesc=new PieceDesc(45)
+		pieceDesc.add(new PathAndAttributes('M 9,39 L 36,39 L 36,36 L 9,36 L 9,39 z',{'stroke-linecap':'butt'}))
+		pieceDesc.add(new PathAndAttributes('M 12,36 L 12,32 L 33,32 L 33,36 L 12,36 z',{'stroke-linecap':'butt'}))
+		pieceDesc.add(new PathAndAttributes('M 11,14 L 11,9 L 15,9 L 15,11 L 20,11 L 20,9 L 25,9 L 25,11 L 30,11 L 30,9 L 34,9 L 34,14',{'stroke-linecap':'butt'}))
+		pieceDesc.add(new PathAndAttributes('M 34,14 L 31,17 L 14,17 L 11,14',{}))
+		pieceDesc.add(new PathAndAttributes('M 31,17 L 31,29.5 L 14,29.5 L 14,17',{'stroke-linecap':'butt','stroke-linejoin':'miter'}))
+		pieceDesc.add(new PathAndAttributes('M 31,29.5 L 32.5,32 L 12.5,32 L 14,29.5',{}))
+		pieceDesc.add(new PathAndAttributes('M 11,14 L 34,14',{'stroke-linejoin':'miter'}))
+		return pieceDesc 
+	}
+	throw 'unknown piece '+pieceType
+}
+ChessBoard.prototype.putPiece=function(pieceType,pos) {
+	var pieceDesc=this.createPiece(pieceType)
+	// calculate transform (move and scale)
+	var pixelPos=this.posToPixels(pos)
+	var m=Raphael.matrix()
+	m.translate(pixelPos.x,pixelPos.y)
+	m.scale(this.square/pieceDesc.rect,this.square/pieceDesc.rect)
+	var transform=m.toTransformString()
+	// now put it on the paper
 	var width=this.config['size']/240.0
 	var stdatt={
 		'stroke-width': width,
 		'stroke':this.config['pencolor'],
 		// the first 0 is the direction of the gradient in degrees (0 is horizontal)
 		'fill': '0-#fff:0-#aaa:100',
+		// this is not the right way to make it hidden
+		//'opacity':0,
 	}
 	var gr=this.paper.set()
-	var el1=this.paper.path('M 9,39 L 36,39 L 36,36 L 9,36 L 9,39 z')
-	el1.attr(unite(stdatt,{'stroke-linecap':'butt'}))
-	gr.push(el1)
-	var el2=this.paper.path('M 12,36 L 12,32 L 33,32 L 33,36 L 12,36 z')
-	el2.attr(unite(stdatt,{'stroke-linecap':'butt'}))
-	gr.push(el2)
-	var el3=this.paper.path('M 11,14 L 11,9 L 15,9 L 15,11 L 20,11 L 20,9 L 25,9 L 25,11 L 30,11 L 30,9 L 34,9 L 34,14')
-	el3.attr(unite(stdatt,{'stroke-linecap':'butt'}))
-	gr.push(el3)
-	var el4=this.paper.path('M 34,14 L 31,17 L 14,17 L 11,14')
-	el4.attr(unite(stdatt,{}))
-	gr.push(el4)
-	var el5=this.paper.path('M 31,17 L 31,29.5 L 14,29.5 L 14,17')
-	el5.attr(unite(stdatt,{'stroke-linecap':'butt','stroke-linejoin':'miter'}))
-	gr.push(el5)
-	var el6=this.paper.path('M 31,29.5 L 32.5,32 L 12.5,32 L 14,29.5')
-	el6.attr(unite(stdatt,{}))
-	gr.push(el6)
-	var el7=this.paper.path('M 11,14 L 34,14')
-	el7.attr(unite(stdatt,{'stroke-linejoin':'miter'}))
-	gr.push(el7)
+	for(var x in pieceDesc.paas) {
+		var paa=pieceDesc.paas[x]
+		var orig_path=paa.path
+		var new_path=Raphael.transformPath(orig_path,transform)
+		var el=this.paper.path(new_path)
+		el.attr(unite(stdatt,paa.attr))
+		//el.hide()
+		gr.push(el)
+	}
 	// lets add the piece
-	var piece=this.piecesAdd(gr,new Position(7,7),45)
-	this.positionPiece(piece,pos)
+	var piece=this.piecesAdd(gr,pos)
+	//this.hidePiece(piece)
+	//this.positionPiece(piece,pos)
+	//this.showPiece(piece)
 	return piece;
 }
 
@@ -166,6 +180,21 @@ ChessBoard.prototype.resize=function(gr) {
 }
 */
 
+ChessBoard.prototype.showHidePiece=function(piece,hide) {
+	piece.gr.forEach(function(el) {
+		if(hide) {
+			el.hide()
+		} else {
+			el.show()
+		}
+	},this)
+}
+ChessBoard.prototype.showPiece=function(piece) {
+	this.showHidePiece(piece,false)
+}
+ChessBoard.prototype.hidePiece=function(piece) {
+	this.showHidePiece(piece,true)
+}
 ChessBoard.prototype.movePiece=function(piece,posTo) {
 	this.timeMovePiece(piece,posTo,this.config['ms'])
 }
@@ -176,11 +205,12 @@ ChessBoard.prototype.positionPiece=function(piece,posTo) {
 
 ChessBoard.prototype.timeMovePiece=function(piece,posTo,ms) {
 	var posFrom=piece.pos
-	var pixelPos=this.posToPixels(posTo)
+	var pixelPosFrom=this.posToPixels(posFrom)
+	var pixelPosTo=this.posToPixels(posTo)
 	piece.gr.forEach(function(el) {
 		var m=Raphael.matrix()
-		m.translate(pixelPos.x,pixelPos.y)
-		m.scale(this.square/piece.rect,this.square/piece.rect)
+		m.translate(pixelPosTo.x-pixelPosFrom.x,pixelPosTo.y-pixelPosFrom.y)
+		//m.scale(this.square/piece.rect,this.square/piece.rect)
 		var transformString=m.toTransformString()
 		el.animate({transform: transformString},ms)
 	},this)
@@ -217,8 +247,8 @@ ChessBoard.prototype.redraw=function() {
 var r1
 var r2
 ChessBoard.prototype.putrooks=function() {
-	r1=this.createRook(new Position(0,0))
-	r2=this.createRook(new Position(7,0))
+	r1=this.putPiece('rook',new Position(0,0))
+	r2=this.putPiece('rook',new Position(7,0))
 }
 ChessBoard.prototype.moverooks=function() {
 	this.movePiece(r1,new Position(0,4))
