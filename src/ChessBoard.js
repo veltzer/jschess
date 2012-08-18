@@ -150,9 +150,6 @@ ChessBoard.prototype.putPiece=function(pieceType,pos) {
 	}
 	// lets add the piece
 	var piece=this.piecesAdd(gr,pos,pixelPos)
-	//this.hidePiece(piece)
-	//this.positionPiece(piece,pos)
-	//this.showPiece(piece)
 	return piece;
 }
 
@@ -242,15 +239,17 @@ ChessBoard.prototype.redraw=function() {
 		this.positionPiece(piece,piece.pos)
 	}
 }
+ChessBoard.prototype.movePieceByPos(fromPos,toPos) {
+	var piece=this.piecesGetAtPos(fromPos)
+	this.movePiece(piece,toPos)
+}
 
 // testing code starts here
-var r1
-var r2
 ChessBoard.prototype.putrooks=function() {
-	r1=this.putPiece('rook',new Position(0,0))
-	r2=this.putPiece('rook',new Position(7,0))
+	this.putPiece('rook',new Position(0,0))
+	this.putPiece('rook',new Position(7,0))
 }
 ChessBoard.prototype.moverooks=function() {
-	this.movePiece(r1,new Position(0,4))
-	this.movePiece(r2,new Position(7,4))
+	this.movePieceByPos(new Position(0,0),new Position(0,4))
+	this.movePieceByPos(new Position(7,0),new Position(7,4))
 }
