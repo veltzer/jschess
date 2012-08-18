@@ -11,7 +11,7 @@ function ChessBoard(config) {
 		throw 'no id'
 	}
 	// values with defaults
-	config['size']=config['size'] || 600 // size of the board
+	config['size']=config['size'] || 400 // size of the board
 	config['black_color']=config['black_color'] || '819faa' // color of the black squares
 	config['white_color']=config['white_color'] || 'ffffff' // color of the white squares
 	config['flipview']=config['flipview'] || false // is the board flipped
