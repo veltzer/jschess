@@ -11,7 +11,7 @@ function ChessBoard(config) {
 		throw 'no id'
 	}
 	// values with defaults
-	config['size']=config['size'] || 300 // size of the board
+	config['size']=config['size'] || 500 // size of the board
 	config['black_color']=config['black_color'] || '819faa' // color of the black squares
 	config['white_color']=config['white_color'] || 'ffffff' // color of the white squares
 	config['flipview']=config['flipview'] || false // is the board flipped
@@ -32,13 +32,13 @@ function ChessBoard(config) {
 ChessBoard.prototype.piecesInit=function() {
 	this.pieces=[]
 }
-ChessBoard.prototype.piecesAdd=function(gr,pos) {
-	var piece=new Piece(gr,pos)
+ChessBoard.prototype.piecesAdd=function(gr,pos,pixelPos) {
+	var piece=new Piece(gr,pos,pixelPos)
 	this.pieces.push(piece)
 	return piece
 }
 ChessBoard.prototype.piecesGetAtPos=function(pos) {
-	for(i in this.pieces) {
+	for(var i in this.pieces) {
 		var piece=this.pieces[i]
 		var p=piece.pos
 		if(p.x==pos.x && p.y==pos.y) {
@@ -51,7 +51,7 @@ ChessBoard.prototype.piecesGetAtPos=function(pos) {
 	Debug function
 */
 ChessBoard.prototype.piecesDump=function() {
-	for(i in this.pieces) {
+	for(var i in this.pieces) {
 		console.log(this.pieces[i])
 	}
 }
@@ -149,7 +149,7 @@ ChessBoard.prototype.putPiece=function(pieceType,pos) {
 		gr.push(el)
 	}
 	// lets add the piece
-	var piece=this.piecesAdd(gr,pos)
+	var piece=this.piecesAdd(gr,pos,pixelPos)
 	//this.hidePiece(piece)
 	//this.positionPiece(piece,pos)
 	//this.showPiece(piece)
@@ -161,7 +161,7 @@ ChessBoard.prototype.putPiece=function(pieceType,pos) {
 */
 ChessBoard.prototype.posToPixels=function(pos) {
 	if(this.flipview==true) {
-		return new Position((7-pos.x)*this.square,pos.y*this.square)
+		return new Position(pos.x*this.square,pos.y*this.square)
 	} else {
 		return new Position(pos.x*this.square,(7-pos.y)*this.square)
 	}
@@ -171,7 +171,6 @@ ChessBoard.prototype.resize=function(gr) {
 	var m=Raphael.matrix()
 	m.scale(1.7,1.7)
 	var transformString=m.toTransformString()
-	//console.log(transformString)
 	gr.forEach(function(el) {
 		//el.animate({transform: transformString},ms)
 		el.transform(transformString)
@@ -204,8 +203,7 @@ ChessBoard.prototype.positionPiece=function(piece,posTo) {
 }
 
 ChessBoard.prototype.timeMovePiece=function(piece,posTo,ms) {
-	var posFrom=piece.pos
-	var pixelPosFrom=this.posToPixels(posFrom)
+	var pixelPosFrom=piece.pixelPos
 	var pixelPosTo=this.posToPixels(posTo)
 	piece.gr.forEach(function(el) {
 		var m=Raphael.matrix()
@@ -215,6 +213,7 @@ ChessBoard.prototype.timeMovePiece=function(piece,posTo,ms) {
 		el.animate({transform: transformString},ms)
 	},this)
 	piece.pos=posTo
+	//piece.pixelPos=pixelPosTo
 }
 /**
 	Flips the board (see it from the other side)
@@ -237,8 +236,9 @@ ChessBoard.prototype.dump=function() {
 	Redraw the entire board
 */
 ChessBoard.prototype.redraw=function() {
-	for(i in this.pieces) {
+	for(var i in this.pieces) {
 		var piece=this.pieces[i]
+		var pixelPos=piece.pixelPos
 		this.positionPiece(piece,piece.pos)
 	}
 }

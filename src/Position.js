@@ -10,3 +10,6 @@ function Position(x,y) {
 	this.x=x
 	this.y=y
 }
+Position.prototype.toString=function() {
+	return '('+this.x+','+this.y+')'
+}
