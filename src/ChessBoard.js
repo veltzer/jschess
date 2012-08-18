@@ -186,7 +186,7 @@ ChessBoard.prototype.dump=function() {
 ChessBoard.prototype.redraw=function() {
 	for(i in this.pieces) {
 		var piece=this.pieces[i]
-		this.moveGrToPos(piece.gr,piece.pos,0)
+		this.positionPiece(piece,piece.pos)
 	}
 }
 
