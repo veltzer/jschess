@@ -1,6 +1,9 @@
+make the pieces have gradients properly.
+make the pieces move at constant speed (when moving a piece calculate the distance it needs to move
+	and the time from the distance/speed, speed should be the parameter at construction at units
+	of squares per second).
 make a "make install" target to setup a site for jschess with demos.
 	link to it from the README.md file.
-Make the pieces zoom in and out according to the board size.
 Make a frame around the board.
 	like in the championship: http://moscow2012.fide.com/en/live?g=20120530
 Add move control like in the moscow championship.
