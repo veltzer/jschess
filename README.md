@@ -21,5 +21,6 @@ What makes jschess different?
 * as a result of being pure javascript totally controllable programatically.
 * looks best
 * sits on top of good infrastructure (raphaeljs).
+* you can have your board at any size you want (because of scalable graphics).
 
 Mark Veltzer, 2012, mark.veltzer@gmail.com
