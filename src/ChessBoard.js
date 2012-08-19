@@ -17,6 +17,7 @@ function ChessBoard(config) {
 	config['flipview']=config['flipview'] || false // is the board flipped
 	config['ms']=config['ms'] || 350 // ms for moving animation
 	config['pencolor']=config['pencolor'] || 'black'
+	config['flipms']=config['flipms'] || 0
 	// store the config
 	this.config=config
 	// get RW vars from the config
@@ -246,7 +247,8 @@ ChessBoard.prototype.redraw=function() {
 	for(var i in this.pieces) {
 		var piece=this.pieces[i]
 		var pixelPos=piece.pixelPos
-		this.positionPiece(piece,piece.pos)
+		//this.positionPiece(piece,piece.pos)
+		this.timeMovePiece(piece,piece.pos,this.config['flipms'])
 	}
 }
 ChessBoard.prototype.movePieceByPos=function(fromPos,toPos) {
