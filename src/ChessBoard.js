@@ -292,7 +292,7 @@ ChessBoard.prototype.movePieceByPos=function(fromPos,toPos) {
 }
 
 // testing code starts here
-ChessBoard.prototype.putrooks=function() {
+ChessBoard.prototype.startpos=function() {
 	this.putPiece('rook',new Position(0,0))
 	this.putPiece('knight',new Position(1,0))
 	this.putPiece('bishop',new Position(2,0))
