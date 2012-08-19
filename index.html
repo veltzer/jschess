@@ -18,8 +18,8 @@
 				var board=new ChessBoard({
 					id:'myid',
 				})
-				$('#putrooks').click(function() {
-					board.putrooks()
+				$('#startpos').click(function() {
+					board.startpos()
 				})
 				$('#moverooks').click(function() {
 					board.moverooks()
@@ -56,7 +56,7 @@
 		Here is a small demo that I use to hack on <b>jschess</b>:
 		<div id="myid">
 		</div>
-		<button id="putrooks">putrooks</button>
+		<button id="startpos">startpos</button>
 		<button id="moverooks">moverooks</button>
 		<button id="moveknights">moveknights</button>
 		<button id="movebishops">movebishops</button>
