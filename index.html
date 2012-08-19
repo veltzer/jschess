@@ -14,14 +14,10 @@
 		<script src="src/Piece.js"></script>
 		<script src="src/ChessBoard.js"></script>
 		<script>
-			var board
-			function init() {
-				board=new ChessBoard({
+			$(document).ready(function() {
+				var board=new ChessBoard({
 					id:'myid',
 				})
-			}
-			window.onload=init
-			$(document).ready(function() {
 				$('#putrooks').click(function() {
 					board.putrooks()
 				})
@@ -30,6 +26,9 @@
 				})
 				$('#moveknights').click(function() {
 					board.moveknights()
+				})
+				$('#movebishops').click(function() {
+					board.movebishops()
 				})
 				$('#flip').click(function() {
 					board.flip()
@@ -60,6 +59,7 @@
 		<button id="putrooks">putrooks</button>
 		<button id="moverooks">moverooks</button>
 		<button id="moveknights">moveknights</button>
+		<button id="movebishops">movebishops</button>
 		<button id="flip">flip</button>
 		<button id="dump">dump</button>
 		<br/>

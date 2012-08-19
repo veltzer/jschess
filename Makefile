@@ -5,6 +5,7 @@ TP_FOLDER=thirdparty
 SOURCES:=$(shell find $(SRC_FOLDER) -name "*.js")
 JSDOC_FOLDER:=jsdoc
 JSDOC_FILE:=$(JSDOC_FOLDER)/index.html
+HTML_FILES:=index.html calc.html
 OUT_FOLDER:=out
 JSFULL:=$(OUT_FOLDER)/$(PROJECT)-$(VER).js
 JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js
@@ -52,9 +53,10 @@ debug:
 	$(info WEB_DIR is $(WEB_DIR))
 	$(info SRC_FOLDER is $(SRC_FOLDER))
 	$(info TP_FOLDER is $(TP_FOLDER))
+	$(info HTML_FILES is $(HTML_FILES))
 
 .PHONY: install
 install: all
 	sudo rm -rf $(WEB_DIR)
 	sudo mkdir $(WEB_DIR)
-	sudo cp -r index.html $(TP_FOLDER) $(SRC_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
+	sudo cp -r $(HTML_FILES) $(TP_FOLDER) $(SRC_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
