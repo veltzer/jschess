@@ -1,3 +1,5 @@
+svg for black and white pieces is DIFFERENT. So internally we need to have 'blackrook' 'whiterook' etc pieces
+	to create.
 make the pieces move at constant speed (when moving a piece calculate the distance it needs to move
 	and the time from the distance/speed, speed should be the parameter at construction at units
 	of squares per second).
