@@ -13,12 +13,15 @@ function ChessBoard(config) {
 	}
 	// values with defaults
 	config['size']=config['size'] || 500 // size of the board
-	config['black_color']=config['black_color'] || '819faa' // color of the black squares
+	config['black_color']=config['black_color'] || '000000' // color of the black squares
 	config['white_color']=config['white_color'] || 'ffffff' // color of the white squares
+	config['black_square_color']=config['black_square_color'] || '819faa' // color of the black squares
+	config['white_square_color']=config['white_square_color'] || 'ffffff' // color of the white squares
 	config['flipview']=config['flipview'] || false // is the board flipped
 	config['ms']=config['ms'] || 350 // ms for moving animation
 	config['pencolor']=config['pencolor'] || 'black'
 	config['flipms']=config['flipms'] || 0
+	config['gradients']=config['gradients'] || true
 	// store the config
 	this.config=config
 	// get RW vars from the config
@@ -98,13 +101,20 @@ ChessBoard.prototype.drawBoard=function() {
 		for(var y=0;y<8;y++) {
 			// Creates circle at x = 50, y = 40, with radius 10
 			var rec =this.paper.rect(x*this.square,y*this.square,this.square,this.square)
+			rec.attr('stroke', 'black')
+			rec.attr('stroke-width',0.1)
 			if((x+y)%2==1) {
-				// Sets the fill attribute of the circle to red (#f00)
-				rec.attr('fill', this.config['black_color'])
-				rec.attr('stroke', 'none')
+				if(this.config['gradients']) {
+					rec.attr('fill','0-#91afba:0-819faa:50-819faa:100')
+				} else {
+					rec.attr('fill', this.config['black_square_color'])
+				}
 			} else {
-				rec.attr('fill', this.config['white_color'])
-				rec.attr('stroke', 'none')
+				if(this.config['gradients']) {
+					rec.attr('fill','0-#eee:0-#fff:50-#fff:100')
+				} else {
+					rec.attr('fill', this.config['white_square_color'])
+				}
 			}
 		}
 	}
@@ -128,7 +138,11 @@ ChessBoard.prototype.createPiece=function(pieceColor,pieceType) {
 		//'fill': '0-#fff:0-#fff:50-#999:100',
 		// this is not the right way to make it hidden
 		//'opacity':0,
-		stdatt['fill']='0-#fff:0-#fff:50-#999:100'
+		if(this.config['gradients']) {
+			stdatt['fill']='0-#fff:0-#fff:50-#999:100'
+		} else {
+			stdatt['fill']=this.config['white_color']
+		}
 		if(pieceType=='rook') {
 			var pieceDesc=new PieceDesc(45)
 			pieceDesc.add(new PathAndAttributes('M 9,39 L 36,39 L 36,36 L 9,36 L 9,39 z',stdatt))
@@ -186,8 +200,12 @@ ChessBoard.prototype.createPiece=function(pieceColor,pieceType) {
 		}
 	}
 	if(pieceColor=='black') {
-		//stdatt['fill']='0-#000:0-#222:50-#555:100'
-		stdatt['fill']='0-#555:0-#222:50-#000:100'
+		if(this.config['gradients']) {
+			//stdatt['fill']='0-#000:0-#222:50-#555:100'
+			stdatt['fill']='0-#555:0-#222:50-#000:100'
+		} else {
+			stdatt['fill']=this.config['black_color']
+		}
 		if(pieceType=='rook') {
 			var pieceDesc=new PieceDesc(45)
 			pieceDesc.add(new PathAndAttributes('M 9,39 L 36,39 L 36,36 L 9,36 L 9,39 z',stdatt))
