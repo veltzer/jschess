@@ -186,7 +186,8 @@ ChessBoard.prototype.createPiece=function(pieceColor,pieceType) {
 		}
 	}
 	if(pieceColor=='black') {
-		stdatt['fill']='0-#000:0-#222:50-#555:100'
+		//stdatt['fill']='0-#000:0-#222:50-#555:100'
+		stdatt['fill']='0-#555:0-#222:50-#000:100'
 		if(pieceType=='rook') {
 			var pieceDesc=new PieceDesc(45)
 			pieceDesc.add(new PathAndAttributes('M 9,39 L 36,39 L 36,36 L 9,36 L 9,39 z',stdatt))
