@@ -5,8 +5,10 @@
 function Utils() {
 }
 /**
-	Creates graphics for a rook
-	@param pos at which position to create
+ 	Unite two javascript objects into a third one.
+	Second trumps the first.
+	@param o1 first object
+	@param o2 first object
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 Utils.unite=function(o1,o2) {
