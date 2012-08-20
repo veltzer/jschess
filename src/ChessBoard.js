@@ -3,6 +3,7 @@
 	@class a whole board to play with
 	@constructor 
 	@param config configuration for this board
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */ 
 function ChessBoard(config) {
 	// lets get the configs out
@@ -29,15 +30,28 @@ function ChessBoard(config) {
 	this.piecesInit()
 }
 
-// methods to handle pieces start here
+/**
+	Method which initializes pieces held by the board
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
 ChessBoard.prototype.piecesInit=function() {
 	this.pieces=[]
 }
-ChessBoard.prototype.piecesAdd=function(gr,pos,pixelPos) {
-	var piece=new Piece(gr,pos,pixelPos)
+/**
+	Method which adds a piece to the board
+	@param piece the piece to be added of type Piece
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+ChessBoard.prototype.piecesAdd=function(piece) {
 	this.pieces.push(piece)
 	return piece
 }
+/**
+	Get a piece according to position
+	@param pos object of type Position (0,0)-(7,7)
+	@returns the piece at the specified position
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
 ChessBoard.prototype.piecesGetAtPos=function(pos) {
 	for(var i in this.pieces) {
 		var piece=this.pieces[i]
@@ -50,6 +64,7 @@ ChessBoard.prototype.piecesGetAtPos=function(pos) {
 }
 /**
 	Debug function
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.piecesDump=function() {
 	for(var i in this.pieces) {
@@ -59,6 +74,7 @@ ChessBoard.prototype.piecesDump=function() {
 
 /**
 	Prepare the raphael paper so we could do graphics
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.raphaelPrep=function() {
 	// async way
@@ -75,6 +91,7 @@ ChessBoard.prototype.raphaelPrep=function() {
 
 /**
 	Draw the board (which and black squares)
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.drawBoard=function() {
 	for(var x=0;x<8;x++) {
@@ -96,6 +113,7 @@ ChessBoard.prototype.drawBoard=function() {
 /**
 	Creates graphics for a rook
 	@param pos at which position to create
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 unite=function(h1,h2) {
 	var ret={}
@@ -107,7 +125,13 @@ unite=function(h1,h2) {
 	}
 	return ret
 }
-ChessBoard.prototype.createPiece=function(pieceType) {
+/**
+	Method which creates a piece according to color and type
+	@param pieceColor the color of the piece
+	@param pieceType the type of the piece
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+ChessBoard.prototype.createPiece=function(pieceColor,pieceType) {
 	if(pieceType=='rook') {
 		var pieceDesc=new PieceDesc(45)
 		pieceDesc.add(new PathAndAttributes('M 9,39 L 36,39 L 36,36 L 9,36 L 9,39 z',{'stroke-linecap':'butt'}))
@@ -165,8 +189,14 @@ ChessBoard.prototype.createPiece=function(pieceType) {
 	}
 	throw 'unknown piece '+pieceType
 }
-ChessBoard.prototype.putPiece=function(pieceType,pos) {
-	var pieceDesc=this.createPiece(pieceType)
+/**
+	Method which create a new piece of a specified color and type and puts it in the specified position
+	@param pieceColor the color of the piece ('white','black')
+	@param pieceType the type of the piece ('rook','knight','bishop','queen','king','pawn')
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+ChessBoard.prototype.putPiece=function(pieceColor,pieceType,pos) {
+	var pieceDesc=this.createPiece(pieceColor,pieceType)
 	// calculate transform (move and scale)
 	var pixelPos=this.posToPixels(pos)
 	var m=Raphael.matrix()
@@ -195,12 +225,14 @@ ChessBoard.prototype.putPiece=function(pieceType,pos) {
 		gr.push(el)
 	}
 	// lets add the piece
-	var piece=this.piecesAdd(gr,pos,pixelPos)
+	var piece=new Piece(gr,pos,pixelPos,pieceColor,pieceType)
+	var piece=this.piecesAdd(piece)
 	return piece
 }
 
 /**
 	Translates position (0..7,0..7) to pixels
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.posToPixels=function(pos) {
 	if(this.flipview==true) {
@@ -222,6 +254,12 @@ ChessBoard.prototype.resize=function(gr) {
 }
 */
 
+/**
+	Shows or hides a given piece according to parameter
+	@param piece of type Piece, the piece to show or hide
+	@param hide boolean - show or hide the piece
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
 ChessBoard.prototype.showHidePiece=function(piece,hide) {
 	piece.gr.forEach(function(el) {
 		if(hide) {
@@ -231,12 +269,28 @@ ChessBoard.prototype.showHidePiece=function(piece,hide) {
 		}
 	},this)
 }
+/**
+	Quick method to show a piece
+	@param piece of type Piece - the piece to show
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
 ChessBoard.prototype.showPiece=function(piece) {
 	this.showHidePiece(piece,false)
 }
+/**
+	Quick method to hide a piece
+	@param piece of type Piece - the piece to hide
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
 ChessBoard.prototype.hidePiece=function(piece) {
 	this.showHidePiece(piece,true)
 }
+/**
+	Move a piece on the board (including animation if so configured)
+	@param piece of type Piece - the piece to move
+	@param posTo of type Position - the position to move the piece to
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
 ChessBoard.prototype.movePiece=function(piece,posTo) {
 	this.timeMovePiece(piece,posTo,this.config['ms'])
 }
@@ -260,6 +314,7 @@ ChessBoard.prototype.timeMovePiece=function(piece,posTo,ms) {
 }
 /**
 	Flips the board (see it from the other side)
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.flip=function() {
 	if(this.flipview==true) {
@@ -271,12 +326,14 @@ ChessBoard.prototype.flip=function() {
 }
 /**
 	Debug function
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.dump=function() {
 	this.piecesDump()
 }
 /**
 	Redraw the entire board
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.redraw=function() {
 	for(var i in this.pieces) {
@@ -293,22 +350,22 @@ ChessBoard.prototype.movePieceByPos=function(fromPos,toPos) {
 
 // testing code starts here
 ChessBoard.prototype.startpos=function() {
-	this.putPiece('rook',new Position(0,0))
-	this.putPiece('knight',new Position(1,0))
-	this.putPiece('bishop',new Position(2,0))
-	this.putPiece('queen',new Position(3,0))
-	this.putPiece('king',new Position(4,0))
-	this.putPiece('bishop',new Position(5,0))
-	this.putPiece('knight',new Position(6,0))
-	this.putPiece('rook',new Position(7,0))
-	this.putPiece('pawn',new Position(0,1))
-	this.putPiece('pawn',new Position(1,1))
-	this.putPiece('pawn',new Position(2,1))
-	this.putPiece('pawn',new Position(3,1))
-	this.putPiece('pawn',new Position(4,1))
-	this.putPiece('pawn',new Position(5,1))
-	this.putPiece('pawn',new Position(6,1))
-	this.putPiece('pawn',new Position(7,1))
+	this.putPiece('white','rook',new Position(0,0))
+	this.putPiece('white','knight',new Position(1,0))
+	this.putPiece('white','bishop',new Position(2,0))
+	this.putPiece('white','queen',new Position(3,0))
+	this.putPiece('white','king',new Position(4,0))
+	this.putPiece('white','bishop',new Position(5,0))
+	this.putPiece('white','knight',new Position(6,0))
+	this.putPiece('white','rook',new Position(7,0))
+	this.putPiece('white','pawn',new Position(0,1))
+	this.putPiece('white','pawn',new Position(1,1))
+	this.putPiece('white','pawn',new Position(2,1))
+	this.putPiece('white','pawn',new Position(3,1))
+	this.putPiece('white','pawn',new Position(4,1))
+	this.putPiece('white','pawn',new Position(5,1))
+	this.putPiece('white','pawn',new Position(6,1))
+	this.putPiece('white','pawn',new Position(7,1))
 }
 ChessBoard.prototype.moverooks=function() {
 	this.movePieceByPos(new Position(0,0),new Position(0,4))

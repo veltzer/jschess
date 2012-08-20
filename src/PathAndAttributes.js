@@ -1,10 +1,9 @@
 /**
 	This is a path (string) + attributes two tuple object
 	@class represents a path + attributes
-	@constructor
+	@param path string representing SVG path
+	@param attr object with attributes for said path
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
-	@param path string
-	@param attr object
 */
 function PathAndAttributes(path,attr) {
 	this.path=path
