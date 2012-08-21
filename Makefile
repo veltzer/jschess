@@ -60,3 +60,8 @@ install: all
 	sudo rm -rf $(WEB_DIR)
 	sudo mkdir $(WEB_DIR)
 	sudo cp -r $(HTML_FILES) $(TP_FOLDER) $(SRC_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
+
+.PHONY: sloccount
+sloccount: $(ALL_DEP)
+	$(info doing [$@])
+	$(Q)sloccount .
