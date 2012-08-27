@@ -5,7 +5,7 @@ TP_FOLDER=thirdparty
 SOURCES:=$(shell find $(SRC_FOLDER) -name "*.js")
 JSDOC_FOLDER:=jsdoc
 JSDOC_FILE:=$(JSDOC_FOLDER)/index.html
-HTML_FILES:=index.html calc.html
+HTML_FILES:=index.html calc.html favicon.ico
 OUT_FOLDER:=out
 JSFULL:=$(OUT_FOLDER)/$(PROJECT)-$(VER).js
 JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js
@@ -16,12 +16,12 @@ all: $(JSMIN) $(JSDOC_FILE)
 
 $(JSFULL): $(SOURCES)
 	$(info doing [$@])
-	@-mkdir $(dir $@) 2> /dev/null || exit 0
+	@mkdir -p $(dir $@)
 	@cat $(SOURCES) > $@
 
 $(JSMIN): $(JSFULL)
 	$(info doing [$@])
-	@-mkdir $(dir $@) 2> /dev/null || exit 0
+	@mkdir -p $(dir $@)
 	@yui-compressor $< -o $@
 
 .PHONY: jsdoc
@@ -31,7 +31,7 @@ jsdoc: $(JSDOC_FILE)
 $(JSDOC_FILE): $(SOURCES)
 	$(info doing [$@])
 	@-rm -rf $(JSDOC_FOLDER)
-	@-mkdir $(dir $@) 2> /dev/null || exit 0
+	@mkdir -p $(dir $@)
 	@jsdoc -d=$(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
 
 
@@ -58,7 +58,7 @@ debug:
 .PHONY: install
 install: all
 	sudo rm -rf $(WEB_DIR)
-	sudo mkdir $(WEB_DIR)
+	sudo mkdir -p $(WEB_DIR)
 	sudo cp -r $(HTML_FILES) $(TP_FOLDER) $(SRC_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
 
 .PHONY: sloccount
