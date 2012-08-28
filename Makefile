@@ -5,7 +5,7 @@ TP_FOLDER=thirdparty
 SOURCES:=$(shell find $(SRC_FOLDER) -name "*.js")
 JSDOC_FOLDER:=jsdoc
 JSDOC_FILE:=$(JSDOC_FOLDER)/index.html
-HTML_FILES:=index.html calc.html favicon.ico
+HTML_FILES:=$(shell find web)
 OUT_FOLDER:=out
 JSFULL:=$(OUT_FOLDER)/$(PROJECT)-$(VER).js
 JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js
@@ -57,9 +57,10 @@ debug:
 
 .PHONY: install
 install: all
-	sudo rm -rf $(WEB_DIR)
-	sudo mkdir -p $(WEB_DIR)
-	sudo cp -r $(HTML_FILES) $(TP_FOLDER) $(SRC_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
+	$(info doing [$@])
+	@sudo rm -rf $(WEB_DIR)
+	@sudo mkdir -p $(WEB_DIR)
+	@sudo cp -r $(OUT_FOLDER) $(HTML_FILES) $(TP_FOLDER) $(SRC_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
 
 .PHONY: sloccount
 sloccount: $(ALL_DEP)

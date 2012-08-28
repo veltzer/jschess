@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>jsChess</title>
+		<title>jschess</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
 		<script src="thirdparty/jquery-1.8.0.min.js"></script>
@@ -62,38 +62,24 @@
 		</script>
 	</head>
 	<body>
-		<h1>Welcome to the jschess project</h1>
-		<p>
-		<b>jschess</b> is a JavaScript library which is fully object oriented that enables:
-		<ul>
-			<li>showing chess games in pgn format from the server</li>
-			<li>showing chess positions as riddles and show solutions</li>
-			<li>enable the end user to create chess positions and save them</li>
-			<li>allows to build a chess game where the player plays the server or some other player</li>
-			<li>other things I did not think about...</li>
-		</ul>
-		</p>
-		<b>This is alpha material at the moment, use at your own risk! API is subject to change!</b>
-		Some links:
-		<ul>
-			<li>jschess API is <a href="http://veltzer.net/jschess/jsdoc">here</a></li>
-			<li>The github projec is <a href="https://github.com/veltzer/jschess">here</a></li>
-		</ul>
-		<div>
-		Here is a small demo that I use to hack on <b>jschess</b>:<br/>
-		First you need a place for your board, so place something like this somewhere in your html:
+		<h1>Demo2 - moving the pieces</h1>
+		First download the minified file from <a title="jschess download" href="out/jschess-0.1.min.js">here</a>.
+		Place the file somewhere on your web server and import it from your HTML like this:
+		<pre class="brush: xml">
+			&lt;script src="jschess-0.1.min.js"&gt;&lt;/script&gt;
+		</pre>
+		You need a place for your board, so place something like this somewhere in your html:
 		<pre class="brush: xml">
 			&lt;div id="myid"&gt;
 			&lt;/div&gt;
 		</pre>
-		Then you can create a board by calling the constructor of ChessBoard. The board will be empty so we call startpos to get initial game position:
+		Then you can create a board from your javascript code by calling the constructor of ChessBoard. The board will be empty so we call startpos to get initial game position:
 		<pre class="brush: js">
 		var board=new ChessBoard({
 			id:'myid',
 		})
 		board.startpos()
 		</pre>
-		</div>
 		Here is the result:
 		<div id="myid">
 		</div>
