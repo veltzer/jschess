@@ -1,10 +1,11 @@
 add "cleanBoard" method which removes all the pieces and add button to do it.
-add code beautifier to the project as third party and show the code that creates
-	each example.
 add a large scale gallery of the pieces so that I could fine tune the svg of them.
+	(link to it from the main jschess page).
 make the pieces move at constant speed (when moving a piece calculate the distance it needs to move
 	and the time from the distance/speed, speed should be the parameter at construction at units
 	of squares per second).
+have an option to turn animations of movement of pieces off.
+Have a dialog that allows the end user to control all visual aspects of the board.
 Make a frame around the board.
 	like in the championship: http://moscow2012.fide.com/en/live?g=20120530
 Add move control like in the moscow championship.
