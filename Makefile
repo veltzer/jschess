@@ -57,9 +57,10 @@ debug:
 
 .PHONY: install
 install: all
-	sudo rm -rf $(WEB_DIR)
-	sudo mkdir -p $(WEB_DIR)
-	sudo cp -r $(HTML_FILES) $(TP_FOLDER) $(SRC_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
+	$(info doing [$@])
+	@sudo rm -rf $(WEB_DIR)
+	@sudo mkdir -p $(WEB_DIR)
+	@sudo cp -r $(OUT_FOLDER) $(HTML_FILES) $(TP_FOLDER) $(SRC_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
 
 .PHONY: sloccount
 sloccount: $(ALL_DEP)
