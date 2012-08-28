@@ -1,3 +1,4 @@
+move the web site to some preprocessing tool (mako?!?)
 add "cleanBoard" method which removes all the pieces and add button to do it.
 add code beautifier to the project as third party and show the code that creates
 	each example.
