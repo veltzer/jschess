@@ -101,7 +101,7 @@ ChessBoard.prototype.drawBoard=function() {
 		for(var y=0;y<8;y++) {
 			// Creates circle at x = 50, y = 40, with radius 10
 			var rec =this.paper.rect(x*this.square,y*this.square,this.square,this.square)
-			rec.attr('stroke', 'black')
+			rec.attr('stroke','black')
 			rec.attr('stroke-width',0.1)
 			if((x+y)%2==1) {
 				if(this.config['gradients']) {
@@ -421,6 +421,14 @@ ChessBoard.prototype.flip=function() {
 */
 ChessBoard.prototype.dump=function() {
 	this.piecesDump()
+}
+/**
+	Make a piece glow
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+ChessBoard.prototype.glow=function() {
+	var piece=this.piecesGetAtPos(new Position(0,0));
+	piece.gr.glow();
 }
 /**
 	Redraw the entire board
