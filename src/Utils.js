@@ -12,24 +12,24 @@ function Utils() {
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 Utils.unite=function(o1,o2) {
-	var ret={}
+	var ret={};
 	for(var x in o1) {
-		ret[x]=o1[x]
+		ret[x]=o1[x];
 	}
-	for(var x in o2) {
-		ret[x]=o2[x]
+	for(var y in o2) {
+		ret[y]=o2[y];
 	}
-	return ret
-}
+	return ret;
+};
 /**
 	Clone a javascript object
 	@param o the object to shalow clone
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 Utils.clone=function(o) {
-	var ret={}
+	var ret={};
 	for(var x in o) {
-		ret[x]=o[x]
+		ret[x]=o[x];
 	}
-	return ret
-}
+	return ret;
+};
