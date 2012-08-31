@@ -6,6 +6,6 @@
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function PathAndAttributes(path,attr) {
-	this.path=path
-	this.attr=attr
+	this.path=path;
+	this.attr=attr;
 }
