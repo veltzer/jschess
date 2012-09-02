@@ -9,16 +9,16 @@
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function Piece(gr,pos,pixelPos,pieceColor,pieceType) {
-	this.gr=gr
-	this.pos=pos
-	this.pixelPos=pixelPos
-	this.pieceColor=pieceColor
-	this.pieceType=pieceType
+	this.gr=gr;
+	this.pos=pos;
+	this.pixelPos=pixelPos;
+	this.pieceColor=pieceColor;
+	this.pieceType=pieceType;
 }
 /**
 	Debug method that allows you to get a nice printout for this type
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 Piece.prototype.toString=function() {
-	throw 'the toString method still has to be written'
-}
+	throw 'the toString method still has to be written';
+};
