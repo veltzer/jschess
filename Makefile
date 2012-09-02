@@ -16,6 +16,7 @@ all: $(JSMIN) $(JSDOC_FILE)
 
 $(JSFULL): $(SOURCES)
 	$(info doing [$@])
+	@~/downloads/jsl/jsl --conf=misc/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES)
 	@mkdir -p $(dir $@)
 	@cat $(SOURCES) > $@
 
@@ -33,7 +34,6 @@ $(JSDOC_FILE): $(SOURCES)
 	@-rm -rf $(JSDOC_FOLDER)
 	@mkdir -p $(dir $@)
 	@jsdoc -d=$(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
-
 
 .PHONY: clean
 clean:
