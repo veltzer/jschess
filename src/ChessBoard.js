@@ -66,6 +66,22 @@ ChessBoard.prototype.piecesGetAtPos=function(pos) {
 	throw 'no piece at pos '+pos
 }
 /**
+	Find out if there is a piece at position.
+	@param pos object of type Position (0,0)-(7,7)
+	@returns boolean that indicates whether there is a piece at position. 
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+ChessBoard.prototype.piecesHasAtPos=function(pos) {
+	for(var i in this.pieces) {
+		var piece=this.pieces[i]
+		var p=piece.pos
+		if(p.x==pos.x && p.y==pos.y) {
+			return true
+		}
+	}
+	return false
+}
+/**
 	Debug function
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
@@ -488,8 +504,13 @@ ChessBoard.prototype.moverooks=function() {
 	this.movePieceByPos(new Position(7,0),new Position(7,4))
 }
 ChessBoard.prototype.moveknights=function() {
-	this.movePieceByPos(new Position(1,0),new Position(2,2))
-	this.movePieceByPos(new Position(6,0),new Position(5,2))
+	if(this.piecesHasAtPos(new Position(1,0))) {
+		this.movePieceByPos(new Position(1,0),new Position(2,2))
+		this.movePieceByPos(new Position(6,0),new Position(5,2))
+	} else {
+		this.movePieceByPos(new Position(2,2),new Position(1,0))
+		this.movePieceByPos(new Position(5,2),new Position(6,0))
+	}
 }
 ChessBoard.prototype.movebishops=function() {
 	this.movePieceByPos(new Position(2,0),new Position(4,2))
