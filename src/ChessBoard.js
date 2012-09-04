@@ -77,14 +77,14 @@ ChessBoard.prototype.piecesGetAtPos=function(pos) {
 */
 ChessBoard.prototype.piecesHasAtPos=function(pos) {
 	for(var i in this.pieces) {
-		var piece=this.pieces[i]
-		var p=piece.pos
+		var piece=this.pieces[i];
+		var p=piece.pos;
 		if(p.x==pos.x && p.y==pos.y) {
-			return true
+			return true;
 		}
 	}
-	return false
-}
+	return false;
+};
 /**
 	Debug function
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
