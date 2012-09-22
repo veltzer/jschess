@@ -7,12 +7,14 @@
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function Position(x,y) {
+	/*
 	if(x<0 || x>7) {
 		throw 'bad value for x '+x;
 	}
 	if(y<0 || y>7) {
 		throw 'bad value for x '+x;
 	}
+	*/
 	this.x=x;
 	this.y=y;
 }

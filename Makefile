@@ -16,7 +16,7 @@ all: $(JSMIN) $(JSDOC_FILE)
 
 $(JSFULL): $(SOURCES)
 	$(info doing [$@])
-	@~/downloads/jsl/jsl --conf=misc/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES)
+	@~/install/jsl/jsl --conf=misc/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES)
 	@mkdir -p $(dir $@)
 	@cat $(SOURCES) > $@
 
