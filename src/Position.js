@@ -9,10 +9,10 @@
 function Position(x,y) {
 	/*
 	if(x<0 || x>7) {
-		throw 'bad value for x '+x;
+		throw 'bad value for x '+x+','+typeof(x);
 	}
 	if(y<0 || y>7) {
-		throw 'bad value for x '+x;
+		throw 'bad value for y '+y+','+typeof(y);
 	}
 	*/
 	this.x=x;

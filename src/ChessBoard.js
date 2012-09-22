@@ -3,6 +3,7 @@
 /*jsl:import Utils.js*/
 /*jsl:import Piece.js*/
 /*jsl:import Position.js*/
+/*jsl:import PixelPosition.js*/
 /**
 	Creates a new Board
 	@class a whole board to play with
@@ -348,9 +349,9 @@ ChessBoard.prototype.putPiece=function(pieceColor,pieceType,pos) {
 */
 ChessBoard.prototype.posToPixels=function(pos) {
 	if(this.flipview===true) {
-		return new Position(pos.x*this.square,pos.y*this.square);
+		return new PixelPosition(pos.x*this.square,pos.y*this.square);
 	} else {
-		return new Position(pos.x*this.square,(7-pos.y)*this.square);
+		return new PixelPosition(pos.x*this.square,(7-pos.y)*this.square);
 	}
 };
 /*
