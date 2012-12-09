@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -98,6 +97,13 @@
 		<button id="glow">glow</button>
 		<button id="dump">dump</button>
 		<br/>
-		<h3>Mark Veltzer, 2012</h3>
+		<p>
+		Mark Veltzer, <?php 
+			$copyYear = 2012;
+			$curYear = date('Y');
+			echo $copyYear . (($copyYear != $curYear) ? '-' . $curYear : '');
+		?>
+		<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
+		</p>
 	</body>
 </html>
