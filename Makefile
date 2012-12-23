@@ -73,7 +73,7 @@ $(JSDOC_FILE): $(SOURCES)
 .PHONY: clean
 clean:
 	$(info doing [$@])
-	$(Q)-rm -rf $(JSDOC_FOLDER) $(OUT_FOLDER)
+	$(Q)-rm -rf $(JSDOC_FOLDER) $(OUT_FOLDER) $(WEB_FOLDER)
 
 .PHONY: debug
 debug:
