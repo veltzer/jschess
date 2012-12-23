@@ -5,7 +5,7 @@
 	@param attr object with attributes for said path
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-function PathAndAttributes(path,attr) {
+function SvgPathAndAttributes(path,attr) {
 	this.path=path;
 	this.attr=attr;
 }
@@ -13,6 +13,6 @@ function PathAndAttributes(path,attr) {
 	Debug method that allows you to get a nice printout for this type
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-PathAndAttributes.prototype.toString=function() {
+SvgPathAndAttributes.prototype.toString=function() {
 	return [this.path,this.attr].join();
 };

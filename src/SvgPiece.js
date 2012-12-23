@@ -6,7 +6,7 @@
 	@param rect rect size
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-function PieceDesc(rect) {
+function SvgPiece(rect) {
 	this.rect=rect;
 	this.paas=[];
 }
@@ -15,6 +15,6 @@ function PieceDesc(rect) {
 	@param paa PathAndAttributes object to be added
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-PieceDesc.prototype.add=function(paa) {
+SvgPiece.prototype.add=function(paa) {
 	this.paas.push(paa);
 };

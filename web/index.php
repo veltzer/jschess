@@ -10,11 +10,16 @@
 		<!--script src="../out/jschess-0.1.min.js"></script-->
 		<!--script src="../out/jschess-0.1.js"></script-->
 		<script src="../src/Utils.js"></script>
-		<script src="../src/PathAndAttributes.js"></script>
-		<script src="../src/PieceDesc.js"></script>
-		<script src="../src/Position.js"></script>
+		<script src="../src/SvgPathAndAttributes.js"></script>
+		<script src="../src/SvgPiece.js"></script>
+		<script src="../src/SvgCreator.js"></script>
+		<script src="../src/PiecePosition.js"></script>
+		<script src="../src/PieceColor.js"></script>
+		<script src="../src/PieceType.js"></script>
 		<script src="../src/PixelPosition.js"></script>
 		<script src="../src/Piece.js"></script>
+		<script src="../src/BoardPiece.js"></script>
+		<script src="../src/BoardPosition.js"></script>
 		<script src="../src/ChessBoard.js"></script>
 
 		<!-- syntax highlighter stuff -->
