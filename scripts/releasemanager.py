@@ -16,7 +16,7 @@ class ReleaseManager:
 		self.name='releasemanager'
 		self.config.read([
 			self.name+'.cfg',
-			'misc/'+self.name+'.cfg',
+			'support/'+self.name+'.cfg',
 			os.path.expanduser('~/.'+self.name+'.cfg')
 		])
 		self.section='release'
