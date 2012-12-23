@@ -14,7 +14,11 @@ class ReleaseManager:
 		self.debug=False
 		self.config=ConfigParser.ConfigParser()
 		self.name='releasemanager'
-		self.config.read([self.name+'.cfg', os.path.expanduser('~/.'+self.name+'.cfg')])
+		self.config.read([
+			self.name+'.cfg',
+			'misc/'+self.name+'.cfg',
+			os.path.expanduser('~/.'+self.name+'.cfg')
+		])
 		self.section='release'
 		self.p_subject=self.config.get(self.section,'subject')
 		self.p_from=self.config.get(self.section,'from')
