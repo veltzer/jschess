@@ -13,7 +13,7 @@ DO_WRAPDEPS:=1
 VER:=$(shell git describe)
 PROJECT=jschess
 SRC_FOLDER=src
-TP_FOLDER=thirdparty
+THIRDPARTY_FOLDER=thirdparty
 SOURCES:=$(shell find $(SRC_FOLDER) -name "*.js")
 JSDOC_FOLDER:=jsdoc
 JSDOC_FILE:=$(JSDOC_FOLDER)/index.html
@@ -87,7 +87,7 @@ debug:
 	$(info JSDOC_FILE is $(JSDOC_FILE))
 	$(info WEB_DIR is $(WEB_DIR))
 	$(info SRC_FOLDER is $(SRC_FOLDER))
-	$(info TP_FOLDER is $(TP_FOLDER))
+	$(info THIRDPARTY_FOLDER is $(THIRDPARTY_FOLDER))
 	$(info WEB_FOLDER is $(WEB_FOLDER))
 	$(info WEBMAKO_FILES is $(WEBMAKO_FILES))
 	$(info WEB_FILES is $(WEB_FILES))
@@ -97,7 +97,7 @@ install: all
 	$(info doing [$@])
 	$(Q)sudo rm -rf $(WEB_DIR)
 	$(Q)sudo mkdir -p $(WEB_DIR)
-	$(Q)sudo cp -r index.html $(OUT_FOLDER) $(WEB_FOLDER) $(TP_FOLDER) $(SRC_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
+	$(Q)sudo cp -r index.html $(OUT_FOLDER) $(WEB_FOLDER)/webmako $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
 	$(Q)#sudo ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
 	$(Q)#sudo ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
 

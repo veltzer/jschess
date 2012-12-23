@@ -4,8 +4,10 @@ import sys
 import mako.template
 import mako.lookup
 import os # for os.chmod, os.unlink
+import subprocess # for subprocess.check_output
 
 import versioncheck
+import myutils
 
 if len(sys.argv)!=3:
 	raise ValueError('command line issue')
@@ -17,7 +19,7 @@ p_output=sys.argv[2]
 
 def get_attr():
 	attr={}
-	attr['ver']="version"
+	attr['ver']=subprocess.check_output(["git", "describe"]).rstrip()
 	return attr
 
 try:
