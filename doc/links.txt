@@ -8,8 +8,6 @@ svg graphics on the web:
 	http://www.alistapart.com/articles/using-svg-for-flexible-scalable-and-fun-backgrounds-part-ii/
 jsdoc:
 	http://code.google.com/p/jsdoc-toolkit/w/list
-testing URL on my machine:
-	http://localhost/~mark/jschess/test_board.html
 similar or related projects:
 	http://p4wn.sourceforge.net/sven/
 	http://htmlchess.sourceforge.net/demo/example.html
