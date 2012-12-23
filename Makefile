@@ -118,3 +118,4 @@ $(WEB_FILES_OTHER): $(WEB_FOLDER)/%: $(WEBMAKO_FOLDER)/% $(MAKO_WRAPPER_DEP) $(A
 .PHONY: check
 check:
 	$(Q)-git grep "\"" src/ | grep -v author
+	$(Q)-git grep "\ \ " src/
