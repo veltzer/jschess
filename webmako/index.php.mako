@@ -79,6 +79,7 @@
 			<li>other things I did not think about...</li>
 		</ul>
 		</p>
+		<p>The current version of jschess is ${ver}</p>
 		<b>This is alpha material at the moment, use at your own risk! API is subject to change!</b>
 		Some links:
 		<ul>
