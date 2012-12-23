@@ -114,3 +114,7 @@ $(WEB_FILES_OTHER): $(WEB_FOLDER)/%: $(WEBMAKO_FOLDER)/% $(MAKO_WRAPPER_DEP) $(A
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
 	$(Q)cp $< $@
+
+.PHONY: check
+check:
+	$(Q)-git grep "\"" src/ | grep -v author
