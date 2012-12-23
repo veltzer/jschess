@@ -95,6 +95,7 @@
 			<li><a href="demo1.html">Demo1 - creating the board</a></li>
 			<li><a href="demo2.html">Demo2 - moving pieces</a></li>
 			<li><a href="calc.html">SVG path calculator (comes in handy when doing SVG graphics)</a></li>
+			<li><a href="tests.html">JSChess QUnit tests</a></li>
 		</ul>
 		Here is a quick demo:
 		<div id="myid">
