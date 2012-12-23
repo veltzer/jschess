@@ -1,8 +1,11 @@
-make the site carry older versions of jschess too.
-
-make php include the files in the file by file version in the right order
+mako:
+=====
+make mako files include individual js files in the file by file version in the right order
 	(prepare an order file which says which is the right order).
+make mako files not be php files (there is only one thing we use it for which is the copyright
+	signature).
 
+make the site carry older versions of jschess too.
 consider changing the name of this project to chess.js.
 
 add a type safe config singleton system.
