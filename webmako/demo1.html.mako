@@ -37,15 +37,15 @@
 	</head>
 	<body>
 		<h1>Demo1 - Creating the starting position</h1>
-		First download the minified file from <a title="jschess compressed download" href="../out/jschess-0.1.min.js">here</a>.
+		First download the minified file from <a title="jschess compressed download" href="../out/jschess-${ver}.min.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
 		<pre class="brush: xml">
-			&lt;script src="jschess-0.1.min.js"&gt;&lt;/script&gt;
+			&lt;script src="jschess-${ver}.min.js"&gt;&lt;/script&gt;
 		</pre>
 		If you want to help me debug jschess or are experiencing problems you can download the uncompressed file
-		from <a title="jschess uncompressed download" href="../out/jschess-0.1.js">here</a> and use it like this:
+		from <a title="jschess uncompressed download" href="../out/jschess-${ver}.js">here</a> and use it like this:
 		<pre class="brush: xml">
-			&lt;script src="jschess-0.1.js"&gt;&lt;/script&gt;
+			&lt;script src="jschess-${ver}.js"&gt;&lt;/script&gt;
 		</pre>
 		You need a place for your board, so place something like this somewhere in your html:
 		<pre class="brush: xml">

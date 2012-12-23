@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -8,8 +7,8 @@
 		<script src="../thirdparty/jquery-1.8.3.min.js"></script>
 		<script src="../thirdparty/raphael-2.1.0.min.js"></script>
 		<!-- our code, three options: minified, regular or file by file -->
-		<!--script src="../out/jschess-0.1.min.js"></script-->
-		<!--script src="../out/jschess-0.1.js"></script-->
+		<!--script src="../out/jschess-${ver}.min.js"></script-->
+		<!--script src="../out/jschess-${ver}.js"></script-->
 		<script src="../src/Utils.js"></script>
 		<script src="../src/SvgPathAndAttributes.js"></script>
 		<script src="../src/SvgPiece.js"></script>
@@ -40,8 +39,6 @@
 			 
 		<script>
 			$(document).ready(function() {
-				// Finally, to actually run the highlighter, you need to include this JS on your page
-				SyntaxHighlighter.all()
 				var board=new ChessBoard({
 					id:'myid',
 				})
@@ -61,6 +58,9 @@
 				$('#flip').click(function() {
 					board.flip()
 				})
+				$('#glow').click(function() {
+					board.glow()
+				})
 				$('#dump').click(function() {
 					board.dump()
 				})
@@ -68,25 +68,30 @@
 		</script>
 	</head>
 	<body>
-		<h1>Demo2 - moving the pieces</h1>
-		First download the minified file from <a title="jschess download" href="../out/jschess-0.1.min.js">here</a>.
-		Place the file somewhere on your web server and import it from your HTML like this:
-		<pre class="brush: xml">
-			&lt;script src="jschess-0.1.min.js"&gt;&lt;/script&gt;
-		</pre>
-		You need a place for your board, so place something like this somewhere in your html:
-		<pre class="brush: xml">
-			&lt;div id="myid"&gt;
-			&lt;/div&gt;
-		</pre>
-		Then you can create a board from your javascript code by calling the constructor of ChessBoard. The board will be empty so we call startpos to get initial game position:
-		<pre class="brush: js">
-		var board=new ChessBoard({
-			id:'myid',
-		})
-		board.startpos()
-		</pre>
-		Here is the result:
+		<h1>Welcome to the jschess project</h1>
+		<p>
+		<b>jschess</b> is a JavaScript library which is fully object oriented that enables:
+		<ul>
+			<li>showing chess games in pgn format from the server</li>
+			<li>showing chess positions as riddles and show solutions</li>
+			<li>enable the end user to create chess positions and save them</li>
+			<li>allows to build a chess game where the player plays the server or some other player</li>
+			<li>other things I did not think about...</li>
+		</ul>
+		</p>
+		<b>This is alpha material at the moment, use at your own risk! API is subject to change!</b>
+		Some links:
+		<ul>
+			<li>jschess API is <a href="../jsdoc">here</a></li>
+			<li>The github projec is <a href="https://github.com/veltzer/jschess">here</a></li>
+		</ul>
+		Demos of jschess
+		<ul>
+			<li><a href="demo1.html">Demo1 - creating the board</a></li>
+			<li><a href="demo2.html">Demo2 - moving pieces</a></li>
+			<li><a href="calc.html">SVG path calculator (comes in handy when doing SVG graphics)</a></li>
+		</ul>
+		Here is a quick demo:
 		<div id="myid">
 		</div>
 		<button id="startpos">startpos</button>
@@ -94,8 +99,16 @@
 		<button id="moveknights">moveknights</button>
 		<button id="movebishops">movebishops</button>
 		<button id="flip">flip</button>
+		<button id="glow">glow</button>
 		<button id="dump">dump</button>
 		<br/>
-		<h3>Mark Veltzer, 2012</h3>
+		<p>
+		Mark Veltzer, <?php 
+			$copyYear = 2012;
+			$curYear = date('Y');
+			echo $copyYear . (($copyYear != $curYear) ? '-' . $curYear : '');
+		?>
+		<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
+		</p>
 	</body>
 </html>

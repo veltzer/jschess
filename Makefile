@@ -3,6 +3,8 @@
 ##############
 # should we show commands executed ?
 DO_MKDBG?=0
+# should we depend on versions of wrappers ?
+DO_WRAPDEPS:=1
 
 #############
 # VARIABLES #
@@ -20,6 +22,21 @@ OUT_FOLDER:=out
 JSFULL:=$(OUT_FOLDER)/$(PROJECT)-$(VER).js
 JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js
 WEB_DIR:=/var/www/$(PROJECT)
+WEB_FOLDER:=web
+WEBMAKO_FOLDER:=webmako
+WEBMAKO_FILES_MAKO:=$(shell find $(WEBMAKO_FOLDER) -type f -and -name "*.mako")
+WEBMAKO_FILES_OTHER:=$(shell find $(WEBMAKO_FOLDER) -type f -and -not -name "*.mako")
+WEBMAKO_FILES:=$(WEBMAKO_FILES_MAKO) $(WEBMAKO_FILES_OTHER)
+WEB_FILES_MAKO:=$(addprefix $(WEB_FOLDER)/,$(basename $(WEBMAKO_FILES_MAKO)))
+WEB_FILES_OTHER:=$(addprefix $(WEB_FOLDER)/,$(WEBMAKO_FILES_OTHER))
+WEB_FILES:=$(WEB_FILES_MAKO) $(WEB_FILES_OTHER)
+MAKO_WRAPPER:=scripts/mako_wrapper.py
+
+ifeq ($(DO_WRAPDEPS),1)
+	MAKO_WRAPPER_DEP:=$(MAKO_WRAPPER)
+else
+	MAKO_WRAPPER_DEP:=
+endif
 
 ifeq ($(DO_MKDBG),1)
 Q=
@@ -30,7 +47,7 @@ Q=@
 endif # DO_MKDBG
 
 .PHONY: all
-all: $(JSMIN) $(JSDOC_FILE) 
+all: $(JSMIN) $(JSDOC_FILE) $(WEB_FILES)
 
 $(JSFULL): $(SOURCES)
 	$(info doing [$@])
@@ -72,6 +89,8 @@ debug:
 	$(info SRC_FOLDER is $(SRC_FOLDER))
 	$(info TP_FOLDER is $(TP_FOLDER))
 	$(info WEB_FOLDER is $(WEB_FOLDER))
+	$(info WEBMAKO_FILES is $(WEBMAKO_FILES))
+	$(info WEB_FILES is $(WEB_FILES))
 
 .PHONY: install
 install: all
@@ -79,10 +98,19 @@ install: all
 	$(Q)sudo rm -rf $(WEB_DIR)
 	$(Q)sudo mkdir -p $(WEB_DIR)
 	$(Q)sudo cp -r index.html $(OUT_FOLDER) $(WEB_FOLDER) $(TP_FOLDER) $(SRC_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
-	$(Q)sudo ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
-	$(Q)sudo ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
+	$(Q)#sudo ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
+	$(Q)#sudo ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
 
 .PHONY: sloccount
 sloccount: $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)sloccount .
+
+$(WEB_FILES_MAKO): $(WEB_FOLDER)/%: %.mako $(MAKO_WRAPPER_DEP) $(ALL_DEP)
+	$(info doing [$@])
+	$(Q)mkdir -p $(dir $@)
+	$(Q)$(MAKO_WRAPPER) $< $@
+$(WEB_FILES_OTHER): $(WEB_FOLDER)/%: % $(MAKO_WRAPPER_DEP) $(ALL_DEP)
+	$(info doing [$@])
+	$(Q)mkdir -p $(dir $@)
+	$(Q)cp $< $@
