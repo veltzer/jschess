@@ -5,7 +5,7 @@
 	@param y y co-ordinate
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-function PixelPosition(x,y) {
+function SvgPixelPosition(x,y) {
 	if(x<0) {
 		throw 'bad value for x '+x+','+typeof(x);
 	}
@@ -19,6 +19,6 @@ function PixelPosition(x,y) {
 	Debug method so that you can get a nice printout of instances of this type
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-PixelPosition.prototype.toString=function() {
+SvgPixelPosition.prototype.toString=function() {
 	return '('+this.x+','+this.y+')';
 };

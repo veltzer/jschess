@@ -14,12 +14,12 @@
 	into some other piece like in the case of coronation).
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-function Move() {
+function GameMove() {
 }
 /**
 	Debug method that allows you to get a nice printout for this type
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-Move.prototype.toString=function() {
-	return 'no rep for this';
+GameMove.prototype.toString=function() {
+	return 'no toString for type GameMove';
 };

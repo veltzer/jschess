@@ -2,7 +2,7 @@
 /*jsl:import SvgPathAndAttributes.js*/
 /*jsl:import SvgPiece.js*/
 /**
-	@class a class to have just static methods for creating pieces
+	@class static class to have just static methods for creating pieces
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function SvgCreator() {
