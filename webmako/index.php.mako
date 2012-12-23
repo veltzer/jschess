@@ -80,11 +80,15 @@
 		</ul>
 		</p>
 		<p>The current version of jschess is ${ver}</p>
+		<p>
 		<b>This is alpha material at the moment, use at your own risk! API is subject to change!</b>
+		</p>
 		Some links:
 		<ul>
 			<li>jschess API is <a href="../jsdoc">here</a></li>
 			<li>The github projec is <a href="https://github.com/veltzer/jschess">here</a></li>
+			<li>latest full jschess is <a href="http://veltzer.net/jschess/out/jschess-${ver}.js">jschess-${ver}.js</a></li>
+			<li>latest minified jschess is <a href="http://veltzer.net/jschess/out/jschess-${ver}.min.js">jschess-${ver}.min.js</a></li>
 		</ul>
 		Demos of jschess
 		<ul>

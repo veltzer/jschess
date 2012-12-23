@@ -9,20 +9,17 @@
 	could be in a different position than the capturing position like
 	in en passant).
 	- info about whether this was a 0-0 or 0-0-0 (all other info
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	needed for castling).
 	- info about what the piece turns to (in case the piece turns
 	into some other piece like in the case of coronation).
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-function Move(name) {
-	if(!(name in Move.names)) {
-		throw 'illegal piecetype '+name;
-	}
-	this.name=name;
+function Move() {
 }
 /**
 	Debug method that allows you to get a nice printout for this type
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 Move.prototype.toString=function() {
-	throw 'the toString method still has to be written';
+	return 'no rep for this';
 };

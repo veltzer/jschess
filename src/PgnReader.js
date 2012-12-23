@@ -11,7 +11,7 @@ function PgnReader() {
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 PgnReader.prototype.toString=function() {
-	throw "this is not implemented yet";
+	throw 'this is not implemented yet';
 };
 /**
 	A method to read a pgn file via ajax.

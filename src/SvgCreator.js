@@ -168,7 +168,7 @@ SvgCreator.createPiece=function(config,pieceColor,pieceType) {
 			pieceDesc.add(new SvgPathAndAttributes('M 20,8 L 25,8',stdatt));
 			stdatt=Utils.clone(stdatt);
 			stdatt['stroke']='#fff';
-			pieceDesc.add(new SvgPathAndAttributes('M 32,29.5 C 32,29.5 40.5,25.5 38.03,19.85 C 34.15,14 25,18 22.5,24.5 L 22.51,26.6 L 22.5,24.5 C 20,18 9.906,14 6.997,19.85 C 4.5,25.5 11.85,28.85 11.85,28.85"',stdatt));
+			pieceDesc.add(new SvgPathAndAttributes('M 32,29.5 C 32,29.5 40.5,25.5 38.03,19.85 C 34.15,14 25,18 22.5,24.5 L 22.51,26.6 L 22.5,24.5 C 20,18 9.906,14 6.997,19.85 C 4.5,25.5 11.85,28.85 11.85,28.85',stdatt));
 			pieceDesc.add(new SvgPathAndAttributes('M 11.5,30 C 17,27 27,27 32.5,30 M 11.5,33.5 C 17,30.5 27,30.5 32.5,33.5 M 11.5,37 C 17,34 27,34 32.5,37',stdatt));
 			return pieceDesc;
 		}
