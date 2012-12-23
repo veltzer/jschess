@@ -1,9 +1,13 @@
+/*jsl:import Utils.js*/
 /*jsl:import PathAndAttributes.js*/
 /*jsl:import PieceDesc.js*/
-/*jsl:import Utils.js*/
-/*jsl:import Piece.js*/
-/*jsl:import Position.js*/
 /*jsl:import PixelPosition.js*/
+/*jsl:import PieceColor.js*/
+/*jsl:import PieceType.js*/
+/*jsl:import PiecePosition.js*/
+/*jsl:import BoardPiece.js*/
+/*jsl:import BoardPosition.js*/
+/*jsl:import Piece.js*/
 /**
 	Creates a new Board
 	@class a whole board to play with
@@ -318,10 +322,10 @@ ChessBoard.prototype.createPiece=function(pieceColor,pieceType) {
 	@param pieceType the type of the piece ('rook','knight','bishop','queen','king','pawn')
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-ChessBoard.prototype.putPiece=function(pieceColor,pieceType,pos) {
-	var pieceDesc=this.createPiece(pieceColor,pieceType);
+ChessBoard.prototype.putPiece=function(boardPiece) {
+	var pieceDesc=this.createPiece(boardPiece.color,boardPiece.type);
 	// calculate transform (move and scale)
-	var pixelPos=this.posToPixels(pos);
+	var pixelPos=this.posToPixels(boardPiece.pos);
 	var m=Raphael.matrix();
 	m.translate(pixelPos.x,pixelPos.y);
 	m.scale(this.square/pieceDesc.rect,this.square/pieceDesc.rect);
@@ -338,7 +342,7 @@ ChessBoard.prototype.putPiece=function(pieceColor,pieceType,pos) {
 		gr.push(el);
 	}
 	// lets add the piece
-	var piece=new Piece(gr,pos,pixelPos,pieceColor,pieceType);
+	var piece=new Piece(gr,boardPiece.pos,pixelPos,boardPiece.color,boardPiece.type);
 	this.piecesAdd(piece);
 	return piece;
 };
@@ -449,7 +453,7 @@ ChessBoard.prototype.dump=function() {
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.glow=function() {
-	var piece=this.piecesGetAtPos(new Position(0,0));
+	var piece=this.piecesGetAtPos(new PiecePosition(0,0));
 	piece.gr.glow();
 };
 /**
@@ -471,54 +475,23 @@ ChessBoard.prototype.movePieceByPos=function(fromPos,toPos) {
 
 // testing code starts here
 ChessBoard.prototype.startpos=function() {
-	this.putPiece('white','rook',new Position(0,0));
-	this.putPiece('white','knight',new Position(1,0));
-	this.putPiece('white','bishop',new Position(2,0));
-	this.putPiece('white','queen',new Position(3,0));
-	this.putPiece('white','king',new Position(4,0));
-	this.putPiece('white','bishop',new Position(5,0));
-	this.putPiece('white','knight',new Position(6,0));
-	this.putPiece('white','rook',new Position(7,0));
-	this.putPiece('white','pawn',new Position(0,1));
-	this.putPiece('white','pawn',new Position(1,1));
-	this.putPiece('white','pawn',new Position(2,1));
-	this.putPiece('white','pawn',new Position(3,1));
-	this.putPiece('white','pawn',new Position(4,1));
-	this.putPiece('white','pawn',new Position(5,1));
-	this.putPiece('white','pawn',new Position(6,1));
-	this.putPiece('white','pawn',new Position(7,1));
-
-	this.putPiece('black','rook',new Position(0,7));
-	this.putPiece('black','knight',new Position(1,7));
-	this.putPiece('black','bishop',new Position(2,7));
-	this.putPiece('black','queen',new Position(3,7));
-	this.putPiece('black','king',new Position(4,7));
-	this.putPiece('black','bishop',new Position(5,7));
-	this.putPiece('black','knight',new Position(6,7));
-	this.putPiece('black','rook',new Position(7,7));
-	this.putPiece('black','pawn',new Position(0,6));
-	this.putPiece('black','pawn',new Position(1,6));
-	this.putPiece('black','pawn',new Position(2,6));
-	this.putPiece('black','pawn',new Position(3,6));
-	this.putPiece('black','pawn',new Position(4,6));
-	this.putPiece('black','pawn',new Position(5,6));
-	this.putPiece('black','pawn',new Position(6,6));
-	this.putPiece('black','pawn',new Position(7,6));
+	var that=this;
+	BoardPosition.startPos().forEachPiece(that.putPiece);
 };
 ChessBoard.prototype.moverooks=function() {
-	this.movePieceByPos(new Position(0,0),new Position(0,4));
-	this.movePieceByPos(new Position(7,0),new Position(7,4));
+	this.movePieceByPos(new PiecePosition(0,0),new PiecePosition(0,4));
+	this.movePieceByPos(new PiecePosition(7,0),new PiecePosition(7,4));
 };
 ChessBoard.prototype.moveknights=function() {
-	if(this.piecesHasAtPos(new Position(1,0))) {
-		this.movePieceByPos(new Position(1,0),new Position(2,2));
-		this.movePieceByPos(new Position(6,0),new Position(5,2));
+	if(this.piecesHasAtPos(new PiecePosition(1,0))) {
+		this.movePieceByPos(new PiecePosition(1,0),new PiecePosition(2,2));
+		this.movePieceByPos(new PiecePosition(6,0),new PiecePosition(5,2));
 	} else {
-		this.movePieceByPos(new Position(2,2),new Position(1,0));
-		this.movePieceByPos(new Position(5,2),new Position(6,0));
+		this.movePieceByPos(new PiecePosition(2,2),new PiecePosition(1,0));
+		this.movePieceByPos(new PiecePosition(5,2),new PiecePosition(6,0));
 	}
 };
 ChessBoard.prototype.movebishops=function() {
-	this.movePieceByPos(new Position(2,0),new Position(4,2));
-	this.movePieceByPos(new Position(5,0),new Position(3,2));
+	this.movePieceByPos(new PiecePosition(2,0),new PiecePosition(4,2));
+	this.movePieceByPos(new PiecePosition(5,0),new PiecePosition(3,2));
 };

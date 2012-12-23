@@ -14,10 +14,10 @@ function PieceType(name) {
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 PieceType.prototype.toString=function() {
-	throw 'the toString method still has to be written';
+	return this.name;
 };
 /**
-	Array of piece type
+	Array of piece types
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 PieceType.names={

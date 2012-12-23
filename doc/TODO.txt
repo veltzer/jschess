@@ -1,3 +1,8 @@
+consider changing the name of this project to chess.js.
+
+move to using prototype as the basis for this entire project (the class
+	system of prototype.js to be exact).
+
 move the web site to some preprocessing tool (mako?!?)
 add "cleanBoard" method which removes all the pieces and add button to do it.
 add a large scale gallery of the pieces so that I could fine tune the svg of them.

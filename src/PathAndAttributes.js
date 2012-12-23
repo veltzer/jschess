@@ -9,3 +9,10 @@ function PathAndAttributes(path,attr) {
 	this.path=path;
 	this.attr=attr;
 }
+/**
+	Debug method that allows you to get a nice printout for this type
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+PathAndAttributes.prototype.toString=function() {
+	return [this.path,this.attr].join();
+};
