@@ -24,3 +24,17 @@ PieceColor.colors={
 	white:undefined,
 	black:undefined
 };
+/**
+	Return whether the piece is white
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+PieceColor.prototype.isWhite=function() {
+	return this.color=='white';
+};
+/**
+	Return whether the piece is black
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+PieceColor.prototype.isBlack=function() {
+	return this.color=='black';
+};

@@ -21,5 +21,5 @@ function PiecePosition(x,y) {
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 PiecePosition.prototype.toString=function() {
-	return '('+this.x+','+this.y+')';
+	return 'PiecePosition: ('+this.x+','+this.y+')';
 };

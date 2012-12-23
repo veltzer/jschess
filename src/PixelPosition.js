@@ -6,6 +6,12 @@
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function PixelPosition(x,y) {
+	if(x<0) {
+		throw 'bad value for x '+x+','+typeof(x);
+	}
+	if(y<0) {
+		throw 'bad value for y '+y+','+typeof(y);
+	}
 	this.x=x;
 	this.y=y;
 }
