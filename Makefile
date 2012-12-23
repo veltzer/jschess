@@ -1,3 +1,12 @@
+##############
+# PARAMETERS #
+##############
+# should we show commands executed ?
+DO_MKDBG?=0
+
+#############
+# VARIABLES #
+#############
 #VER:=$(shell git tag)
 VER:=$(shell git describe)
 PROJECT=jschess
@@ -12,19 +21,27 @@ JSFULL:=$(OUT_FOLDER)/$(PROJECT)-$(VER).js
 JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js
 WEB_DIR:=/var/www/$(PROJECT)
 
+ifeq ($(DO_MKDBG),1)
+Q=
+# we are not silent in this branch
+else # DO_MKDBG
+Q=@
+#.SILENT:
+endif # DO_MKDBG
+
 .PHONY: all
 all: $(JSMIN) $(JSDOC_FILE) 
 
 $(JSFULL): $(SOURCES)
 	$(info doing [$@])
-	@~/install/jsl/jsl --conf=misc/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES)
-	@mkdir -p $(dir $@)
-	@cat $(SOURCES) > $@
+	$(Q)~/install/jsl/jsl --conf=misc/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES)
+	$(Q)mkdir -p $(dir $@)
+	$(Q)cat $(SOURCES) > $@
 
 $(JSMIN): $(JSFULL)
 	$(info doing [$@])
-	@mkdir -p $(dir $@)
-	@yui-compressor $< -o $@
+	$(Q)mkdir -p $(dir $@)
+	$(Q)yui-compressor $< -o $@
 
 .PHONY: jsdoc
 jsdoc: $(JSDOC_FILE)
@@ -32,14 +49,14 @@ jsdoc: $(JSDOC_FILE)
 
 $(JSDOC_FILE): $(SOURCES)
 	$(info doing [$@])
-	@-rm -rf $(JSDOC_FOLDER)
-	@mkdir -p $(dir $@)
-	@jsdoc -d=$(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
+	$(Q)-rm -rf $(JSDOC_FOLDER)
+	$(Q)mkdir -p $(dir $@)
+	$(Q)jsdoc -d=$(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
 
 .PHONY: clean
 clean:
 	$(info doing [$@])
-	-@rm -rf $(JSDOC_FOLDER) $(OUT_FOLDER)
+	$(Q)-rm -rf $(JSDOC_FOLDER) $(OUT_FOLDER)
 
 .PHONY: debug
 debug:
@@ -59,9 +76,11 @@ debug:
 .PHONY: install
 install: all
 	$(info doing [$@])
-	@sudo rm -rf $(WEB_DIR)
-	@sudo mkdir -p $(WEB_DIR)
-	@sudo cp -r index.html $(OUT_FOLDER) $(WEB_FOLDER) $(TP_FOLDER) $(SRC_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
+	$(Q)sudo rm -rf $(WEB_DIR)
+	$(Q)sudo mkdir -p $(WEB_DIR)
+	$(Q)sudo cp -r index.html $(OUT_FOLDER) $(WEB_FOLDER) $(TP_FOLDER) $(SRC_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
+	$(Q)sudo ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
+	$(Q)sudo ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
 
 .PHONY: sloccount
 sloccount: $(ALL_DEP)
