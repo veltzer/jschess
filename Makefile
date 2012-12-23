@@ -52,7 +52,7 @@ all: $(JSMIN) $(JSDOC_FILE) $(WEB_FILES)
 
 $(JSFULL): $(SOURCES)
 	$(info doing [$@])
-	$(Q)~/install/jsl/jsl --conf=misc/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES)
+	$(Q)~/install/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)cat $(SOURCES) > $@
 
