@@ -68,7 +68,7 @@ ChessBoard.prototype.piecesAdd=function(piece) {
 ChessBoard.prototype.piecesGetAtPos=function(pos) {
 	for(var i in this.pieces) {
 		var piece=this.pieces[i];
-		var p=piece.pos;
+		var p=piece.boardPiece.position;
 		if(p.x==pos.x && p.y==pos.y) {
 			return piece;
 		}
@@ -84,23 +84,13 @@ ChessBoard.prototype.piecesGetAtPos=function(pos) {
 ChessBoard.prototype.piecesHasAtPos=function(pos) {
 	for(var i in this.pieces) {
 		var piece=this.pieces[i];
-		var p=piece.pos;
+		var p=piece.boardPiece.position;
 		if(p.x==pos.x && p.y==pos.y) {
 			return true;
 		}
 	}
 	return false;
 };
-/**
-	Debug function
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
-*/
-ChessBoard.prototype.piecesDump=function() {
-	for(var i in this.pieces) {
-		console.log(this.pieces[i]);
-	}
-};
-
 /**
 	Prepare the raphael paper so we could do graphics
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -171,7 +161,7 @@ ChessBoard.prototype.putPiece=function(boardPiece) {
 		gr.push(el);
 	}
 	// lets add the piece
-	var piece=new Piece(gr,boardPiece.pos,pixelPos,boardPiece.color,boardPiece.type);
+	var piece=new Piece(gr,pixelPos,boardPiece);
 	this.piecesAdd(piece);
 	return piece;
 };
@@ -292,9 +282,10 @@ ChessBoard.prototype.glow=function() {
 ChessBoard.prototype.redraw=function() {
 	for(var i in this.pieces) {
 		var piece=this.pieces[i];
+		var pos=piece.boardPiece.position;
 		//var pixelPos=piece.pixelPos;
 		//this.positionPiece(piece,piece.pos);
-		this.timeMovePiece(piece,piece.pos,this.config['flipms']);
+		this.timeMovePiece(piece,pos,this.config['flipms']);
 	}
 };
 ChessBoard.prototype.movePieceByPos=function(fromPos,toPos) {

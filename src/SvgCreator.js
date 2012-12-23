@@ -23,7 +23,7 @@ SvgCreator.createPiece=function(config,pieceColor,pieceType) {
 		'stroke-linecap':'round'
 	};
 	var pieceDesc;
-	if(pieceColor=='white') {
+	if(pieceColor.isWhite()) {
 		// the first 0 is the direction of the gradient in degrees (0 is horizontal)
 		//'fill': '0-#fff:0-#ccc:100',
 		//'fill': '0-#fff:0-#fff:50-#999:100',
@@ -34,7 +34,7 @@ SvgCreator.createPiece=function(config,pieceColor,pieceType) {
 		} else {
 			stdatt['fill']=config['white_color'];
 		}
-		if(pieceType=='rook') {
+		if(pieceType.isRook()) {
 			pieceDesc=new SvgPiece(45);
 			pieceDesc.add(new SvgPathAndAttributes('M 9,39 L 36,39 L 36,36 L 9,36 L 9,39 z',stdatt));
 			pieceDesc.add(new SvgPathAndAttributes('M 12,36 L 12,32 L 33,32 L 33,36 L 12,36 z',stdatt));
@@ -45,14 +45,14 @@ SvgCreator.createPiece=function(config,pieceColor,pieceType) {
 			pieceDesc.add(new SvgPathAndAttributes('M 11,14 L 34,14',stdatt));
 			return pieceDesc;
 		}
-		if(pieceType=='knight') {
+		if(pieceType.isKnight()) {
 			pieceDesc=new SvgPiece(45);
 			pieceDesc.add(new SvgPathAndAttributes('M 22,10 C 32.5,11 38.5,18 38,39 L 15,39 C 15,30 25,32.5 23,18 24,18 C 24.38,20.91 18.45,25.37 16,27 C 13,29 13.18,31.34 11,31 C 9.958,30.06 12.41,27.96 11,28 C 10,28 11.19,29.23 10,30 C 9,30 5.997,31 6,26 C 6,24 12,14 12,14 C 12,14 13.89,12.1 14,10.5 C 13.27,9.506 13.5,8.5 13.5,7.5 C 14.5,6.5 16.5,10 16.5,10 L 18.5,10 C 18.5,10 19.28,8.008 21,7 C 22,7 22,10 22,10',stdatt));
 			pieceDesc.add(new SvgPathAndAttributes('M 9.5 25.5 A 0.5 0.5 0 1 1 8.5,25.5 A 0.5 0.5 0 1 1 9.5 25.5 z',stdatt));
 			pieceDesc.add(new SvgPathAndAttributes('M 15 15.5 A 0.5 1.5 0 1 1 14,15.5 A 0.5 1.5 0 1 1 15 15.5 z',stdatt));
 			return pieceDesc;
 		}
-		if(pieceType=='bishop') {
+		if(pieceType.isBishop()) {
 			pieceDesc=new SvgPiece(45);
 			pieceDesc.add(new SvgPathAndAttributes('M 9,36 C 12.39,35.03 19.11,36.43 22.5,34 C 25.89,36.43 32.61,35.03 36,36 C 36,36 37.65,36.54 39,38 C 38.32,38.97 37.35,38.99 36,38.5 C 32.61,37.53 25.89,38.96 22.5,37.5 C 19.11,38.96 12.39,37.53 9,38.5 C 7.646,38.99 6.677,38.97 6,38 C 7.354,36.06 9,36 9,36 z',stdatt));
 			pieceDesc.add(new SvgPathAndAttributes('M 15,32 C 17.5,34.5 27.5,34.5 30,32 C 30.5,30.5 30,30 30,30 C 30,27.5 27.5,26 27.5,26 C 33,24.5 33.5,14.5 22.5,10.5 C 11.5,14.5 12,24.5 17.5,26 C 17.5,26 15,27.5 15,30 C 15,30 14.5,30.5 15,32 z',stdatt));
@@ -60,7 +60,7 @@ SvgCreator.createPiece=function(config,pieceColor,pieceType) {
 			pieceDesc.add(new SvgPathAndAttributes('M 17.5,26 L 27.5,26 M 15,30 L 30,30 M 22.5,15.5 L 22.5,20.5 M 20,18 L 25,18',stdatt));
 			return pieceDesc;
 		}
-		if(pieceType=='queen') {
+		if(pieceType.isQueen()) {
 			pieceDesc=new SvgPiece(45);
 			// the head of the crown...
 			pieceDesc.add(new SvgPathAndAttributes('M8,12C8,13.539600717839003,6.333333333333333,14.501851166488377,5,13.732050807568877C4.381197846482994,13.374785217660714,4,12.714531179816328,4,12C4,10.460399282160997,5.666666666666667,9.498148833511623,7,10.267949192431123C7.618802153517006,10.625214782339286,8,11.285468820183672,8,12C8,12,8,12,8,12',stdatt));
@@ -74,7 +74,7 @@ SvgCreator.createPiece=function(config,pieceColor,pieceType) {
 			pieceDesc.add(new SvgPathAndAttributes('M 12,33.5 C 18,32.5 27,32.5 33,33.5',stdatt));
 			return pieceDesc;
 		}
-		if(pieceType=='king') {
+		if(pieceType.isKing()) {
 			pieceDesc=new SvgPiece(45);
 			pieceDesc.add(new SvgPathAndAttributes('M 22.5,11.63 L 22.5,6',stdatt));
 			pieceDesc.add(new SvgPathAndAttributes('M 20,8 L 25,8',stdatt));
@@ -85,20 +85,20 @@ SvgCreator.createPiece=function(config,pieceColor,pieceType) {
 			pieceDesc.add(new SvgPathAndAttributes('M 11.5,37 C 17,34 27,34 32.5,37',stdatt));
 			return pieceDesc;
 		}
-		if(pieceType=='pawn') {
+		if(pieceType.isPawn()) {
 			pieceDesc=new SvgPiece(45);
 			pieceDesc.add(new SvgPathAndAttributes('M 22,9 C 19.79,9 18,10.79 18,13 C 18,13.89 18.29,14.71 18.78,15.38 C 16.83,16.5 15.5,18.59 15.5,21 C 15.5,23.03 16.44,24.84 17.91,26.03 C 14.91,27.09 10.5,31.58 10.5,39.5 L 33.5,39.5 C 33.5,31.58 29.09,27.09 26.09,26.03 C 27.56,24.84 28.5,23.03 28.5,21 C 28.5,18.59 27.17,16.5 25.22,15.38 C 25.71,14.71 26,13.89 26,13 C 26,10.79 24.21,9 22,9 z',stdatt));
 			return pieceDesc;
 		}
 	}
-	if(pieceColor=='black') {
+	if(pieceColor.isBlack()) {
 		if(config['gradients']) {
 			//stdatt['fill']='0-#000:0-#222:50-#555:100';
 			stdatt['fill']='0-#555:0-#222:50-#000:100';
 		} else {
 			stdatt['fill']=config['black_color'];
 		}
-		if(pieceType=='rook') {
+		if(pieceType.isRook()) {
 			pieceDesc=new SvgPiece(45);
 			pieceDesc.add(new SvgPathAndAttributes('M 9,39 L 36,39 L 36,36 L 9,36 L 9,39 z',stdatt));
 			pieceDesc.add(new SvgPathAndAttributes('M 12.5,32 L 14,29.5 L 31,29.5 L 32.5,32 L 12.5,32 z',stdatt));
@@ -115,7 +115,7 @@ SvgCreator.createPiece=function(config,pieceColor,pieceType) {
 			pieceDesc.add(new SvgPathAndAttributes('M 11,14 L 34,14',stdatt));
 			return pieceDesc;
 		}
-		if(pieceType=='knight') {
+		if(pieceType.isKnight()) {
 			pieceDesc=new SvgPiece(45);
 			pieceDesc.add(new SvgPathAndAttributes('M 22,10 C 32.5,11 38.5,18 38,39 L 15,39 C 15,30 25,32.5 23,18',stdatt));
 			pieceDesc.add(new SvgPathAndAttributes('M 24,18 C 24.38,20.91 18.45,25.37 16,27 C 13,29 13.18,31.34 11,31 C 9.958,30.06 12.41,27.96 11,28 C 10,28 11.19,29.23 10,30 C 9,30 5.997,31 6,26 C 6,24 12,14 12,14 C 12,14 13.89,12.1 14,10.5 C 13.27,9.506 13.5,8.5 13.5,7.5 C 14.5,6.5 16.5,10 16.5,10 L 18.5,10 C 18.5,10 19.28,8.008 21,7 C 22,7 22,10 22,10',stdatt));
@@ -130,7 +130,7 @@ SvgCreator.createPiece=function(config,pieceColor,pieceType) {
 			pieceDesc.add(new SvgPathAndAttributes('M 24.55,10.4 L 24.1,11.85 L 24.6,12 C 27.75,13 30.25,14.49 32.5,18.75 C 34.75,23.01 35.75,29.06 35.25,39 L 35.2,39.5 L 37.45,39.5 L 37.5,39 C 38,28.94 36.62,22.15 34.25,17.66 C 31.88,13.17 28.46,11.02 25.06,10.5 L 24.55,10.4 z',stdatt));
 			return pieceDesc;
 		}
-		if(pieceType=='bishop') {
+		if(pieceType.isBishop()) {
 			pieceDesc=new SvgPiece(45);
 			pieceDesc.add(new SvgPathAndAttributes('M 9,36 C 12.39,35.03 19.11,36.43 22.5,34 C 25.89,36.43 32.61,35.03 36,36 C 36,36 37.65,36.54 39,38 C 38.32,38.97 37.35,38.99 36,38.5 C 32.61,37.53 25.89,38.96 22.5,37.5 C 19.11,38.96 12.39,37.53 9,38.5 C 7.646,38.99 6.677,38.97 6,38 C 7.354,36.06 9,36 9,36 z',stdatt));
 			pieceDesc.add(new SvgPathAndAttributes('M 15,32 C 17.5,34.5 27.5,34.5 30,32 C 30.5,30.5 30,30 30,30 C 30,27.5 27.5,26 27.5,26 C 33,24.5 33.5,14.5 22.5,10.5 C 11.5,14.5 12,24.5 17.5,26 C 17.5,26 15,27.5 15,30 C 15,30 14.5,30.5 15,32 z',stdatt));
@@ -140,7 +140,7 @@ SvgCreator.createPiece=function(config,pieceColor,pieceType) {
 			pieceDesc.add(new SvgPathAndAttributes('M 17.5,26 L 27.5,26 M 15,30 L 30,30 M 22.5,15.5 L 22.5,20.5 M 20,18 L 25,18',stdatt));
 			return pieceDesc;
 		}
-		if(pieceType=='queen') {
+		if(pieceType.isQueen()) {
 			pieceDesc=new SvgPiece(45);
 			// the head of the crown...
 			pieceDesc.add(new SvgPathAndAttributes('M8,12C8,13.539600717839003,6.333333333333333,14.501851166488377,5,13.732050807568877C4.381197846482994,13.374785217660714,4,12.714531179816328,4,12C4,10.460399282160997,5.666666666666667,9.498148833511623,7,10.267949192431123C7.618802153517006,10.625214782339286,8,11.285468820183672,8,12C8,12,8,12,8,12',stdatt));
@@ -159,7 +159,7 @@ SvgCreator.createPiece=function(config,pieceColor,pieceType) {
 			pieceDesc.add(new SvgPathAndAttributes('M 10.5,37.5 A 35,35 1 0 0 34.5,37.5',stdatt));
 			return pieceDesc;
 		}
-		if(pieceType=='king') {
+		if(pieceType.isKing()) {
 			pieceDesc=new SvgPiece(45);
 			pieceDesc.add(new SvgPathAndAttributes('M 22.5,11.63 L 22.5,6',stdatt));
 			pieceDesc.add(new SvgPathAndAttributes('M 22.5,25 C 22.5,25 27,17.5 25.5,14.5 C 25.5,14.5 24.5,12 22.5,12 C 20.5,12 19.5,14.5 19.5,14.5 C 18,17.5 22.5,25 22.5,25',stdatt));
@@ -171,7 +171,7 @@ SvgCreator.createPiece=function(config,pieceColor,pieceType) {
 			pieceDesc.add(new SvgPathAndAttributes('M 11.5,30 C 17,27 27,27 32.5,30 M 11.5,33.5 C 17,30.5 27,30.5 32.5,33.5 M 11.5,37 C 17,34 27,34 32.5,37',stdatt));
 			return pieceDesc;
 		}
-		if(pieceType=='pawn') {
+		if(pieceType.isPawn()) {
 			pieceDesc=new SvgPiece(45);
 			pieceDesc.add(new SvgPathAndAttributes('M 22,9 C 19.79,9 18,10.79 18,13 C 18,13.89 18.29,14.71 18.78,15.38 C 16.83,16.5 15.5,18.59 15.5,21 C 15.5,23.03 16.44,24.84 17.91,26.03 C 14.91,27.09 10.5,31.58 10.5,39.5 L 33.5,39.5 C 33.5,31.58 29.09,27.09 26.09,26.03 C 27.56,24.84 28.5,23.03 28.5,21 C 28.5,18.59 27.17,16.5 25.22,15.38 C 25.71,14.71 26,13.89 26,13 C 26,10.79 24.21,9 22,9 z',stdatt));
 			return pieceDesc;

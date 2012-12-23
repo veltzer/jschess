@@ -1,5 +1,7 @@
 consider changing the name of this project to chess.js.
 
+add a type safe config singleton system.
+
 move to using prototype as the basis for this entire project (the class
 	system of prototype.js to be exact).
 

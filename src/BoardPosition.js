@@ -17,8 +17,12 @@ BoardPosition.prototype.toString=function() {
 	Add a piece to the position
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-BoardPosition.prototype.addPiece=function(color,type,pos) {
-	this.pieces.push(new BoardPiece(color,type,pos));
+BoardPosition.prototype.addPiece=function(color,type,x,y) {
+	this.pieces.push(new BoardPiece(
+		new PieceColor(color),
+		new PieceType(type),
+		new PiecePosition(x,y)
+	));
 };
 /**
 	Run a function for each piece in this position
