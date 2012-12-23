@@ -1,8 +1,3 @@
-testing:
-========
-- use some kind of testing framework and show a page of tests on my web page.
-	in the test parse various pgn files and ask questions of them.
-
 mako:
 =====
 make mako files include individual js files in the file by file version in the right order
