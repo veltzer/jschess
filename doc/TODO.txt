@@ -1,36 +1,33 @@
 mako:
 =====
-make mako files include individual js files in the file by file version in the right order
+- make mako files include individual js files in the file by file version in the right order
 	(prepare an order file which says which is the right order).
-make mako files not be php files (there is only one thing we use it for which is the copyright
+- make mako files not be php files (there is only one thing we use it for which is the copyright
 	signature).
 
-demo sites:
-===========
+site:
+=====
 - add instructions about jquery, raphael and prototype which are needed to run this project.
+- make the site carry older versions of jschess too.
+- consider changing the name of this project to chess.js.
 
-make the site carry older versions of jschess too.
-consider changing the name of this project to chess.js.
-
-add a type safe config singleton system.
-
-move to using prototype as the basis for this entire project (the class
+code:
+=====
+- add a type safe config standalone system.
+- move to using prototype as the basis for this entire project (the class
 	system of prototype.js to be exact).
-
-move the web site to some preprocessing tool (mako?!?)
-add "cleanBoard" method which removes all the pieces and add button to do it.
-add a large scale gallery of the pieces so that I could fine tune the svg of them.
+- add "cleanBoard" method which removes all the pieces and add button to do it.
+- add a large scale gallery of the pieces so that I could fine tune the svg of them.
 	(link to it from the main jschess page).
-make the pieces move at constant speed (when moving a piece calculate the distance it needs to move
+- make the pieces move at constant speed (when moving a piece calculate the distance it needs to move
 	and the time from the distance/speed, speed should be the parameter at construction at units
 	of squares per second).
-have an option to turn animations of movement of pieces off.
-Have a dialog that allows the end user to control all visual aspects of the board.
-Make a frame around the board.
+- have an option to turn animations of movement of pieces off.
+- have a dialog that allows the end user to control all visual aspects of the board.
+- make a frame around the board.
 	like in the championship: http://moscow2012.fide.com/en/live?g=20120530
-Add move control like in the moscow championship.
-Add zoom in and zoom out buttons.
-Add the moves in a text box to the right.
-
-What about movement of knights? Currently they move in a diagonal which is not very nice visually. Maybe it will be better
+- add move control like in the moscow championship.
+- add zoom in and zoom out buttons.
+- add the moves in a text box to the right.
+- what about movement of knights? Currently they move in a diagonal which is not very nice visually. Maybe it will be better
 	to select one of the ways and move them in two phases (one square up down left or right and one square diagonal) ?
