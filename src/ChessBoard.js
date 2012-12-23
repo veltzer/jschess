@@ -2,13 +2,14 @@
 /*jsl:import SvgPathAndAttributes.js*/
 /*jsl:import SvgPiece.js*/
 /*jsl:import SvgCreator.js*/
-/*jsl:import PixelPosition.js*/
+/*jsl:import SvgPieceData.js*/
+/*jsl:import SvgPixelPosition.js*/
 /*jsl:import PieceColor.js*/
 /*jsl:import PieceType.js*/
 /*jsl:import PiecePosition.js*/
 /*jsl:import BoardPiece.js*/
 /*jsl:import BoardPosition.js*/
-/*jsl:import Piece.js*/
+/*jsl:import Board.js*/
 /**
 	Creates a new Board
 	@class a whole board to play with
@@ -39,58 +40,18 @@ function ChessBoard(config) {
 	this.flipview=this.config['flipview'];
 	this.square=this.config['size']/8;
 	// real code starts here
+	this.board=new Board();
 	this.raphaelPrep();
 	this.drawBoard();
-	this.piecesInit();
+	// hook the board to our graphics
+	var that=this;
+	this.board.addPieceAddCallback(function(boardPiece) {
+		that.addPiece(boardPiece);
+	});
+	this.board.addPieceRemoveCallback(function(boardPiece) {
+		that.removePiece(boardPiece);
+	});
 }
-
-/**
-	Method which initializes pieces held by the board
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
-*/
-ChessBoard.prototype.piecesInit=function() {
-	this.pieces=[];
-};
-/**
-	Method which adds a piece to the board
-	@param piece the piece to be added of type Piece
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
-*/
-ChessBoard.prototype.piecesAdd=function(piece) {
-	this.pieces.push(piece);
-};
-/**
-	Get a piece according to position
-	@param pos object of type Position (0,0)-(7,7)
-	@returns the piece at the specified position
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
-*/
-ChessBoard.prototype.piecesGetAtPos=function(pos) {
-	for(var i in this.pieces) {
-		var piece=this.pieces[i];
-		var p=piece.boardPiece.position;
-		if(p.x==pos.x && p.y==pos.y) {
-			return piece;
-		}
-	}
-	throw 'no piece at pos '+pos;
-};
-/**
-	Find out if there is a piece at position.
-	@param pos object of type Position (0,0)-(7,7)
-	@returns boolean that indicates whether there is a piece at position. 
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
-*/
-ChessBoard.prototype.piecesHasAtPos=function(pos) {
-	for(var i in this.pieces) {
-		var piece=this.pieces[i];
-		var p=piece.boardPiece.position;
-		if(p.x==pos.x && p.y==pos.y) {
-			return true;
-		}
-	}
-	return false;
-};
 /**
 	Prepare the raphael paper so we could do graphics
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -136,12 +97,12 @@ ChessBoard.prototype.drawBoard=function() {
 	}
 };
 /**
-	Method which create a new piece of a specified color and type and puts it in the specified position
+	Callback method to create graphics and place them when adding a piece.
 	@param pieceColor the color of the piece ('white','black')
 	@param pieceType the type of the piece ('rook','knight','bishop','queen','king','pawn')
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-ChessBoard.prototype.putPiece=function(boardPiece) {
+ChessBoard.prototype.addPiece=function(boardPiece) {
 	var pieceDesc=SvgCreator.createPiece(this.config,boardPiece.color,boardPiece.type);
 	// calculate transform (move and scale)
 	var pixelPos=this.posToPixels(boardPiece.position);
@@ -160,21 +121,22 @@ ChessBoard.prototype.putPiece=function(boardPiece) {
 		//el.hide();
 		gr.push(el);
 	}
-	// lets add the piece
-	var piece=new Piece(gr,pixelPos,boardPiece);
-	this.piecesAdd(piece);
-	return piece;
+	// lets put our own data with the piece
+	var svgPieceData=new SvgPieceData(gr,pixelPos);
+	boardPiece.setData(svgPieceData);
 };
 
 /**
 	Translates position (0..7,0..7) to pixels
+	@param pos position (0..7,0..7) to translate
+	@returns position in pixels
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.posToPixels=function(pos) {
 	if(this.flipview===true) {
-		return new PixelPosition(pos.x*this.square,pos.y*this.square);
+		return new SvgPixelPosition(pos.x*this.square,pos.y*this.square);
 	} else {
-		return new PixelPosition(pos.x*this.square,(7-pos.y)*this.square);
+		return new SvgPixelPosition(pos.x*this.square,(7-pos.y)*this.square);
 	}
 };
 /*
@@ -196,8 +158,9 @@ ChessBoard.prototype.resize=function(gr) {
 	@param hide boolean - show or hide the piece
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-ChessBoard.prototype.showHidePiece=function(piece,hide) {
-	piece.gr.forEach(function(el) {
+ChessBoard.prototype.showHidePiece=function(boardPiece,hide) {
+	var data=boardPiece.getData();
+	data.gr.forEach(function(el) {
 		if(hide) {
 			el.hide();
 		} else {
@@ -208,6 +171,7 @@ ChessBoard.prototype.showHidePiece=function(piece,hide) {
 /**
 	Quick method to show a piece
 	@param piece of type Piece - the piece to show
+	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.showPiece=function(piece) {
@@ -216,6 +180,7 @@ ChessBoard.prototype.showPiece=function(piece) {
 /**
 	Quick method to hide a piece
 	@param piece of type Piece - the piece to hide
+	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.hidePiece=function(piece) {
@@ -225,6 +190,7 @@ ChessBoard.prototype.hidePiece=function(piece) {
 	Move a piece on the board (including animation if so configured)
 	@param piece of type Piece - the piece to move
 	@param posTo of type Position - the position to move the piece to
+	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.movePiece=function(piece,posTo) {
@@ -250,6 +216,7 @@ ChessBoard.prototype.timeMovePiece=function(piece,posTo,ms) {
 };
 /**
 	Flips the board (see it from the other side)
+	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.flip=function() {
@@ -269,6 +236,7 @@ ChessBoard.prototype.dump=function() {
 };
 /**
 	Make a piece glow
+	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.glow=function() {
@@ -277,6 +245,7 @@ ChessBoard.prototype.glow=function() {
 };
 /**
 	Redraw the entire board
+	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.redraw=function() {
@@ -296,7 +265,7 @@ ChessBoard.prototype.movePieceByPos=function(fromPos,toPos) {
 // testing code starts here
 ChessBoard.prototype.startpos=function() {
 	var that=this;
-	BoardPosition.startPos().forEachPiece(function(p) { that.putPiece(p); });
+	BoardPosition.startPos().forEachPiece(function(p) { that.addPiece(p); });
 };
 ChessBoard.prototype.moverooks=function() {
 	this.movePieceByPos(new PiecePosition(0,0),new PiecePosition(0,4));

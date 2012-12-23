@@ -14,13 +14,14 @@
 		<script src="../src/SvgPathAndAttributes.js"></script>
 		<script src="../src/SvgPiece.js"></script>
 		<script src="../src/SvgCreator.js"></script>
+		<script src="../src/SvgPixelPosition.js"></script>
+		<script src="../src/SvgPieceData.js"></script>
 		<script src="../src/PiecePosition.js"></script>
 		<script src="../src/PieceColor.js"></script>
 		<script src="../src/PieceType.js"></script>
-		<script src="../src/PixelPosition.js"></script>
-		<script src="../src/Piece.js"></script>
 		<script src="../src/BoardPiece.js"></script>
 		<script src="../src/BoardPosition.js"></script>
+		<script src="../src/Board.js"></script>
 		<script src="../src/ChessBoard.js"></script>
 
 		<!-- syntax highlighter stuff -->
