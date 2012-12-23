@@ -1,4 +1,5 @@
-VER:=0.1
+#VER:=$(shell git tag)
+VER:=$(shell git describe)
 PROJECT=jschess
 SRC_FOLDER=src
 TP_FOLDER=thirdparty
