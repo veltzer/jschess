@@ -98,7 +98,7 @@
 			<li><a href="calc.html">SVG path calculator (comes in handy when doing SVG graphics)</a></li>
 			<li><a href="tests.html">JSChess QUnit tests</a></li>
 		</ul>
-		Here is a quick demo (go ahead and zoom it with Ctrl+[+] to see what SVG is all about...):
+		Here is a quick demo (go ahead and zoom it with Ctrl+[+/-] to see what SVG is all about...):
 		<div id="myid">
 		</div>
 		<button id="startpos">startpos</button>
