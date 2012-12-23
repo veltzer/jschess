@@ -13,6 +13,7 @@ DO_WRAPDEPS:=1
 VER:=$(shell git describe)
 PROJECT=jschess
 SRC_FOLDER=src
+TESTS_FOLDER=tests
 THIRDPARTY_FOLDER=thirdparty
 SOURCES:=$(shell find $(SRC_FOLDER) -name "*.js")
 JSDOC_FOLDER:=jsdoc
@@ -97,7 +98,7 @@ install: all
 	$(info doing [$@])
 	$(Q)sudo rm -rf $(WEB_DIR)
 	$(Q)sudo mkdir -p $(WEB_DIR)
-	$(Q)sudo cp -r index.html $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
+	$(Q)sudo cp -r index.html $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(TESTS_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
 	$(Q)sudo ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
 	$(Q)sudo ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
 
