@@ -1,4 +1,3 @@
-/*jsl:import PixelPosition.js*/
 /**
 	@class represents a position + graphics
 	@param gr graphics (raphael) for the piece
