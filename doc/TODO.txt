@@ -1,3 +1,8 @@
+make the site carry older versions of jschess too.
+grep for "jschess-0.1" and fix it.
+make php include the files in the file by file version in the right order
+	(prepare an order file which says which is the right order).
+
 consider changing the name of this project to chess.js.
 
 add a type safe config singleton system.
