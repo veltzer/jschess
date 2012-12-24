@@ -40,21 +40,30 @@
 			 
 		<script>
 			$(document).ready(function() {
-				var svgBoard=new SvgBoard({
+				var board=new Board();
+				var svgBoard=new SvgBoard(board,{
 					id:'myid',
 				})
-				svgBoard.getBoard().startPosition();
+				board.startPosition();
 				$('#startpos').click(function() {
-					svgBoard.startPosition()
+					board.startPosition()
 				});
 				$('#moverooks').click(function() {
-					svgBoard.moverooks()
+					board.movePieceByPos(new PiecePosition(0,0),new PiecePosition(0,4));
+					board.movePieceByPos(new PiecePosition(7,0),new PiecePosition(7,4));
 				});
 				$('#moveknights').click(function() {
-					svgBoard.moveknights()
+					if(board.piecesHasAtPos(new PiecePosition(1,0))) {
+						board.movePieceByPos(new PiecePosition(1,0),new PiecePosition(2,2));
+						board.movePieceByPos(new PiecePosition(6,0),new PiecePosition(5,2));
+					} else {
+						board.movePieceByPos(new PiecePosition(2,2),new PiecePosition(1,0));
+						board.movePieceByPos(new PiecePosition(5,2),new PiecePosition(6,0));
+					}
 				});
 				$('#movebishops').click(function() {
-					svgBoard.movebishops()
+					board.movePieceByPos(new PiecePosition(2,0),new PiecePosition(4,2));
+					board.movePieceByPos(new PiecePosition(5,0),new PiecePosition(3,2));
 				});
 				$('#flip').click(function() {
 					svgBoard.flip()
@@ -64,6 +73,9 @@
 				});
 				$('#dump').click(function() {
 					svgBoard.dump()
+				});
+				$('#clear').click(function() {
+					board.clearPieces()
 				});
 			})
 		</script>
@@ -130,6 +142,7 @@
 			<button id="flip">flip</button>
 			<button id="glow">glow</button>
 			<button id="dump">dump</button>
+			<button id="clear">clear</button>
 		</p>
 		<p>
 			Mark Veltzer, <?php 

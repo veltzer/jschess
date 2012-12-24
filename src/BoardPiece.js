@@ -32,6 +32,14 @@ BoardPiece.prototype.setData=function(data) {
 	this.data=data;
 };
 /**
+	Method to get secret data for this piece
+	@returns the secret data associated with this piece.
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+BoardPiece.prototype.getData=function() {
+	return this.data;
+};
+/**
 	Method to unset secret data for this piece
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
