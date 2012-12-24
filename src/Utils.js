@@ -1,5 +1,6 @@
 /**
 	@class a class to have static utility functions
+	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function Utils() {
@@ -9,6 +10,7 @@ function Utils() {
 	Second trumps the first.
 	@param o1 first object
 	@param o2 first object
+	@returns object which is the unification of the two objects
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 Utils.unite=function(o1,o2) {
@@ -24,6 +26,7 @@ Utils.unite=function(o1,o2) {
 /**
 	Clone a javascript object
 	@param o the object to shalow clone
+	@returns object which is a clone of the original one
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 Utils.clone=function(o) {
