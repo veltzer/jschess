@@ -91,11 +91,30 @@ Board.prototype.addPiece=function(boardPiece) {
 Board.prototype.removePiece=function(boardPiece) {
 	var position=boardPiece.position;
 	this.checkPieceAt(position);
+	this.bd[position.x][position.y]=undefined;
 	for(var i in this.removeCB) {
 		var f=this.removeCB[i];
 		f(boardPiece);
 	}
-	this.bd[position.x][position.y]=undefined;
+};
+/**
+	Move a piece
+	@param boardPiece piece to move
+	@param piecePosition where to move it to
+	@returns nothing
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+Board.prototype.movePiece=function(boardPiece,piecePosition) {
+	this.checkPieceAt(boardPiece.position);
+	this.checkNoPieceAt(piecePosition);
+	var oldPosition=boardPiece.position;
+	boardPiece.position=piecePosition;
+	this.bd[oldPosition.x][oldPosition.y]=undefined;
+	this.bd[piecePosition.x][piecePosition.y]=boardPiece;
+	for(var i in this.moveCB) {
+		var f=this.moveCB[i];
+		f(boardPiece,oldPosition,piecePosition);
+	}
 };
 /**
 	Clear the board
@@ -223,4 +242,13 @@ Board.prototype.setPosition=function(boardPosition) {
 */
 Board.prototype.startPosition=function() {
 	this.setPosition(BoardPosition.startPos());
+};
+/**
+	Move a piece according to positions.
+	@returns nothing
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+Board.prototype.movePieceByPos=function(fromPos,toPos) {
+	var piece=this.getPieceAtPosition(fromPos);
+	this.movePiece(piece,toPos);
 };

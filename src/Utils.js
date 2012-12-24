@@ -36,3 +36,15 @@ Utils.clone=function(o) {
 	}
 	return ret;
 };
+/**
+	Fake using a parameter.
+	This is mainly used to avoid lint warnings.
+	@param o the object to use
+	@returns nothing
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+Utils.fakeUse=function(o) {
+	if(Utils.nottrue) {
+		console.log(o);
+	}
+};

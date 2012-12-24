@@ -49,11 +49,16 @@
 					board.startPosition()
 				});
 				$('#moverooks').click(function() {
-					board.movePieceByPos(new PiecePosition(0,0),new PiecePosition(0,4));
-					board.movePieceByPos(new PiecePosition(7,0),new PiecePosition(7,4));
+					if(board.hasPieceAtPosition(new PiecePosition(0,4))) {
+						board.movePieceByPos(new PiecePosition(0,4),new PiecePosition(0,0));
+						board.movePieceByPos(new PiecePosition(7,4),new PiecePosition(7,0));
+					} else {
+						board.movePieceByPos(new PiecePosition(0,0),new PiecePosition(0,4));
+						board.movePieceByPos(new PiecePosition(7,0),new PiecePosition(7,4));
+					}
 				});
 				$('#moveknights').click(function() {
-					if(board.piecesHasAtPos(new PiecePosition(1,0))) {
+					if(board.hasPieceAtPosition(new PiecePosition(1,0))) {
 						board.movePieceByPos(new PiecePosition(1,0),new PiecePosition(2,2));
 						board.movePieceByPos(new PiecePosition(6,0),new PiecePosition(5,2));
 					} else {
@@ -62,14 +67,19 @@
 					}
 				});
 				$('#movebishops').click(function() {
-					board.movePieceByPos(new PiecePosition(2,0),new PiecePosition(4,2));
-					board.movePieceByPos(new PiecePosition(5,0),new PiecePosition(3,2));
+					if(board.hasPieceAtPosition(new PiecePosition(2,0))) {
+						board.movePieceByPos(new PiecePosition(2,0),new PiecePosition(4,2));
+						board.movePieceByPos(new PiecePosition(5,0),new PiecePosition(3,2));
+					} else {
+						board.movePieceByPos(new PiecePosition(4,2),new PiecePosition(2,0));
+						board.movePieceByPos(new PiecePosition(3,2),new PiecePosition(5,0));
+					}
 				});
 				$('#flip').click(function() {
 					svgBoard.flip()
 				});
 				$('#glow').click(function() {
-					svgBoard.glow()
+					svgBoard.glow(board.getPieceAtPosition(new PiecePosition(0,0)));
 				});
 				$('#dump').click(function() {
 					svgBoard.dump()

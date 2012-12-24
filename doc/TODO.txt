@@ -13,6 +13,7 @@ site:
 
 code:
 =====
+- cache SVG elements so that clear/startpos cycles will be faster.
 - add a type safe config standalone system.
 - move to using prototype as the basis for this entire project (the class
 	system of prototype.js to be exact).

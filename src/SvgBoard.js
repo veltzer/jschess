@@ -44,8 +44,8 @@ function SvgBoard(board,config) {
 	this.board.addPieceRemoveCallback(function(boardPiece) {
 		that.removePiece(boardPiece);
 	});
-	this.board.addPieceMoveCallback(function(boardPiece) {
-		that.movePiece(boardPiece);
+	this.board.addPieceMoveCallback(function(boardPiece,fromPos,toPos) {
+		that.movePiece(boardPiece,fromPos,toPos);
 	});
 }
 SvgBoard.prototype.getBoard=function() {
@@ -206,24 +206,25 @@ SvgBoard.prototype.hidePiece=function(piece) {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-SvgBoard.prototype.movePiece=function(piece,posTo) {
-	this.timeMovePiece(piece,posTo,this.config['ms']);
+SvgBoard.prototype.movePiece=function(piece,posFrom,posTo) {
+	Utils.fakeUse(posFrom);
+	this.timeMovePiece(piece,posFrom,posTo,this.config['ms']);
 };
 SvgBoard.prototype.positionPiece=function(piece,posTo) {
 	this.timeMovePiece(piece,posTo,0);
 };
-SvgBoard.prototype.timeMovePiece=function(piece,posTo,ms) {
-	var pixelPosFrom=piece.pixelPos;
+SvgBoard.prototype.timeMovePiece=function(piece,posFrom,posTo,ms) {
+	Utils.fakeUse(posFrom);
+	var pixelPosFrom=piece.getData().pixelPos;
 	var pixelPosTo=this.posToPixels(posTo);
-	piece.gr.forEach(function(el) {
+	piece.getData().gr.forEach(function(el) {
 		var m=Raphael.matrix();
 		m.translate(pixelPosTo.x-pixelPosFrom.x,pixelPosTo.y-pixelPosFrom.y);
 		//m.scale(this.square/piece.rect,this.square/piece.rect);
 		var transformString=m.toTransformString();
 		el.animate({transform: transformString},ms);
 	},this);
-	piece.pos=posTo;
-	//piece.pixelPos=pixelPosTo;
+	//piece.getData().pixelPos=pixelPosTo;
 };
 /**
 	Flips the board (see it from the other side)
@@ -248,12 +249,12 @@ SvgBoard.prototype.toString=function() {
 };
 /**
 	Make a piece glow
+	@param boardPiece the piece to make glow
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-SvgBoard.prototype.glow=function() {
-	var piece=this.piecesGetAtPos(new PiecePosition(0,0));
-	piece.gr.glow();
+SvgBoard.prototype.glow=function(boardPiece) {
+	boardPiece.getData().gr.glow();
 };
 /**
 	Redraw the entire board
@@ -261,14 +262,9 @@ SvgBoard.prototype.glow=function() {
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 SvgBoard.prototype.redraw=function() {
-	for(var i in this.pieces) {
-		var piece=this.pieces[i];
-		var pos=piece.boardPiece.position;
-		this.timeMovePiece(piece,pos,this.config['flipms']);
-	}
-};
-// code that should be moved
-SvgBoard.prototype.movePieceByPos=function(fromPos,toPos) {
-	var piece=this.piecesGetAtPos(fromPos);
-	this.movePiece(piece,toPos);
+	var that=this;
+	this.board.forEachPiece(function(boardPiece) {
+		var pos=boardPiece.position;
+		that.timeMovePiece(boardPiece,pos,pos,that.config['flipms']);
+	});
 };
