@@ -89,7 +89,9 @@
 				<li>You can have your board at any size you want (because of scalable graphics)</li>
 				<li>As a result of being pure javascript totally controllable programatically</li>
 				<li>Looks best (can animate the pieces, show arrows and what not)</li>
-				<li>Sits on top of good infrastructure (raphael.js,jQuery.js,prototype.js)</li>
+				<li>Sits on top of <a href="http://raphaeljs.com">raphael.js</a> for high level SVG capabilities</li>
+				<li>Sits on top of <a href="http://jquery.com">jQuery</a> to make coding easier and have better browser compatibility</li>
+				<li>Sits on top of <a href="http://prototypejs.org">prototype</a> to make object oriented easier and more error free</li>
 				<li>Uses <a href="http://www.javascriptlint.com/download.htm">jsl</a> to make sure javascript code is standards complient</li>
 				<li>Uses <a href="http://qunitjs.com">qunitjs</a> for testing</li>
 			</ul>
