@@ -87,6 +87,8 @@ BoardPosition.startPos=function() {
 	Example of start position is:
 	"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	@todo add more sanity tests (regexp) for the whole input
+	@todo parse the 5 other blocks after the position itself (what do I do with that ?!?)
 */
 BoardPosition.setupFEN=function(fen) {
 	var blocks=fen.split(' ');
@@ -99,7 +101,7 @@ BoardPosition.setupFEN=function(fen) {
 	}
 	var newPos=new BoardPosition();
 	for(var irank=7;irank>=0;irank--) {
-		var rank=ranks[7-rank];
+		var rank=ranks[7-irank];
 		for(var iletter=0;iletter<rank.length;iletter++) {
 			var letter=rank[iletter];
 			switch(letter) {
