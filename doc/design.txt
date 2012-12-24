@@ -3,3 +3,13 @@ Avoiding flicker
 In order to avoid flicker we create the pieces right at the right spot and in the right size.
 In order to do this we use the Raphael.transformPath(path, transform) and transform the paths
 of the shapes in advance to the right place.
+
+Board vs SvgBoard
+=================
+Is a Model <-> View where Board is the model and SvgBoard is the view.
+SvgBoard holds a reference to Board.
+But not the other way around.
+If messages need to be passed from Board to SvgBoard then SvgBoard will
+record callbacks with board to do it.
+The idea is that the same board may be used to service more than one svg board.
+The idea is also to keep Board.js clean with no consideration for graphics.
