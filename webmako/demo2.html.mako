@@ -16,13 +16,13 @@
 		<script src="../src/SvgCreator.js"></script>
 		<script src="../src/SvgPixelPosition.js"></script>
 		<script src="../src/SvgPieceData.js"></script>
+		<script src="../src/SvgBoard.js"></script>
 		<script src="../src/PiecePosition.js"></script>
 		<script src="../src/PieceColor.js"></script>
 		<script src="../src/PieceType.js"></script>
 		<script src="../src/BoardPiece.js"></script>
 		<script src="../src/BoardPosition.js"></script>
 		<script src="../src/Board.js"></script>
-		<script src="../src/ChessBoard.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
@@ -43,7 +43,7 @@
 			$(document).ready(function() {
 				// Finally, to actually run the highlighter, you need to include this JS on your page
 				SyntaxHighlighter.all()
-				var board=new ChessBoard({
+				var board=new SvgBoard({
 					id:'myid',
 				})
 				board.startpos()
@@ -80,9 +80,9 @@
 			&lt;div id="myid"&gt;
 			&lt;/div&gt;
 		</pre>
-		Then you can create a board from your javascript code by calling the constructor of ChessBoard. The board will be empty so we call startpos to get initial game position:
+		Then you can create a board from your javascript code by calling the constructor of SvgBoard. The board will be empty so we call startpos to get initial game position:
 		<pre class="brush: js">
-		var board=new ChessBoard({
+		var board=new SvgBoard({
 			id:'myid',
 		})
 		board.startpos()

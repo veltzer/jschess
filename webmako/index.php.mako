@@ -15,13 +15,13 @@
 		<script src="../src/SvgCreator.js"></script>
 		<script src="../src/SvgPixelPosition.js"></script>
 		<script src="../src/SvgPieceData.js"></script>
+		<script src="../src/SvgBoard.js"></script>
 		<script src="../src/PiecePosition.js"></script>
 		<script src="../src/PieceColor.js"></script>
 		<script src="../src/PieceType.js"></script>
 		<script src="../src/BoardPiece.js"></script>
 		<script src="../src/BoardPosition.js"></script>
 		<script src="../src/Board.js"></script>
-		<script src="../src/ChessBoard.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
@@ -40,31 +40,31 @@
 			 
 		<script>
 			$(document).ready(function() {
-				var board=new ChessBoard({
+				var svgBoard=new SvgBoard({
 					id:'myid',
 				})
-				board.startpos()
+				svgBoard.getBoard().startPosition();
 				$('#startpos').click(function() {
-					board.startpos()
-				})
+					svgBoard.startPosition()
+				});
 				$('#moverooks').click(function() {
-					board.moverooks()
-				})
+					svgBoard.moverooks()
+				});
 				$('#moveknights').click(function() {
-					board.moveknights()
-				})
+					svgBoard.moveknights()
+				});
 				$('#movebishops').click(function() {
-					board.movebishops()
-				})
+					svgBoard.movebishops()
+				});
 				$('#flip').click(function() {
-					board.flip()
-				})
+					svgBoard.flip()
+				});
 				$('#glow').click(function() {
-					board.glow()
-				})
+					svgBoard.glow()
+				});
 				$('#dump').click(function() {
-					board.dump()
-				})
+					svgBoard.dump()
+				});
 			})
 		</script>
 	</head>

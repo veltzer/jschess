@@ -17,7 +17,7 @@
 	@param config configuration for this board
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-function ChessBoard(config) {
+function SvgBoard(config) {
 	// lets get the configs out
 	// must have values
 	if(!'id' in config) {
@@ -52,12 +52,15 @@ function ChessBoard(config) {
 		that.removePiece(boardPiece);
 	});
 }
+SvgBoard.prototype.getBoard=function() {
+	return this.board;
+};
 /**
 	Prepare the raphael paper so we could do graphics
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-ChessBoard.prototype.raphaelPrep=function() {
+SvgBoard.prototype.raphaelPrep=function() {
 	// async way
 	/*
 	var widget=this
@@ -69,13 +72,12 @@ ChessBoard.prototype.raphaelPrep=function() {
 	// sync way
 	this.paper=Raphael(this.config['id'],this.config['size'],this.config['size']);
 };
-
 /**
 	Draw the board (which and black squares)
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-ChessBoard.prototype.drawBoard=function() {
+SvgBoard.prototype.drawBoard=function() {
 	for(var x=0;x<8;x++) {
 		for(var y=0;y<8;y++) {
 			// Creates circle at x = 50, y = 40, with radius 10
@@ -105,7 +107,7 @@ ChessBoard.prototype.drawBoard=function() {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-ChessBoard.prototype.addPiece=function(boardPiece) {
+SvgBoard.prototype.addPiece=function(boardPiece) {
 	var pieceDesc=SvgCreator.createPiece(this.config,boardPiece.color,boardPiece.type);
 	// calculate transform (move and scale)
 	var pixelPos=this.posToPixels(boardPiece.position);
@@ -128,22 +130,25 @@ ChessBoard.prototype.addPiece=function(boardPiece) {
 	var svgPieceData=new SvgPieceData(gr,pixelPos);
 	boardPiece.setData(svgPieceData);
 };
-
 /**
 	Translates position (0..7,0..7) to pixels
 	@param pos position (0..7,0..7) to translate
 	@returns position in pixels
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-ChessBoard.prototype.posToPixels=function(pos) {
+SvgBoard.prototype.posToPixels=function(pos) {
 	if(this.flipview===true) {
 		return new SvgPixelPosition(pos.x*this.square,pos.y*this.square);
 	} else {
 		return new SvgPixelPosition(pos.x*this.square,(7-pos.y)*this.square);
 	}
 };
-/*
-ChessBoard.prototype.resize=function(gr) {
+/**
+	Resize the board
+	@returns nothing
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+SvgBoard.prototype.resize=function(gr) {
 	var m=Raphael.matrix();
 	m.scale(1.7,1.7);
 	var transformString=m.toTransformString();
@@ -153,8 +158,6 @@ ChessBoard.prototype.resize=function(gr) {
 		//el.scale(5,5);
 	},this);
 };
-*/
-
 /**
 	Shows or hides a given piece according to parameter
 	@param piece of type Piece, the piece to show or hide
@@ -162,7 +165,7 @@ ChessBoard.prototype.resize=function(gr) {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-ChessBoard.prototype.showHidePiece=function(boardPiece,hide) {
+SvgBoard.prototype.showHidePiece=function(boardPiece,hide) {
 	var data=boardPiece.getData();
 	data.gr.forEach(function(el) {
 		if(hide) {
@@ -178,7 +181,7 @@ ChessBoard.prototype.showHidePiece=function(boardPiece,hide) {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-ChessBoard.prototype.showPiece=function(piece) {
+SvgBoard.prototype.showPiece=function(piece) {
 	this.showHidePiece(piece,false);
 };
 /**
@@ -187,7 +190,7 @@ ChessBoard.prototype.showPiece=function(piece) {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-ChessBoard.prototype.hidePiece=function(piece) {
+SvgBoard.prototype.hidePiece=function(piece) {
 	this.showHidePiece(piece,true);
 };
 /**
@@ -197,15 +200,13 @@ ChessBoard.prototype.hidePiece=function(piece) {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-ChessBoard.prototype.movePiece=function(piece,posTo) {
+SvgBoard.prototype.movePiece=function(piece,posTo) {
 	this.timeMovePiece(piece,posTo,this.config['ms']);
 };
-
-ChessBoard.prototype.positionPiece=function(piece,posTo) {
+SvgBoard.prototype.positionPiece=function(piece,posTo) {
 	this.timeMovePiece(piece,posTo,0);
 };
-
-ChessBoard.prototype.timeMovePiece=function(piece,posTo,ms) {
+SvgBoard.prototype.timeMovePiece=function(piece,posTo,ms) {
 	var pixelPosFrom=piece.pixelPos;
 	var pixelPosTo=this.posToPixels(posTo);
 	piece.gr.forEach(function(el) {
@@ -223,7 +224,7 @@ ChessBoard.prototype.timeMovePiece=function(piece,posTo,ms) {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-ChessBoard.prototype.flip=function() {
+SvgBoard.prototype.flip=function() {
 	if(this.flipview===true) {
 		this.flipview=false;
 	} else {
@@ -236,15 +237,15 @@ ChessBoard.prototype.flip=function() {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-ChessBoard.prototype.dump=function() {
-	this.piecesDump();
+SvgBoard.prototype.toString=function() {
+	return 'no dump now';
 };
 /**
 	Make a piece glow
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-ChessBoard.prototype.glow=function() {
+SvgBoard.prototype.glow=function() {
 	var piece=this.piecesGetAtPos(new PiecePosition(0,0));
 	piece.gr.glow();
 };
@@ -253,30 +254,23 @@ ChessBoard.prototype.glow=function() {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-ChessBoard.prototype.redraw=function() {
+SvgBoard.prototype.redraw=function() {
 	for(var i in this.pieces) {
 		var piece=this.pieces[i];
 		var pos=piece.boardPiece.position;
-		//var pixelPos=piece.pixelPos;
-		//this.positionPiece(piece,piece.pos);
 		this.timeMovePiece(piece,pos,this.config['flipms']);
 	}
 };
-ChessBoard.prototype.movePieceByPos=function(fromPos,toPos) {
+// code that should be moved
+SvgBoard.prototype.movePieceByPos=function(fromPos,toPos) {
 	var piece=this.piecesGetAtPos(fromPos);
 	this.movePiece(piece,toPos);
 };
-
-// testing code starts here
-ChessBoard.prototype.startpos=function() {
-	var that=this;
-	BoardPosition.startPos().forEachPiece(function(p) { that.addPiece(p); });
-};
-ChessBoard.prototype.moverooks=function() {
+SvgBoard.prototype.moverooks=function() {
 	this.movePieceByPos(new PiecePosition(0,0),new PiecePosition(0,4));
 	this.movePieceByPos(new PiecePosition(7,0),new PiecePosition(7,4));
 };
-ChessBoard.prototype.moveknights=function() {
+SvgBoard.prototype.moveknights=function() {
 	if(this.piecesHasAtPos(new PiecePosition(1,0))) {
 		this.movePieceByPos(new PiecePosition(1,0),new PiecePosition(2,2));
 		this.movePieceByPos(new PiecePosition(6,0),new PiecePosition(5,2));
@@ -285,7 +279,7 @@ ChessBoard.prototype.moveknights=function() {
 		this.movePieceByPos(new PiecePosition(5,2),new PiecePosition(6,0));
 	}
 };
-ChessBoard.prototype.movebishops=function() {
+SvgBoard.prototype.movebishops=function() {
 	this.movePieceByPos(new PiecePosition(2,0),new PiecePosition(4,2));
 	this.movePieceByPos(new PiecePosition(5,0),new PiecePosition(3,2));
 };

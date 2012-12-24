@@ -1,4 +1,5 @@
 /*jsl:import BoardPiece.js*/
+/*jsl:import BoardPosition.js*/
 /*jsl:import PieceColor.js*/
 /*jsl:import PieceType.js*/
 /*jsl:import PiecePosition.js*/
@@ -76,7 +77,8 @@ Board.prototype.addPiece=function(boardPiece) {
 	var position=boardPiece.position;
 	this.checkNoPieceAt(position);
 	this.bd[position.x][position.y]=boardPiece;
-	for(var f in this.addCB) {
+	for(var i in this.addCB) {
+		var f=this.addCB[i];
 		f(boardPiece);
 	}
 };
@@ -89,10 +91,20 @@ Board.prototype.addPiece=function(boardPiece) {
 Board.prototype.removePiece=function(boardPiece) {
 	var position=boardPiece.position;
 	this.checkPieceAt(position);
-	for(var f in this.addCB) {
+	for(var i in this.removeCB) {
+		var f=this.removeCB[i];
 		f(boardPiece);
 	}
 	this.bd[position.x][position.y]=undefined;
+};
+/**
+	Clear the board
+	@returns nothing
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+Board.prototype.clearPieces=function() {
+	var that=this;
+	this.forEachPiece(function(p) { that.removePiece(p); });
 };
 /**
 	Add a piece to the position (seperate pieces of data).
@@ -192,4 +204,23 @@ Board.prototype.addPieceRemoveCallback=function(f) {
 */
 Board.prototype.addPieceMoveCallback=function(f) {
 	this.moveCB.push(f);
+};
+/**
+	Clear the board and add a position to the current board
+	@param boardPosition position to set
+	@returns nothing
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+Board.prototype.setPosition=function(boardPosition) {
+	this.clearPieces();
+	var that=this;
+	boardPosition.forEachPiece(function(p) { that.addPiece(p); });
+};
+/**
+	Put the board in starting position
+	@returns nothing
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+Board.prototype.startPosition=function() {
+	this.setPosition(BoardPosition.startPos());
 };
