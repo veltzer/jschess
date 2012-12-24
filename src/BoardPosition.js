@@ -4,13 +4,15 @@
 /*jsl:import PiecePosition.js*/
 /**
 	@class represents a full position of the board
+	@returns a new object of this type
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function BoardPosition() {
 	this.pieces=[];
 }
 /**
-	Debug method that allows you to get a nice printout for this type
+	toString method that allows you to get a nice printout for this type
+	@returns a string representation of this object
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 BoardPosition.prototype.toString=function() {
@@ -18,6 +20,11 @@ BoardPosition.prototype.toString=function() {
 };
 /**
 	Add a piece to the position
+	@param color the color of the piece (black/white)
+	@param type the type of the piece (rook/knight/bishop/queen/king/pawn)
+	@param x the x position of the piece [0..8)
+	@param y the y position of the piece [0..8)
+	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 BoardPosition.prototype.addPiece=function(color,type,x,y) {
@@ -29,6 +36,7 @@ BoardPosition.prototype.addPiece=function(color,type,x,y) {
 };
 /**
 	Run a function for each piece in this position
+	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 BoardPosition.prototype.forEachPiece=function(f) {
@@ -39,6 +47,7 @@ BoardPosition.prototype.forEachPiece=function(f) {
 };
 /**
 	Static method that returns a starting position in standard chess.
+	@returns A standard chess starting position.
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 BoardPosition.startPos=function() {
@@ -86,6 +95,8 @@ BoardPosition.startPos=function() {
 	See <a href="http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation">Forsyth–Edwards Notation</a> for more details.
 	Example of start position is:
 	"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+	@param fen a string describing a chess board position in FEN notation.
+	@returns A position object corresponding to the FEN notation given.
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	@todo add more sanity tests (regexp) for the whole input
 	@todo parse the 5 other blocks after the position itself (what do I do with that ?!?)
