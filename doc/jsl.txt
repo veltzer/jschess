@@ -1,0 +1,12 @@
+jsl is a javascript lint.
+Here is how to install it.
+Do not download the source code as it is only partial source and does not include the build
+system (so there is nothing you can really do with it...)
+Clone the repository:
+svn co https://javascriptlint.svn.sourceforge.net/svnroot/javascriptlint/trunk jsl
+then go into it.
+run "python setup.py build"
+That's it. Keep the folder under something like ~/install and use it.
+
+The website for jsl is:
+http://www.javascriptlint.com/download.htm
