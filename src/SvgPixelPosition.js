@@ -3,6 +3,7 @@
 	@class represents a position on the screen
 	@param x x co-ordinate
 	@param y y co-ordinate
+	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function SvgPixelPosition(x,y) {
@@ -16,7 +17,8 @@ function SvgPixelPosition(x,y) {
 	this.y=y;
 }
 /**
-	Debug method so that you can get a nice printout of instances of this type
+	toString method so that you can get a nice printout of instances of this type
+	@returns string representation of this object
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 SvgPixelPosition.prototype.toString=function() {

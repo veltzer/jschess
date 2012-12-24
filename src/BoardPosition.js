@@ -1,4 +1,7 @@
 /*jsl:import BoardPiece.js*/
+/*jsl:import PieceColor.js*/
+/*jsl:import PieceType.js*/
+/*jsl:import PiecePosition.js*/
 /**
 	@class represents a full position of the board
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>

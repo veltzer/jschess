@@ -54,6 +54,7 @@ function ChessBoard(config) {
 }
 /**
 	Prepare the raphael paper so we could do graphics
+	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.raphaelPrep=function() {
@@ -71,6 +72,7 @@ ChessBoard.prototype.raphaelPrep=function() {
 
 /**
 	Draw the board (which and black squares)
+	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.drawBoard=function() {
@@ -100,6 +102,7 @@ ChessBoard.prototype.drawBoard=function() {
 	Callback method to create graphics and place them when adding a piece.
 	@param pieceColor the color of the piece ('white','black')
 	@param pieceType the type of the piece ('rook','knight','bishop','queen','king','pawn')
+	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.addPiece=function(boardPiece) {
@@ -156,6 +159,7 @@ ChessBoard.prototype.resize=function(gr) {
 	Shows or hides a given piece according to parameter
 	@param piece of type Piece, the piece to show or hide
 	@param hide boolean - show or hide the piece
+	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.showHidePiece=function(boardPiece,hide) {
@@ -229,6 +233,7 @@ ChessBoard.prototype.flip=function() {
 };
 /**
 	Debug function
+	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 ChessBoard.prototype.dump=function() {
