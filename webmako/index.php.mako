@@ -73,13 +73,13 @@
 		<p>
 			<b>jschess</b> is a JavaScript library that enables:
 			<ul>
-				<li>showing chess games in <a href="http://en.wikipedia.org/wiki/Portable_Game_Notation">PGN</a> format (hardcoded or coming from a server)</li>
-				<li>showing chess positions in <a href="http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation">FEN</a> format (hardcoded or coming from a server)</li>
-				<li>writing a web app that shows chess riddles and their solutions</li>
-				<li>writing a web app that enables the end user to create chess positions and save them (in FEN or other format)</li>
-				<li>allows to build a chess game where the player plays a server or some other player</li>
-				<li>allows to build live broadcast systems for competitions</li>
-				<li>other things I did not think about...</li>
+				<li>Showing chess games in <a href="http://en.wikipedia.org/wiki/Portable_Game_Notation">PGN</a> format (hardcoded or coming from a server)</li>
+				<li>Showing chess positions in <a href="http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation">FEN</a> format (hardcoded or coming from a server)</li>
+				<li>Writing a web app that shows chess riddles and their solutions</li>
+				<li>Writing a web app that enables the end user to create chess positions and save them (in FEN or other format)</li>
+				<li>Allows to build a chess game where the player plays a server or some other player</li>
+				<li>Allows to build live broadcast systems for competitions</li>
+				<li>Other things I did not think about...</li>
 			</ul>
 		</p>
 		<p>
@@ -90,11 +90,12 @@
 				<li>You can have your board at any size you want (because of scalable graphics)</li>
 				<li>As a result of being pure javascript totally controllable programatically</li>
 				<li>Looks best (can animate the pieces, show arrows and what not)</li>
+				<li>Free source. Full freedom to tweak or you can ask me for help with implementing a feature.</li>
 				<li>Sits on top of <a href="http://raphaeljs.com">raphael.js</a> for high level SVG capabilities</li>
 				<li>Sits on top of <a href="http://jquery.com">jQuery</a> to make coding easier and have better browser compatibility</li>
 				<li>Sits on top of <a href="http://prototypejs.org">prototype</a> to make object oriented easier and more error free</li>
-				<li>Uses <a href="http://www.javascriptlint.com/download.htm">jsl</a> to make sure javascript code is standards complient</li>
-				<li>Uses <a href="http://qunitjs.com">qunitjs</a> for testing</li>
+				<li>Sits on top of <a href="http://www.javascriptlint.com/download.htm">jsl</a> to make sure javascript code is standards complient</li>
+				<li>Sits on top of <a href="http://qunitjs.com">qunitjs</a> for testing</li>
 			</ul>
 		</p>
 		<p>The current version of <b>jschess</b> is ${ver}
