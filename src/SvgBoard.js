@@ -10,7 +10,7 @@
 	@param config configuration for this board
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-function SvgBoard(config) {
+function SvgBoard(board,config) {
 	// lets get the configs out
 	// must have values
 	if(!'id' in config) {
@@ -33,7 +33,7 @@ function SvgBoard(config) {
 	this.flipview=this.config['flipview'];
 	this.square=this.config['size']/8;
 	// real code starts here
-	this.board=new Board();
+	this.board=board;
 	this.raphaelPrep();
 	this.drawBoard();
 	// hook the board to our graphics
@@ -43,6 +43,9 @@ function SvgBoard(config) {
 	});
 	this.board.addPieceRemoveCallback(function(boardPiece) {
 		that.removePiece(boardPiece);
+	});
+	this.board.addPieceMoveCallback(function(boardPiece) {
+		that.movePiece(boardPiece);
 	});
 }
 SvgBoard.prototype.getBoard=function() {
@@ -95,8 +98,7 @@ SvgBoard.prototype.drawBoard=function() {
 };
 /**
 	Callback method to create graphics and place them when adding a piece.
-	@param pieceColor the color of the piece ('white','black')
-	@param pieceType the type of the piece ('rook','knight','bishop','queen','king','pawn')
+	@param boardPiece the piece to add.
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
@@ -122,6 +124,17 @@ SvgBoard.prototype.addPiece=function(boardPiece) {
 	// lets put our own data with the piece
 	var svgPieceData=new SvgPieceData(gr,pixelPos);
 	boardPiece.setData(svgPieceData);
+};
+/**
+	Callback method to create graphics and place them when adding a piece.
+	@param boardPiece the piece to add.
+	@returns nothing
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+SvgBoard.prototype.removePiece=function(boardPiece) {
+	var svgPieceData=boardPiece.getData();
+	svgPieceData.gr.remove();
+	boardPiece.unsetData();
 };
 /**
 	Translates position (0..7,0..7) to pixels
@@ -258,21 +271,4 @@ SvgBoard.prototype.redraw=function() {
 SvgBoard.prototype.movePieceByPos=function(fromPos,toPos) {
 	var piece=this.piecesGetAtPos(fromPos);
 	this.movePiece(piece,toPos);
-};
-SvgBoard.prototype.moverooks=function() {
-	this.movePieceByPos(new PiecePosition(0,0),new PiecePosition(0,4));
-	this.movePieceByPos(new PiecePosition(7,0),new PiecePosition(7,4));
-};
-SvgBoard.prototype.moveknights=function() {
-	if(this.piecesHasAtPos(new PiecePosition(1,0))) {
-		this.movePieceByPos(new PiecePosition(1,0),new PiecePosition(2,2));
-		this.movePieceByPos(new PiecePosition(6,0),new PiecePosition(5,2));
-	} else {
-		this.movePieceByPos(new PiecePosition(2,2),new PiecePosition(1,0));
-		this.movePieceByPos(new PiecePosition(5,2),new PiecePosition(6,0));
-	}
-};
-SvgBoard.prototype.movebishops=function() {
-	this.movePieceByPos(new PiecePosition(2,0),new PiecePosition(4,2));
-	this.movePieceByPos(new PiecePosition(5,0),new PiecePosition(3,2));
 };
