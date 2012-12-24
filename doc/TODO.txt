@@ -31,3 +31,7 @@ code:
 - add the moves in a text box to the right.
 - what about movement of knights? Currently they move in a diagonal which is not very nice visually. Maybe it will be better
 	to select one of the ways and move them in two phases (one square up down left or right and one square diagonal) ?
+
+formats:
+========
+- need to support both PGN and FEN.
