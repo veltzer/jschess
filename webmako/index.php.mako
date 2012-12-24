@@ -73,11 +73,12 @@
 		<p>
 			<b>jschess</b> is a JavaScript library that enables:
 			<ul>
-				<li>showing chess games in pgn format from a server</li>
-				<li>showing chess positions as riddles and show solutions</li>
-				<li>enable the end user to create chess positions and save them</li>
-				<li>allows to build a chess game where the player plays the server or some other player</li>
-				<li>allows to build live broadcast systems</li>
+				<li>showing chess games in <a href="http://en.wikipedia.org/wiki/Portable_Game_Notation">PGN</a> format (hardcoded or coming from a server)</li>
+				<li>showing chess positions in <a href="http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation">FEN</a> format (hardcoded or coming from a server)</li>
+				<li>writing a web app that shows chess riddles and their solutions</li>
+				<li>writing a web app that enables the end user to create chess positions and save them (in FEN or other format)</li>
+				<li>allows to build a chess game where the player plays a server or some other player</li>
+				<li>allows to build live broadcast systems for competitions</li>
 				<li>other things I did not think about...</li>
 			</ul>
 		</p>
