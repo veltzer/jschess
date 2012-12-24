@@ -1,14 +1,7 @@
-/*jsl:import Utils.js*/
-/*jsl:import SvgPathAndAttributes.js*/
-/*jsl:import SvgPiece.js*/
-/*jsl:import SvgCreator.js*/
 /*jsl:import SvgPieceData.js*/
+/*jsl:import SvgCreator.js*/
 /*jsl:import SvgPixelPosition.js*/
-/*jsl:import PieceColor.js*/
-/*jsl:import PieceType.js*/
 /*jsl:import PiecePosition.js*/
-/*jsl:import BoardPiece.js*/
-/*jsl:import BoardPosition.js*/
 /*jsl:import Board.js*/
 /**
 	Creates a new Board
