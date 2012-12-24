@@ -15,3 +15,4 @@ similar or related projects:
 	http://www.dhtmlgoodies.com/scripts/dhtml-chess-3/demo/tactic-training-on-a-web-page.html
 	http://code.google.com/p/pgn4web/
 	http://code.google.com/p/jspgnviewer/
+	http://code.google.com/p/jschessboard/
