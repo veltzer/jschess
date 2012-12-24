@@ -112,8 +112,11 @@
 			</ul>
 			Demos of <b>jschess</b>...
 			<ul>
+				<li><a href="demo0.html">Demo0 - preparation (bringing in the right libraries)</a></li>
 				<li><a href="demo1.html">Demo1 - creating the board</a></li>
 				<li><a href="demo2.html">Demo2 - moving pieces</a></li>
+				<li><a href="demo3.html">Demo3 - showing a FEN position</a></li>
+				<li><a href="demo4.html">Demo4 - showing a PGN game</a></li>
 				<li><a href="calc.html">SVG path calculator (comes in handy when doing SVG graphics)</a></li>
 				<li><a href="tests.html">JSChess QUnit tests</a></li>
 			</ul>
