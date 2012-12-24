@@ -16,3 +16,8 @@ similar or related projects:
 	http://code.google.com/p/pgn4web/
 	http://code.google.com/p/jspgnviewer/
 	http://code.google.com/p/jschessboard/
+PGN reference:
+	http://www.thechessdrum.net/PGN_Reference.txt
+	http://en.wikipedia.org/wiki/Portable_Game_Notation
+FEN reference:
+	http://en.wikipedia.org/wiki/FEN
