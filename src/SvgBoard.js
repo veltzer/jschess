@@ -30,7 +30,8 @@ function SvgBoard(board,config) {
 	config['pencolor']=config['pencolor'] || 'black';// pen color for drawing the shapes
 	config['flipms']=config['flipms'] || 350;// how fast should flip work
 	config['gradients']=config['gradients'] || true;// should we use gradients?
-	config['select_color']=config['select_color'] || '00ff00';// color of selected squares
+	config['select_color']=config['select_color'] || 'ffff00';// color of selected squares
+	config['over_color']=config['over_color'] || '00ff00';// color of selected squares
 	config['rec_stroke_color']=config['rec_stroke_color'] || 'black';// rectangles stroke color
 	config['rec_stroke_width']=config['rec_stroke_width'] || 0.1;// rectangles stroke width
 	// store the config
@@ -77,6 +78,13 @@ SvgBoard.prototype.raphaelPrep=function() {
 	// sync way
 	this.paper=Raphael(this.config['id'],this.config['size'],this.config['size']);
 };
+/**
+	Fill a rectangle using the default color
+	@param rec Raphael.js rectangle object to fill
+	@param piecePosition PiecePosition object that describes the position of the rectangle
+	@returns nothing
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
 SvgBoard.prototype.setRectFill=function(rec,piecePosition) {
 	if((piecePosition.x+piecePosition.y)%2==1) {
 		if(this.config['gradients']) {
@@ -106,34 +114,34 @@ SvgBoard.prototype.drawBoard=function() {
 			rec.attr('stroke-width',this.config['rec_stroke_width']);
 			var piecePosition=new PiecePosition(x,7-y);
 			this.setRectFill(rec,piecePosition);
-			rec.click(function(tpos,trec) {
+			rec.click(function(tpos,trec,type) {
 				return function() {
-					that.squareSelect(tpos,trec);
+					that.eventSquare(tpos,trec,type);
 				};
-			}(piecePosition,rec));
+			}(piecePosition,rec,"click"));
 			rec.mousedown(function(tpos,trec,type) {
 				return function() {
-					that.eventMouse(tpos,trec,type);
+					that.eventSquare(tpos,trec,type);
 				};
 			}(piecePosition,rec,"mousedown"));
 			rec.mousemove(function(tpos,trec,type) {
 				return function() {
-					that.eventMouse(tpos,trec,type);
+					that.eventSquare(tpos,trec,type);
 				};
 			}(piecePosition,rec,"mousemove"));
 			rec.mouseout(function(tpos,trec,type) {
 				return function() {
-					that.eventMouse(tpos,trec,type);
+					that.eventSquare(tpos,trec,type);
 				};
 			}(piecePosition,rec,"mouseout"));
 			rec.mouseover(function(tpos,trec,type) {
 				return function() {
-					that.eventMouse(tpos,trec,type);
+					that.eventSquare(tpos,trec,type);
 				};
 			}(piecePosition,rec,"mouseover"));
 			rec.mouseup(function(tpos,trec,type) {
 				return function() {
-					that.eventMouse(tpos,trec,type);
+					that.eventSquare(tpos,trec,type);
 				};
 			}(piecePosition,rec,"mouseup"));
 		}
@@ -146,6 +154,7 @@ SvgBoard.prototype.drawBoard=function() {
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 SvgBoard.prototype.postAddPiece=function(boardPiece,piecePosition) {
+	var that=this;
 	var svgPiece=SvgCreator.createPiece(this.config,boardPiece.color,boardPiece.type);
 	// calculate transform (move and scale)
 	var pixelPos=this.posToPixels(piecePosition);
@@ -155,6 +164,11 @@ SvgBoard.prototype.postAddPiece=function(boardPiece,piecePosition) {
 	var transform=m.toTransformString();
 	// now put it on the paper
 	var set=svgPiece.toSet(this.paper,transform);
+	RUtils.click(set,function(iboardPiece) {
+		return function() {
+			that.eventPiece(iboardPiece);
+		};
+	}(boardPiece));
 	// lets put our own data with the piece
 	var svgPieceData=new SvgPieceData(set,pixelPos);
 	boardPiece.setData(svgPieceData);
@@ -310,16 +324,10 @@ SvgBoard.prototype.redraw=function() {
 		that.timeMovePiece(boardPiece,position,position,that.config['flipms']);
 	});
 };
-/**
-	Square select callback. Called when the user selects a square.
-	@param piecePosition position of the square
-	@param rec Raphael.js rec object which was selected
-	@returns nothing
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
-*/
-SvgBoard.prototype.squareSelect=function(piecePosition,rec) {
+SvgBoard.prototype.eventPiece=function(piecePosition,rec) {
 	Utils.fakeUse(piecePosition);
 	Utils.fakeUse(rec);
+	console.log('eventPiece '+piecePosition+','+rec);
 	/*
 	//console.log('select is called '+piecePosition.x+','+piecePosition.y);
 	if(this.board.hasPieceAtPosition(piecePosition)) {
@@ -341,15 +349,45 @@ SvgBoard.prototype.squareSelect=function(piecePosition,rec) {
 	}
 	*/
 };
-SvgBoard.prototype.eventMouse=function(piecePosition,rec,type) {
+/**
+	Events for squares.
+	Types of events: mouseover, mouseout, click and more.
+	@param piecePosition the position of the event
+	@param rec the Raphael.js rectangle where the event happened
+	@param type string which is the name of the event that happened
+	@returns nothing
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+var selected=undefined;
+var selectedPos=undefined;
+SvgBoard.prototype.eventSquare=function(piecePosition,rec,type) {
 	//Utils.fakeUse(rec);
 	//Utils.fakeUse(piecePosition);
 	// going into a rectangle - set the selected color
-	if(type=='mouseover') {
-		rec.attr('fill',this.config['select_color']);
+	if(type=='mouseover' && selected!=rec) {
+		rec.attr('fill',this.config['over_color']);
 	}
-	// if we have a selected one, revert to old color
-	if(type=='mouseout') {
+	// going out from a rectangle - set the original color
+	if(type=='mouseout' && selected!=rec) {
 		this.setRectFill(rec,piecePosition);
+	}
+	// selecting a rectangle - fill with select_color
+	if(type=='click') {
+		if(selected) {
+			if(selected==rec) {
+				this.setRectFill(selected,selectedPos);
+				selected=undefined;
+				selectedPos=undefined;
+			} else {
+				this.setRectFill(selected,selectedPos);
+				rec.attr('fill',this.config['select_color']);
+				selected=rec;
+				selectedPos=piecePosition;
+			}
+		} else {
+			rec.attr('fill',this.config['select_color']);
+			selected=rec;
+			selectedPos=piecePosition;
+		}
 	}
 };

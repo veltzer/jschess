@@ -1,3 +1,4 @@
+/*jsl:import Utils.js*/
 /**
 	@class a class to have static utility functions for Raphael.js
 	@returns nothing
@@ -18,4 +19,10 @@ RUtils.setGlow=function(paper,set) {
 		nset.push(e.glow());
 	},undefined);
 	return nset;
+};
+RUtils.click=function(set,f) {
+	set.forEach(function(e) {
+		Utils.fakeUse(e);
+		f();
+	});
 };
