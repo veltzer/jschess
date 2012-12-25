@@ -78,9 +78,9 @@ Board.prototype.checkPieceAt=function(position) {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-Board.prototype.checkBoardPieceAt=function(boardPiece,position) {
-	if(this.bd[position.x][position.y]!==boardPiece) {
-		throw 'wrong piece at position '+position.toString();
+Board.prototype.checkBoardPieceAt=function(boardPiece,piecePosition) {
+	if(this.bd[piecePosition.x][piecePosition.y]!==boardPiece) {
+		throw 'wrong piece at position '+piecePosition.toString();
 	}
 };
 /**
@@ -107,16 +107,16 @@ Board.prototype.addPiece=function(boardPiece,position) {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-Board.prototype.removePiece=function(boardPiece,position) {
-	this.checkBoardPieceAt(position);
+Board.prototype.removePiece=function(boardPiece,piecePosition) {
+	this.checkBoardPieceAt(boardPiece,piecePosition);
 	for(var i in this.preRemoveCB) {
 		var f=this.preRemoveCB[i];
-		f(boardPiece,position);
+		f(boardPiece,piecePosition);
 	}
-	this.bd[position.x][position.y]=undefined;
+	this.bd[piecePosition.x][piecePosition.y]=undefined;
 	for(i in this.postRemoveCB) {
 		f=this.postRemoveCB[i];
-		f(boardPiece,position);
+		f(boardPiece,piecePosition);
 	}
 };
 /**
@@ -147,7 +147,7 @@ Board.prototype.movePiece=function(boardPiece,fromPosition,toPosition) {
 */
 Board.prototype.clearPieces=function() {
 	var that=this;
-	this.forEachPiece(function(boardPiece,position) { that.removePiece(boardPiece,position); });
+	this.forEachPiece(function(boardPiece,piecePosition) { that.removePiece(boardPiece,piecePosition); });
 };
 /**
 	Add a piece to the position (seperate pieces of data).
@@ -256,7 +256,7 @@ Board.prototype.addPiecePostMoveCallback=function(f) {
 Board.prototype.setPosition=function(boardPosition) {
 	this.clearPieces();
 	var that=this;
-	boardPosition.forEachPiece(function(boardPiece,position) { that.addPiece(boardPiece,position); });
+	boardPosition.forEachPiece(function(boardPiece,piecePosition) { that.addPiece(boardPiece,piecePosition); });
 };
 /**
 	Put the board in starting position

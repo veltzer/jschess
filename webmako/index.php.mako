@@ -49,30 +49,36 @@
 					board.startPosition()
 				});
 				$('#moverooks').click(function() {
-					if(board.hasPieceAtPosition(new PiecePosition(0,4))) {
+					if(board.hasPieceAtPosition(new PiecePosition(0,4)) && board.hasPieceAtPosition(new PiecePosition(7,4))) {
 						board.movePieceByPos(new PiecePosition(0,4),new PiecePosition(0,0));
 						board.movePieceByPos(new PiecePosition(7,4),new PiecePosition(7,0));
 					} else {
-						board.movePieceByPos(new PiecePosition(0,0),new PiecePosition(0,4));
-						board.movePieceByPos(new PiecePosition(7,0),new PiecePosition(7,4));
+						if(board.hasPieceAtPosition(new PiecePosition(0,0)) && board.hasPieceAtPosition(new PiecePosition(7,0))) {
+							board.movePieceByPos(new PiecePosition(0,0),new PiecePosition(0,4));
+							board.movePieceByPos(new PiecePosition(7,0),new PiecePosition(7,4));
+						}
 					}
 				});
 				$('#moveknights').click(function() {
-					if(board.hasPieceAtPosition(new PiecePosition(1,0))) {
+					if(board.hasPieceAtPosition(new PiecePosition(1,0)) && board.hasPieceAtPosition(new PiecePosition(6,0))) {
 						board.movePieceByPos(new PiecePosition(1,0),new PiecePosition(2,2));
 						board.movePieceByPos(new PiecePosition(6,0),new PiecePosition(5,2));
 					} else {
-						board.movePieceByPos(new PiecePosition(2,2),new PiecePosition(1,0));
-						board.movePieceByPos(new PiecePosition(5,2),new PiecePosition(6,0));
+						if(board.hasPieceAtPosition(new PiecePosition(2,2)) && board.hasPieceAtPosition(new PiecePosition(5,2))) {
+							board.movePieceByPos(new PiecePosition(2,2),new PiecePosition(1,0));
+							board.movePieceByPos(new PiecePosition(5,2),new PiecePosition(6,0));
+						}
 					}
 				});
 				$('#movebishops').click(function() {
-					if(board.hasPieceAtPosition(new PiecePosition(2,0))) {
+					if(board.hasPieceAtPosition(new PiecePosition(2,0)) && board.hasPieceAtPosition(new PiecePosition(5,0))) {
 						board.movePieceByPos(new PiecePosition(2,0),new PiecePosition(4,2));
 						board.movePieceByPos(new PiecePosition(5,0),new PiecePosition(3,2));
 					} else {
-						board.movePieceByPos(new PiecePosition(4,2),new PiecePosition(2,0));
-						board.movePieceByPos(new PiecePosition(3,2),new PiecePosition(5,0));
+						if(board.hasPieceAtPosition(new PiecePosition(4,2)) && board.hasPieceAtPosition(new PiecePosition(3,2))) {
+							board.movePieceByPos(new PiecePosition(4,2),new PiecePosition(2,0));
+							board.movePieceByPos(new PiecePosition(3,2),new PiecePosition(5,0));
+						}
 					}
 				});
 				$('#flip').click(function() {
