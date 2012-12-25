@@ -43,9 +43,6 @@ function SvgBoard(board,config) {
 	this.board=board;
 	this.raphaelPrep();
 	this.drawBoard();
-	// glow parameters
-	this.glowOn=false;
-	this.glowPiece=undefined;
 	// hook the board to our graphics
 	var that=this;
 	this.board.addPiecePostAddCallback(function(boardPiece,piecePosition) {
@@ -164,11 +161,11 @@ SvgBoard.prototype.postAddPiece=function(boardPiece,piecePosition) {
 	var transform=m.toTransformString();
 	// now put it on the paper
 	var set=svgPiece.toSet(this.paper,transform);
-	RUtils.click(set,function(iboardPiece) {
+	RUtils.click(set,function(iboardPiece,itype) {
 		return function() {
-			that.eventPiece(iboardPiece);
+			that.eventPiece(iboardPiece,itype);
 		};
-	}(boardPiece));
+	}(boardPiece,'click'));
 	// lets put our own data with the piece
 	var svgPieceData=new SvgPieceData(set,pixelPos);
 	boardPiece.setData(svgPieceData);
@@ -308,7 +305,6 @@ SvgBoard.prototype.glow=function(boardPiece,glow) {
 	if(glow) {
 		svgPieceData.glow=RUtils.setGlow(this.paper,svgPieceData.set);
 	} else {
-		//svgPieceData.set.remove();
 		svgPieceData.glow.remove();
 		svgPieceData.glow=undefined;
 	}
@@ -324,10 +320,34 @@ SvgBoard.prototype.redraw=function() {
 		that.timeMovePiece(boardPiece,position,position,that.config['flipms']);
 	});
 };
-SvgBoard.prototype.eventPiece=function(piecePosition,rec) {
-	Utils.fakeUse(piecePosition);
-	Utils.fakeUse(rec);
-	console.log('eventPiece '+piecePosition+','+rec);
+/**
+	Event handler for events happening on the pieces.
+	Types of events: click, mouseover and more...
+	@param boardPiece the BoardPiece instance the event happened on
+	@param type the type of event that happened
+	@returns nothing
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+var spiece=undefined;
+SvgBoard.prototype.eventPiece=function(boardPiece,type) {
+	//Utils.fakeUse(piecePosition);
+	//Utils.fakeUse(rec);
+	//console.log('eventPiece '+boardPiece+','+type);
+	if(type=='click' || type=='squaremouseover') {
+		if(spiece) {
+			if(spiece==boardPiece) {
+				this.glow(spiece,false);
+				spiece=undefined;
+			} else {
+				this.glow(spiece,false);
+				spiece=boardPiece;
+				this.glow(spiece,true);
+			}
+		} else {
+			spiece=boardPiece;
+			this.glow(spiece,true);
+		}
+	}
 	/*
 	//console.log('select is called '+piecePosition.x+','+piecePosition.y);
 	if(this.board.hasPieceAtPosition(piecePosition)) {
@@ -364,6 +384,10 @@ SvgBoard.prototype.eventSquare=function(piecePosition,rec,type) {
 	//Utils.fakeUse(rec);
 	//Utils.fakeUse(piecePosition);
 	// going into a rectangle - set the selected color
+	if(this.board.hasPieceAtPosition(piecePosition)) {
+		var boardPiece=this.board.getPieceAtPosition(piecePosition);
+		this.eventPiece(boardPiece,'square'+type);
+	}
 	if(type=='mouseover' && selected!=rec) {
 		rec.attr('fill',this.config['over_color']);
 	}

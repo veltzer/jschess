@@ -18,7 +18,7 @@ function BoardPiece(color,type) {
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 BoardPiece.prototype.toString=function() {
-	return [this.color,this.type,this.data].join();
+	return 'BoardPiece: '+[this.color,this.type,this.data].join();
 };
 /**
 	Method to set secret data for this piece
