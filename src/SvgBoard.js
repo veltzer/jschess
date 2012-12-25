@@ -3,6 +3,7 @@
 /*jsl:import SvgPixelPosition.js*/
 /*jsl:import PiecePosition.js*/
 /*jsl:import Board.js*/
+/*jsl:import RUtils.js*/
 /**
 	Creates a new Board
 	@class a whole board to play with
@@ -36,6 +37,9 @@ function SvgBoard(board,config) {
 	this.board=board;
 	this.raphaelPrep();
 	this.drawBoard();
+	// glow parameters
+	this.glowOn=false;
+	this.glowPiece=undefined;
 	// hook the board to our graphics
 	var that=this;
 	this.board.addPiecePostAddCallback(function(boardPiece,piecePosition) {
@@ -96,7 +100,7 @@ SvgBoard.prototype.drawBoard=function() {
 			}
 			var inner_func=(function(tx,ty) {
 				return function() {
-					that.select(tx,7-ty);
+					that.select(new PiecePosition(tx,7-ty));
 				};
 			})(x,y);
 			rec.click(inner_func);
@@ -110,26 +114,26 @@ SvgBoard.prototype.drawBoard=function() {
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 SvgBoard.prototype.postAddPiece=function(boardPiece,position) {
-	var pieceDesc=SvgCreator.createPiece(this.config,boardPiece.color,boardPiece.type);
+	var svgPiece=SvgCreator.createPiece(this.config,boardPiece.color,boardPiece.type);
 	// calculate transform (move and scale)
 	var pixelPos=this.posToPixels(position);
 	var m=Raphael.matrix();
 	m.translate(pixelPos.x,pixelPos.y);
-	m.scale(this.square/pieceDesc.rect,this.square/pieceDesc.rect);
+	m.scale(this.square/svgPiece.rect,this.square/svgPiece.rect);
 	var transform=m.toTransformString();
 	// now put it on the paper
-	var gr=this.paper.set();
-	for(var x in pieceDesc.paas) {
-		var paa=pieceDesc.paas[x];
+	var set=this.paper.set();
+	for(var x in svgPiece.paas) {
+		var paa=svgPiece.paas[x];
 		var orig_path=paa.path;
 		var new_path=Raphael.transformPath(orig_path,transform);
 		var el=this.paper.path(new_path);
 		el.attr(paa.attr);
 		//el.hide();
-		gr.push(el);
+		set.push(el);
 	}
 	// lets put our own data with the piece
-	var svgPieceData=new SvgPieceData(gr,pixelPos);
+	var svgPieceData=new SvgPieceData(set,pixelPos);
 	boardPiece.setData(svgPieceData);
 };
 /**
@@ -141,7 +145,7 @@ SvgBoard.prototype.postAddPiece=function(boardPiece,position) {
 SvgBoard.prototype.postRemovePiece=function(boardPiece,position) {
 	Utils.fakeUse(position);
 	var svgPieceData=boardPiece.getData();
-	svgPieceData.gr.remove();
+	svgPieceData.set.remove();
 	boardPiece.unsetData();
 };
 /**
@@ -181,7 +185,7 @@ SvgBoard.prototype.resize=function(gr) {
 */
 SvgBoard.prototype.showHidePiece=function(boardPiece,hide) {
 	var data=boardPiece.getData();
-	data.gr.forEach(function(el) {
+	data.set.forEach(function(el) {
 		if(hide) {
 			el.hide();
 		} else {
@@ -225,7 +229,7 @@ SvgBoard.prototype.timeMovePiece=function(piece,posFrom,posTo,ms) {
 	Utils.fakeUse(posFrom);
 	var pixelPosFrom=piece.getData().pixelPos;
 	var pixelPosTo=this.posToPixels(posTo);
-	piece.getData().gr.forEach(function(el) {
+	piece.getData().set.forEach(function(el) {
 		var m=Raphael.matrix();
 		m.translate(pixelPosTo.x-pixelPosFrom.x,pixelPosTo.y-pixelPosFrom.y);
 		//m.scale(this.square/piece.rect,this.square/piece.rect);
@@ -261,8 +265,15 @@ SvgBoard.prototype.toString=function() {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-SvgBoard.prototype.glow=function(boardPiece) {
-	boardPiece.getData().gr.glow();
+SvgBoard.prototype.glow=function(boardPiece,glow) {
+	var svgPieceData=boardPiece.getData();
+	if(glow) {
+		svgPieceData.glow=RUtils.setGlow(this.paper,svgPieceData.set);
+	} else {
+		//svgPieceData.set.remove();
+		svgPieceData.glow.remove();
+		svgPieceData.glow=undefined;
+	}
 };
 /**
 	Redraw the entire board
@@ -280,6 +291,23 @@ SvgBoard.prototype.redraw=function() {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-SvgBoard.prototype.select=function(x,y) {
-	console.log('select is called '+x+','+y);
+SvgBoard.prototype.select=function(piecePosition) {
+	//console.log('select is called '+piecePosition.x+','+piecePosition.y);
+	if(this.board.hasPieceAtPosition(piecePosition)) {
+		if(this.glowOn) {
+			this.glow(this.glowPiece,false);
+			this.glowOn=false;
+			this.glowPiece=undefined;
+		}
+		var boardPiece=this.board.getPieceAtPosition(piecePosition);
+		this.glow(boardPiece,true);
+		this.glowOn=true;
+		this.glowPiece=boardPiece;
+	} else {
+		if(this.glowOn) {
+			this.glow(this.glowPiece,false);
+			this.glowOn=false;
+			this.glowPiece=undefined;
+		}
+	}
 };

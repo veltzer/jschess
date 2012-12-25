@@ -10,6 +10,7 @@
 		<!--script src="../out/jschess-${ver}.min.js"></script-->
 		<!--script src="../out/jschess-${ver}.js"></script-->
 		<script src="../src/Utils.js"></script>
+		<script src="../src/RUtils.js"></script>
 		<script src="../src/SvgPathAndAttributes.js"></script>
 		<script src="../src/SvgPiece.js"></script>
 		<script src="../src/SvgCreator.js"></script>
@@ -85,7 +86,7 @@
 					svgBoard.flip()
 				});
 				$('#glow').click(function() {
-					svgBoard.glow(board.getPieceAtPosition(new PiecePosition(0,0)));
+					svgBoard.glow(board.getPieceAtPosition(new PiecePosition(0,0)),true);
 				});
 				$('#dump').click(function() {
 					svgBoard.dump()
