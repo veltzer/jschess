@@ -23,11 +23,16 @@ function SvgBoard(board,config) {
 	config['white_color']=config['white_color'] || 'ffffff';// color of the white squares
 	config['black_square_color']=config['black_square_color'] || '819faa';// color of the black squares
 	config['white_square_color']=config['white_square_color'] || 'ffffff';// color of the white squares
+	config['black_square_gradient']=config['black_square_gradient'] || '0-#91afba:0-819faa:50-819faa:100';// gradient for black squares
+	config['white_square_gradient']=config['white_square_gradient'] || '0-#eee:0-#fff:50-#fff:100';// gradient for white squares
 	config['flipview']=config['flipview'] || false;// is the board flipped
 	config['ms']=config['ms'] || 350;// ms for moving animation
-	config['pencolor']=config['pencolor'] || 'black';
-	config['flipms']=config['flipms'] || 0;
-	config['gradients']=config['gradients'] || true;
+	config['pencolor']=config['pencolor'] || 'black';// pen color for drawing the shapes
+	config['flipms']=config['flipms'] || 350;// how fast should flip work
+	config['gradients']=config['gradients'] || true;// should we use gradients?
+	config['select_color']=config['select_color'] || '00ff00';// color of selected squares
+	config['rec_stroke_color']=config['rec_stroke_color'] || 'black';// rectangles stroke color
+	config['rec_stroke_width']=config['rec_stroke_width'] || 0.1;// rectangles stroke width
 	// store the config
 	this.config=config;
 	// get RW vars from the config
@@ -72,6 +77,21 @@ SvgBoard.prototype.raphaelPrep=function() {
 	// sync way
 	this.paper=Raphael(this.config['id'],this.config['size'],this.config['size']);
 };
+SvgBoard.prototype.setRectFill=function(rec,piecePosition) {
+	if((piecePosition.x+piecePosition.y)%2==1) {
+		if(this.config['gradients']) {
+			rec.attr('fill',this.config['black_square_gradient']);
+		} else {
+			rec.attr('fill',this.config['black_square_color']);
+		}
+	} else {
+		if(this.config['gradients']) {
+			rec.attr('fill',this.config['white_square_gradient']);
+		} else {
+			rec.attr('fill',this.config['white_square_color']);
+		}
+	}
+};
 /**
 	Draw the board (which and black squares)
 	@returns nothing
@@ -81,29 +101,41 @@ SvgBoard.prototype.drawBoard=function() {
 	var that=this;
 	for(var x=0;x<8;x++) {
 		for(var y=0;y<8;y++) {
-			// Creates circle at x = 50, y = 40, with radius 10
-			var rec =this.paper.rect(x*this.square,y*this.square,this.square,this.square);
-			rec.attr('stroke','black');
-			rec.attr('stroke-width',0.1);
-			if((x+y)%2==1) {
-				if(this.config['gradients']) {
-					rec.attr('fill','0-#91afba:0-819faa:50-819faa:100');
-				} else {
-					rec.attr('fill', this.config['black_square_color']);
-				}
-			} else {
-				if(this.config['gradients']) {
-					rec.attr('fill','0-#eee:0-#fff:50-#fff:100');
-				} else {
-					rec.attr('fill', this.config['white_square_color']);
-				}
-			}
-			var inner_func=(function(tx,ty) {
+			var rec=this.paper.rect(x*this.square,y*this.square,this.square,this.square);
+			rec.attr('stroke',this.config['rec_stroke_color']);
+			rec.attr('stroke-width',this.config['rec_stroke_width']);
+			var piecePosition=new PiecePosition(x,7-y);
+			this.setRectFill(rec,piecePosition);
+			rec.click(function(tpos,trec) {
 				return function() {
-					that.select(new PiecePosition(tx,7-ty));
+					that.squareSelect(tpos,trec);
 				};
-			})(x,y);
-			rec.click(inner_func);
+			}(piecePosition,rec));
+			rec.mousedown(function(tpos,trec,type) {
+				return function() {
+					that.eventMouse(tpos,trec,type);
+				};
+			}(piecePosition,rec,"mousedown"));
+			rec.mousemove(function(tpos,trec,type) {
+				return function() {
+					that.eventMouse(tpos,trec,type);
+				};
+			}(piecePosition,rec,"mousemove"));
+			rec.mouseout(function(tpos,trec,type) {
+				return function() {
+					that.eventMouse(tpos,trec,type);
+				};
+			}(piecePosition,rec,"mouseout"));
+			rec.mouseover(function(tpos,trec,type) {
+				return function() {
+					that.eventMouse(tpos,trec,type);
+				};
+			}(piecePosition,rec,"mouseover"));
+			rec.mouseup(function(tpos,trec,type) {
+				return function() {
+					that.eventMouse(tpos,trec,type);
+				};
+			}(piecePosition,rec,"mouseup"));
 		}
 	}
 };
@@ -113,25 +145,16 @@ SvgBoard.prototype.drawBoard=function() {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-SvgBoard.prototype.postAddPiece=function(boardPiece,position) {
+SvgBoard.prototype.postAddPiece=function(boardPiece,piecePosition) {
 	var svgPiece=SvgCreator.createPiece(this.config,boardPiece.color,boardPiece.type);
 	// calculate transform (move and scale)
-	var pixelPos=this.posToPixels(position);
+	var pixelPos=this.posToPixels(piecePosition);
 	var m=Raphael.matrix();
 	m.translate(pixelPos.x,pixelPos.y);
 	m.scale(this.square/svgPiece.rect,this.square/svgPiece.rect);
 	var transform=m.toTransformString();
 	// now put it on the paper
-	var set=this.paper.set();
-	for(var x in svgPiece.paas) {
-		var paa=svgPiece.paas[x];
-		var orig_path=paa.path;
-		var new_path=Raphael.transformPath(orig_path,transform);
-		var el=this.paper.path(new_path);
-		el.attr(paa.attr);
-		//el.hide();
-		set.push(el);
-	}
+	var set=svgPiece.toSet(this.paper,transform);
 	// lets put our own data with the piece
 	var svgPieceData=new SvgPieceData(set,pixelPos);
 	boardPiece.setData(svgPieceData);
@@ -142,8 +165,8 @@ SvgBoard.prototype.postAddPiece=function(boardPiece,position) {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-SvgBoard.prototype.postRemovePiece=function(boardPiece,position) {
-	Utils.fakeUse(position);
+SvgBoard.prototype.postRemovePiece=function(boardPiece,piecePosition) {
+	Utils.fakeUse(piecePosition);
 	var svgPieceData=boardPiece.getData();
 	svgPieceData.set.remove();
 	boardPiece.unsetData();
@@ -163,14 +186,15 @@ SvgBoard.prototype.posToPixels=function(piecePosition) {
 };
 /**
 	Resize the board
+	@param set Raphael set to resize
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-SvgBoard.prototype.resize=function(gr) {
+SvgBoard.prototype.resize=function(set) {
 	var m=Raphael.matrix();
 	m.scale(1.7,1.7);
 	var transformString=m.toTransformString();
-	gr.forEach(function(el) {
+	set.forEach(function(el) {
 		//el.animate({transform: transformString},ms);
 		el.transform(transformString);
 		//el.scale(5,5);
@@ -287,11 +311,16 @@ SvgBoard.prototype.redraw=function() {
 	});
 };
 /**
-	Select callback. Called when the user selects a square.
+	Square select callback. Called when the user selects a square.
+	@param piecePosition position of the square
+	@param rec Raphael.js rec object which was selected
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-SvgBoard.prototype.select=function(piecePosition) {
+SvgBoard.prototype.squareSelect=function(piecePosition,rec) {
+	Utils.fakeUse(piecePosition);
+	Utils.fakeUse(rec);
+	/*
 	//console.log('select is called '+piecePosition.x+','+piecePosition.y);
 	if(this.board.hasPieceAtPosition(piecePosition)) {
 		if(this.glowOn) {
@@ -309,5 +338,18 @@ SvgBoard.prototype.select=function(piecePosition) {
 			this.glowOn=false;
 			this.glowPiece=undefined;
 		}
+	}
+	*/
+};
+SvgBoard.prototype.eventMouse=function(piecePosition,rec,type) {
+	//Utils.fakeUse(rec);
+	//Utils.fakeUse(piecePosition);
+	// going into a rectangle - set the selected color
+	if(type=='mouseover') {
+		rec.attr('fill',this.config['select_color']);
+	}
+	// if we have a selected one, revert to old color
+	if(type=='mouseout') {
+		this.setRectFill(rec,piecePosition);
 	}
 };
