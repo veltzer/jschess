@@ -74,6 +74,7 @@ SvgBoard.prototype.raphaelPrep=function() {
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 SvgBoard.prototype.drawBoard=function() {
+	var that=this;
 	for(var x=0;x<8;x++) {
 		for(var y=0;y<8;y++) {
 			// Creates circle at x = 50, y = 40, with radius 10
@@ -93,6 +94,12 @@ SvgBoard.prototype.drawBoard=function() {
 					rec.attr('fill', this.config['white_square_color']);
 				}
 			}
+			var inner_func=(function(tx,ty) {
+				return function() {
+					that.select(tx,ty);
+				};
+			})(x,y);
+			rec.click(inner_func);
 		}
 	}
 };
@@ -267,4 +274,12 @@ SvgBoard.prototype.redraw=function() {
 	this.board.forEachPiece(function(boardPiece,position) {
 		that.timeMovePiece(boardPiece,position,position,that.config['flipms']);
 	});
+};
+/**
+	Select callback. Called when the user selects a square.
+	@returns nothing
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+SvgBoard.prototype.select=function(x,y) {
+	console.log('select is called '+x+','+y);
 };
