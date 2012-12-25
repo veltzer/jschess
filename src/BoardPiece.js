@@ -1,17 +1,15 @@
 /**
-	@class represents a piece on the board: color, type and position
+	@class represents a piece on the board: color, type
 	The instance also has a data field that could be used for private
 	data attached to the piece.
 	@param color color of this piece (black/white)
 	@param type type of this piece (rook/knight/bishop/queen/king/pawn)
-	@param position position of this piece [0..8)x[0..8)
 	@returns the new object created
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-function BoardPiece(color,type,position) {
+function BoardPiece(color,type) {
 	this.color=color;
 	this.type=type;
-	this.position=position;
 	this.data=undefined;
 }
 /**
@@ -20,7 +18,7 @@ function BoardPiece(color,type,position) {
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 BoardPiece.prototype.toString=function() {
-	return [this.color,this.type,this.position,this.data].join();
+	return [this.color,this.type,this.data].join();
 };
 /**
 	Method to set secret data for this piece

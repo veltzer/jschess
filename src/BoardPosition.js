@@ -28,11 +28,9 @@ BoardPosition.prototype.toString=function() {
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 BoardPosition.prototype.addPiece=function(color,type,x,y) {
-	this.pieces.push(new BoardPiece(
-		new PieceColor(color),
-		new PieceType(type),
-		new PiecePosition(x,y)
-	));
+	var boardPiece=new BoardPiece(new PieceColor(color),new PieceType(type));
+	var piecePosition=new PiecePosition(x,y);
+	this.pieces.push([boardPiece,piecePosition]);
 };
 /**
 	Run a function for each piece in this position
@@ -41,8 +39,10 @@ BoardPosition.prototype.addPiece=function(color,type,x,y) {
 */
 BoardPosition.prototype.forEachPiece=function(f) {
 	for(var ipiece in this.pieces) {
-		var piece=this.pieces[ipiece];
-		f(piece);
+		var pieceAndPos=this.pieces[ipiece];
+		var boardPiece=pieceAndPos[0];
+		var position=pieceAndPos[1];
+		f(boardPiece,position);
 	}
 };
 /**
