@@ -96,7 +96,7 @@ SvgBoard.prototype.drawBoard=function() {
 			}
 			var inner_func=(function(tx,ty) {
 				return function() {
-					that.select(tx,ty);
+					that.select(tx,7-ty);
 				};
 			})(x,y);
 			rec.click(inner_func);
