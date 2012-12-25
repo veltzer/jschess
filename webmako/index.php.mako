@@ -88,8 +88,8 @@
 				$('#glow').click(function() {
 					svgBoard.glow(board.getPieceAtPosition(new PiecePosition(0,0)),true);
 				});
-				$('#dump').click(function() {
-					svgBoard.dump()
+				$('#toString').click(function() {
+					console.log(svgBoard);
 				});
 				$('#clear').click(function() {
 					board.clearPieces()
@@ -158,7 +158,7 @@
 			<button id="movebishops">movebishops</button>
 			<button id="flip">flip</button>
 			<button id="glow">glow</button>
-			<button id="dump">dump</button>
+			<button id="toString">toString</button>
 			<button id="clear">clear</button>
 		</p>
 		<p>
