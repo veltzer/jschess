@@ -10,7 +10,7 @@ DO_WRAPDEPS:=1
 # VARIABLES #
 #############
 #VER:=$(shell git tag)
-VER:=$(shell git describe)
+VER:=$(shell ./scripts/tagname.py)
 PROJECT=jschess
 SRC_FOLDER=src
 TESTS_FOLDER=tests

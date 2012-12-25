@@ -19,7 +19,7 @@ p_output=sys.argv[2]
 
 def get_attr():
 	attr={}
-	attr['ver']=subprocess.check_output(["git", "describe"]).rstrip()
+	attr['ver']=subprocess.check_output(["./scripts/tagname.py"]).rstrip()
 	return attr
 
 try:
