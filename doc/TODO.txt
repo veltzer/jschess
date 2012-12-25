@@ -13,9 +13,6 @@ site:
 
 code:
 =====
-- boardPiece now carries a position. Remove that as the board
-	knows where the piece is and can pass it to all the callbacks...
-	this is duplicate info and can cause problems...
 - cache SVG elements so that clear/startpos cycles will be faster.
 - add a type safe config standalone system.
 - move to using prototype as the basis for this entire project (the class

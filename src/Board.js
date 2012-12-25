@@ -24,9 +24,12 @@ function Board() {
 	}
 	this.pieces=[];
 	// callbacks
-	this.addCB=[];
-	this.removeCB=[];
-	this.moveCB=[];
+	this.preAddCB=[];
+	this.postAddCB=[];
+	this.preRemoveCB=[];
+	this.postRemoveCB=[];
+	this.preMoveCB=[];
+	this.postMoveCB=[];
 }
 /**
 	toString method that allows you to get a nice printout for this type
@@ -68,18 +71,34 @@ Board.prototype.checkPieceAt=function(position) {
 	}
 };
 /**
+	Check that a certain piece is at a certain position.
+	Will throw an exception if that is not the case.
+	@param boardPiece the piece in question
+	@param position position to check that a piece is at
+	@returns nothing
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+Board.prototype.checkBoardPieceAt=function(boardPiece,position) {
+	if(this.bd[position.x][position.y]!==boardPiece) {
+		throw 'wrong piece at position '+position.toString();
+	}
+};
+/**
 	Add a piece to the position
 	@param boardPiece piece to add
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-Board.prototype.addPiece=function(boardPiece) {
-	var position=boardPiece.position;
+Board.prototype.addPiece=function(boardPiece,position) {
+	for(var i in this.preAddCB) {
+		var f=this.preAddCB[i];
+		f(boardPiece,position);
+	}
 	this.checkNoPieceAt(position);
 	this.bd[position.x][position.y]=boardPiece;
-	for(var i in this.addCB) {
-		var f=this.addCB[i];
-		f(boardPiece);
+	for(i in this.postAddCB) {
+		f=this.postAddCB[i];
+		f(boardPiece,position);
 	}
 };
 /**
@@ -88,13 +107,16 @@ Board.prototype.addPiece=function(boardPiece) {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-Board.prototype.removePiece=function(boardPiece) {
-	var position=boardPiece.position;
-	this.checkPieceAt(position);
+Board.prototype.removePiece=function(boardPiece,position) {
+	this.checkBoardPieceAt(position);
+	for(var i in this.preRemoveCB) {
+		var f=this.preRemoveCB[i];
+		f(boardPiece,position);
+	}
 	this.bd[position.x][position.y]=undefined;
-	for(var i in this.removeCB) {
-		var f=this.removeCB[i];
-		f(boardPiece);
+	for(i in this.postRemoveCB) {
+		f=this.postRemoveCB[i];
+		f(boardPiece,position);
 	}
 };
 /**
@@ -104,16 +126,18 @@ Board.prototype.removePiece=function(boardPiece) {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-Board.prototype.movePiece=function(boardPiece,piecePosition) {
-	this.checkPieceAt(boardPiece.position);
-	this.checkNoPieceAt(piecePosition);
-	var oldPosition=boardPiece.position;
-	boardPiece.position=piecePosition;
-	this.bd[oldPosition.x][oldPosition.y]=undefined;
-	this.bd[piecePosition.x][piecePosition.y]=boardPiece;
-	for(var i in this.moveCB) {
-		var f=this.moveCB[i];
-		f(boardPiece,oldPosition,piecePosition);
+Board.prototype.movePiece=function(boardPiece,fromPosition,toPosition) {
+	this.checkPieceAt(fromPosition);
+	this.checkNoPieceAt(toPosition);
+	for(var i in this.preMoveCB) {
+		var f=this.preMoveCB[i];
+		f(boardPiece,fromPosition,toPosition);
+	}
+	this.bd[fromPosition.x][fromPosition.y]=undefined;
+	this.bd[toPosition.x][toPosition.y]=boardPiece;
+	for(i in this.postMoveCB) {
+		f=this.postMoveCB[i];
+		f(boardPiece,fromPosition,toPosition);
 	}
 };
 /**
@@ -123,7 +147,7 @@ Board.prototype.movePiece=function(boardPiece,piecePosition) {
 */
 Board.prototype.clearPieces=function() {
 	var that=this;
-	this.forEachPiece(function(p) { that.removePiece(p); });
+	this.forEachPiece(function(boardPiece,position) { that.removePiece(boardPiece,position); });
 };
 /**
 	Add a piece to the position (seperate pieces of data).
@@ -137,10 +161,9 @@ Board.prototype.clearPieces=function() {
 Board.prototype.addPieceVals=function(color,type,x,y) {
 	var boardPiece=new BoardPiece(
 		new PieceColor(color),
-		new PieceType(type),
-		new PiecePosition(x,y)
+		new PieceType(type)
 	);
-	this.addPiece(boardPiece);
+	this.addPiece(boardPiece,new PiecePosition(x,y));
 };
 /**
 	Run a function for each piece in this position
@@ -153,7 +176,7 @@ Board.prototype.forEachPiece=function(f) {
 	for(var i=0;i<8;i++) {
 		for(var j=0;j<8;j++) {
 			if(this.bd[i][j]!==undefined) {
-				f(this.bd[i][j]);
+				f(this.bd[i][j],new PiecePosition(i,j));
 			}
 		}
 	}
@@ -203,8 +226,8 @@ Board.prototype.hasPieceAtPositionVals=function(x,y) {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-Board.prototype.addPieceAddCallback=function(f) {
-	this.addCB.push(f);
+Board.prototype.addPiecePostAddCallback=function(f) {
+	this.postAddCB.push(f);
 };
 /**
 	Add a callback for removing a piece
@@ -212,8 +235,8 @@ Board.prototype.addPieceAddCallback=function(f) {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-Board.prototype.addPieceRemoveCallback=function(f) {
-	this.removeCB.push(f);
+Board.prototype.addPiecePostRemoveCallback=function(f) {
+	this.postRemoveCB.push(f);
 };
 /**
 	Add a callback for moving a piece
@@ -221,8 +244,8 @@ Board.prototype.addPieceRemoveCallback=function(f) {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-Board.prototype.addPieceMoveCallback=function(f) {
-	this.moveCB.push(f);
+Board.prototype.addPiecePostMoveCallback=function(f) {
+	this.postMoveCB.push(f);
 };
 /**
 	Clear the board and add a position to the current board
@@ -233,7 +256,7 @@ Board.prototype.addPieceMoveCallback=function(f) {
 Board.prototype.setPosition=function(boardPosition) {
 	this.clearPieces();
 	var that=this;
-	boardPosition.forEachPiece(function(p) { that.addPiece(p); });
+	boardPosition.forEachPiece(function(boardPiece,position) { that.addPiece(boardPiece,position); });
 };
 /**
 	Put the board in starting position
@@ -249,6 +272,6 @@ Board.prototype.startPosition=function() {
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 Board.prototype.movePieceByPos=function(fromPos,toPos) {
-	var piece=this.getPieceAtPosition(fromPos);
-	this.movePiece(piece,toPos);
+	var boardPiece=this.getPieceAtPosition(fromPos);
+	this.movePiece(boardPiece,fromPos,toPos);
 };

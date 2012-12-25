@@ -38,14 +38,14 @@ function SvgBoard(board,config) {
 	this.drawBoard();
 	// hook the board to our graphics
 	var that=this;
-	this.board.addPieceAddCallback(function(boardPiece) {
-		that.addPiece(boardPiece);
+	this.board.addPiecePostAddCallback(function(boardPiece,piecePosition) {
+		that.postAddPiece(boardPiece,piecePosition);
 	});
-	this.board.addPieceRemoveCallback(function(boardPiece) {
-		that.removePiece(boardPiece);
+	this.board.addPiecePostRemoveCallback(function(boardPiece,piecePosition) {
+		that.postRemovePiece(boardPiece,piecePosition);
 	});
-	this.board.addPieceMoveCallback(function(boardPiece,fromPos,toPos) {
-		that.movePiece(boardPiece,fromPos,toPos);
+	this.board.addPiecePostMoveCallback(function(boardPiece,fromPos,toPos) {
+		that.postMovePiece(boardPiece,fromPos,toPos);
 	});
 }
 SvgBoard.prototype.getBoard=function() {
@@ -102,10 +102,10 @@ SvgBoard.prototype.drawBoard=function() {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-SvgBoard.prototype.addPiece=function(boardPiece) {
+SvgBoard.prototype.postAddPiece=function(boardPiece,position) {
 	var pieceDesc=SvgCreator.createPiece(this.config,boardPiece.color,boardPiece.type);
 	// calculate transform (move and scale)
-	var pixelPos=this.posToPixels(boardPiece.position);
+	var pixelPos=this.posToPixels(position);
 	var m=Raphael.matrix();
 	m.translate(pixelPos.x,pixelPos.y);
 	m.scale(this.square/pieceDesc.rect,this.square/pieceDesc.rect);
@@ -131,7 +131,8 @@ SvgBoard.prototype.addPiece=function(boardPiece) {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-SvgBoard.prototype.removePiece=function(boardPiece) {
+SvgBoard.prototype.postRemovePiece=function(boardPiece,position) {
+	Utils.fakeUse(position);
 	var svgPieceData=boardPiece.getData();
 	svgPieceData.gr.remove();
 	boardPiece.unsetData();
@@ -142,11 +143,11 @@ SvgBoard.prototype.removePiece=function(boardPiece) {
 	@returns position in pixels
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-SvgBoard.prototype.posToPixels=function(pos) {
+SvgBoard.prototype.posToPixels=function(piecePosition) {
 	if(this.flipview===true) {
-		return new SvgPixelPosition(pos.x*this.square,pos.y*this.square);
+		return new SvgPixelPosition(piecePosition.x*this.square,piecePosition.y*this.square);
 	} else {
-		return new SvgPixelPosition(pos.x*this.square,(7-pos.y)*this.square);
+		return new SvgPixelPosition(piecePosition.x*this.square,(7-piecePosition.y)*this.square);
 	}
 };
 /**
@@ -206,9 +207,9 @@ SvgBoard.prototype.hidePiece=function(piece) {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-SvgBoard.prototype.movePiece=function(piece,posFrom,posTo) {
+SvgBoard.prototype.postMovePiece=function(boardPiece,posFrom,posTo) {
 	Utils.fakeUse(posFrom);
-	this.timeMovePiece(piece,posFrom,posTo,this.config['ms']);
+	this.timeMovePiece(boardPiece,posFrom,posTo,this.config['ms']);
 };
 SvgBoard.prototype.positionPiece=function(piece,posTo) {
 	this.timeMovePiece(piece,posTo,0);
@@ -263,8 +264,7 @@ SvgBoard.prototype.glow=function(boardPiece) {
 */
 SvgBoard.prototype.redraw=function() {
 	var that=this;
-	this.board.forEachPiece(function(boardPiece) {
-		var pos=boardPiece.position;
-		that.timeMovePiece(boardPiece,pos,pos,that.config['flipms']);
+	this.board.forEachPiece(function(boardPiece,position) {
+		that.timeMovePiece(boardPiece,position,position,that.config['flipms']);
 	});
 };
