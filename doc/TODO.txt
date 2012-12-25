@@ -13,6 +13,8 @@ site:
 
 code:
 =====
+- consider morphing one piece into another using raphael.js animations
+	when one shape turns into another (coronations).
 - cache SVG elements so that clear/startpos cycles will be faster.
 - add a type safe config standalone system.
 - move to using prototype as the basis for this entire project (the class
