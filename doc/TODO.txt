@@ -13,6 +13,8 @@ site:
 
 code:
 =====
+- consider moving pieces at certain speeds and having the speed and not the
+	time of the animation recorded in the config.
 - consider morphing one piece into another using raphael.js animations
 	when one shape turns into another (coronations).
 - cache SVG elements so that clear/startpos cycles will be faster.

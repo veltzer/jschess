@@ -3,6 +3,7 @@
 	@class represents a position on the board
 	@param x x co-ordinate
 	@param y y co-ordinate
+	@returns the new instance of this class
 	The method checks if the values given to it are in the 0..7 range.
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
@@ -18,6 +19,7 @@ function PiecePosition(x,y) {
 }
 /**
 	Debug method so that you can get a nice printout of instances of this type
+	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 PiecePosition.prototype.toString=function() {
