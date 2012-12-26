@@ -85,15 +85,15 @@ SvgBoard.prototype.raphaelPrep=function() {
 SvgBoard.prototype.setRectFill=function(rec,piecePosition) {
 	if((piecePosition.x+piecePosition.y)%2==1) {
 		if(this.config['gradients']) {
-			rec.attr('fill',this.config['black_square_gradient']);
-		} else {
-			rec.attr('fill',this.config['black_square_color']);
-		}
-	} else {
-		if(this.config['gradients']) {
 			rec.attr('fill',this.config['white_square_gradient']);
 		} else {
 			rec.attr('fill',this.config['white_square_color']);
+		}
+	} else {
+		if(this.config['gradients']) {
+			rec.attr('fill',this.config['black_square_gradient']);
+		} else {
+			rec.attr('fill',this.config['black_square_color']);
 		}
 	}
 };
@@ -104,12 +104,15 @@ SvgBoard.prototype.setRectFill=function(rec,piecePosition) {
 */
 SvgBoard.prototype.drawBoard=function() {
 	var that=this;
+	this.recs=[];
 	for(var x=0;x<8;x++) {
+		var rec_line=[];
 		for(var y=0;y<8;y++) {
 			var rec=this.paper.rect(x*this.square,y*this.square,this.square,this.square);
 			rec.attr('stroke',this.config['rec_stroke_color']);
 			rec.attr('stroke-width',this.config['rec_stroke_width']);
-			var piecePosition=new PiecePosition(x,7-y);
+			rec_line.push(rec);
+			var piecePosition=new PiecePosition(x,(7-y));
 			this.setRectFill(rec,piecePosition);
 			rec.click(function(tpos,trec,type) {
 				return function() {
@@ -142,6 +145,8 @@ SvgBoard.prototype.drawBoard=function() {
 				};
 			}(piecePosition,rec,"mouseup"));
 		}
+		rec_line.reverse();
+		this.recs.push(rec_line);
 	}
 };
 /**
@@ -195,7 +200,7 @@ SvgBoard.prototype.postRemovePiece=function(boardPiece,piecePosition) {
 */
 SvgBoard.prototype.posToPixels=function(piecePosition) {
 	if(this.flipview===true) {
-		return new SvgPixelPosition(piecePosition.x*this.square,piecePosition.y*this.square);
+		return new SvgPixelPosition((7-piecePosition.x)*this.square,piecePosition.y*this.square);
 	} else {
 		return new SvgPixelPosition(piecePosition.x*this.square,(7-piecePosition.y)*this.square);
 	}
@@ -334,16 +339,20 @@ SvgBoard.prototype.redraw=function() {
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 var spiece=undefined;
+//var selected=undefined;
+//var selectedPos=undefined;
+var colored=undefined;
+var coloredPos=undefined;
 SvgBoard.prototype.eventPiece=function(boardPiece,type) {
-	//Utils.fakeUse(piecePosition);
-	//Utils.fakeUse(rec);
 	//console.log('eventPiece '+boardPiece+','+type);
-	if(type=='click' || type=='mouseover') {
+	if(type=='mouseover' || type=='mouseout') {
+		var piecePosition=this.board.getPiecePosition(boardPiece);
+		var rec=this.getRec(piecePosition);
+		this.eventSquare(piecePosition,rec,'piece'+type);
+	}
+	if(type=='mouseover' || type=='squaremouseover') {
 		if(spiece) {
-			if(spiece==boardPiece) {
-				this.glow(spiece,false);
-				spiece=undefined;
-			} else {
+			if(spiece!=boardPiece) {
 				this.glow(spiece,false);
 				spiece=boardPiece;
 				this.glow(spiece,true);
@@ -353,26 +362,20 @@ SvgBoard.prototype.eventPiece=function(boardPiece,type) {
 			this.glow(spiece,true);
 		}
 	}
-	/*
-	//console.log('select is called '+piecePosition.x+','+piecePosition.y);
-	if(this.board.hasPieceAtPosition(piecePosition)) {
-		if(this.glowOn) {
-			this.glow(this.glowPiece,false);
-			this.glowOn=false;
-			this.glowPiece=undefined;
-		}
-		var boardPiece=this.board.getPieceAtPosition(piecePosition);
-		this.glow(boardPiece,true);
-		this.glowOn=true;
-		this.glowPiece=boardPiece;
-	} else {
-		if(this.glowOn) {
-			this.glow(this.glowPiece,false);
-			this.glowOn=false;
-			this.glowPiece=undefined;
+	if(type=='mouseout' || type=='squaremouseout') {
+		if(spiece) {
+			this.glow(spiece,false);
+			spiece=undefined;
 		}
 	}
-	*/
+};
+/**
+	Return the square at a position.
+	@param piecePosition the position for which to return the square.
+	@returns the Raphael.js rec in question
+*/
+SvgBoard.prototype.getRec=function(piecePosition) {
+	return this.recs[piecePosition.x][piecePosition.y];
 };
 /**
 	Events for squares.
@@ -383,23 +386,40 @@ SvgBoard.prototype.eventPiece=function(boardPiece,type) {
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-var selected=undefined;
-var selectedPos=undefined;
 SvgBoard.prototype.eventSquare=function(piecePosition,rec,type) {
+	//console.log('eventSquare '+piecePosition+','+rec+','+type);
 	//Utils.fakeUse(rec);
 	//Utils.fakeUse(piecePosition);
 	// going into a rectangle - set the selected color
-	if(this.board.hasPieceAtPosition(piecePosition)) {
-		var boardPiece=this.board.getPieceAtPosition(piecePosition);
-		this.eventPiece(boardPiece,'square'+type);
+	if(type=='mouseover' || type=='mouseout') {
+		if(this.board.hasPieceAtPosition(piecePosition)) {
+			var boardPiece=this.board.getPieceAtPosition(piecePosition);
+			this.eventPiece(boardPiece,'square'+type);
+		}
 	}
-	if(type=='mouseover' && selected!=rec) {
-		rec.attr('fill',this.config['over_color']);
+	if(type=='mouseover' || type=='piecemouseover') {
+		if(colored) {
+			if(colored!=rec) {
+				this.setRectFill(colored,coloredPos);
+				colored=rec;
+				coloredPos=piecePosition;
+				colored.attr('fill',this.config['over_color']);
+			}
+		} else {
+			colored=rec;
+			coloredPos=piecePosition;
+			colored.attr('fill',this.config['over_color']);
+		}
 	}
 	// going out from a rectangle - set the original color
-	if(type=='mouseout' && selected!=rec) {
-		this.setRectFill(rec,piecePosition);
+	if(type=='mouseout' || type=='piecemouseout') {
+		if(colored) {
+			this.setRectFill(colored,coloredPos);
+			colored=undefined;
+			coloredPos=undefined;
+		}
 	}
+	/*
 	// selecting a rectangle - fill with select_color
 	if(type=='click') {
 		if(selected) {
@@ -419,4 +439,5 @@ SvgBoard.prototype.eventSquare=function(piecePosition,rec,type) {
 			selectedPos=piecePosition;
 		}
 	}
+	*/
 };

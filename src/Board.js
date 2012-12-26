@@ -275,3 +275,18 @@ Board.prototype.movePieceByPos=function(fromPos,toPos) {
 	var boardPiece=this.getPieceAtPosition(fromPos);
 	this.movePiece(boardPiece,fromPos,toPos);
 };
+/**
+	Get the position of a piece
+	@returns piecePosition which is the position of the piece
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+Board.prototype.getPiecePosition=function(boardPiece) {
+	for(var i=0;i<8;i++) {
+		for(var j=0;j<8;j++) {
+			if(this.bd[i][j]==boardPiece) {
+				return new PiecePosition(i,j);
+			}
+		}
+	}
+	throw 'piece not on board '+boardPiece;
+};
