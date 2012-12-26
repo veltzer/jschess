@@ -24,3 +24,8 @@ RUtils.click=function(set,f) {
 		e.click(f);
 	});
 };
+RUtils.mouseover=function(set,f) {
+	set.forEach(function(e) {
+		e.mouseover(f);
+	});
+};

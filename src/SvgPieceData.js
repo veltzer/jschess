@@ -9,11 +9,27 @@
 function SvgPieceData(set,pixelPos) {
 	this.set=set;
 	this.pixelPos=pixelPos;
+	this.extra=undefined;
 }
 /**
 	Debug method that allows you to get a nice printout for this type
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 SvgPieceData.prototype.toString=function() {
-	return [this.set,this.pixelPos].join();
+	return [this.set,this.pixelPos,this.extra].join();
+};
+/**
+	ForEach method on all presentation elements
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+SvgPieceData.prototype.forEach=function(f) {
+	//var that=this;
+	this.set.forEach(function(el) {
+		f(el);
+	});
+	if(this.extra!==undefined) {
+		this.extra.forEach(function(el) {
+			f(el);
+		});
+	}
 };

@@ -26,9 +26,9 @@ function SvgBoard(board,config) {
 	config['black_square_gradient']=config['black_square_gradient'] || '0-#91afba:0-819faa:50-819faa:100';// gradient for black squares
 	config['white_square_gradient']=config['white_square_gradient'] || '0-#eee:0-#fff:50-#fff:100';// gradient for white squares
 	config['flipview']=config['flipview'] || false;// is the board flipped
-	config['ms']=config['ms'] || 350;// ms for moving animation
+	config['move_ms']=config['move_ms'] || 350;// ms for moving animation
+	config['flip_ms']=config['flip_ms'] || 350;// how fast should flip work
 	config['pencolor']=config['pencolor'] || 'black';// pen color for drawing the shapes
-	config['flipms']=config['flipms'] || 350;// how fast should flip work
 	config['gradients']=config['gradients'] || true;// should we use gradients?
 	config['select_color']=config['select_color'] || 'ffff00';// color of selected squares
 	config['over_color']=config['over_color'] || '00ff00';// color of selected squares
@@ -166,6 +166,11 @@ SvgBoard.prototype.postAddPiece=function(boardPiece,piecePosition) {
 			that.eventPiece(iboardPiece,itype);
 		};
 	}(boardPiece,'click'));
+	RUtils.mouseover(set,function(iboardPiece,itype) {
+		return function() {
+			that.eventPiece(iboardPiece,itype);
+		};
+	}(boardPiece,'mouseover'));
 	// lets put our own data with the piece
 	var svgPieceData=new SvgPieceData(set,pixelPos);
 	boardPiece.setData(svgPieceData);
@@ -220,13 +225,13 @@ SvgBoard.prototype.resize=function(set) {
 */
 SvgBoard.prototype.showHidePiece=function(boardPiece,hide) {
 	var data=boardPiece.getData();
-	data.set.forEach(function(el) {
+	data.forEach(function(el) {
 		if(hide) {
 			el.hide();
 		} else {
 			el.show();
 		}
-	},this);
+	});
 };
 /**
 	Quick method to show a piece
@@ -255,7 +260,7 @@ SvgBoard.prototype.hidePiece=function(piece) {
 */
 SvgBoard.prototype.postMovePiece=function(boardPiece,posFrom,posTo) {
 	Utils.fakeUse(posFrom);
-	this.timeMovePiece(boardPiece,posFrom,posTo,this.config['ms']);
+	this.timeMovePiece(boardPiece,posFrom,posTo,this.config['move_ms']);
 };
 SvgBoard.prototype.positionPiece=function(piece,posTo) {
 	this.timeMovePiece(piece,posTo,0);
@@ -264,13 +269,13 @@ SvgBoard.prototype.timeMovePiece=function(piece,posFrom,posTo,ms) {
 	Utils.fakeUse(posFrom);
 	var pixelPosFrom=piece.getData().pixelPos;
 	var pixelPosTo=this.posToPixels(posTo);
-	piece.getData().set.forEach(function(el) {
+	piece.getData().forEach(function(el) {
 		var m=Raphael.matrix();
 		m.translate(pixelPosTo.x-pixelPosFrom.x,pixelPosTo.y-pixelPosFrom.y);
 		//m.scale(this.square/piece.rect,this.square/piece.rect);
 		var transformString=m.toTransformString();
 		el.animate({transform: transformString},ms);
-	},this);
+	});
 	//piece.getData().pixelPos=pixelPosTo;
 };
 /**
@@ -303,10 +308,10 @@ SvgBoard.prototype.toString=function() {
 SvgBoard.prototype.glow=function(boardPiece,glow) {
 	var svgPieceData=boardPiece.getData();
 	if(glow) {
-		svgPieceData.glow=RUtils.setGlow(this.paper,svgPieceData.set);
+		svgPieceData.extra=RUtils.setGlow(this.paper,svgPieceData.set);
 	} else {
-		svgPieceData.glow.remove();
-		svgPieceData.glow=undefined;
+		svgPieceData.extra.remove();
+		svgPieceData.extra=undefined;
 	}
 };
 /**
@@ -317,7 +322,7 @@ SvgBoard.prototype.glow=function(boardPiece,glow) {
 SvgBoard.prototype.redraw=function() {
 	var that=this;
 	this.board.forEachPiece(function(boardPiece,position) {
-		that.timeMovePiece(boardPiece,position,position,that.config['flipms']);
+		that.timeMovePiece(boardPiece,position,position,that.config['flip_ms']);
 	});
 };
 /**
@@ -333,7 +338,7 @@ SvgBoard.prototype.eventPiece=function(boardPiece,type) {
 	//Utils.fakeUse(piecePosition);
 	//Utils.fakeUse(rec);
 	//console.log('eventPiece '+boardPiece+','+type);
-	if(type=='click' || type=='squaremouseover') {
+	if(type=='click' || type=='mouseover') {
 		if(spiece) {
 			if(spiece==boardPiece) {
 				this.glow(spiece,false);
