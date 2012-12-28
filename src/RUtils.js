@@ -1,6 +1,7 @@
 /**
 	@class a class to have static utility functions for Raphael.js
 	@returns nothing
+	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function RUtils() {

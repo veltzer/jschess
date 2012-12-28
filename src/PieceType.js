@@ -1,6 +1,7 @@
 /**
 	@class represents a piece type (rook,knight,bishop,queen,king,pawn) 
 	@param string - the type of the piece
+	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function PieceType(type) {

@@ -5,6 +5,7 @@
 /**
 	@class represents a full position of the board
 	@returns a new object of this type
+	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function BoardPosition() {

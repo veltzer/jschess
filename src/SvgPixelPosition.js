@@ -4,6 +4,7 @@
 	@param x x co-ordinate
 	@param y y co-ordinate
 	@returns nothing
+	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function SvgPixelPosition(x,y) {

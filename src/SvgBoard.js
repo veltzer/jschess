@@ -9,6 +9,7 @@
 	@class a whole board to play with
 	@constructor
 	@param config configuration for this board
+	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function SvgBoard(board,config) {

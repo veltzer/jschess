@@ -12,6 +12,7 @@
 	needed for castling).
 	- info about what the piece turns to (in case the piece turns
 	into some other piece like in the case of coronation).
+	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function GameMove() {

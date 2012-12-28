@@ -1,6 +1,7 @@
 /**
 	@class represents a piece color (white,black) 
 	@param string - the color of the piece
+	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function PieceColor(color) {

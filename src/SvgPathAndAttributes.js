@@ -3,6 +3,7 @@
 	@class represents a path + attributes
 	@param path string representing SVG path
 	@param attr object with attributes for said path
+	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function SvgPathAndAttributes(path,attr) {
