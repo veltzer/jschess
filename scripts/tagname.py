@@ -4,9 +4,12 @@
 
 import subprocess # for subprocess.check_output
 
-try:
-	f=open("/dev/null")
-	ver=subprocess.check_output(["git", "describe"],stderr=f).rstrip()
-	print ver
-except:
-	print "test"
+def get_version():
+	try:
+		f=open("/dev/null")
+		ver=subprocess.check_output(["git", "describe"],stderr=f).rstrip()
+		return ver
+	except:
+		return "test"
+
+print get_version()
