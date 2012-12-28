@@ -85,16 +85,14 @@ Board.prototype.checkBoardPieceAt=function(boardPiece,piecePosition) {
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 Board.prototype.addPiece=function(boardPiece,position) {
-	for(var i in this.preAddCB) {
-		var f=this.preAddCB[i];
+	this.preAddCB.forEach(function(f) {
 		f(boardPiece,position);
-	}
+	});
 	this.checkNoPieceAt(position);
 	this.bd[position.x][position.y]=boardPiece;
-	for(i in this.postAddCB) {
-		f=this.postAddCB[i];
+	this.postAddCB.forEach(function(f) {
 		f(boardPiece,position);
-	}
+	});
 };
 /**
 	@description Remove a piece
@@ -104,15 +102,13 @@ Board.prototype.addPiece=function(boardPiece,position) {
 */
 Board.prototype.removePiece=function(boardPiece,piecePosition) {
 	this.checkBoardPieceAt(boardPiece,piecePosition);
-	for(var i in this.preRemoveCB) {
-		var f=this.preRemoveCB[i];
+	this.preRemoveCB.forEach(function(f) {
 		f(boardPiece,piecePosition);
-	}
+	});
 	this.bd[piecePosition.x][piecePosition.y]=undefined;
-	for(i in this.postRemoveCB) {
-		f=this.postRemoveCB[i];
+	this.postRemoveCB.forEach(function(f) {
 		f(boardPiece,piecePosition);
-	}
+	});
 };
 /**
 	@description Move a piece
@@ -124,16 +120,14 @@ Board.prototype.removePiece=function(boardPiece,piecePosition) {
 Board.prototype.movePiece=function(boardPiece,fromPosition,toPosition) {
 	this.checkPieceAt(fromPosition);
 	this.checkNoPieceAt(toPosition);
-	for(var i in this.preMoveCB) {
-		var f=this.preMoveCB[i];
+	this.preMoveCB.forEach(function(f) {
 		f(boardPiece,fromPosition,toPosition);
-	}
+	});
 	this.bd[fromPosition.x][fromPosition.y]=undefined;
 	this.bd[toPosition.x][toPosition.y]=boardPiece;
-	for(i in this.postMoveCB) {
-		f=this.postMoveCB[i];
+	this.postMoveCB.forEach(function(f) {
 		f(boardPiece,fromPosition,toPosition);
-	}
+	});
 };
 /**
 	@description Clear the board

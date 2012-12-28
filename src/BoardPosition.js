@@ -40,12 +40,11 @@ BoardPosition.prototype.addPiece=function(color,type,x,y) {
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 BoardPosition.prototype.forEachPiece=function(f) {
-	for(var ipiece in this.pieces) {
-		var pieceAndPos=this.pieces[ipiece];
+	this.pieces.forEach(function(pieceAndPos) {
 		var boardPiece=pieceAndPos[0];
 		var position=pieceAndPos[1];
 		f(boardPiece,position);
-	}
+	});
 };
 /**
 	@description Static method that returns a starting position in standard chess.

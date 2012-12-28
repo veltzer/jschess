@@ -25,19 +25,18 @@ SvgPiece.prototype.add=function(paa) {
 	@description Create a Raphael.js set from this object
 	@param paper Raphael.js paper to work on
 	@param transform Raphael.js transformating for this object
-	@returns nothing
+	@returns the set after the transformation
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 SvgPiece.prototype.toSet=function(paper,transform) {
 	var set=paper.set();
-	for(var x in this.paas) {
-		var paa=this.paas[x];
+	this.paas.forEach(function(paa) {
 		var orig_path=paa.path;
 		var new_path=Raphael.transformPath(orig_path,transform);
 		var el=paper.path(new_path);
 		el.attr(paa.attr);
 		//el.hide();
 		set.push(el);
-	}
+	});
 	return set;
 };
