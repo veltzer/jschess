@@ -162,11 +162,7 @@
 			<button id="clear">clear</button>
 		</p>
 		<p>
-			Mark Veltzer, <?php 
-				$copyYear = 2012;
-				$curYear = date('Y');
-				echo $copyYear . (($copyYear != $curYear) ? '-' . $curYear : '');
-			?>
+			<Mark Veltzer, Copyright ${copyright_years(2010)}>
 			<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
 		</p>
 	</body>
