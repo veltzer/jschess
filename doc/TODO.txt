@@ -1,9 +1,10 @@
+now:
+====
+
 mako:
 =====
 - make mako files include individual js files in the file by file version in the right order
 	(prepare an order file which says which is the right order).
-- make mako files not be php files (there is only one thing we use it for which is the copyright
-	signature).
 
 site:
 =====
