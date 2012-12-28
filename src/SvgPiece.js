@@ -5,6 +5,7 @@
 	@class A single piece description.
 	@param rect rect size
 	@returns a new object of this type
+	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function SvgPiece(rect) {

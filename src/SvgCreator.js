@@ -3,6 +3,7 @@
 /*jsl:import SvgPiece.js*/
 /**
 	@class static class to have just static methods for creating pieces
+	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function SvgCreator() {

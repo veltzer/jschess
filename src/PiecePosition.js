@@ -5,6 +5,7 @@
 	@param y y co-ordinate
 	@returns the new instance of this class
 	The method checks if the values given to it are in the 0..7 range.
+	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function PiecePosition(x,y) {

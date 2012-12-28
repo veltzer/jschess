@@ -5,6 +5,7 @@
 	@param color color of this piece (black/white)
 	@param type type of this piece (rook/knight/bishop/queen/king/pawn)
 	@returns the new object created
+	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function BoardPiece(color,type) {

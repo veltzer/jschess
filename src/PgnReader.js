@@ -2,6 +2,7 @@
 	A class that knows how to read a PGN file and give instructions
 	to a board.
 	@class A PGN reader
+	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function PgnReader() {

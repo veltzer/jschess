@@ -10,6 +10,7 @@
 	1. Use pieces: put, remove and move them.
 	2. Do something with all pieces.
 	@returns the new object created
+	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function Board() {
