@@ -34,6 +34,8 @@ function SvgBoard(board,config) {
 	config['over_color']=config['over_color'] || '00ff00';// color of selected squares
 	config['rec_stroke_color']=config['rec_stroke_color'] || 'black';// rectangles stroke color
 	config['rec_stroke_width']=config['rec_stroke_width'] || 0.1;// rectangles stroke width
+	config['do_select']=config['do_select'] || true;// do you want selection to work?
+	config['do_pieceselect']=config['do_pieceselect'] || false;// do you want selection to work?
 	// store the config
 	this.config=config;
 	// get RW vars from the config
@@ -331,6 +333,14 @@ SvgBoard.prototype.redraw=function() {
 	});
 };
 /**
+	Return the square at a position.
+	@param piecePosition the position for which to return the square.
+	@returns the Raphael.js rec in question
+*/
+SvgBoard.prototype.getRec=function(piecePosition) {
+	return this.recs[piecePosition.x][piecePosition.y];
+};
+/**
 	Event handler for events happening on the pieces.
 	Types of events: click, mouseover and more...
 	@param boardPiece the BoardPiece instance the event happened on
@@ -350,32 +360,28 @@ SvgBoard.prototype.eventPiece=function(boardPiece,type) {
 		var rec=this.getRec(piecePosition);
 		this.eventSquare(piecePosition,rec,'piece'+type);
 	}
-	if(type=='mouseover' || type=='squaremouseover') {
-		if(spiece) {
-			if(spiece!=boardPiece) {
-				this.glow(spiece,false);
+	if(type=='squaremouseover') {
+		if(this.config['do_pieceselect']) {
+			if(spiece) {
+				if(spiece!=boardPiece) {
+					this.glow(spiece,false);
+					spiece=boardPiece;
+					this.glow(spiece,true);
+				}
+			} else {
 				spiece=boardPiece;
 				this.glow(spiece,true);
 			}
-		} else {
-			spiece=boardPiece;
-			this.glow(spiece,true);
 		}
 	}
-	if(type=='mouseout' || type=='squaremouseout') {
-		if(spiece) {
-			this.glow(spiece,false);
-			spiece=undefined;
+	if(type=='squaremouseout') {
+		if(this.config['do_pieceselect']) {
+			if(spiece) {
+				this.glow(spiece,false);
+				spiece=undefined;
+			}
 		}
 	}
-};
-/**
-	Return the square at a position.
-	@param piecePosition the position for which to return the square.
-	@returns the Raphael.js rec in question
-*/
-SvgBoard.prototype.getRec=function(piecePosition) {
-	return this.recs[piecePosition.x][piecePosition.y];
 };
 /**
 	Events for squares.
@@ -398,25 +404,29 @@ SvgBoard.prototype.eventSquare=function(piecePosition,rec,type) {
 		}
 	}
 	if(type=='mouseover' || type=='piecemouseover') {
-		if(colored) {
-			if(colored!=rec) {
-				this.setRectFill(colored,coloredPos);
+		if(this.config['do_select']) {
+			if(colored) {
+				if(colored!=rec) {
+					this.setRectFill(colored,coloredPos);
+					colored=rec;
+					coloredPos=piecePosition;
+					colored.attr('fill',this.config['over_color']);
+				}
+			} else {
 				colored=rec;
 				coloredPos=piecePosition;
 				colored.attr('fill',this.config['over_color']);
 			}
-		} else {
-			colored=rec;
-			coloredPos=piecePosition;
-			colored.attr('fill',this.config['over_color']);
 		}
 	}
 	// going out from a rectangle - set the original color
 	if(type=='mouseout' || type=='piecemouseout') {
-		if(colored) {
-			this.setRectFill(colored,coloredPos);
-			colored=undefined;
-			coloredPos=undefined;
+		if(this.config['do_select']) {
+			if(colored) {
+				this.setRectFill(colored,coloredPos);
+				colored=undefined;
+				coloredPos=undefined;
+			}
 		}
 	}
 	/*
