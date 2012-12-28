@@ -162,7 +162,7 @@
 			<button id="clear">clear</button>
 		</p>
 		<p>
-			<Mark Veltzer, Copyright ${copyright_years(2010)}>
+			Mark Veltzer, Copyright ${copyright_years(2012)}
 			<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
 		</p>
 	</body>

@@ -13,7 +13,7 @@ import myutils
 
 def years(x):
 	curr_year=datetime.datetime.now().year
-	return ','.join(map(str,range(x,curr_year)))
+	return ','.join(map(str,range(x,curr_year+1)))
 
 if len(sys.argv)!=3:
 	print(sys.argv[0]+': usage: '+sys.argv[0]+' [input] [output]',file=sys.stderr)
