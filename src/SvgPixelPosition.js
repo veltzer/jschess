@@ -1,9 +1,9 @@
 /**
-	A position on the screen (in pixels)
-	@class represents a position on the screen
+	@class represents a position on the screen (in pixels)
+	@description creates a new instance
 	@param x x co-ordinate
 	@param y y co-ordinate
-	@returns nothing
+	@returns the new instance
 	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
@@ -18,7 +18,7 @@ function SvgPixelPosition(x,y) {
 	this.y=y;
 }
 /**
-	toString method so that you can get a nice printout of instances of this type
+	@description toString method so that you can get a nice printout of instances of this type
 	@returns string representation of this object
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */

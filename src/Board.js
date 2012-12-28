@@ -4,11 +4,8 @@
 /*jsl:import PieceType.js*/
 /*jsl:import PiecePosition.js*/
 /**
-	@class Represents a full board
-	This is the main class to interact with. Using this class you
-	can:
-	1. Use pieces: put, remove and move them.
-	2. Do something with all pieces.
+	@class Represents a full board This is the main class to interact with. Using this class you can: 1. Use pieces: put, remove and move them. 2. Do something with all pieces.
+	@description creates a new instance
 	@returns the new object created
 	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -33,7 +30,7 @@ function Board() {
 	this.postMoveCB=[];
 }
 /**
-	toString method that allows you to get a nice printout for this type
+	@description toString method that allows you to get a nice printout for this type
 	@returns string representation of this object
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
@@ -48,8 +45,7 @@ Board.prototype.toString=function() {
 	return str;
 };
 /**
-	Check that no piece is at a certain position.
-	Will throw an exception if that is not the case.
+	@description Check that no piece is at a certain position. Will throw an exception if that is not the case.
 	@param position position to check that no piece is at
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -60,8 +56,7 @@ Board.prototype.checkNoPieceAt=function(position) {
 	}
 };
 /**
-	Check that piece is at a certain position.
-	Will throw an exception if that is not the case.
+	@description Check that piece is at a certain position. Will throw an exception if that is not the case.
 	@param position position to check that a piece is at
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -72,8 +67,7 @@ Board.prototype.checkPieceAt=function(position) {
 	}
 };
 /**
-	Check that a certain piece is at a certain position.
-	Will throw an exception if that is not the case.
+	@description Check that a certain piece is at a certain position. Will throw an exception if that is not the case.
 	@param boardPiece the piece in question
 	@param position position to check that a piece is at
 	@returns nothing
@@ -85,7 +79,7 @@ Board.prototype.checkBoardPieceAt=function(boardPiece,piecePosition) {
 	}
 };
 /**
-	Add a piece to the position
+	@description Add a piece to the position
 	@param boardPiece piece to add
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -103,7 +97,7 @@ Board.prototype.addPiece=function(boardPiece,position) {
 	}
 };
 /**
-	Remove a piece
+	@description Remove a piece
 	@param boardPiece piece to remove
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -121,7 +115,7 @@ Board.prototype.removePiece=function(boardPiece,piecePosition) {
 	}
 };
 /**
-	Move a piece
+	@description Move a piece
 	@param boardPiece piece to move
 	@param piecePosition where to move it to
 	@returns nothing
@@ -142,7 +136,7 @@ Board.prototype.movePiece=function(boardPiece,fromPosition,toPosition) {
 	}
 };
 /**
-	Clear the board
+	@description Clear the board
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
@@ -151,7 +145,7 @@ Board.prototype.clearPieces=function() {
 	this.forEachPiece(function(boardPiece,piecePosition) { that.removePiece(boardPiece,piecePosition); });
 };
 /**
-	Add a piece to the position (seperate pieces of data).
+	@description Add a piece to the position (seperate pieces of data).
 	@param color color of the piece (black/white)
 	@param type type of the piece (rook/knight/bishop/queen/king/pawn)
 	@param x x location of the piece [0..8)
@@ -167,9 +161,8 @@ Board.prototype.addPieceVals=function(color,type,x,y) {
 	this.addPiece(boardPiece,new PiecePosition(x,y));
 };
 /**
-	Run a function for each piece in this position
-	@param f function to be called back for each piece. This function should
-	receive the piece to work on.
+	@description Run a function for each piece in this position
+	@param f function to be called back for each piece.This function should receive the piece to work on.
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
@@ -183,7 +176,7 @@ Board.prototype.forEachPiece=function(f) {
 	}
 };
 /**
-	Get a piece at a specific position
+	@description Get a piece at a specific position
 	@param position position to get the piece at
 	@returns the piece at the specified position
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -193,7 +186,7 @@ Board.prototype.getPieceAtPosition=function(position) {
 	return this.bd[position.x][position.y];
 };
 /**
-	Get a piece at a specific position (in parts)
+	@description Get a piece at a specific position (in parts)
 	@param x x position to get piece at [0..8)
 	@param y y position to get piece at [0..8)
 	@returns the piece at the specified position
@@ -203,7 +196,7 @@ Board.prototype.getPieceAtPositionVals=function(x,y) {
 	return this.getPieceAtPosition(new PiecePosition(x,y));
 };
 /**
-	Do we have a piece in a specific position?
+	@description Do we have a piece in a specific position?
 	@param position position to check for a piece at
 	@returns boolean that indicates whether there is a piece at position. 
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -212,7 +205,7 @@ Board.prototype.hasPieceAtPosition=function(position) {
 	return this.bd[position.x][position.y]!==undefined;
 };
 /**
-	Do we have a piece in a specific position?
+	@description Do we have a piece in a specific position?
 	@param x x position to check for piece at [0..8)
 	@param y y position to check for piece at [0..8)
 	@returns boolean that indicates whether there is a piece at position. 
@@ -222,7 +215,7 @@ Board.prototype.hasPieceAtPositionVals=function(x,y) {
 	return this.hasPieceAtPosition(new PiecePosition(x,y));
 };
 /**
-	Add a callback for adding a piece
+	@description Add a callback for adding a piece
 	@param f callback function
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -231,7 +224,7 @@ Board.prototype.addPiecePostAddCallback=function(f) {
 	this.postAddCB.push(f);
 };
 /**
-	Add a callback for removing a piece
+	@description Add a callback for removing a piece
 	@param f callback function
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -240,7 +233,7 @@ Board.prototype.addPiecePostRemoveCallback=function(f) {
 	this.postRemoveCB.push(f);
 };
 /**
-	Add a callback for moving a piece
+	@description Add a callback for moving a piece
 	@param f callback function
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -249,7 +242,7 @@ Board.prototype.addPiecePostMoveCallback=function(f) {
 	this.postMoveCB.push(f);
 };
 /**
-	Clear the board and add a position to the current board
+	@description Clear the board and add a position to the current board
 	@param boardPosition position to set
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -260,7 +253,7 @@ Board.prototype.setPosition=function(boardPosition) {
 	boardPosition.forEachPiece(function(boardPiece,piecePosition) { that.addPiece(boardPiece,piecePosition); });
 };
 /**
-	Put the board in starting position
+	@description Put the board in starting position
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
@@ -268,7 +261,7 @@ Board.prototype.startPosition=function() {
 	this.setPosition(BoardPosition.startPos());
 };
 /**
-	Move a piece according to positions.
+	@description Move a piece according to positions.
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
@@ -277,7 +270,7 @@ Board.prototype.movePieceByPos=function(fromPos,toPos) {
 	this.movePiece(boardPiece,fromPos,toPos);
 };
 /**
-	Get the position of a piece
+	@description Get the position of a piece
 	@returns piecePosition which is the position of the piece
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */

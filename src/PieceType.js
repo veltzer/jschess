@@ -1,5 +1,6 @@
 /**
 	@class represents a piece type (rook,knight,bishop,queen,king,pawn) 
+	@description creates a new instance
 	@param string - the type of the piece
 	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -11,14 +12,14 @@ function PieceType(type) {
 	this.type=type;
 }
 /**
-	Debug method that allows you to get a nice printout for this type
+	@description toString method that allows you to get a nice printout for this type
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 PieceType.prototype.toString=function() {
 	return this.type;
 };
 /**
-	Array of piece types
+	@description Array of piece types
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 PieceType.types={
@@ -30,42 +31,48 @@ PieceType.types={
 	pawn:undefined
 };
 /**
-	Return whether the piece is a rook
+	@description Return whether the piece is a rook
+	@returns is this piece a rook
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 PieceType.prototype.isRook=function() {
 	return this.type=='rook';
 };
 /**
-	Return whether the piece is a knight
+	@description Return whether the piece is a knight
+	@returns is this piece a knight
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 PieceType.prototype.isKnight=function() {
 	return this.type=='knight';
 };
 /**
-	Return whether the piece is a bishop
+	@description Return whether the piece is a bishop
+	@returns is this piece a bishop
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 PieceType.prototype.isBishop=function() {
 	return this.type=='bishop';
 };
 /**
-	Return whether the piece is a queen
+	@description Return whether the piece is a queen
+	@returns is this piece a queen
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 PieceType.prototype.isQueen=function() {
 	return this.type=='queen';
 };
 /**
-	Return whether the piece is a king
+	@description Return whether the piece is a king
+	@returns is this piece a king
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 PieceType.prototype.isKing=function() {
 	return this.type=='king';
 };
 /**
-	Return whether the piece is a pawn
+	@description Return whether the piece is a pawn
+	@returns is this piece a pawn
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 PieceType.prototype.isPawn=function() {

@@ -5,10 +5,11 @@
 /*jsl:import Board.js*/
 /*jsl:import RUtils.js*/
 /**
-	Creates a new Board
 	@class a whole board to play with
+	@description creates a new instance
 	@constructor
 	@param config configuration for this board
+	@returns the new instance
 	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
@@ -60,7 +61,7 @@ SvgBoard.prototype.getBoard=function() {
 	return this.board;
 };
 /**
-	Prepare the raphael paper so we could do graphics
+	@description Prepare the raphael paper so we could do graphics
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
@@ -77,7 +78,7 @@ SvgBoard.prototype.raphaelPrep=function() {
 	this.paper=Raphael(this.config['id'],this.config['size'],this.config['size']);
 };
 /**
-	Fill a rectangle using the default color
+	@description Fill a rectangle using the default color
 	@param rec Raphael.js rectangle object to fill
 	@param piecePosition PiecePosition object that describes the position of the rectangle
 	@returns nothing
@@ -99,7 +100,7 @@ SvgBoard.prototype.setRectFill=function(rec,piecePosition) {
 	}
 };
 /**
-	Draw the board (which and black squares)
+	@description Draw the board (which and black squares)
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
@@ -151,7 +152,7 @@ SvgBoard.prototype.drawBoard=function() {
 	}
 };
 /**
-	Callback method to create graphics and place them when adding a piece.
+	@description Callback method to create graphics and place them when adding a piece.
 	@param boardPiece the piece to add.
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -177,12 +178,17 @@ SvgBoard.prototype.postAddPiece=function(boardPiece,piecePosition) {
 			that.eventPiece(iboardPiece,itype);
 		};
 	}(boardPiece,'mouseover'));
+	RUtils.mouseout(set,function(iboardPiece,itype) {
+		return function() {
+			that.eventPiece(iboardPiece,itype);
+		};
+	}(boardPiece,'mouseout'));
 	// lets put our own data with the piece
 	var svgPieceData=new SvgPieceData(set,pixelPos);
 	boardPiece.setData(svgPieceData);
 };
 /**
-	Callback method to create graphics and place them when adding a piece.
+	@description Callback method to create graphics and place them when adding a piece.
 	@param boardPiece the piece to add.
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -194,7 +200,7 @@ SvgBoard.prototype.postRemovePiece=function(boardPiece,piecePosition) {
 	boardPiece.unsetData();
 };
 /**
-	Translates position (0..7,0..7) to pixels
+	@description Translates position (0..7,0..7) to pixels
 	@param pos position (0..7,0..7) to translate
 	@returns position in pixels
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -207,7 +213,7 @@ SvgBoard.prototype.posToPixels=function(piecePosition) {
 	}
 };
 /**
-	Resize the board
+	@description Resize the board
 	@param set Raphael set to resize
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -223,7 +229,7 @@ SvgBoard.prototype.resize=function(set) {
 	},this);
 };
 /**
-	Shows or hides a given piece according to parameter
+	@description Shows or hides a given piece according to parameter
 	@param piece of type Piece, the piece to show or hide
 	@param hide boolean - show or hide the piece
 	@returns nothing
@@ -240,7 +246,7 @@ SvgBoard.prototype.showHidePiece=function(boardPiece,hide) {
 	});
 };
 /**
-	Quick method to show a piece
+	@description Quick method to show a piece
 	@param piece of type Piece - the piece to show
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -249,7 +255,7 @@ SvgBoard.prototype.showPiece=function(piece) {
 	this.showHidePiece(piece,false);
 };
 /**
-	Quick method to hide a piece
+	@description Quick method to hide a piece
 	@param piece of type Piece - the piece to hide
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -258,7 +264,7 @@ SvgBoard.prototype.hidePiece=function(piece) {
 	this.showHidePiece(piece,true);
 };
 /**
-	Move a piece on the board (including animation if so configured)
+	@description Move a piece on the board (including animation if so configured)
 	@param piece of type Piece - the piece to move
 	@param posTo of type Position - the position to move the piece to
 	@returns nothing
@@ -285,7 +291,7 @@ SvgBoard.prototype.timeMovePiece=function(piece,posFrom,posTo,ms) {
 	//piece.getData().pixelPos=pixelPosTo;
 };
 /**
-	Flips the board (see it from the other side)
+	@description Flips the board (see it from the other side)
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
@@ -298,15 +304,15 @@ SvgBoard.prototype.flip=function() {
 	this.redraw();
 };
 /**
-	Debug function
-	@returns nothing
+	@description toString function
+	@returns a string representation of this object
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 SvgBoard.prototype.toString=function() {
 	return 'no dump now';
 };
 /**
-	Make a piece glow
+	@description Make a piece glow
 	@param boardPiece the piece to make glow
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -321,7 +327,7 @@ SvgBoard.prototype.glow=function(boardPiece,glow) {
 	}
 };
 /**
-	Redraw the entire board
+	@description Redraw the entire board
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
@@ -332,7 +338,7 @@ SvgBoard.prototype.redraw=function() {
 	});
 };
 /**
-	Event handler for events happening on the pieces.
+	@description Event handler for events happening on the pieces.
 	Types of events: click, mouseover and more...
 	@param boardPiece the BoardPiece instance the event happened on
 	@param type the type of event that happened
@@ -371,15 +377,16 @@ SvgBoard.prototype.eventPiece=function(boardPiece,type) {
 	}
 };
 /**
-	Return the square at a position.
+	@description Return the square at a position.
 	@param piecePosition the position for which to return the square.
 	@returns the Raphael.js rec in question
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 SvgBoard.prototype.getRec=function(piecePosition) {
 	return this.recs[piecePosition.x][piecePosition.y];
 };
 /**
-	Events for squares.
+	@description Events for squares.
 	Types of events: mouseover, mouseout, click and more.
 	@param piecePosition the position of the event
 	@param rec the Raphael.js rectangle where the event happened

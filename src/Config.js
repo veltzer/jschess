@@ -9,6 +9,7 @@
 	will override anything in the default config.
 	This class SHOULD NOT be a singleton since the user may want to put
 	two boards on the page and have each configured differently.
+	@description creates a new instance.
 	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */

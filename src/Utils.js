@@ -1,17 +1,17 @@
 /**
 	@class a class to have static utility functions
-	@returns nothing
+	@description creates a new instance
+	@returns the new instance 
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function Utils() {
 }
 /**
- 	Unite two javascript objects into a third one.
+ 	@description Unite two javascript objects into a third one.
 	Second trumps the first.
 	@param o1 first object
 	@param o2 first object
 	@returns object which is the unification of the two objects
-	@constructs
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 Utils.unite=function(o1,o2) {
@@ -25,7 +25,7 @@ Utils.unite=function(o1,o2) {
 	return ret;
 };
 /**
-	Clone a javascript object
+	@description Clone a javascript object
 	@param o the object to shalow clone
 	@returns object which is a clone of the original one
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -38,7 +38,7 @@ Utils.clone=function(o) {
 	return ret;
 };
 /**
-	Fake using a parameter.
+	@description Fake using a parameter.
 	This is mainly used to avoid lint warnings.
 	@param o the object to use
 	@returns nothing
