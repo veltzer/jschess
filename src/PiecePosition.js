@@ -1,6 +1,6 @@
 /**
-	Create a position object
 	@class represents a position on the board
+	@description creates a new instance
 	@param x x co-ordinate
 	@param y y co-ordinate
 	@returns the new instance of this class
@@ -19,7 +19,7 @@ function PiecePosition(x,y) {
 	this.y=y;
 }
 /**
-	Debug method so that you can get a nice printout of instances of this type
+	@descrition toString method so that you can get a nice printout of instances of this type
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */

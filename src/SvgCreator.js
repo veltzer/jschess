@@ -3,13 +3,15 @@
 /*jsl:import SvgPiece.js*/
 /**
 	@class static class to have just static methods for creating pieces
+	@description creates a new instance
 	@constructs
+	@returns the new instance
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 function SvgCreator() {
 }
 /**
-	Method which creates a piece according to color and type
+	@description Method which creates a piece according to color and type
 	@param config A configuration to work with
 	@param pieceColor the color of the piece
 	@param pieceType the type of the piece
