@@ -20,6 +20,7 @@ JSDOC_FOLDER:=jsdoc
 JSDOC_FILE:=$(JSDOC_FOLDER)/index.html
 WEB_FOLDER:=web
 OUT_FOLDER:=out
+JSCHECK:=$(OUT_FOLDER)/$(PROJECT)-$(VER).stamp
 JSFULL:=$(OUT_FOLDER)/$(PROJECT)-$(VER).js
 JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js
 WEB_DIR:=/var/www/$(PROJECT)
@@ -50,9 +51,14 @@ endif # DO_MKDBG
 .PHONY: all
 all: $(JSMIN) $(JSDOC_FILE) $(WEB_FILES)
 
-$(JSFULL): $(SOURCES)
+$(JSCHECK): $(SOURCES)
 	$(info doing [$@])
 	$(Q)~/install/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES)
+	$(Q)mkdir -p $(dir $@)
+	$(Q)touch $(JSCHECK)
+
+$(JSFULL): $(SOURCES) $(JSCHECK)
+	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
 	$(Q)cat $(SOURCES) > $@
 
