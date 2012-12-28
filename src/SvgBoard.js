@@ -168,21 +168,11 @@ SvgBoard.prototype.postAddPiece=function(boardPiece,piecePosition) {
 	var transform=m.toTransformString();
 	// now put it on the paper
 	var set=svgPiece.toSet(this.paper,transform);
-	RUtils.click(set,function(iboardPiece,itype) {
-		return function() {
-			that.eventPiece(iboardPiece,itype);
+	RUtils.eventRegister(set,function(iboardPiece) {
+		return function(eventName) {
+			that.eventPiece(iboardPiece,eventName);
 		};
-	}(boardPiece,'click'));
-	RUtils.mouseover(set,function(iboardPiece,itype) {
-		return function() {
-			that.eventPiece(iboardPiece,itype);
-		};
-	}(boardPiece,'mouseover'));
-	RUtils.mouseout(set,function(iboardPiece,itype) {
-		return function() {
-			that.eventPiece(iboardPiece,itype);
-		};
-	}(boardPiece,'mouseout'));
+	}(boardPiece),['click','mouseover','mouseout']);
 	// lets put our own data with the piece
 	var svgPieceData=new SvgPieceData(set,pixelPos);
 	boardPiece.setData(svgPieceData);

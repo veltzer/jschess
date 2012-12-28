@@ -11,6 +11,10 @@ site:
 - make the site carry older versions of jschess too.
 - consider changing the name of this project to chess.js.
 
+build system:
+=============
+- create a full file with all the dependencies (minified).
+
 code:
 =====
 - consider moving pieces at certain speeds and having the speed and not the
