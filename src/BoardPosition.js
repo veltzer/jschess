@@ -2,50 +2,54 @@
 /*jsl:import PieceColor.js*/
 /*jsl:import PieceType.js*/
 /*jsl:import PiecePosition.js*/
-/**
-	@class represents a full position of the board
-	@description constructs a new object
-	@returns a new object of this type
-	@constructs
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
-*/
-function BoardPosition() {
-	this.pieces=[];
-}
-/**
-	@description toString method that allows you to get a nice printout for this type
-	@returns a string representation of this object
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
-*/
-BoardPosition.prototype.toString=function() {
-	return this.pieces.join();
-};
-/**
-	@description Add a piece to the position
-	@param color the color of the piece (black/white)
-	@param type the type of the piece (rook/knight/bishop/queen/king/pawn)
-	@param x the x position of the piece [0..8)
-	@param y the y position of the piece [0..8)
-	@returns nothing
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
-*/
-BoardPosition.prototype.addPiece=function(color,type,x,y) {
-	var boardPiece=new BoardPiece(new PieceColor(color),new PieceType(type));
-	var piecePosition=new PiecePosition(x,y);
-	this.pieces.push([boardPiece,piecePosition]);
-};
-/**
-	@description Run a function for each piece in this position
-	@returns nothing
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
-*/
-BoardPosition.prototype.forEachPiece=function(f) {
-	this.pieces.forEach(function(pieceAndPos) {
-		var boardPiece=pieceAndPos[0];
-		var position=pieceAndPos[1];
-		f(boardPiece,position);
-	});
-};
+var BoardPosition=Class.create(
+	/** @lends BoardPosition# */
+	{
+	/**
+		@class represents a full position of the board
+		@description constructs a new object
+		@returns a new object of this type
+		@constructs
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
+	initialize: function() {
+		this.pieces=[];
+	},
+	/**
+		@description toString method that allows you to get a nice printout for this type
+		@returns a string representation of this object
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
+	toString: function() {
+		return this.pieces.join();
+	},
+	/**
+		@description Add a piece to the position
+		@param color the color of the piece (black/white)
+		@param type the type of the piece (rook/knight/bishop/queen/king/pawn)
+		@param x the x position of the piece [0..8)
+		@param y the y position of the piece [0..8)
+		@returns nothing
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
+	addPiece: function(color,type,x,y) {
+		var boardPiece=new BoardPiece(new PieceColor(color),new PieceType(type));
+		var piecePosition=new PiecePosition(x,y);
+		this.pieces.push([boardPiece,piecePosition]);
+	},
+	/**
+		@description Run a function for each piece in this position
+		@returns nothing
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
+	forEachPiece: function(f) {
+		this.pieces.forEach(function(pieceAndPos) {
+			var boardPiece=pieceAndPos[0];
+			var position=pieceAndPos[1];
+			f(boardPiece,position);
+		});
+	}
+});
 /**
 	@description Static method that returns a starting position in standard chess.
 	@returns A standard chess starting position.
