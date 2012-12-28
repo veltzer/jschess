@@ -1,5 +1,7 @@
 now:
 ====
+- use prototype all over.
+	see that the documentation is ok.
 
 mako:
 =====
