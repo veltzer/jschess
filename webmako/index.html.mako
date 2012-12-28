@@ -4,7 +4,11 @@
 		<title>jschess</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
+		<script src="../thirdparty/prototype-1.7.1.min.js"></script>
 		<script src="../thirdparty/jquery-1.8.3.min.js"></script>
+		<script>
+			jQuery.noConflict();
+		</script>
 		<script src="../thirdparty/raphael-2.1.0.min.js"></script>
 		<!-- our code, three options: minified, regular or file by file -->
 		<!--script src="../out/jschess-${ver}.min.js"></script-->
@@ -40,16 +44,16 @@
 		<!-- You also need to add some content to highlight, but that is covered elsewhere. -->
 			 
 		<script>
-			$(document).ready(function() {
+			jQuery(document).ready(function() {
 				var board=new Board();
 				var svgBoard=new SvgBoard(board,{
 					id:'myid',
 				})
 				board.startPosition();
-				$('#startpos').click(function() {
+				jQuery('#startpos').click(function() {
 					board.startPosition()
 				});
-				$('#moverooks').click(function() {
+				jQuery('#moverooks').click(function() {
 					if(board.hasPieceAtPosition(new PiecePosition(0,4)) && board.hasPieceAtPosition(new PiecePosition(7,4))) {
 						board.movePieceByPos(new PiecePosition(0,4),new PiecePosition(0,0));
 						board.movePieceByPos(new PiecePosition(7,4),new PiecePosition(7,0));
@@ -60,7 +64,7 @@
 						}
 					}
 				});
-				$('#moveknights').click(function() {
+				jQuery('#moveknights').click(function() {
 					if(board.hasPieceAtPosition(new PiecePosition(1,0)) && board.hasPieceAtPosition(new PiecePosition(6,0))) {
 						board.movePieceByPos(new PiecePosition(1,0),new PiecePosition(2,2));
 						board.movePieceByPos(new PiecePosition(6,0),new PiecePosition(5,2));
@@ -71,7 +75,7 @@
 						}
 					}
 				});
-				$('#movebishops').click(function() {
+				jQuery('#movebishops').click(function() {
 					if(board.hasPieceAtPosition(new PiecePosition(2,0)) && board.hasPieceAtPosition(new PiecePosition(5,0))) {
 						board.movePieceByPos(new PiecePosition(2,0),new PiecePosition(4,2));
 						board.movePieceByPos(new PiecePosition(5,0),new PiecePosition(3,2));
@@ -82,16 +86,16 @@
 						}
 					}
 				});
-				$('#flip').click(function() {
+				jQuery('#flip').click(function() {
 					svgBoard.flip()
 				});
-				$('#glow').click(function() {
+				jQuery('#glow').click(function() {
 					svgBoard.glow(board.getPieceAtPosition(new PiecePosition(0,0)),true);
 				});
-				$('#toString').click(function() {
+				jQuery('#toString').click(function() {
 					console.log(svgBoard);
 				});
-				$('#clear').click(function() {
+				jQuery('#clear').click(function() {
 					board.clearPieces()
 				});
 			})
