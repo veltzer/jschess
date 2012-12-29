@@ -151,6 +151,9 @@
 				<li><a href="demo2.html">Demo2 - moving pieces</a></li>
 				<li><a href="demo3.html">Demo3 - showing a FEN position</a></li>
 				<li><a href="demo4.html">Demo4 - showing a PGN game</a></li>
+			</ul>
+			Misc pages that help develop <b>jschess</b>...
+			<ul>
 				<li><a href="calc.html">SVG path calculator (comes in handy when doing SVG graphics)</a></li>
 				<li><a href="tests.html">JSChess QUnit tests</a></li>
 			</ul>
