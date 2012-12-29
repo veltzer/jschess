@@ -5,6 +5,7 @@ var Utils=Class.create(
 		@class a class to have static utility functions
 		@description creates a new instance
 		@returns the new instance 
+		@constructs
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	initialize: function() {
