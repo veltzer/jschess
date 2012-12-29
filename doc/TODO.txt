@@ -1,6 +1,9 @@
 now:
 ====
-- move all demos to use names instead of number (so that reordering wont be difficult.
+- do the demos that I know how to do.
+	move.
+	fen.
+- bring the calc back to life with examples of input.
 
 mako:
 =====
