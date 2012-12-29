@@ -38,6 +38,8 @@ var SvgBoard=Class.create(
 		config['gradients']=config['gradients'] || true;// should we use gradients?
 		config['select_color']=config['select_color'] || 'ffff00';// color of selected squares
 		config['over_color']=config['over_color'] || '00ff00';// color of selected squares
+		config['do_select_square']=config['do_select_square'] || false;// should we select squares
+		config['do_select_piece']=config['do_select_piece'] || false;// should we select pieces
 		config['rec_stroke_color']=config['rec_stroke_color'] || 'black';// rectangles stroke color
 		config['rec_stroke_width']=config['rec_stroke_width'] || 0.1;// rectangles stroke width
 		// store the config
@@ -347,21 +349,25 @@ var SvgBoard=Class.create(
 			this.eventSquare(piecePosition,rec,'piece'+type);
 		}
 		if(type=='mouseover' || type=='squaremouseover') {
-			if(SvgBoard.spiece) {
-				if(SvgBoard.spiece!=boardPiece) {
-					this.glow(SvgBoard.spiece,false);
+			if(this.config['do_select_piece']) {
+				if(SvgBoard.spiece) {
+					if(SvgBoard.spiece!=boardPiece) {
+						this.glow(SvgBoard.spiece,false);
+						SvgBoard.spiece=boardPiece;
+						this.glow(SvgBoard.spiece,true);
+					}
+				} else {
 					SvgBoard.spiece=boardPiece;
 					this.glow(SvgBoard.spiece,true);
 				}
-			} else {
-				SvgBoard.spiece=boardPiece;
-				this.glow(SvgBoard.spiece,true);
 			}
 		}
 		if(type=='mouseout' || type=='squaremouseout') {
-			if(SvgBoard.spiece) {
-				this.glow(SvgBoard.spiece,false);
-				SvgBoard.spiece=undefined;
+			if(this.config['do_select_piece']) {
+				if(SvgBoard.spiece) {
+					this.glow(SvgBoard.spiece,false);
+					SvgBoard.spiece=undefined;
+				}
 			}
 		}
 	},
@@ -395,25 +401,29 @@ var SvgBoard=Class.create(
 			}
 		}
 		if(type=='mouseover' || type=='piecemouseover') {
-			if(SvgBoard.colored) {
-				if(SvgBoard.colored!=rec) {
-					this.setRectFill(SvgBoard.colored,SvgBoard.coloredPos);
+			if(this.config['do_select_square']) {
+				if(SvgBoard.colored) {
+					if(SvgBoard.colored!=rec) {
+						this.setRectFill(SvgBoard.colored,SvgBoard.coloredPos);
+						SvgBoard.colored=rec;
+						SvgBoard.coloredPos=piecePosition;
+						SvgBoard.colored.attr('fill',this.config['over_color']);
+					}
+				} else {
 					SvgBoard.colored=rec;
 					SvgBoard.coloredPos=piecePosition;
 					SvgBoard.colored.attr('fill',this.config['over_color']);
 				}
-			} else {
-				SvgBoard.colored=rec;
-				SvgBoard.coloredPos=piecePosition;
-				SvgBoard.colored.attr('fill',this.config['over_color']);
 			}
 		}
 		// going out from a rectangle - set the original color
 		if(type=='mouseout' || type=='piecemouseout') {
-			if(SvgBoard.colored) {
-				this.setRectFill(SvgBoard.colored,SvgBoard.coloredPos);
-				SvgBoard.colored=undefined;
-				SvgBoard.coloredPos=undefined;
+			if(this.config['do_select_square']) {
+				if(SvgBoard.colored) {
+					this.setRectFill(SvgBoard.colored,SvgBoard.coloredPos);
+					SvgBoard.colored=undefined;
+					SvgBoard.coloredPos=undefined;
+				}
 			}
 		}
 		/*
