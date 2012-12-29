@@ -4,11 +4,10 @@
 		<meta charset="UTF-8">
 		<title>SVG path calculator</title>
 		<!-- third parties -->
-		<script src="../thirdparty/prototype-1.7.1.min.js"></script>
-		<script src="../thirdparty/raphael-2.1.0.min.js"></script>
+${jsThirdParty()}
 		<script>
-			$(document).ready(function() {
-				$('calc').click(function() {
+			document.observe('dom:loaded', function() {
+				$('calc').observe('click',function() {
 					var path=$('path').val()
 					var x=$('x').val()
 					var y=$('y').val()
@@ -35,6 +34,9 @@
 		Enter y <input id="y"/><br/>
 		<button id="calc">calc</button><br/>
 		Result <div id="result"/>
+		<p>
+		Example will be:
+		</p>
 		<p>
 			Mark Veltzer, Copyright ${copyright_years(2012)}
 			<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>

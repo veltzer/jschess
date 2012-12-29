@@ -9,21 +9,7 @@ ${jsThirdParty()}
 		<!--script src="../out/jschess-${ver}.pack.js"></script-->
 		<!--script src="../out/jschess-${ver}.min.js"></script-->
 		<!--script src="../out/jschess-${ver}.js"></script-->
-		<script src="../src/Utils.js"></script>
-		<script src="../src/RUtils.js"></script>
-		<script src="../src/SvgPathAndAttributes.js"></script>
-		<script src="../src/SvgPiece.js"></script>
-		<script src="../src/SvgCreator.js"></script>
-		<script src="../src/SvgPixelPosition.js"></script>
-		<script src="../src/SvgPieceData.js"></script>
-		<script src="../src/SvgBoard.js"></script>
-		<script src="../src/PiecePosition.js"></script>
-		<script src="../src/PieceColor.js"></script>
-		<script src="../src/PieceType.js"></script>
-		<script src="../src/BoardPiece.js"></script>
-		<script src="../src/BoardPosition.js"></script>
-		<script src="../src/Board.js"></script>
-
+${jsFiles()}
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
 		<script type="text/javascript" src="../thirdparty/sh/scripts/shCore.js"></script>
@@ -147,11 +133,11 @@ ${jsThirdParty()}
 			</ul>
 			Demos of <b>jschess</b>...
 			<ul>
-				<li><a href="demo0.html">Demo0 - using the .pack.js file</a></li>
-				<li><a href="demo1.html">Demo1 - creating the board</a></li>
-				<li><a href="demo2.html">Demo2 - moving pieces</a></li>
-				<li><a href="demo3.html">Demo3 - showing a FEN position</a></li>
-				<li><a href="demo4.html">Demo4 - showing a PGN game</a></li>
+				<li><a href="demo_using_pack.html"></a>using the pack.js file</li>
+				<li><a href="demo_using_min.html"></a>using the min.js file</li>
+				<li><a href="demo_moving_pieces.html">moving pieces</a></li>
+				<li><a href="demo_fen.html">showing a FEN position</a></li>
+				<li><a href="demo_pgn.html">showing a PGN game</a></li>
 			</ul>
 			Misc pages that help develop <b>jschess</b>...
 			<ul>
