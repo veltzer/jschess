@@ -1,12 +1,16 @@
-/**
-	@class a class to have static utility functions for Raphael.js
-	@description creates a new instance
-	@returns a new instance of this class
-	@constructs
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
-*/
-function RUtils() {
-}
+var RUtils=Class.create(
+	/** @lends RUtils# */
+{
+	/**
+		@class a class to have static utility functions for Raphael.js
+		@description creates a new instance
+		@returns a new instance of this class
+		@constructs
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
+	initialize: function() {
+	}
+});
 /**
 	@description Get glow set for a set
 	@param paper paper to work on
