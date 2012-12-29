@@ -1,6 +1,5 @@
 now:
 ====
-- test after removal of jQuery.
 
 mako:
 =====
