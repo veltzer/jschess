@@ -1,6 +1,6 @@
 now:
 ====
-- see that the documentation is ok after the move to prototype.js.
+- integrate the stuff from the laptop.
 
 mako:
 =====
