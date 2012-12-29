@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Demo1 - Using the jschess-[ver].min.js distribution</title>
+		<title>Using the jschess-[ver].min.js distribution</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
 ${jsThirdParty()}
@@ -36,7 +36,7 @@ ${jsThirdParty()}
 		</script>
 	</head>
 	<body>
-		<h1>Demo1 - Using the jschess-[ver].min.js distribution</h1>
+		<h1>Using the jschess-[ver].min.js distribution</h1>
 		<p>
 		In order to use <b>jschess</b> you will need some external libraries. 
 		This is the list and the download location...
