@@ -24,7 +24,7 @@ ${jsThirdParty()}
 		<!-- You also need to add some content to highlight, but that is covered elsewhere. -->
 			 
 		<script>
-			jQuery(document).ready(function() {
+			document.observe('dom:loaded', function() {
 				// Finally, to actually run the highlighter, you need to include this JS on your page
 				SyntaxHighlighter.all()
 				var board=new Board()
@@ -32,22 +32,22 @@ ${jsThirdParty()}
 					id:'myid'
 				})
 				board.startPosition()
-				jQuery('#startpos').click(function() {
+				$('startpos').observe('click',function() {
 					board.startpos()
 				})
-				jQuery('#moverooks').click(function() {
+				$('moverooks').observe('click',function() {
 					board.moverooks()
 				})
-				jQuery('#moveknights').click(function() {
+				$('moveknights').observe('click',function() {
 					board.moveknights()
 				})
-				jQuery('#movebishops').click(function() {
+				$('movebishops').observe('click',function() {
 					board.movebishops()
 				})
-				jQuery('#flip').click(function() {
+				$('flip').observe('click',function() {
 					board.flip()
 				})
-				jQuery('#dump').click(function() {
+				$('dump').observe('click',function() {
 					board.dump()
 				})
 			})

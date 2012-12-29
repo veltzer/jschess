@@ -23,7 +23,7 @@
 		<!-- You also need to add some content to highlight, but that is covered elsewhere. -->
 			 
 		<script>
-			jQuery(document).ready(function() {
+			document.observe('dom:loaded', function() {
 				// Finally, to actually run the highlighter, you need to include this JS on your page
 				SyntaxHighlighter.all()
 				var board=new Board()

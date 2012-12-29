@@ -2,8 +2,6 @@ pieces designed for free from wikimedia:
 	http://commons.wikimedia.org/wiki/Category:SVG_chess_pieces/Standard_transparent
 the moscow championship chess board:
 	http://moscow2012.fide.com/en/live?g=20120530
-the raphael library:
-	http://raphaeljs.com/reference.html
 svg graphics on the web:
 	http://www.alistapart.com/articles/using-svg-for-flexible-scalable-and-fun-backgrounds-part-ii/
 jsdoc:
