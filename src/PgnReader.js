@@ -24,6 +24,6 @@ var PgnReader=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	get: function() {
-		// use jQuery to do HTTP GET
+		// use prototype to do HTTP GET
 	}
 });
