@@ -50,7 +50,14 @@
 		<pre class="brush: xml">
 			&lt;div id="myid"&gt;
 			&lt;/div&gt;</pre>
-		Then you can create a board from your javascript code by calling the constructor of SvgBoard. The board will be empty so we call startpos to get initial game position:
+		In order to get a board with initial position we must:
+		<ul>
+			<li>create a board using the constructor of Board.</li>
+			<li>attach an SvgBoard to it so that it will reflect graphically the what happens on the board.</li>
+		</ul>
+		The SvgBoard will also need the id you prepared since it is the one doing the actual drawing on the screen.
+		To do "chess stuff" we will mainly interact with the board: move pieces, delete pieces etc.
+		So we will also call the startPosition method to setup a classic chess start position.
 		<pre class="brush: js">
 			var board=new Board()
 			var svgBoard=new SvgBoard(board,{
