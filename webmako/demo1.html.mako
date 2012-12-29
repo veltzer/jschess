@@ -38,7 +38,7 @@ ${jsThirdParty()}
 	<body>
 		<h1>Demo1 - Using the jschess-[ver].min.js distribution</h1>
 		<p>
-		In order to use <b>jschess<b/> you will need some external libraries. 
+		In order to use <b>jschess</b> you will need some external libraries. 
 		This is the list and the download location...
 		<table>
 			<tr>
@@ -55,7 +55,7 @@ ${jsThirdParty()}
 			% endfor
 		</table>
 		<p>
-		First download the minified file from <a title="jschess compressed download" href="../out/jschess-${ver}.min.js">here</a>.
+		Then download the minified <b>jschess</b> file from <a title="jschess compressed download" href="../out/jschess-${ver}.min.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
 		</p>
 		<pre class="brush: xml">
