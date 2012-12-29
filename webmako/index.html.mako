@@ -4,26 +4,12 @@
 		<title>jschess</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
-		<script src="../thirdparty/jquery-1.8.3.min.js"></script>
-		<script src="../thirdparty/raphael-2.1.0.min.js"></script>
-		<!-- our code, three options: minified, regular or file by file -->
+${jsThirdParty()}
+		<!-- our code, options: full pack, minified, regular or file by file -->
+		<!--script src="../out/jschess-${ver}.pack.js"></script-->
 		<!--script src="../out/jschess-${ver}.min.js"></script-->
 		<!--script src="../out/jschess-${ver}.js"></script-->
-		<script src="../src/Utils.js"></script>
-		<script src="../src/RUtils.js"></script>
-		<script src="../src/SvgPathAndAttributes.js"></script>
-		<script src="../src/SvgPiece.js"></script>
-		<script src="../src/SvgCreator.js"></script>
-		<script src="../src/SvgPixelPosition.js"></script>
-		<script src="../src/SvgPieceData.js"></script>
-		<script src="../src/SvgBoard.js"></script>
-		<script src="../src/PiecePosition.js"></script>
-		<script src="../src/PieceColor.js"></script>
-		<script src="../src/PieceType.js"></script>
-		<script src="../src/BoardPiece.js"></script>
-		<script src="../src/BoardPosition.js"></script>
-		<script src="../src/Board.js"></script>
-
+${jsFiles()}
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
 		<script type="text/javascript" src="../thirdparty/sh/scripts/shCore.js"></script>
@@ -40,16 +26,16 @@
 		<!-- You also need to add some content to highlight, but that is covered elsewhere. -->
 			 
 		<script>
-			$(document).ready(function() {
+			document.observe('dom:loaded', function() {
 				var board=new Board();
 				var svgBoard=new SvgBoard(board,{
 					id:'myid',
 				})
 				board.startPosition();
-				$('#startpos').click(function() {
+				$('startpos').observe('click',function() {
 					board.startPosition()
 				});
-				$('#moverooks').click(function() {
+				$('moverooks').observe('click',function() {
 					if(board.hasPieceAtPosition(new PiecePosition(0,4)) && board.hasPieceAtPosition(new PiecePosition(7,4))) {
 						board.movePieceByPos(new PiecePosition(0,4),new PiecePosition(0,0));
 						board.movePieceByPos(new PiecePosition(7,4),new PiecePosition(7,0));
@@ -60,7 +46,7 @@
 						}
 					}
 				});
-				$('#moveknights').click(function() {
+				$('moveknights').observe('click',function() {
 					if(board.hasPieceAtPosition(new PiecePosition(1,0)) && board.hasPieceAtPosition(new PiecePosition(6,0))) {
 						board.movePieceByPos(new PiecePosition(1,0),new PiecePosition(2,2));
 						board.movePieceByPos(new PiecePosition(6,0),new PiecePosition(5,2));
@@ -71,7 +57,7 @@
 						}
 					}
 				});
-				$('#movebishops').click(function() {
+				$('movebishops').observe('click',function() {
 					if(board.hasPieceAtPosition(new PiecePosition(2,0)) && board.hasPieceAtPosition(new PiecePosition(5,0))) {
 						board.movePieceByPos(new PiecePosition(2,0),new PiecePosition(4,2));
 						board.movePieceByPos(new PiecePosition(5,0),new PiecePosition(3,2));
@@ -82,16 +68,16 @@
 						}
 					}
 				});
-				$('#flip').click(function() {
+				$('flip').observe('click',function() {
 					svgBoard.flip()
 				});
-				$('#glow').click(function() {
+				$('glow').observe('click',function() {
 					svgBoard.glow(board.getPieceAtPosition(new PiecePosition(0,0)),true);
 				});
-				$('#toString').click(function() {
+				$('toString').observe('click',function() {
 					console.log(svgBoard);
 				});
-				$('#clear').click(function() {
+				$('clear').observe('click',function() {
 					board.clearPieces()
 				});
 			})
@@ -121,10 +107,14 @@
 				<li>Looks best (can animate the pieces, show arrows and what not)</li>
 				<li>Free source. Full freedom to tweak or you can ask me for help with implementing a feature.</li>
 				<li>Sits on top of <a href="http://raphaeljs.com">raphael.js</a> for high level SVG capabilities</li>
-				<li>Sits on top of <a href="http://jquery.com">jQuery</a> to make coding easier and have better browser compatibility</li>
 				<li>Sits on top of <a href="http://prototypejs.org">prototype</a> to make object oriented easier and more error free</li>
-				<li>Sits on top of <a href="http://www.javascriptlint.com/download.htm">jsl</a> to make sure javascript code is standards complient</li>
-				<li>Sits on top of <a href="http://qunitjs.com">qunitjs</a> for testing</li>
+			</ul>
+		</p>
+		<p>
+			Technologies used to develop <b>jschess</b>...
+			<ul>
+				<li><a href="http://www.javascriptlint.com/download.htm">jsl</a> to make sure javascript code is standards complient</li>
+				<li><a href="http://qunitjs.com">qunitjs</a> for testing</li>
 			</ul>
 		</p>
 		<p>The current version of <b>jschess</b> is ${ver}
@@ -138,14 +128,19 @@
 				<li><b>jschess</b> github projec is <a href="https://github.com/veltzer/jschess">here</a></li>
 				<li>latest full <b>jschess</b> is <a href="http://veltzer.net/jschess/out/jschess-${ver}.js">jschess-${ver}.js</a></li>
 				<li>latest minified <b>jschess</b> is <a href="http://veltzer.net/jschess/out/jschess-${ver}.min.js">jschess-${ver}.min.js</a></li>
+				<li>latest package (with third parties) <b>jschess</b> is <a href="http://veltzer.net/jschess/out/jschess-${ver}.pack.js">jschess-${ver}.pack.js</a></li>
+				<li>latest sources for <b>jschess</b> is <a href="http://veltzer.net/jschess/out/jschess-${ver}.zip">jschess-${ver}.zip</a></li>
 			</ul>
 			Demos of <b>jschess</b>...
 			<ul>
-				<li><a href="demo0.html">Demo0 - preparation (bringing in the right libraries)</a></li>
-				<li><a href="demo1.html">Demo1 - creating the board</a></li>
-				<li><a href="demo2.html">Demo2 - moving pieces</a></li>
-				<li><a href="demo3.html">Demo3 - showing a FEN position</a></li>
-				<li><a href="demo4.html">Demo4 - showing a PGN game</a></li>
+				<li><a href="demo_using_pack.html">using the pack.js file</a></li>
+				<li><a href="demo_using_min.html">using the min.js file</a></li>
+				<li><a href="demo_moving_pieces.html">moving pieces</a></li>
+				<li><a href="demo_fen.html">showing a FEN position</a></li>
+				<li><a href="demo_pgn.html">showing a PGN game</a></li>
+			</ul>
+			Misc pages that help develop <b>jschess</b>...
+			<ul>
 				<li><a href="calc.html">SVG path calculator (comes in handy when doing SVG graphics)</a></li>
 				<li><a href="tests.html">JSChess QUnit tests</a></li>
 			</ul>
@@ -162,11 +157,7 @@
 			<button id="clear">clear</button>
 		</p>
 		<p>
-			Mark Veltzer, <?php 
-				$copyYear = 2012;
-				$curYear = date('Y');
-				echo $copyYear . (($copyYear != $curYear) ? '-' . $curYear : '');
-			?>
+			Mark Veltzer, Copyright ${copyright_years(2012)}
 			<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
 		</p>
 	</body>

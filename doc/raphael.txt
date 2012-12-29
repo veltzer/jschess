@@ -1,0 +1,9 @@
+the raphael library:
+	http://raphaeljs.com/reference.html
+
+- raphael provide a minified version of their library
+	but it does not end with a ';' nor with a newline
+	which makes catenating it with other libraries
+	difficult.
+	I added my own newline after in the raphael minified
+	version.

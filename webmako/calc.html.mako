@@ -2,15 +2,15 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<title>SVG path calculator</title>
 		<!-- third parties -->
-		<script src="thirdparty/jquery-1.8.3.min.js"></script>
-		<script src="thirdparty/raphael-2.1.0.min.js"></script>
+${jsThirdParty()}
 		<script>
-			$(document).ready(function() {
-				$('#calc').click(function() {
-					var path=$('#path').val()
-					var x=$('#x').val()
-					var y=$('#y').val()
+			document.observe('dom:loaded', function() {
+				$('calc').observe('click',function() {
+					var path=$('path').value
+					var x=$('x').value
+					var y=$('y').value
 					var m=Raphael.matrix()
 					m.translate(x,y)
 					var transform=m.toTransformString()
@@ -18,7 +18,7 @@
 					//console.log('path is '+path)
 					//console.log('x is '+x)
 					//console.log('y is '+y)
-					$('#result').text(transformPath)
+					$('result').update(transformPath)
 				})
 			})
 		</script>
@@ -33,6 +33,16 @@
 		Enter x <input id="x"/><br/>
 		Enter y <input id="y"/><br/>
 		<button id="calc">calc</button><br/>
-		Result <div id="result"/>
+		Result <div id="result"></div>
+		<p>
+		Example can be:<br/>
+		path: M 34,14 L 31,17 L 14,17 L 11,14<br/>
+		x: 5<br/>
+		y: 6<br/>
+		</p>
+		<p>
+			Mark Veltzer, Copyright ${copyright_years(2012)}
+			<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
+		</p>
 	</body>
 </html>

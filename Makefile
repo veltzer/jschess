@@ -10,7 +10,7 @@ DO_WRAPDEPS:=1
 # VARIABLES #
 #############
 #VER:=$(shell git tag)
-VER:=$(shell ./scripts/tagname.py)
+VER:=$(shell scripts/tagname.py)
 PROJECT=jschess
 SRC_FOLDER=src
 TESTS_FOLDER=tests
@@ -20,8 +20,11 @@ JSDOC_FOLDER:=jsdoc
 JSDOC_FILE:=$(JSDOC_FOLDER)/index.html
 WEB_FOLDER:=web
 OUT_FOLDER:=out
+JSCHECK:=$(OUT_FOLDER)/$(PROJECT)-$(VER).stamp
 JSFULL:=$(OUT_FOLDER)/$(PROJECT)-$(VER).js
 JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js
+JSPACK:=$(OUT_FOLDER)/$(PROJECT)-$(VER).pack.js
+JSZIP:=$(OUT_FOLDER)/$(PROJECT)-$(VER).zip
 WEB_DIR:=/var/www/$(PROJECT)
 WEB_FOLDER:=web
 WEBMAKO_FOLDER:=webmako
@@ -32,6 +35,7 @@ WEB_FILES_MAKO:=$(addprefix $(WEB_FOLDER)/,$(notdir $(basename $(WEBMAKO_FILES_M
 WEB_FILES_OTHER:=$(addprefix $(WEB_FOLDER)/,$(notdir $(WEBMAKO_FILES_OTHER)))
 WEB_FILES:=$(WEB_FILES_MAKO) $(WEB_FILES_OTHER)
 MAKO_WRAPPER:=scripts/mako_wrapper.py
+DEPS:=$(shell scripts/deps.py)
 
 ifeq ($(DO_WRAPDEPS),1)
 	MAKO_WRAPPER_DEP:=$(MAKO_WRAPPER)
@@ -48,11 +52,20 @@ Q=@
 endif # DO_MKDBG
 
 .PHONY: all
-all: $(JSMIN) $(JSDOC_FILE) $(WEB_FILES)
+all: $(JSPACK) $(JSZIP) $(JSDOC_FILE) $(WEB_FILES)
 
-$(JSFULL): $(SOURCES)
+$(JSZIP): $(SOURCES)
+	$(info doing [$@])
+	$(Q)zip -qr $@ $(SOURCES)
+
+$(JSCHECK): $(SOURCES)
 	$(info doing [$@])
 	$(Q)~/install/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES)
+	$(Q)mkdir -p $(dir $@)
+	$(Q)touch $(JSCHECK)
+
+$(JSFULL): $(SOURCES) $(JSCHECK)
+	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
 	$(Q)cat $(SOURCES) > $@
 
@@ -60,6 +73,11 @@ $(JSMIN): $(JSFULL)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
 	$(Q)yui-compressor $< -o $@
+
+$(JSPACK): $(JSMIN)
+	$(info doing [$@])
+	$(Q)mkdir -p $(dir $@)
+	$(Q)cat $(DEPS) $(JSMIN) > $(JSPACK)
 
 .PHONY: jsdoc
 jsdoc: $(JSDOC_FILE)
@@ -92,6 +110,7 @@ debug:
 	$(info WEB_FOLDER is $(WEB_FOLDER))
 	$(info WEBMAKO_FILES is $(WEBMAKO_FILES))
 	$(info WEB_FILES is $(WEB_FILES))
+	$(info DEPS is $(DEPS))
 
 .PHONY: install
 install: all

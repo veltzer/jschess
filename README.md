@@ -7,9 +7,8 @@ and more.
 
 Technologies used
 -----------------
-* Raphael javascript library (http://raphaeljs.com).
-* jQuery javascript library (http://jquery.com).
 * Prototype javascript library (http://prototypejs.org).
+* Raphael javascript library (http://raphaeljs.com).
 
 Demo
 ----
@@ -22,6 +21,6 @@ What makes jschess different?
 * You can have your board at any size you want (because of scalable graphics).
 * As a result of being pure javascript totally controllable programatically.
 * Looks best.
-* Sits on top of good infrastructure (raphael.js,jQuery.js,prototype.js).
+* Sits on top of good infrastructure (prototype.js,raphael.js).
 
 Mark Veltzer, 2012, mark.veltzer@gmail.com

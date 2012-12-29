@@ -1,0 +1,5 @@
+Website is:
+	http://code.google.com/p/jsdoc-toolkit/
+If you use backbone.js or prototype.js to write Javascript code then
+you can document it using jsdoc with the right tags. Look at this:
+	http://code.google.com/p/jsdoc-toolkit/wiki/CookBook
