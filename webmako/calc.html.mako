@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<!-- third parties -->
-		<script src="thirdparty/jquery-1.8.3.min.js"></script>
-		<script src="thirdparty/raphael-2.1.0.min.js"></script>
+		<script src="../thirdparty/jquery-1.8.3.min.js"></script>
+		<script src="../thirdparty/raphael-2.1.0.min.js"></script>
 		<script>
 			$(document).ready(function() {
 				$('#calc').click(function() {
