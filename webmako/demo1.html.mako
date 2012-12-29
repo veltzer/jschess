@@ -2,14 +2,11 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>demo1</title>
+		<title>Demo1 - Using the jschess-[ver].min.js distribution</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
-		<script src="../thirdparty/prototype-1.7.1.min.js"></script>
-		<script src="../thirdparty/jquery-1.8.3.min.js"></script>
-		<script src="../thirdparty/jquery.nc.js"></script>
-		<script src="../thirdparty/raphael-2.1.0.min.js"></script>
-		<script src="../out/jschess.min.js"></script>
+${jsThirdParty()}
+		<script src="../out/jschess-${ver}.min.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
@@ -39,9 +36,28 @@
 		</script>
 	</head>
 	<body>
-		<h1>Demo1 - Creating the starting position</h1>
+		<h1>Demo1 - Using the jschess-[ver].min.js distribution</h1>
+		<p>
+		In order to use <b>jschess<b/> you will need some external libraries. 
+		This is the list and the download location...
+		<table>
+			<tr>
+				<td>name</td>
+				<td>version</td>
+				<td>downloadUrl</td>
+			</tr>
+			% for dep in deps:
+			<tr>
+				<td>${dep.name}</td>
+				<td>${dep.version}</td>
+				<td>${dep.downloadUrl}</td>
+			</tr>
+			% endfor
+		</table>
+		<p>
 		First download the minified file from <a title="jschess compressed download" href="../out/jschess-${ver}.min.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
+		</p>
 		<pre class="brush: xml">
 			&lt;script src="jschess-${ver}.min.js"&gt;&lt;/script&gt;</pre>
 		If you want to help me debug jschess or are experiencing problems you can download the uncompressed file

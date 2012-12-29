@@ -5,11 +5,8 @@
 		<title>demo2</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
-		<script src="../thirdparty/prototype-1.7.1.min.js"></script>
-		<script src="../thirdparty/jquery-1.8.3.min.js"></script>
-		<script src="../thirdparty/jquery.nc.js"></script>
-		<script src="../thirdparty/raphael-2.1.0.min.js"></script>
-		<script src="../out/jschess.min.js"></script>
+${jsThirdParty()}
+		<script src="../out/jschess-${ver}.min.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->

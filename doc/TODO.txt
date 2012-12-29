@@ -1,6 +1,6 @@
 now:
 ====
-- integrate the stuff from the laptop.
+- test after removal of jQuery.
 
 mako:
 =====
@@ -9,7 +9,7 @@ mako:
 
 site:
 =====
-- add instructions about jquery, raphael and prototype which are needed to run this project.
+- add instructions about raphael and prototype which are needed to run this project.
 - make the site carry older versions of jschess too.
 - consider changing the name of this project to chess.js.
 

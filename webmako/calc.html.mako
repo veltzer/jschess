@@ -2,15 +2,16 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<title>SVG path calculator</title>
 		<!-- third parties -->
-		<script src="../thirdparty/jquery-1.8.3.min.js"></script>
+		<script src="../thirdparty/prototype-1.7.1.min.js"></script>
 		<script src="../thirdparty/raphael-2.1.0.min.js"></script>
 		<script>
 			$(document).ready(function() {
-				$('#calc').click(function() {
-					var path=$('#path').val()
-					var x=$('#x').val()
-					var y=$('#y').val()
+				$('calc').click(function() {
+					var path=$('path').val()
+					var x=$('x').val()
+					var y=$('y').val()
 					var m=Raphael.matrix()
 					m.translate(x,y)
 					var transform=m.toTransformString()
@@ -18,7 +19,7 @@
 					//console.log('path is '+path)
 					//console.log('x is '+x)
 					//console.log('y is '+y)
-					$('#result').text(transformPath)
+					$('result').text(transformPath)
 				})
 			})
 		</script>
@@ -34,5 +35,9 @@
 		Enter y <input id="y"/><br/>
 		<button id="calc">calc</button><br/>
 		Result <div id="result"/>
+		<p>
+			Mark Veltzer, Copyright ${copyright_years(2012)}
+			<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
+		</p>
 	</body>
 </html>

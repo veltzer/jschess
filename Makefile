@@ -10,7 +10,7 @@ DO_WRAPDEPS:=1
 # VARIABLES #
 #############
 #VER:=$(shell git tag)
-VER:=$(shell ./scripts/tagname.py)
+VER:=$(shell scripts/tagname.py)
 PROJECT=jschess
 SRC_FOLDER=src
 TESTS_FOLDER=tests
@@ -35,6 +35,7 @@ WEB_FILES_MAKO:=$(addprefix $(WEB_FOLDER)/,$(notdir $(basename $(WEBMAKO_FILES_M
 WEB_FILES_OTHER:=$(addprefix $(WEB_FOLDER)/,$(notdir $(WEBMAKO_FILES_OTHER)))
 WEB_FILES:=$(WEB_FILES_MAKO) $(WEB_FILES_OTHER)
 MAKO_WRAPPER:=scripts/mako_wrapper.py
+DEPS:=$(shell scripts/deps.py)
 
 ifeq ($(DO_WRAPDEPS),1)
 	MAKO_WRAPPER_DEP:=$(MAKO_WRAPPER)
@@ -76,7 +77,7 @@ $(JSMIN): $(JSFULL)
 $(JSPACK): $(JSMIN)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)cat thirdparty/prototype-1.7.1.min.js thirdparty/jquery-1.8.3.min.js thirdparty/jquery.nc.js thirdparty/raphael-2.1.0.min.js thirdparty/comma.js $(JSMIN) > $(JSPACK)
+	$(Q)cat $(DEPS) $(JSMIN) > $(JSPACK)
 
 .PHONY: jsdoc
 jsdoc: $(JSDOC_FILE)
@@ -109,6 +110,7 @@ debug:
 	$(info WEB_FOLDER is $(WEB_FOLDER))
 	$(info WEBMAKO_FILES is $(WEBMAKO_FILES))
 	$(info WEB_FILES is $(WEB_FILES))
+	$(info DEPS is $(DEPS))
 
 .PHONY: install
 install: all
