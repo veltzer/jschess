@@ -10,6 +10,7 @@ import datetime # for now
 
 import versioncheck
 import myutils
+import deps
 
 def years(x):
 	curr_year=datetime.datetime.now().year
@@ -28,6 +29,8 @@ def get_attr():
 	attr={}
 	attr['ver']=subprocess.check_output(['./scripts/tagname.py']).rstrip()
 	attr['copyright_years']=years
+	attr['deps']=deps.deps
+	attr['jsThirdParty']=deps.getJsThirdParty
 	return attr
 
 try:

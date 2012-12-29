@@ -4,10 +4,7 @@
 		<title>jschess</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
-		<script src="../thirdparty/prototype-1.7.1.min.js"></script>
-		<script src="../thirdparty/jquery-1.8.3.min.js"></script>
-		<script src="../thirdparty/jquery.nc.js"></script>
-		<script src="../thirdparty/raphael-2.1.0.min.js"></script>
+${jsThirdParty()}
 		<!-- our code, options: full pack, minified, regular or file by file -->
 		<!--script src="../out/jschess-${ver}.pack.js"></script-->
 		<!--script src="../out/jschess-${ver}.min.js"></script-->
@@ -43,16 +40,16 @@
 		<!-- You also need to add some content to highlight, but that is covered elsewhere. -->
 			 
 		<script>
-			jQuery(document).ready(function() {
+			document.observe('dom:loaded', function() {
 				var board=new Board();
 				var svgBoard=new SvgBoard(board,{
 					id:'myid',
 				})
 				board.startPosition();
-				jQuery('#startpos').click(function() {
+				$('startpos').observe('click',function() {
 					board.startPosition()
 				});
-				jQuery('#moverooks').click(function() {
+				$('moverooks').observe('click',function() {
 					if(board.hasPieceAtPosition(new PiecePosition(0,4)) && board.hasPieceAtPosition(new PiecePosition(7,4))) {
 						board.movePieceByPos(new PiecePosition(0,4),new PiecePosition(0,0));
 						board.movePieceByPos(new PiecePosition(7,4),new PiecePosition(7,0));
@@ -63,7 +60,7 @@
 						}
 					}
 				});
-				jQuery('#moveknights').click(function() {
+				$('moveknights').observe('click',function() {
 					if(board.hasPieceAtPosition(new PiecePosition(1,0)) && board.hasPieceAtPosition(new PiecePosition(6,0))) {
 						board.movePieceByPos(new PiecePosition(1,0),new PiecePosition(2,2));
 						board.movePieceByPos(new PiecePosition(6,0),new PiecePosition(5,2));
@@ -74,7 +71,7 @@
 						}
 					}
 				});
-				jQuery('#movebishops').click(function() {
+				$('movebishops').observe('click',function() {
 					if(board.hasPieceAtPosition(new PiecePosition(2,0)) && board.hasPieceAtPosition(new PiecePosition(5,0))) {
 						board.movePieceByPos(new PiecePosition(2,0),new PiecePosition(4,2));
 						board.movePieceByPos(new PiecePosition(5,0),new PiecePosition(3,2));
@@ -85,16 +82,16 @@
 						}
 					}
 				});
-				jQuery('#flip').click(function() {
+				$('flip').observe('click',function() {
 					svgBoard.flip()
 				});
-				jQuery('#glow').click(function() {
+				$('glow').observe('click',function() {
 					svgBoard.glow(board.getPieceAtPosition(new PiecePosition(0,0)),true);
 				});
-				jQuery('#toString').click(function() {
+				$('toString').observe('click',function() {
 					console.log(svgBoard);
 				});
-				jQuery('#clear').click(function() {
+				$('clear').observe('click',function() {
 					board.clearPieces()
 				});
 			})
@@ -124,10 +121,14 @@
 				<li>Looks best (can animate the pieces, show arrows and what not)</li>
 				<li>Free source. Full freedom to tweak or you can ask me for help with implementing a feature.</li>
 				<li>Sits on top of <a href="http://raphaeljs.com">raphael.js</a> for high level SVG capabilities</li>
-				<li>Sits on top of <a href="http://jquery.com">jQuery</a> to make coding easier and have better browser compatibility</li>
 				<li>Sits on top of <a href="http://prototypejs.org">prototype</a> to make object oriented easier and more error free</li>
-				<li>Sits on top of <a href="http://www.javascriptlint.com/download.htm">jsl</a> to make sure javascript code is standards complient</li>
-				<li>Sits on top of <a href="http://qunitjs.com">qunitjs</a> for testing</li>
+			</ul>
+		</p>
+		<p>
+			Technologies used to develop <b>jschess</b>...
+			<ul>
+				<li><a href="http://www.javascriptlint.com/download.htm">jsl</a> to make sure javascript code is standards complient</li>
+				<li><a href="http://qunitjs.com">qunitjs</a> for testing</li>
 			</ul>
 		</p>
 		<p>The current version of <b>jschess</b> is ${ver}
