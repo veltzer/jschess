@@ -133,8 +133,8 @@ ${jsFiles()}
 			</ul>
 			Demos of <b>jschess</b>...
 			<ul>
-				<li><a href="demo_using_pack.html"></a>using the pack.js file</li>
-				<li><a href="demo_using_min.html"></a>using the min.js file</li>
+				<li><a href="demo_using_pack.html">using the pack.js file</a></li>
+				<li><a href="demo_using_min.html">using the min.js file</a></li>
 				<li><a href="demo_moving_pieces.html">moving pieces</a></li>
 				<li><a href="demo_fen.html">showing a FEN position</a></li>
 				<li><a href="demo_pgn.html">showing a PGN game</a></li>

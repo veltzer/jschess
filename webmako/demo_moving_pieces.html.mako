@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>demo2</title>
+		<title>Moving pieces</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
 ${jsThirdParty()}
@@ -54,7 +54,7 @@ ${jsThirdParty()}
 		</script>
 	</head>
 	<body>
-		<h1>Demo2 - moving the pieces</h1>
+		<h1>Moving pieces</h1>
 		First download the minified file from <a title="jschess download" href="../out/jschess-${ver}.min.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
 		<pre class="brush: xml">
