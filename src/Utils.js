@@ -1,11 +1,15 @@
-/**
-	@class a class to have static utility functions
-	@description creates a new instance
-	@returns the new instance 
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
-*/
-function Utils() {
-}
+var Utils=Class.create(
+	/** @lends Utils# */
+{
+	/**
+		@class a class to have static utility functions
+		@description creates a new instance
+		@returns the new instance 
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
+	initialize: function() {
+	}
+});
 /**
  	@description Unite two javascript objects into a third one.
 	Second trumps the first.

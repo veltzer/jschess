@@ -1,7 +1,6 @@
 now:
 ====
-- use prototype all over.
-	see that the documentation is ok.
+- see that the documentation is ok after the move to prototype.js.
 
 mako:
 =====
@@ -26,8 +25,6 @@ code:
 	when one shape turns into another (coronations).
 - cache SVG elements so that clear/startpos cycles will be faster.
 - add a type safe config standalone system.
-- move to using prototype as the basis for this entire project (the class
-	system of prototype.js to be exact).
 - add "cleanBoard" method which removes all the pieces and add button to do it.
 - add a large scale gallery of the pieces so that I could fine tune the svg of them.
 	(link to it from the main jschess page).
