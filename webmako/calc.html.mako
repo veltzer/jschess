@@ -8,9 +8,9 @@ ${jsThirdParty()}
 		<script>
 			document.observe('dom:loaded', function() {
 				$('calc').observe('click',function() {
-					var path=$('path').val()
-					var x=$('x').val()
-					var y=$('y').val()
+					var path=$('path').value
+					var x=$('x').value
+					var y=$('y').value
 					var m=Raphael.matrix()
 					m.translate(x,y)
 					var transform=m.toTransformString()
@@ -18,7 +18,7 @@ ${jsThirdParty()}
 					//console.log('path is '+path)
 					//console.log('x is '+x)
 					//console.log('y is '+y)
-					$('result').text(transformPath)
+					$('result').update(transformPath)
 				})
 			})
 		</script>
@@ -33,9 +33,12 @@ ${jsThirdParty()}
 		Enter x <input id="x"/><br/>
 		Enter y <input id="y"/><br/>
 		<button id="calc">calc</button><br/>
-		Result <div id="result"/>
+		Result <div id="result"></div>
 		<p>
-		Example will be:
+		Example can be:<br/>
+		path: M 34,14 L 31,17 L 14,17 L 11,14<br/>
+		x: 5<br/>
+		y: 6<br/>
 		</p>
 		<p>
 			Mark Veltzer, Copyright ${copyright_years(2012)}
