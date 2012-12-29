@@ -6,11 +6,10 @@
 		<!-- third parties -->
 		<script src="../thirdparty/prototype-1.7.1.min.js"></script>
 		<script src="../thirdparty/jquery-1.8.3.min.js"></script>
-		<script>
-			jQuery.noConflict();
-		</script>
+		<script src="../thirdparty/jquery.nc.js"></script>
 		<script src="../thirdparty/raphael-2.1.0.min.js"></script>
 		<!-- our code, three options: minified, regular or file by file -->
+		<!--script src="../out/jschess-${ver}.pack.js"></script-->
 		<!--script src="../out/jschess-${ver}.min.js"></script-->
 		<!--script src="../out/jschess-${ver}.js"></script-->
 		<script src="../src/Utils.js"></script>

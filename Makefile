@@ -23,6 +23,7 @@ OUT_FOLDER:=out
 JSCHECK:=$(OUT_FOLDER)/$(PROJECT)-$(VER).stamp
 JSFULL:=$(OUT_FOLDER)/$(PROJECT)-$(VER).js
 JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js
+JSPACK:=$(OUT_FOLDER)/$(PROJECT)-$(VER).pack.js
 WEB_DIR:=/var/www/$(PROJECT)
 WEB_FOLDER:=web
 WEBMAKO_FOLDER:=webmako
@@ -49,7 +50,7 @@ Q=@
 endif # DO_MKDBG
 
 .PHONY: all
-all: $(JSMIN) $(JSDOC_FILE) $(WEB_FILES)
+all: $(JSPACK) $(JSDOC_FILE) $(WEB_FILES)
 
 $(JSCHECK): $(SOURCES)
 	$(info doing [$@])
@@ -66,6 +67,11 @@ $(JSMIN): $(JSFULL)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
 	$(Q)yui-compressor $< -o $@
+
+$(JSPACK): $(JSMIN)
+	$(info doing [$@])
+	$(Q)mkdir -p $(dir $@)
+	$(Q)cat thirdparty/prototype-1.7.1.min.js thirdparty/jquery-1.8.3.min.js thirdparty/jquery.nc.js thirdparty/raphael-2.1.0.min.js $(JSMIN) > $(JSPACK)
 
 .PHONY: jsdoc
 jsdoc: $(JSDOC_FILE)
