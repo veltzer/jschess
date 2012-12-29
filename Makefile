@@ -76,7 +76,7 @@ $(JSMIN): $(JSFULL)
 $(JSPACK): $(JSMIN)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)cat thirdparty/prototype-1.7.1.min.js thirdparty/jquery-1.8.3.min.js thirdparty/jquery.nc.js thirdparty/raphael-2.1.0.min.js $(JSMIN) > $(JSPACK)
+	$(Q)cat thirdparty/prototype-1.7.1.min.js thirdparty/jquery-1.8.3.min.js thirdparty/jquery.nc.js thirdparty/raphael-2.1.0.min.js thirdparty/comma.js $(JSMIN) > $(JSPACK)
 
 .PHONY: jsdoc
 jsdoc: $(JSDOC_FILE)
