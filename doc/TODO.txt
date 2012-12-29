@@ -1,5 +1,6 @@
 now:
 ====
+- do standard board without highlights.
 - integrate what I have on my laptop.
 - do the demos that I know how to do.
 	move.
