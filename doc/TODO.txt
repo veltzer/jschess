@@ -1,10 +1,10 @@
 now:
 ====
-- do standard board without highlights.
-- integrate what I have on my laptop.
+- bring back highlight on index.html.mako and make it work right.
 - do the demos that I know how to do.
-	move.
+	moving pieces + deleting pieces.
 	FEN.
+	selecting a square.
 
 mako:
 =====
