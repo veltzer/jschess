@@ -7,6 +7,7 @@ import mako.lookup # for mako.lookup.TemplateLookup
 import os # for os.chmod, os.unlink
 import subprocess # for subprocess.check_output
 import datetime # for now
+import glob # for glob
 
 import versioncheck
 import myutils
@@ -15,6 +16,15 @@ import deps
 def years(x):
 	curr_year=datetime.datetime.now().year
 	return ','.join(map(str,range(x,curr_year+1)))
+
+def jsFiles():
+	files=glob.glob('src/*.js')
+	l=[]
+	l.append('<!-- placed by jsFiles() macro -->')
+	for f in files:
+		l.append('<script src="../'+f+'"></script>')
+	l.append('<!-- end of jsFiles() macro -->')
+	return '\n'.join(l)
 
 if len(sys.argv)!=3:
 	print(sys.argv[0]+': usage: '+sys.argv[0]+' [input] [output]',file=sys.stderr)
@@ -31,6 +41,7 @@ def get_attr():
 	attr['copyright_years']=years
 	attr['deps']=deps.deps
 	attr['jsThirdParty']=deps.getJsThirdParty
+	attr['jsFiles']=jsFiles
 	return attr
 
 try:

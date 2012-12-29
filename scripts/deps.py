@@ -32,6 +32,7 @@ deps.append(Dep(
 		'thirdparty/raphael-2.1.0.min.js',
 		'http://raphaeljs.com/reference.html',
 ))
+
 def getJsThirdParty():
 	l=[]
 	l.append('<!-- placed by auto tool, do not edit -->');
