@@ -24,6 +24,7 @@ JSCHECK:=$(OUT_FOLDER)/$(PROJECT)-$(VER).stamp
 JSFULL:=$(OUT_FOLDER)/$(PROJECT)-$(VER).js
 JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js
 JSPACK:=$(OUT_FOLDER)/$(PROJECT)-$(VER).pack.js
+JSZIP:=$(OUT_FOLDER)/$(PROJECT)-$(VER).zip
 WEB_DIR:=/var/www/$(PROJECT)
 WEB_FOLDER:=web
 WEBMAKO_FOLDER:=webmako
@@ -50,7 +51,11 @@ Q=@
 endif # DO_MKDBG
 
 .PHONY: all
-all: $(JSPACK) $(JSDOC_FILE) $(WEB_FILES)
+all: $(JSPACK) $(JSZIP) $(JSDOC_FILE) $(WEB_FILES)
+
+$(JSZIP): $(SOURCES)
+	$(info doing [$@])
+	$(Q)zip -qr $@ $(SOURCES)
 
 $(JSCHECK): $(SOURCES)
 	$(info doing [$@])

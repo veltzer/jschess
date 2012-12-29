@@ -141,6 +141,8 @@
 				<li><b>jschess</b> github projec is <a href="https://github.com/veltzer/jschess">here</a></li>
 				<li>latest full <b>jschess</b> is <a href="http://veltzer.net/jschess/out/jschess-${ver}.js">jschess-${ver}.js</a></li>
 				<li>latest minified <b>jschess</b> is <a href="http://veltzer.net/jschess/out/jschess-${ver}.min.js">jschess-${ver}.min.js</a></li>
+				<li>latest package (with third parties) <b>jschess</b> is <a href="http://veltzer.net/jschess/out/jschess-${ver}.pack.js">jschess-${ver}.pack.js</a></li>
+				<li>latest sources for <b>jschess</b> is <a href="http://veltzer.net/jschess/out/jschess-${ver}.zip">jschess-${ver}.zip</a></li>
 			</ul>
 			Demos of <b>jschess</b>...
 			<ul>
