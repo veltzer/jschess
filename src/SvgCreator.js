@@ -1,14 +1,21 @@
 /*jsl:import Utils.js*/
 /*jsl:import SvgPathAndAttributes.js*/
 /*jsl:import SvgPiece.js*/
+var SvgCreator=Class.create(
+	/** @lends SvgCreator# */
+{
+	/**
+		@class static class to have just static methods for creating pieces
+		@description creates a new instance
+		@constructs
+		@returns the new instance
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
+	initialize: function() {
+	}
+});
 /**
-	@class static class to have just static methods for creating pieces
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
-*/
-function SvgCreator() {
-}
-/**
-	Method which creates a piece according to color and type
+	@description Method which creates a piece according to color and type
 	@param config A configuration to work with
 	@param pieceColor the color of the piece
 	@param pieceType the type of the piece

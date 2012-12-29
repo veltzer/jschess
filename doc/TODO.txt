@@ -1,15 +1,24 @@
+now:
+====
+- integrate what I have on my laptop.
+- do the demos that I know how to do.
+	move.
+	FEN.
+
 mako:
 =====
 - make mako files include individual js files in the file by file version in the right order
 	(prepare an order file which says which is the right order).
-- make mako files not be php files (there is only one thing we use it for which is the copyright
-	signature).
 
 site:
 =====
-- add instructions about jquery, raphael and prototype which are needed to run this project.
+- add instructions about raphael and prototype which are needed to run this project.
 - make the site carry older versions of jschess too.
 - consider changing the name of this project to chess.js.
+
+build system:
+=============
+- create a full file with all the dependencies (minified).
 
 code:
 =====
@@ -19,8 +28,6 @@ code:
 	when one shape turns into another (coronations).
 - cache SVG elements so that clear/startpos cycles will be faster.
 - add a type safe config standalone system.
-- move to using prototype as the basis for this entire project (the class
-	system of prototype.js to be exact).
 - add "cleanBoard" method which removes all the pieces and add button to do it.
 - add a large scale gallery of the pieces so that I could fine tune the svg of them.
 	(link to it from the main jschess page).

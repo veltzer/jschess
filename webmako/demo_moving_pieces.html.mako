@@ -2,27 +2,11 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>jschess</title>
+		<title>Moving pieces</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
-		<script src="../thirdparty/jquery-1.8.3.min.js"></script>
-		<script src="../thirdparty/raphael-2.1.0.min.js"></script>
-		<!-- our code, three options: minified, regular or file by file -->
-		<!--script src="../out/jschess-${ver}.min.js"></script-->
-		<!--script src="../out/jschess-${ver}.js"></script-->
-		<script src="../src/Utils.js"></script>
-		<script src="../src/SvgPathAndAttributes.js"></script>
-		<script src="../src/SvgPiece.js"></script>
-		<script src="../src/SvgCreator.js"></script>
-		<script src="../src/SvgPixelPosition.js"></script>
-		<script src="../src/SvgPieceData.js"></script>
-		<script src="../src/SvgBoard.js"></script>
-		<script src="../src/PiecePosition.js"></script>
-		<script src="../src/PieceColor.js"></script>
-		<script src="../src/PieceType.js"></script>
-		<script src="../src/BoardPiece.js"></script>
-		<script src="../src/BoardPosition.js"></script>
-		<script src="../src/Board.js"></script>
+${jsThirdParty()}
+		<script src="../out/jschess-${ver}.min.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
@@ -40,53 +24,52 @@
 		<!-- You also need to add some content to highlight, but that is covered elsewhere. -->
 			 
 		<script>
-			$(document).ready(function() {
+			document.observe('dom:loaded', function() {
 				// Finally, to actually run the highlighter, you need to include this JS on your page
 				SyntaxHighlighter.all()
-				var board=new SvgBoard({
-					id:'myid',
+				var board=new Board()
+				var svgBoard=new SvgBoard(board,{
+					id:'myid'
 				})
-				board.startpos()
-				$('#startpos').click(function() {
+				board.startPosition()
+				$('startpos').observe('click',function() {
 					board.startpos()
 				})
-				$('#moverooks').click(function() {
+				$('moverooks').observe('click',function() {
 					board.moverooks()
 				})
-				$('#moveknights').click(function() {
+				$('moveknights').observe('click',function() {
 					board.moveknights()
 				})
-				$('#movebishops').click(function() {
+				$('movebishops').observe('click',function() {
 					board.movebishops()
 				})
-				$('#flip').click(function() {
-					board.flip()
+				$('flip').observe('click',function() {
+					svgBoard.flip()
 				})
-				$('#dump').click(function() {
+				$('dump').observe('click',function() {
 					board.dump()
 				})
 			})
 		</script>
 	</head>
 	<body>
-		<h1>Demo2 - moving the pieces</h1>
+		<h1>Moving pieces</h1>
 		First download the minified file from <a title="jschess download" href="../out/jschess-${ver}.min.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
 		<pre class="brush: xml">
-			&lt;script src="jschess-${ver}.min.js"&gt;&lt;/script&gt;
-		</pre>
+			&lt;script src="jschess-${ver}.min.js"&gt;&lt;/script&gt;</pre>
 		You need a place for your board, so place something like this somewhere in your html:
 		<pre class="brush: xml">
 			&lt;div id="myid"&gt;
-			&lt;/div&gt;
-		</pre>
+			&lt;/div&gt;</pre>
 		Then you can create a board from your javascript code by calling the constructor of SvgBoard. The board will be empty so we call startpos to get initial game position:
 		<pre class="brush: js">
-		var board=new SvgBoard({
-			id:'myid',
-		})
-		board.startpos()
-		</pre>
+			var board=new Board()
+			var svgBoard=new SvgBoard(board,{
+				id:'myid'
+			})
+			board.startPosition()</pre>
 		Here is the result:
 		<div id="myid">
 		</div>
@@ -97,6 +80,9 @@
 		<button id="flip">flip</button>
 		<button id="dump">dump</button>
 		<br/>
-		<h3>Mark Veltzer, 2012</h3>
+		<p>
+			Mark Veltzer, Copyright ${copyright_years(2012)}
+			<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
+		</p>
 	</body>
 </html>
