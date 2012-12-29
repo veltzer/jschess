@@ -45,7 +45,7 @@ ${jsThirdParty()}
 					board.movebishops()
 				})
 				$('flip').observe('click',function() {
-					board.flip()
+					svgBoard.flip()
 				})
 				$('dump').observe('click',function() {
 					board.dump()
