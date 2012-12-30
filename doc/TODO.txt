@@ -1,6 +1,6 @@
 now:
 ====
-- bring back highlight on index.html.mako and make it work right.
+- fix the square and piece selection algorithm.
 - do the demos that I know how to do.
 	moving pieces + deleting pieces.
 	FEN.
