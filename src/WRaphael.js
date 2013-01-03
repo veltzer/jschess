@@ -1,5 +1,5 @@
-var RPaper=Class.create(
-	/** @lends RPaper# */
+var WRaphael=Class.create(
+	/** @lends WRaphael# */
 {
 	/**
 		@class Paper wrapper for Raphael.js
@@ -18,21 +18,27 @@ var RPaper=Class.create(
 		@description toString method that allows you to get a nice printout for this type
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
-	rect: function(arguments) {
-		return this.r.rect(arguments);
+	rect: function() {
+		var m=this.r.rect;
+		var r=m.apply(this.r,arguments);
+		return r;
 	},
 	/**
 		@description toString method that allows you to get a nice printout for this type
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	set: function() {
-		return this.r.set(arguments);
+		var m=this.r.set;
+		var r=m.apply(this.r,arguments);
+		return r;
 	},
 	/**
 		@description toString method that allows you to get a nice printout for this type
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	path: function() {
-		return this.r.path(arguments);
+		var m=this.r.path;
+		var r=m.apply(this.r,arguments);
+		return r;
 	}
 });
