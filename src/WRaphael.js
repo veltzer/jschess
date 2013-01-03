@@ -11,8 +11,8 @@ var WRaphael=Class.create(
 		@constructs
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
-	initialize: function(id,sizex,sizey) {
-		this.r=Raphael(id,sizex,sizey);
+	initialize: function() {
+		this.r=Raphael.apply(undefined,arguments);
 	},
 	/**
 		@description toString method that allows you to get a nice printout for this type
