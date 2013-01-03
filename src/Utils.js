@@ -54,3 +54,11 @@ Utils.fakeUse=function(o) {
 		console.log(o);
 	}
 };
+/**
+	@description Fake doing something
+	This is mainly used to avoid lint warnings.
+	@returns nothing
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+Utils.pass=function() {
+};
