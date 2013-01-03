@@ -132,11 +132,13 @@ var SvgBoard=Class.create(
 						that.eventSquare(tpos,trec,type);
 					};
 				}(piecePosition,rec,"mousedown"));
+				/*
 				rec.mousemove(function(tpos,trec,type) {
 					return function() {
 						that.eventSquare(tpos,trec,type);
 					};
 				}(piecePosition,rec,"mousemove"));
+				*/
 				rec.mouseout(function(tpos,trec,type) {
 					return function() {
 						that.eventSquare(tpos,trec,type);
@@ -175,6 +177,7 @@ var SvgBoard=Class.create(
 		// now put it on the paper
 		var set=svgPiece.toSet(this.paper,transform);
 		RUtils.eventRegister(set,function(iboardPiece) {
+		//set.eventRegister(function(iboardPiece) {
 			return function(eventName) {
 				that.eventPiece(iboardPiece,eventName);
 			};
@@ -344,11 +347,14 @@ var SvgBoard=Class.create(
 	eventPiece: function(boardPiece,type) {
 		//console.log('eventPiece '+boardPiece+','+type);
 		if(type=='mouseover' || type=='mouseout') {
+			//Utils.pass();
 			var piecePosition=this.board.getPiecePosition(boardPiece);
 			var rec=this.getRec(piecePosition);
 			this.eventSquare(piecePosition,rec,'piece'+type);
 		}
-		if(type=='mouseover' || type=='squaremouseover') {
+		//if(type=='mouseover' || type=='squaremouseover') {
+		if(type=='mouseover') {
+		//if(type=='squaremouseover') {
 			if(this.config['do_select_piece']) {
 				if(SvgBoard.spiece) {
 					if(SvgBoard.spiece!=boardPiece) {
@@ -362,7 +368,9 @@ var SvgBoard=Class.create(
 				}
 			}
 		}
-		if(type=='mouseout' || type=='squaremouseout') {
+		//if(type=='mouseout' || type=='squaremouseout') {
+		if(type=='mouseout') {
+		//if(type=='squaremouseout') {
 			if(this.config['do_select_piece']) {
 				if(SvgBoard.spiece) {
 					this.glow(SvgBoard.spiece,false);
