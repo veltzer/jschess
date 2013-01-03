@@ -2,6 +2,7 @@ now:
 ====
 - do examples of raphael.js in demos/javascript.
 	Demo how to do moves of mouse and get the event.
+	Do it on the whole paper.
 - get to square selection which works better than current.
 	(without piece selection).
 	See if there are better APIs for selection.

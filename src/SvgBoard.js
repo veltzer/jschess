@@ -119,8 +119,10 @@ var SvgBoard=Class.create(
 			var rec_line=[];
 			for(var y=0;y<8;y++) {
 				var rec=this.paper.rect(x*this.square,y*this.square,this.square,this.square);
-				rec.attr('stroke',this.config['rec_stroke_color']);
-				rec.attr('stroke-width',this.config['rec_stroke_width']);
+				rec.attr({
+					stroke:this.config['rec_stroke_color'],
+					"stroke-width":this.config['rec_stroke_width']
+				});
 				rec_line.push(rec);
 				var piecePosition=new PiecePosition(x,(7-y));
 				this.setRectFill(rec,piecePosition);
