@@ -4,7 +4,7 @@
 /*jsl:import PiecePosition.js*/
 /*jsl:import Board.js*/
 /*jsl:import RUtils.js*/
-/*jsl:import RPaper.js*/
+/*jsl:import WRaphael.js*/
 /*jsl:import Utils.js*/
 var SvgBoard=Class.create(
 	/** @lends SvgBoard# */
@@ -82,8 +82,8 @@ var SvgBoard=Class.create(
 		})
 		*/
 		// sync way
-		//this.paper=new RPaper(this.config['id'],this.config['size'],this.config['size']);
-		this.paper=Raphael(this.config['id'],this.config['size'],this.config['size']);
+		this.paper=new WRaphael(this.config['id'],this.config['size'],this.config['size']);
+		//this.paper=Raphael(this.config['id'],this.config['size'],this.config['size']);
 	},
 	/**
 		@description Fill a rectangle using the default color
