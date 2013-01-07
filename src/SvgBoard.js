@@ -47,6 +47,7 @@ var SvgBoard=Class.create(
 		this.config=config;
 		// get RW vars from the config
 		this.flipview=this.config['flipview'];
+		this.size=this.config['size'];
 		this.square=this.config['size']/8;
 		// real code starts here
 		this.board=board;
@@ -63,6 +64,7 @@ var SvgBoard=Class.create(
 		this.board.addPiecePostMoveCallback(function(boardPiece,fromPos,toPos) {
 			that.postMovePiece(boardPiece,fromPos,toPos);
 		});
+		this.overlay();
 	},
 	getBoard: function() {
 		return this.board;
@@ -164,6 +166,30 @@ var SvgBoard=Class.create(
 		}
 	},
 	/**
+		@description Create an overlay rectange for the entire board
+		@returns nothing
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
+	overlay: function() {
+		var rec=this.paper.rect(0,0,this.size,this.size);
+		rec.attr({fill:Raphael.getColor()});
+		rec.attr({opacity:0.0});
+		rec.mousemove(function() {
+			console.log('mousemove: '+arguments);
+		});
+		rec.mouseover(function() {
+			console.log('mouseover: '+arguments);
+		});
+		rec.mouseout(function() {
+			console.log('mouseout: '+arguments);
+		});
+		rec.toFront();
+		this.fullRec=rec;
+	},
+	postGraphics: function() {
+		this.fullRec.toFront();
+	},
+	/**
 		@description Callback method to create graphics and place them when adding a piece.
 		@param boardPiece the piece to add.
 		@returns nothing
@@ -189,6 +215,7 @@ var SvgBoard=Class.create(
 		// lets put our own data with the piece
 		var svgPieceData=new SvgPieceData(set,pixelPos);
 		boardPiece.setData(svgPieceData);
+		this.postGraphics();
 	},
 	/**
 		@description Callback method to create graphics and place them when adding a piece.
