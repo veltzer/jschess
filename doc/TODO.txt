@@ -1,9 +1,11 @@
 now:
 ====
+- bring back click on a square.
 - do the demos that I know how to do.
 	moving pieces + deleting pieces.
 	FEN.
 	selecting a square.
+- pgn parsing.
 
 mako:
 =====
