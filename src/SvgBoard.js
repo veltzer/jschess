@@ -88,6 +88,10 @@ var SvgBoard=Class.create(
 		// sync way
 		this.paper=new WRaphael(this.config['id'],this.config['size'],this.config['size']);
 		//this.paper=Raphael(this.config['id'],this.config['size'],this.config['size']);
+		this.elem=$(this.config['id']);
+		var offset=this.elem.cumulativeOffset();
+		this.startX=offset.left;
+		this.startY=offset.top;
 	},
 	/**
 		@description Fill a rectangle using the default color
@@ -117,7 +121,7 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	drawBoard: function() {
-		var that=this;
+		//var that=this;
 		this.recs=[];
 		for(var x=0;x<8;x++) {
 			var rec_line=[];
@@ -130,6 +134,7 @@ var SvgBoard=Class.create(
 				rec_line.push(rec);
 				var piecePosition=new PiecePosition(x,(7-y));
 				this.setRectFill(rec,piecePosition);
+				/*
 				rec.click(function(tpos,trec,type) {
 					return function() {
 						that.eventSquare(tpos,trec,type);
@@ -140,13 +145,11 @@ var SvgBoard=Class.create(
 						that.eventSquare(tpos,trec,type);
 					};
 				}(piecePosition,rec,"mousedown"));
-				/*
 				rec.mousemove(function(tpos,trec,type) {
 					return function() {
 						that.eventSquare(tpos,trec,type);
 					};
 				}(piecePosition,rec,"mousemove"));
-				*/
 				rec.mouseout(function(tpos,trec,type) {
 					return function() {
 						that.eventSquare(tpos,trec,type);
@@ -162,6 +165,7 @@ var SvgBoard=Class.create(
 						that.eventSquare(tpos,trec,type);
 					};
 				}(piecePosition,rec,"mouseup"));
+				*/
 			}
 			rec_line.reverse();
 			this.recs.push(rec_line);
@@ -177,28 +181,16 @@ var SvgBoard=Class.create(
 		var rec=this.paper.rect(0,0,this.size,this.size);
 		rec.attr({fill:Raphael.getColor()});
 		rec.attr({opacity:0.0});
-		rec.mousemove(function() {
-			var f=that.eventGlobal;
-			var more=Array.prototype.slice.call(arguments);
-			more.push('mousemove');
-			f.apply(that,more);
+		rec.mousemove(function(evt,x,y) {
+			that.eventGlobal(evt,x,y,'mousemove');
 		});
-		rec.mouseover(function() {
-			var f=that.eventGlobal;
-			var more=Array.prototype.slice.call(arguments);
-			more.push('mouseover');
-			f.apply(that,more);
+		rec.mouseover(function(evt,x,y) {
+			that.eventGlobal(evt,x,y,'mouseover');
 		});
-		rec.mouseout(function() {
-			var f=that.eventGlobal;
-			var more=Array.prototype.slice.call(arguments);
-			more.push('mouseout');
-			f.apply(that,more);
+		rec.mouseout(function(evt,x,y) {
+			that.eventGlobal(evt,x,y,'mouseout');
 		});
 		rec.toFront();
-		console.dir(rec.getBBox());
-		this.startX=rec.getBBox().x;
-		this.startY=rec.getBBox().y;
 		this.fullRec=rec;
 	},
 	postGraphics: function() {
@@ -412,48 +404,8 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	eventPiece: function(boardPiece,type) {
-		//console.log('eventPiece '+boardPiece+','+type);
-		if(type=='mouseover' || type=='mouseout') {
-			//Utils.pass();
-			var piecePosition=this.board.getPiecePosition(boardPiece);
-			var rec=this.getRec(piecePosition);
-			this.eventSquare(piecePosition,rec,'piece'+type);
-		}
-		//if(type=='mouseover' || type=='squaremouseover') {
-		//if(type=='mouseover') {
-		if(type=='squaremouseover') {
-			if(this.config['do_select_piece']) {
-				if(SvgBoard.spiece) {
-					if(SvgBoard.spiece!=boardPiece) {
-						this.glow(SvgBoard.spiece,false);
-						SvgBoard.spiece=boardPiece;
-						this.glow(SvgBoard.spiece,true);
-					}
-				} else {
-					SvgBoard.spiece=boardPiece;
-					this.glow(SvgBoard.spiece,true);
-				}
-			}
-		}
-		//if(type=='mouseout' || type=='squaremouseout') {
-		//if(type=='mouseout') {
-		if(type=='squaremouseout') {
-			if(this.config['do_select_piece']) {
-				if(SvgBoard.spiece) {
-					this.glow(SvgBoard.spiece,false);
-					SvgBoard.spiece=undefined;
-				}
-			}
-		}
-	},
-	/**
-		@description Return the square at a position.
-		@param piecePosition the position for which to return the square.
-		@returns the Raphael.js rec in question
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
-	*/
-	getRec: function(piecePosition) {
-		return this.recs[piecePosition.x][piecePosition.y];
+		Utils.fakeUse(boardPiece);
+		Utils.fakeUse(type);
 	},
 	/**
 		@description Events for squares.
@@ -469,38 +421,6 @@ var SvgBoard=Class.create(
 		//Utils.fakeUse(rec);
 		//Utils.fakeUse(piecePosition);
 		// going into a rectangle - set the selected color
-		if(type=='mouseover' || type=='mouseout') {
-			if(this.board.hasPieceAtPosition(piecePosition)) {
-				var boardPiece=this.board.getPieceAtPosition(piecePosition);
-				this.eventPiece(boardPiece,'square'+type);
-			}
-		}
-		if(type=='mouseover' || type=='piecemouseover') {
-			if(this.config['do_select_square']) {
-				if(SvgBoard.colored) {
-					if(SvgBoard.colored!=rec) {
-						this.setRectFill(SvgBoard.colored,SvgBoard.coloredPos);
-						SvgBoard.colored=rec;
-						SvgBoard.coloredPos=piecePosition;
-						SvgBoard.colored.attr('fill',this.config['over_color']);
-					}
-				} else {
-					SvgBoard.colored=rec;
-					SvgBoard.coloredPos=piecePosition;
-					SvgBoard.colored.attr('fill',this.config['over_color']);
-				}
-			}
-		}
-		// going out from a rectangle - set the original color
-		if(type=='mouseout' || type=='piecemouseout') {
-			if(this.config['do_select_square']) {
-				if(SvgBoard.colored) {
-					this.setRectFill(SvgBoard.colored,SvgBoard.coloredPos);
-					SvgBoard.colored=undefined;
-					SvgBoard.coloredPos=undefined;
-				}
-			}
-		}
 		// selecting a rectangle - fill with select_color
 		if(type=='click') {
 			if(this.config['do_select_click']) {
@@ -524,34 +444,98 @@ var SvgBoard=Class.create(
 		}
 	},
 	eventGlobal: function(eventtype,x,y,type) {
+		//console.dir(arguments);
 		Utils.fakeUse(eventtype);
-		var piecePosition=this.pixelsToPos(new SvgPixelPosition(x,y));
-		if(type=='mouseover' || type=='mouseout') {
-			if(this.board.hasPieceAtPosition(piecePosition)) {
-				var boardPiece=this.board.getPieceAtPosition(piecePosition);
-				this.eventPiece(boardPiece,'square'+type);
+		if(type=='mouseover' || type=='mousemove') {
+			var piecePosition=this.pixelsToPos(new SvgPixelPosition(x,y));
+			if(SvgBoard.currentPos==undefined) {
+				SvgBoard.lastPos=undefined;
+				SvgBoard.currentPos=piecePosition;
+				this.newPosition();
+			} else {
+				if(piecePosition.notEqual(SvgBoard.currentPos)) {
+					SvgBoard.lastPos=SvgBoard.currentPos;
+					SvgBoard.currentPos=piecePosition;
+					this.newPosition();
+				}
 			}
 		}
-		if(type=='mouseover') {
-			if(this.config['do_select_global']) {
-				Utils.pass();
+		if(type=='mouseout') {
+			SvgBoard.lastPos=SvgBoard.currentPos;
+			SvgBoard.currentPos=undefined;
+			this.newPosition();
+		}
+	},
+	newPosition: function() {
+		//console.log(SvgBoard.currentPos,SvgBoard.lastPos);
+		if(SvgBoard.currentPos==undefined) {
+			if(SvgBoard.selectedPiece!=undefined) {
+				if(this.config['do_select_piece']) {
+					this.glow(SvgBoard.selectedPiece,false);
+					SvgBoard.selectedPiece=undefined;
+				}
+			}
+			if(SvgBoard.selectedRec!=undefined) {
+				if(this.config['do_select_square']) {
+					this.setRectFill(SvgBoard.selectedRec,SvgBoard.lastPos);
+					SvgBoard.selectedRec=undefined;
+				}
+			}
+		} else {
+			if(this.board.hasPieceAtPosition(SvgBoard.currentPos)) {
+				var boardPiece=this.board.getPieceAtPosition(SvgBoard.currentPos);
+				//this.eventPiece(boardPiece,'square'+type);
+				if(this.config['do_select_piece']) {
+					if(SvgBoard.selectedPiece==undefined) {
+						SvgBoard.selectedPiece=boardPiece;
+						this.glow(SvgBoard.selectedPiece,true);
+					} else {
+						this.glow(SvgBoard.selectedPiece,false);
+						SvgBoard.selectedPiece=boardPiece;
+						this.glow(SvgBoard.selectedPiece,true);
+					}
+				}
+			} else {
+				if(SvgBoard.selectedPiece!=undefined) {
+					if(this.config['do_select_piece']) {
+						this.glow(SvgBoard.selectedPiece,false);
+						SvgBoard.selectedPiece=undefined;
+					}
+				}
+			}
+			if(this.config['do_select_square']) {
+				var rec=this.getRec(SvgBoard.currentPos);
+				if(SvgBoard.selectedRec==undefined) {
+					SvgBoard.selectedRec=rec;
+					SvgBoard.selectedRec.attr('fill',this.config['over_color']);
+				} else {
+					this.setRectFill(SvgBoard.selectedRec,SvgBoard.lastPos);
+					SvgBoard.selectedRec=rec;
+					SvgBoard.selectedRec.attr('fill',this.config['over_color']);
+				}
 			}
 		}
-		if(type=='mousemove') {
-			if(this.config['do_select_global']) {
-				Utils.pass();
-			}
-		}
-		if(type=='mousemove') {
-			if(this.config['do_select_global']) {
-				Utils.pass();
-			}
+	},
+	/**
+		@description Return the square at a position.
+		@param piecePosition the position for which to return the square.
+		@returns the Raphael.js rec in question
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
+	getRec: function(piecePosition) {
+		if(this.flipview===true) {
+			return this.recs[7-piecePosition.x][7-piecePosition.y];
+		} else {
+			return this.recs[piecePosition.x][piecePosition.y];
 		}
 	}
 });
 // static data
-SvgBoard.spiece=undefined;
-SvgBoard.selected=undefined;
-SvgBoard.selectedPos=undefined;
-SvgBoard.colored=undefined;
-SvgBoard.coloredPos=undefined;
+// last board position
+SvgBoard.lastPos=undefined;
+// current board position
+SvgBoard.currentPos=undefined;
+// selected piece
+SvgBoard.selectedPiece=undefined;
+// selected rec
+SvgBoard.selectedRec=undefined;

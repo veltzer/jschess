@@ -1,8 +1,5 @@
 now:
 ====
-- use the full board coverage infrastructure to get better square
-	selection of the board.
-- remove old selection logic.
 - do the demos that I know how to do.
 	moving pieces + deleting pieces.
 	FEN.

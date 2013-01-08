@@ -22,11 +22,23 @@ var PiecePosition=Class.create(
 		this.y=y;
 	},
 	/**
-		@descrition toString method so that you can get a nice printout of instances of this type
+		@description toString method so that you can get a nice printout of instances of this type
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	toString: function() {
 		return 'PiecePosition: ('+this.x+','+this.y+')';
+	},
+	/**
+		@description compare one position to another
+		@return true or false
+	*/
+	notEqual: function(otherPos) {
+		//console.log(this);
+		//console.log(otherPos);
+		if(!(otherPos instanceof PiecePosition)) {
+			return true;
+		}
+		return otherPos.x!=this.x || otherPos.y!=this.y;
 	}
 });
