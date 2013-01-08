@@ -32,6 +32,7 @@ ${jsFiles()}
 					id:'myid',
 					do_select_square:false,
 					do_select_piece:false,
+					do_select_global:false
 				})
 				board.startPosition();
 				$('startpos').observe('click',function() {

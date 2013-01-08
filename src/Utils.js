@@ -62,3 +62,19 @@ Utils.fakeUse=function(o) {
 */
 Utils.pass=function() {
 };
+/**
+	@description Shallow copy an array
+	@param a the array to copy
+	@returns The copy of the array
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+Utils.arrClone=function(a) {
+	return a.slice();
+	/*
+	var ret=[];
+	a.forEach(function(x) {
+		ret.push(x);
+	});
+	return ret;
+	*/
+};
