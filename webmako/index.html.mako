@@ -30,9 +30,9 @@ ${jsFiles()}
 				var board=new Board();
 				var svgBoard=new SvgBoard(board,{
 					id:'myid',
-					do_select_square:false,
-					do_select_piece:false,
-					do_select_global:false
+					do_select_square:true,
+					do_select_piece:true,
+					do_select_global:true
 				})
 				board.startPosition();
 				$('startpos').observe('click',function() {
