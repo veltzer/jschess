@@ -39,8 +39,10 @@ var SvgBoard=Class.create(
 		config['gradients']=config['gradients'] || true;// should we use gradients?
 		config['select_color']=config['select_color'] || 'ffff00';// color of selected squares
 		config['over_color']=config['over_color'] || '00ff00';// color of selected squares
+		config['do_select_click']=config['do_select_click'] || false;// should we select clicks
 		config['do_select_square']=config['do_select_square'] || false;// should we select squares
 		config['do_select_piece']=config['do_select_piece'] || false;// should we select pieces
+		config['do_select_global']=config['do_select_global'] || false;// should we select pieces
 		config['rec_stroke_color']=config['rec_stroke_color'] || 'black';// rectangles stroke color
 		config['rec_stroke_width']=config['rec_stroke_width'] || 0.1;// rectangles stroke width
 		// store the config
@@ -171,19 +173,32 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	overlay: function() {
+		var that=this;
 		var rec=this.paper.rect(0,0,this.size,this.size);
 		rec.attr({fill:Raphael.getColor()});
 		rec.attr({opacity:0.0});
 		rec.mousemove(function() {
-			console.log('mousemove: '+arguments);
+			var f=that.eventGlobal;
+			var more=Array.prototype.slice.call(arguments);
+			more.push('mousemove');
+			f.apply(that,more);
 		});
 		rec.mouseover(function() {
-			console.log('mouseover: '+arguments);
+			var f=that.eventGlobal;
+			var more=Array.prototype.slice.call(arguments);
+			more.push('mouseover');
+			f.apply(that,more);
 		});
 		rec.mouseout(function() {
-			console.log('mouseout: '+arguments);
+			var f=that.eventGlobal;
+			var more=Array.prototype.slice.call(arguments);
+			more.push('mouseout');
+			f.apply(that,more);
 		});
 		rec.toFront();
+		console.dir(rec.getBBox());
+		this.startX=rec.getBBox().x;
+		this.startY=rec.getBBox().y;
 		this.fullRec=rec;
 	},
 	postGraphics: function() {
@@ -231,15 +246,36 @@ var SvgBoard=Class.create(
 	},
 	/**
 		@description Translates position (0..7,0..7) to pixels
-		@param pos position (0..7,0..7) to translate
+		@param piecePosition PiecePosition (0..7,0..7) to translate
 		@returns position in pixels
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	posToPixels: function(piecePosition) {
 		if(this.flipview===true) {
-			return new SvgPixelPosition((7-piecePosition.x)*this.square,piecePosition.y*this.square);
+			return new SvgPixelPosition(
+				(7-piecePosition.x)*this.square,
+				piecePosition.y*this.square
+			);
 		} else {
-			return new SvgPixelPosition(piecePosition.x*this.square,(7-piecePosition.y)*this.square);
+			return new SvgPixelPosition(
+				piecePosition.x*this.square,
+				(7-piecePosition.y)*this.square
+			);
+		}
+	},
+	/**
+		@description Translates pixel position (x,y) to board position (0..7,0..7)
+		@param svgPixelPosition SvgPixelPosition object to translate
+		@returns position (0..7,0..7)
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
+	pixelsToPos: function(svgPixelPosition) {
+		var x=Math.floor((svgPixelPosition.x-this.startX)/this.square);
+		var y=Math.floor((svgPixelPosition.y-this.startY)/this.square);
+		if(this.flipview===true) {
+			return new PiecePosition(7-x,y);
+		} else {
+			return new PiecePosition(x,7-y);
 		}
 	},
 	/**
@@ -384,8 +420,8 @@ var SvgBoard=Class.create(
 			this.eventSquare(piecePosition,rec,'piece'+type);
 		}
 		//if(type=='mouseover' || type=='squaremouseover') {
-		if(type=='mouseover') {
-		//if(type=='squaremouseover') {
+		//if(type=='mouseover') {
+		if(type=='squaremouseover') {
 			if(this.config['do_select_piece']) {
 				if(SvgBoard.spiece) {
 					if(SvgBoard.spiece!=boardPiece) {
@@ -400,8 +436,8 @@ var SvgBoard=Class.create(
 			}
 		}
 		//if(type=='mouseout' || type=='squaremouseout') {
-		if(type=='mouseout') {
-		//if(type=='squaremouseout') {
+		//if(type=='mouseout') {
+		if(type=='squaremouseout') {
 			if(this.config['do_select_piece']) {
 				if(SvgBoard.spiece) {
 					this.glow(SvgBoard.spiece,false);
@@ -465,31 +501,57 @@ var SvgBoard=Class.create(
 				}
 			}
 		}
-		/*
 		// selecting a rectangle - fill with select_color
 		if(type=='click') {
-			if(selected) {
-				if(selected==rec) {
-					this.setRectFill(selected,selectedPos);
-					selected=undefined;
-					selectedPos=undefined;
+			if(this.config['do_select_click']) {
+				if(SvgBoard.selected) {
+					if(SvgBoard.selected==rec) {
+						this.setRectFill(SvgBoard.selected,SvgBoard.selectedPos);
+						SvgBoard.selected=undefined;
+						SvgBoard.selectedPos=undefined;
+					} else {
+						this.setRectFill(SvgBoard.selected,SvgBoard.selectedPos);
+						rec.attr('fill',this.config['select_color']);
+						SvgBoard.selected=rec;
+						SvgBoard.selectedPos=piecePosition;
+					}
 				} else {
-					this.setRectFill(selected,selectedPos);
 					rec.attr('fill',this.config['select_color']);
-					selected=rec;
-					selectedPos=piecePosition;
+					SvgBoard.selected=rec;
+					SvgBoard.selectedPos=piecePosition;
 				}
-			} else {
-				rec.attr('fill',this.config['select_color']);
-				selected=rec;
-				selectedPos=piecePosition;
 			}
 		}
-		*/
+	},
+	eventGlobal: function(eventtype,x,y,type) {
+		Utils.fakeUse(eventtype);
+		var piecePosition=this.pixelsToPos(new SvgPixelPosition(x,y));
+		if(type=='mouseover' || type=='mouseout') {
+			if(this.board.hasPieceAtPosition(piecePosition)) {
+				var boardPiece=this.board.getPieceAtPosition(piecePosition);
+				this.eventPiece(boardPiece,'square'+type);
+			}
+		}
+		if(type=='mouseover') {
+			if(this.config['do_select_global']) {
+				Utils.pass();
+			}
+		}
+		if(type=='mousemove') {
+			if(this.config['do_select_global']) {
+				Utils.pass();
+			}
+		}
+		if(type=='mousemove') {
+			if(this.config['do_select_global']) {
+				Utils.pass();
+			}
+		}
 	}
 });
+// static data
 SvgBoard.spiece=undefined;
-//SvgBoard.selected=undefined;
-//SvgBoard.selectedPos=undefined;
+SvgBoard.selected=undefined;
+SvgBoard.selectedPos=undefined;
 SvgBoard.colored=undefined;
 SvgBoard.coloredPos=undefined;
