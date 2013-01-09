@@ -21,6 +21,9 @@ var ConfigTemplate=Class.create(
 	*/
 	add: function(s) {
 		Utils.checkContains(s,ConfigTemplate.fullSet);
+		if(!(s.type in ConfigTemplate.types)) {
+			throw 'bad type ['+s.type+']';
+		}	
 		if(s.name in this.tuples) {
 			throw 'repeat of key ['+s.name+']';
 		}
@@ -57,4 +60,9 @@ ConfigTemplate.fullSet={
 	required:undefined,
 	description:undefined,
 	defaultValue:undefined
+};
+ConfigTemplate.types={
+	string:undefined,
+	number:undefined,
+	boolean:undefined
 };

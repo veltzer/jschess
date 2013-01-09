@@ -33,7 +33,8 @@ ${jsFiles()}
 					do_select_square:true,
 					do_select_piece:true,
 					do_select_global:true,
-					do_letters:true
+					do_letters:true,
+					glow_width:7
 				})
 				board.startPosition();
 				$('startpos').observe('click',function() {

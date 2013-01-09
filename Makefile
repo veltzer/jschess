@@ -76,7 +76,8 @@ $(JSFULL): $(SOURCES) $(JSCHECK)
 $(JSMIN): $(JSFULL)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)yui-compressor $< -o $@
+	$(Q)jsmin < $< > $@
+#$(Q)yui-compressor $< -o $@
 
 $(JSPACK): $(JSMIN)
 	$(info doing [$@])
