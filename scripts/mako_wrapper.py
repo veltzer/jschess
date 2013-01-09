@@ -18,7 +18,8 @@ def years(x):
 	return ','.join(map(str,range(x,curr_year+1)))
 
 def jsFiles():
-	files=glob.glob('src/*.js')
+	#files=glob.glob('src/*.js')
+	files=myutils.files_in_order();
 	l=[]
 	l.append('<!-- placed by jsFiles() macro -->')
 	for f in files:

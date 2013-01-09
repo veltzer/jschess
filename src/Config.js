@@ -24,7 +24,7 @@ var Config=Class.create(
 		this.tmpl=tmpl;
 	},
 	getValue: function(key) {
-		if(key in this.tmpl) {
+		if(this.tmpl.hasKey(key)) {
 			if(key in this.d) {
 				return this.d[key];
 			} else {
@@ -41,5 +41,21 @@ var Config=Class.create(
 		// check that the key and value are ok.
 		this.tmpl.check(key,value);
 		this.d[key]=value;
+	},
+	/**
+		@description set many values at once
+		@param d dictionary of values
+	*/
+	override: function(d) {
+		for(var x in d) {
+			this.setValue(x,d[x]);
+		}
+	},
+	/**
+		@description check that the config is good to go
+		for instance: check that all required arguments are set
+	*/
+	check: function() {
+		// TODO
 	}
 });

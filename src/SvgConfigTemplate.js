@@ -11,7 +11,8 @@ var SvgConfigTemplate=Class.create(ConfigTemplate,
 		@constructs
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
-	initialize: function() {
+	initialize: function($super) {
+		$super();
 		this.add({
 			name:'id',
 			type:'string',
@@ -69,7 +70,7 @@ var SvgConfigTemplate=Class.create(ConfigTemplate,
 		});
 		this.add({
 			name:'flipview',
-			type:'bool',
+			type:'boolean',
 			required:false,
 			description:'is the board flipped',
 			defaultValue:false
@@ -97,7 +98,7 @@ var SvgConfigTemplate=Class.create(ConfigTemplate,
 		});
 		this.add({
 			name:'gradients',
-			type:'bool',
+			type:'boolean',
 			required:false,
 			description:'should we use gradients?',
 			defaultValue:true
@@ -118,35 +119,35 @@ var SvgConfigTemplate=Class.create(ConfigTemplate,
 		});
 		this.add({
 			name:'do_select_click',
-			type:'bool',
+			type:'boolean',
 			required:false,
 			description:'should we select clicks',
 			defaultValue:false
 		});
 		this.add({
 			name:'do_select_square',
-			type:'bool',
+			type:'boolean',
 			required:false,
 			description:'should we select squares',
 			defaultValue:false
 		});
 		this.add({
 			name:'do_select_piece',
-			type:'bool',
+			type:'boolean',
 			required:false,
 			description:'should we select pieces',
 			defaultValue:false
 		});
 		this.add({
 			name:'do_select_global',
-			type:'bool',
+			type:'boolean',
 			required:false,
 			description:'should we select pieces',
 			defaultValue:false
 		});
 		this.add({
 			name:'do_letters',
-			type:'bool',
+			type:'boolean',
 			required:false,
 			description:'draw letters around the board',
 			defaultValue:true

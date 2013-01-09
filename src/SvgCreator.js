@@ -23,10 +23,10 @@ var SvgCreator=Class.create(
 */
 SvgCreator.createPiece=function(config,pieceColor,pieceType) {
 	// the 240.0 was found found empirically...
-	var strokewidth=config['size']/240.0;
+	var strokewidth=config.getValue('size')/240.0;
 	var stdatt={
 		'stroke-width':strokewidth,
-		stroke:config['pencolor'],
+		stroke:config.getValue('pencolor'),
 		'stroke-linejoin':'round',
 		'stroke-linecap':'round'
 	};
@@ -37,10 +37,10 @@ SvgCreator.createPiece=function(config,pieceColor,pieceType) {
 		//'fill': '0-#fff:0-#fff:50-#999:100',
 		// this is not the right way to make it hidden
 		//'opacity':0,
-		if(config['gradients']) {
+		if(config.getValue('gradients')) {
 			stdatt['fill']='0-#fff:0-#fff:50-#999:100';
 		} else {
-			stdatt['fill']=config['white_color'];
+			stdatt['fill']=config.getValue('white_color');
 		}
 		if(pieceType.isRook()) {
 			svgPiece=new SvgPiece(45);
@@ -100,11 +100,11 @@ SvgCreator.createPiece=function(config,pieceColor,pieceType) {
 		}
 	}
 	if(pieceColor.isBlack()) {
-		if(config['gradients']) {
+		if(config.getValue('gradients')) {
 			//stdatt['fill']='0-#000:0-#222:50-#555:100';
 			stdatt['fill']='0-#555:0-#222:50-#000:100';
 		} else {
-			stdatt['fill']=config['black_color'];
+			stdatt['fill']=config.getValue('black_color');
 		}
 		if(pieceType.isRook()) {
 			svgPiece=new SvgPiece(45);
