@@ -29,14 +29,14 @@ var SvgBoard=Class.create(
 		this.config.check();
 		// now we are ready to go...
 		// get RW vars from the config
-		this.flipview=this.config.getValue('flipview');
-		this.size=this.config.getValue('size');
-		if(this.config.getValue('do_letters')) {
-			this.square=this.config.getValue('size')/8.6;
+		this.flipview=this.getValue('flipview');
+		this.size=this.getValue('size');
+		if(this.getValue('do_letters')) {
+			this.square=this.getValue('size')/8.6;
 			this.offX=this.square*0.3;
 			this.offY=this.square*0.3;
 		} else {
-			this.square=this.config.getValue('size')/8.0;
+			this.square=this.getValue('size')/8.0;
 			this.offX=0;
 			this.offY=0;
 		}
@@ -44,7 +44,7 @@ var SvgBoard=Class.create(
 		this.board=board;
 		this.raphaelPrep();
 		this.drawBoard();
-		if(this.config.getValue('do_letters')) {
+		if(this.getValue('do_letters')) {
 			this.drawBorder();
 		}
 		// hook the board to our graphics
@@ -61,15 +61,18 @@ var SvgBoard=Class.create(
 		this.overlay();
 		// build the glow object
 		this.glow_obj={};
-		this.glow_obj.width=this.config.getValue('glow_width');
-		this.glow_obj.fill=this.config.getValue('glow_fill');
-		this.glow_obj.opacity=this.config.getValue('glow_opacity');
-		this.glow_obj.offsetx=this.config.getValue('glow_offsetx');
-		this.glow_obj.offsety=this.config.getValue('glow_offsety');
-		this.glow_obj.color=this.config.getValue('glow_color');
+		this.glow_obj.width=this.getValue('glow_width');
+		this.glow_obj.fill=this.getValue('glow_fill');
+		this.glow_obj.opacity=this.getValue('glow_opacity');
+		this.glow_obj.offsetx=this.getValue('glow_offsetx');
+		this.glow_obj.offsety=this.getValue('glow_offsety');
+		this.glow_obj.color=this.getValue('glow_color');
 	},
 	getBoard: function() {
 		return this.board;
+	},
+	getValue: function(key) {
+		return this.config.getValue(key);
 	},
 	/**
 		@description Prepare the raphael paper so we could do graphics
@@ -80,25 +83,25 @@ var SvgBoard=Class.create(
 		// async way
 		/*
 		var widget=this
-		Raphael(this.config.getValue('id'),this.config.getValue('size'),this.config.getValue('size'),function() {
+		Raphael(this.getValue('id'),this.getValue('size'),this.getValue('size'),function() {
 			widget.paper=this
 			widget.drawBoard()
 		})
 		*/
 		// sync way
 		this.paper=new WRaphael(
-			this.config.getValue('id'),
-			this.config.getValue('size'),
-			this.config.getValue('size')
+			this.getValue('id'),
+			this.getValue('size'),
+			this.getValue('size')
 		);
 		/*
 		this.paper=Raphael(
-			this.config.getValue('id'),
-			this.config.getValue('size'),
-			this.config.getValue('size')
+			this.getValue('id'),
+			this.getValue('size'),
+			this.getValue('size')
 		);
 		*/
-		this.elem=$(this.config.getValue('id'));
+		this.elem=$(this.getValue('id'));
 		var offset=this.elem.cumulativeOffset();
 		this.startX=offset.left;
 		this.startY=offset.top;
@@ -112,16 +115,16 @@ var SvgBoard=Class.create(
 	*/
 	setRectFill: function(rec,piecePosition) {
 		if((piecePosition.x+piecePosition.y)%2==1) {
-			if(this.config.getValue('gradients')) {
-				rec.attr('fill',this.config.getValue('white_square_gradient'));
+			if(this.getValue('gradients')) {
+				rec.attr('fill',this.getValue('white_square_gradient'));
 			} else {
-				rec.attr('fill',this.config.getValue('white_square_color'));
+				rec.attr('fill',this.getValue('white_square_color'));
 			}
 		} else {
-			if(this.config.getValue('gradients')) {
-				rec.attr('fill',this.config.getValue('black_square_gradient'));
+			if(this.getValue('gradients')) {
+				rec.attr('fill',this.getValue('black_square_gradient'));
 			} else {
-				rec.attr('fill',this.config.getValue('black_square_color'));
+				rec.attr('fill',this.getValue('black_square_color'));
 			}
 		}
 	},
@@ -157,8 +160,8 @@ var SvgBoard=Class.create(
 					this.square
 				);
 				rec.attr({
-					stroke:this.config.getValue('rec_stroke_color'),
-					"stroke-width":this.config.getValue('rec_stroke_width')
+					stroke:this.getValue('rec_stroke_color'),
+					"stroke-width":this.getValue('rec_stroke_width')
 				});
 				rec_line.push(rec);
 				var piecePosition=new PiecePosition(x,(7-y));
@@ -372,7 +375,7 @@ var SvgBoard=Class.create(
 	*/
 	postMovePiece: function(boardPiece,posFrom,posTo) {
 		Utils.fakeUse(posFrom);
-		this.timeMovePiece(boardPiece,posFrom,posTo,this.config.getValue('move_ms'));
+		this.timeMovePiece(boardPiece,posFrom,posTo,this.getValue('move_ms'));
 	},
 	positionPiece: function(piece,posTo) {
 		this.timeMovePiece(piece,posTo,0);
@@ -465,7 +468,7 @@ var SvgBoard=Class.create(
 		// going into a rectangle - set the selected color
 		// selecting a rectangle - fill with select_color
 		if(type=='click') {
-			if(this.config.getValue('do_select_click')) {
+			if(this.getValue('do_select_click')) {
 				if(SvgBoard.selected) {
 					if(SvgBoard.selected==rec) {
 						this.setRectFill(SvgBoard.selected,SvgBoard.selectedPos);
@@ -473,12 +476,12 @@ var SvgBoard=Class.create(
 						SvgBoard.selectedPos=undefined;
 					} else {
 						this.setRectFill(SvgBoard.selected,SvgBoard.selectedPos);
-						rec.attr('fill',this.config.getValue('select_color'));
+						rec.attr('fill',this.getValue('select_color'));
 						SvgBoard.selected=rec;
 						SvgBoard.selectedPos=piecePosition;
 					}
 				} else {
-					rec.attr('fill',this.config.getValue('select_color'));
+					rec.attr('fill',this.getValue('select_color'));
 					SvgBoard.selected=rec;
 					SvgBoard.selectedPos=piecePosition;
 				}
@@ -517,13 +520,13 @@ var SvgBoard=Class.create(
 		//console.log(SvgBoard.currentPos,SvgBoard.lastPos);
 		if(SvgBoard.currentPos==undefined) {
 			if(SvgBoard.selectedPiece!=undefined) {
-				if(this.config.getValue('do_select_piece')) {
+				if(this.getValue('do_select_piece')) {
 					this.glow(SvgBoard.selectedPiece,false);
 					SvgBoard.selectedPiece=undefined;
 				}
 			}
 			if(SvgBoard.selectedRec!=undefined) {
-				if(this.config.getValue('do_select_square')) {
+				if(this.getValue('do_select_square')) {
 					this.setRectFill(SvgBoard.selectedRec,SvgBoard.lastPos);
 					SvgBoard.selectedRec=undefined;
 				}
@@ -532,7 +535,7 @@ var SvgBoard=Class.create(
 			if(this.board.hasPieceAtPosition(SvgBoard.currentPos)) {
 				var boardPiece=this.board.getPieceAtPosition(SvgBoard.currentPos);
 				//this.eventPiece(boardPiece,'square'+type);
-				if(this.config.getValue('do_select_piece')) {
+				if(this.getValue('do_select_piece')) {
 					if(SvgBoard.selectedPiece==undefined) {
 						SvgBoard.selectedPiece=boardPiece;
 						this.glow(SvgBoard.selectedPiece,true);
@@ -544,21 +547,21 @@ var SvgBoard=Class.create(
 				}
 			} else {
 				if(SvgBoard.selectedPiece!=undefined) {
-					if(this.config.getValue('do_select_piece')) {
+					if(this.getValue('do_select_piece')) {
 						this.glow(SvgBoard.selectedPiece,false);
 						SvgBoard.selectedPiece=undefined;
 					}
 				}
 			}
-			if(this.config.getValue('do_select_square')) {
+			if(this.getValue('do_select_square')) {
 				var rec=this.getRec(SvgBoard.currentPos);
 				if(SvgBoard.selectedRec==undefined) {
 					SvgBoard.selectedRec=rec;
-					SvgBoard.selectedRec.attr('fill',this.config.getValue('over_color'));
+					SvgBoard.selectedRec.attr('fill',this.getValue('over_color'));
 				} else {
 					this.setRectFill(SvgBoard.selectedRec,SvgBoard.lastPos);
 					SvgBoard.selectedRec=rec;
-					SvgBoard.selectedRec.attr('fill',this.config.getValue('over_color'));
+					SvgBoard.selectedRec.attr('fill',this.getValue('over_color'));
 				}
 			}
 		}
