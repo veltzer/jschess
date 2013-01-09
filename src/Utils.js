@@ -83,3 +83,18 @@ Utils.checkType=function(v,t) {
 		throw 'type is wrong';
 	}
 };
+/**
+	@description Checks whether one dictionary contains all the keys of the other
+	Throws an exceptions if that is not the case.
+	@param s1 first set
+	@param s2 second set
+	@returns nothing
+	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+*/
+Utils.checkContains=function(s1,s2) {
+	for(var x in s1) {
+		if(!(x in s2)) {
+			throw 'key '+x+' is bad';
+		}
+	}
+};
