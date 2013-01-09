@@ -1,3 +1,4 @@
+/*jsl:import Utils.js*/
 var Config=Class.create(
 	/** @lends Config# */
 {
@@ -16,6 +17,29 @@ var Config=Class.create(
 		@constructs
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
-	initialize: function() {
+	initialize: function(tmpl) {
+		// the dictionary holding the current config
+		this.d={};
+		// the template to be used
+		this.tmpl=tmpl;
+	},
+	getValue: function(key) {
+		if(key in this.tmpl) {
+			if(key in this.d) {
+				return this.d[key];
+			} else {
+				return this.tmpl.getDefaultValue(key);
+			}
+		} else {
+			throw 'request for bad key ['+key+']';
+		}
+	},
+	/**
+		@description set a key to a certain value in the current configuration
+	*/
+	setValue: function(key,value) {
+		// check that the key and value are ok.
+		this.tmpl.check(key,value);
+		this.d[key]=value;
 	}
 });
