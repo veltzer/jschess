@@ -22,7 +22,6 @@ def files_in_order():
 		'src/PiecePosition.js',
 		'src/PieceType.js',
 		'src/RUtils.js',
-		'src/SvgConfig.js',
 		'src/SvgConfigTemplate.js',
 		'src/SvgBoard.js',
 		'src/Board.js',
