@@ -135,10 +135,23 @@ var SvgBoard=Class.create(
 	*/
 	drawBorder: function() {
 		this.texts=[];
+		console.log(this.offX);
+		console.log(this.offY);
+		console.log(this.square);
+		console.log(this.size);
+		var part=0.5;
 		for(var y=0;y<8;y++) {
-			var txt1=this.paper.text(this.square*0.3*0.3,(y+0.5)*this.square+this.offY,y+1);
+			var txt1=this.paper.text(
+				this.square*0.3*part,
+				(y+0.5)*this.square+this.offY,
+				8-y
+			);
 			this.texts.push(txt1);
-			var txt2=this.paper.text(this.offX+this.square*8.0+this.square*0.3*0.3,(y+0.5)*this.square+this.offY,y+1);
+			var txt2=this.paper.text(
+				this.offX+this.square*8.0+this.square*0.3*part,
+				(y+0.5)*this.square+this.offY,
+				8-y
+			);
 			this.texts.push(txt2);
 		}
 	},
