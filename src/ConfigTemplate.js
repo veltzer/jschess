@@ -25,6 +25,29 @@ var ConfigTemplate=Class.create(
 			throw 'repeat of key ['+s.name+']';
 		}
 		this.tuples[s.name]=s;
+	},
+	/**
+		@description check that a key,value combo is ok
+	*/
+	check: function(key,value) {
+		if(!(key in this.tuples)) {
+			throw 'wrong key ['+key+']';
+		}
+		if(typeof(value)!=this.tuples[key].type) {
+			throw 'wrong type for key ['+key+'] and value ['+value+']';
+		}
+	},
+	/**
+		@description return whether the template has a key
+	*/
+	hasKey: function(key) {
+		return key in this.tuples;
+	},
+	/**
+		@description return the default value for a key
+	*/
+	getDefaultValue: function(key) {
+		return this.tuples[key].defaultValue;
 	}
 });
 // static data

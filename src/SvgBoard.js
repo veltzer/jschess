@@ -32,11 +32,11 @@ var SvgBoard=Class.create(
 		this.flipview=this.config.getValue('flipview');
 		this.size=this.config.getValue('size');
 		if(this.config.getValue('do_letters')) {
-			this.square=this.config['size']/8.6;
+			this.square=this.config.getValue('size')/8.6;
 			this.offX=this.square*0.3;
 			this.offY=this.square*0.3;
 		} else {
-			this.square=this.config['size']/8.0;
+			this.square=this.config.getValue('size')/8.0;
 			this.offX=0;
 			this.offY=0;
 		}
@@ -72,15 +72,25 @@ var SvgBoard=Class.create(
 		// async way
 		/*
 		var widget=this
-		Raphael(this.config['id'],this.config['size'],this.config['size'],function() {
+		Raphael(this.config.getValue('id'),this.config.getValue('size'),this.config.getValue('size'),function() {
 			widget.paper=this
 			widget.drawBoard()
 		})
 		*/
 		// sync way
-		this.paper=new WRaphael(this.config['id'],this.config['size'],this.config['size']);
-		//this.paper=Raphael(this.config['id'],this.config['size'],this.config['size']);
-		this.elem=$(this.config['id']);
+		this.paper=new WRaphael(
+			this.config.getValue('id'),
+			this.config.getValue('size'),
+			this.config.getValue('size')
+		);
+		/*
+		this.paper=Raphael(
+			this.config.getValue('id'),
+			this.config.getValue('size'),
+			this.config.getValue('size')
+		);
+		*/
+		this.elem=$(this.config.getValue('id'));
 		var offset=this.elem.cumulativeOffset();
 		this.startX=offset.left;
 		this.startY=offset.top;
@@ -94,16 +104,16 @@ var SvgBoard=Class.create(
 	*/
 	setRectFill: function(rec,piecePosition) {
 		if((piecePosition.x+piecePosition.y)%2==1) {
-			if(this.config['gradients']) {
-				rec.attr('fill',this.config['white_square_gradient']);
+			if(this.config.getValue('gradients')) {
+				rec.attr('fill',this.config.getValue('white_square_gradient'));
 			} else {
-				rec.attr('fill',this.config['white_square_color']);
+				rec.attr('fill',this.config.getValue('white_square_color'));
 			}
 		} else {
-			if(this.config['gradients']) {
-				rec.attr('fill',this.config['black_square_gradient']);
+			if(this.config.getValue('gradients')) {
+				rec.attr('fill',this.config.getValue('black_square_gradient'));
 			} else {
-				rec.attr('fill',this.config['black_square_color']);
+				rec.attr('fill',this.config.getValue('black_square_color'));
 			}
 		}
 	},
@@ -139,8 +149,8 @@ var SvgBoard=Class.create(
 					this.square
 				);
 				rec.attr({
-					stroke:this.config['rec_stroke_color'],
-					"stroke-width":this.config['rec_stroke_width']
+					stroke:this.config.getValue('rec_stroke_color'),
+					"stroke-width":this.config.getValue('rec_stroke_width')
 				});
 				rec_line.push(rec);
 				var piecePosition=new PiecePosition(x,(7-y));
@@ -354,7 +364,7 @@ var SvgBoard=Class.create(
 	*/
 	postMovePiece: function(boardPiece,posFrom,posTo) {
 		Utils.fakeUse(posFrom);
-		this.timeMovePiece(boardPiece,posFrom,posTo,this.config['move_ms']);
+		this.timeMovePiece(boardPiece,posFrom,posTo,this.config.getValue('move_ms'));
 	},
 	positionPiece: function(piece,posTo) {
 		this.timeMovePiece(piece,posTo,0);
@@ -416,7 +426,7 @@ var SvgBoard=Class.create(
 	redraw: function() {
 		var that=this;
 		this.board.forEachPiece(function(boardPiece,position) {
-			that.timeMovePiece(boardPiece,position,position,that.config['flip_ms']);
+			that.timeMovePiece(boardPiece,position,position,that.config.getValue('flip_ms'));
 		});
 	},
 	/**
@@ -447,7 +457,7 @@ var SvgBoard=Class.create(
 		// going into a rectangle - set the selected color
 		// selecting a rectangle - fill with select_color
 		if(type=='click') {
-			if(this.config['do_select_click']) {
+			if(this.config.getValue('do_select_click')) {
 				if(SvgBoard.selected) {
 					if(SvgBoard.selected==rec) {
 						this.setRectFill(SvgBoard.selected,SvgBoard.selectedPos);
@@ -455,12 +465,12 @@ var SvgBoard=Class.create(
 						SvgBoard.selectedPos=undefined;
 					} else {
 						this.setRectFill(SvgBoard.selected,SvgBoard.selectedPos);
-						rec.attr('fill',this.config['select_color']);
+						rec.attr('fill',this.config.getValue('select_color'));
 						SvgBoard.selected=rec;
 						SvgBoard.selectedPos=piecePosition;
 					}
 				} else {
-					rec.attr('fill',this.config['select_color']);
+					rec.attr('fill',this.config.getValue('select_color'));
 					SvgBoard.selected=rec;
 					SvgBoard.selectedPos=piecePosition;
 				}
@@ -499,13 +509,13 @@ var SvgBoard=Class.create(
 		//console.log(SvgBoard.currentPos,SvgBoard.lastPos);
 		if(SvgBoard.currentPos==undefined) {
 			if(SvgBoard.selectedPiece!=undefined) {
-				if(this.config['do_select_piece']) {
+				if(this.config.getValue('do_select_piece')) {
 					this.glow(SvgBoard.selectedPiece,false);
 					SvgBoard.selectedPiece=undefined;
 				}
 			}
 			if(SvgBoard.selectedRec!=undefined) {
-				if(this.config['do_select_square']) {
+				if(this.config.getValue('do_select_square')) {
 					this.setRectFill(SvgBoard.selectedRec,SvgBoard.lastPos);
 					SvgBoard.selectedRec=undefined;
 				}
@@ -514,7 +524,7 @@ var SvgBoard=Class.create(
 			if(this.board.hasPieceAtPosition(SvgBoard.currentPos)) {
 				var boardPiece=this.board.getPieceAtPosition(SvgBoard.currentPos);
 				//this.eventPiece(boardPiece,'square'+type);
-				if(this.config['do_select_piece']) {
+				if(this.config.getValue('do_select_piece')) {
 					if(SvgBoard.selectedPiece==undefined) {
 						SvgBoard.selectedPiece=boardPiece;
 						this.glow(SvgBoard.selectedPiece,true);
@@ -526,21 +536,21 @@ var SvgBoard=Class.create(
 				}
 			} else {
 				if(SvgBoard.selectedPiece!=undefined) {
-					if(this.config['do_select_piece']) {
+					if(this.config.getValue('do_select_piece')) {
 						this.glow(SvgBoard.selectedPiece,false);
 						SvgBoard.selectedPiece=undefined;
 					}
 				}
 			}
-			if(this.config['do_select_square']) {
+			if(this.config.getValue('do_select_square')) {
 				var rec=this.getRec(SvgBoard.currentPos);
 				if(SvgBoard.selectedRec==undefined) {
 					SvgBoard.selectedRec=rec;
-					SvgBoard.selectedRec.attr('fill',this.config['over_color']);
+					SvgBoard.selectedRec.attr('fill',this.config.getValue('over_color'));
 				} else {
 					this.setRectFill(SvgBoard.selectedRec,SvgBoard.lastPos);
 					SvgBoard.selectedRec=rec;
-					SvgBoard.selectedRec.attr('fill',this.config['over_color']);
+					SvgBoard.selectedRec.attr('fill',this.config.getValue('over_color'));
 				}
 			}
 		}
