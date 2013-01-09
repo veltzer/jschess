@@ -154,6 +154,20 @@ var SvgBoard=Class.create(
 			);
 			this.texts.push(txt2);
 		}
+		for(var x=0;x<8;x++) {
+			var txt3=this.paper.text(
+				(x+0.5)*this.square+this.offX,
+				this.square*0.3*part,
+				String.fromCharCode(x+'A'.charCodeAt(0))
+			);
+			this.texts.push(txt3);
+			var txt4=this.paper.text(
+				(x+0.5)*this.square+this.offX,
+				this.offY+this.square*8.0+this.square*0.3*part,
+				String.fromCharCode(x+'A'.charCodeAt(0))
+			);
+			this.texts.push(txt4);
+		}
 	},
 	/**
 		@description Draw the board (which and black squares)
