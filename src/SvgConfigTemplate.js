@@ -166,6 +166,48 @@ var SvgConfigTemplate=Class.create(ConfigTemplate,
 			description:'rectangles stroke width',
 			defaultValue:0.1
 		});
+		this.add({
+			name:'glow_width',
+			type:'number',
+			required:false,
+			description:'glow width',
+			defaultValue:10
+		});
+		this.add({
+			name:'glow_fill',
+			type:'boolean',
+			required:false,
+			description:'glow fill',
+			defaultValue:false
+		});
+		this.add({
+			name:'glow_opacity',
+			type:'number',
+			required:false,
+			description:'glow opacity',
+			defaultValue:0.5
+		});
+		this.add({
+			name:'glow_offsetx',
+			type:'number',
+			required:false,
+			description:'glow offsetx',
+			defaultValue:0
+		});
+		this.add({
+			name:'glow_offsety',
+			type:'number',
+			required:false,
+			description:'glow offsety',
+			defaultValue:0
+		});
+		this.add({
+			name:'glow_color',
+			type:'string',
+			required:false,
+			description:'glow color',
+			defaultValue:'black'
+		});
 	}
 });
 // singleton pattern

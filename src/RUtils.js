@@ -18,10 +18,10 @@ var RUtils=Class.create(
 	@returns the set of glow objects
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
-RUtils.setGlow=function(paper,set) {
+RUtils.setGlow=function(paper,set,glow_obj) {
 	var nset=paper.set();
 	set.forEach(function(e) {
-		nset.push(e.glow());
+		nset.push(e.glow(glow_obj));
 	},undefined);
 	return nset;
 };

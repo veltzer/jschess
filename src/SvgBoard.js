@@ -59,6 +59,14 @@ var SvgBoard=Class.create(
 			that.postMovePiece(boardPiece,fromPos,toPos);
 		});
 		this.overlay();
+		// build the glow object
+		this.glow_obj={};
+		this.glow_obj.width=this.config.getValue('glow_width');
+		this.glow_obj.fill=this.config.getValue('glow_fill');
+		this.glow_obj.opacity=this.config.getValue('glow_opacity');
+		this.glow_obj.offsetx=this.config.getValue('glow_offsetx');
+		this.glow_obj.offsety=this.config.getValue('glow_offsety');
+		this.glow_obj.color=this.config.getValue('glow_color');
 	},
 	getBoard: function() {
 		return this.board;
@@ -412,7 +420,7 @@ var SvgBoard=Class.create(
 	glow: function(boardPiece,glow) {
 		var svgPieceData=boardPiece.getData();
 		if(glow) {
-			svgPieceData.extra=RUtils.setGlow(this.paper,svgPieceData.set);
+			svgPieceData.extra=RUtils.setGlow(this.paper,svgPieceData.set,this.glow_obj);
 		} else {
 			svgPieceData.extra.remove();
 			svgPieceData.extra=undefined;
