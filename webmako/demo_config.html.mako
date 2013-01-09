@@ -35,7 +35,7 @@ ${jsThirdParty()}
 		</script>
 	</head>
 	<body>
-		<h1>Controls demo</h1>
+		<h1>Configuration options for JsChess</h1>
 		<p>
 		These are the configuration options that <b>jschess</b> supports:
 			<div id="myid">
