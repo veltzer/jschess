@@ -51,6 +51,9 @@ var ConfigTemplate=Class.create(
 	*/
 	getDefaultValue: function(key) {
 		return this.tuples[key].defaultValue;
+	},
+	getHTML: function() {
+		return '<h1>foobar</h1>';
 	}
 });
 // static data
