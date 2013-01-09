@@ -23,4 +23,4 @@ What makes jschess different?
 * Looks best.
 * Sits on top of good infrastructure (prototype.js,raphael.js).
 
-Mark Veltzer, 2012, mark.veltzer@gmail.com
+Mark Veltzer, 2012-2013, mark.veltzer@gmail.com
