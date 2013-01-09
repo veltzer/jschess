@@ -34,7 +34,8 @@ ${jsFiles()}
 					do_select_piece:true,
 					do_select_global:true,
 					do_letters:true,
-					glow_width:7
+					glow_width:7,
+					partial:0.6
 				})
 				board.startPosition();
 				$('startpos').observe('click',function() {

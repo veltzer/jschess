@@ -32,9 +32,10 @@ var SvgBoard=Class.create(
 		this.flipview=this.getValue('flipview');
 		this.size=this.getValue('size');
 		if(this.getValue('do_letters')) {
-			this.square=this.getValue('size')/8.6;
-			this.offX=this.square*0.3;
-			this.offY=this.square*0.3;
+			var partial=this.getValue('partial');
+			this.square=this.getValue('size')/(8+partial);
+			this.offX=this.square*(partial/2);
+			this.offY=this.square*(partial/2);
 		} else {
 			this.square=this.getValue('size')/8.0;
 			this.offX=0;
@@ -140,15 +141,16 @@ var SvgBoard=Class.create(
 		console.log(this.square);
 		console.log(this.size);
 		var part=0.5;
+		var partial=this.getValue('partial');
 		for(var y=0;y<8;y++) {
 			var txt1=this.paper.text(
-				this.square*0.3*part,
+				this.square*(partial/2)*part,
 				(y+0.5)*this.square+this.offY,
 				8-y
 			);
 			this.texts.push(txt1);
 			var txt2=this.paper.text(
-				this.offX+this.square*8.0+this.square*0.3*part,
+				this.offX+this.square*8.0+this.square*(partial/2)*part,
 				(y+0.5)*this.square+this.offY,
 				8-y
 			);
@@ -157,13 +159,13 @@ var SvgBoard=Class.create(
 		for(var x=0;x<8;x++) {
 			var txt3=this.paper.text(
 				(x+0.5)*this.square+this.offX,
-				this.square*0.3*part,
+				this.square*(partial/2)*part,
 				String.fromCharCode(x+'A'.charCodeAt(0))
 			);
 			this.texts.push(txt3);
 			var txt4=this.paper.text(
 				(x+0.5)*this.square+this.offX,
-				this.offY+this.square*8.0+this.square*0.3*part,
+				this.offY+this.square*8.0+this.square*(partial/2)*part,
 				String.fromCharCode(x+'A'.charCodeAt(0))
 			);
 			this.texts.push(txt4);

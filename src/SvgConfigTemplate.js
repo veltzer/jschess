@@ -208,6 +208,13 @@ var SvgConfigTemplate=Class.create(ConfigTemplate,
 			description:'glow color',
 			defaultValue:'black'
 		});
+		this.add({
+			name:'partial',
+			type:'number',
+			required:false,
+			description:'how many squares for borders',
+			defaultValue:0.6
+		});
 	}
 });
 // singleton pattern
