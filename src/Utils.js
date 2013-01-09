@@ -78,3 +78,8 @@ Utils.arrClone=function(a) {
 	return ret;
 	*/
 };
+Utils.checkType=function(v,t) {
+	if(typeof(v)!=t) {
+		throw 'type is wrong';
+	}
+};

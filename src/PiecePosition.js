@@ -1,3 +1,4 @@
+/*jsl:import Utils.js*/
 var PiecePosition=Class.create(
 	/** @lends PiecePosition# */
 {
@@ -12,6 +13,8 @@ var PiecePosition=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	initialize: function(x,y) {
+		Utils.checkType(x,"number");
+		Utils.checkType(y,"number");
 		if(x<0 || x>7) {
 			throw 'bad value for x '+x+','+typeof(x);
 		}

@@ -40,5 +40,10 @@ var WRaphael=Class.create(
 		var m=this.r.path;
 		var r=m.apply(this.r,arguments);
 		return r;
+	},
+	text: function() {
+		var m=this.r.text;
+		var r=m.apply(this.r,arguments);
+		return r;
 	}
 });

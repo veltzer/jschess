@@ -43,6 +43,7 @@ var SvgBoard=Class.create(
 		config['do_select_square']=config['do_select_square'] || false;// should we select squares
 		config['do_select_piece']=config['do_select_piece'] || false;// should we select pieces
 		config['do_select_global']=config['do_select_global'] || false;// should we select pieces
+		config['do_letters']=config['do_letters'] || true;// draw letters around the board
 		config['rec_stroke_color']=config['rec_stroke_color'] || 'black';// rectangles stroke color
 		config['rec_stroke_width']=config['rec_stroke_width'] || 0.1;// rectangles stroke width
 		// store the config
@@ -50,11 +51,22 @@ var SvgBoard=Class.create(
 		// get RW vars from the config
 		this.flipview=this.config['flipview'];
 		this.size=this.config['size'];
-		this.square=this.config['size']/8;
+		if(config['do_letters']) {
+			this.square=this.config['size']/8.6;
+			this.offX=this.square*0.3;
+			this.offY=this.square*0.3;
+		} else {
+			this.square=this.config['size']/8;
+			this.offX=0;
+			this.offY=0;
+		}
 		// real code starts here
 		this.board=board;
 		this.raphaelPrep();
 		this.drawBoard();
+		if(config['do_letters']) {
+			this.drawBorder();
+		}
 		// hook the board to our graphics
 		var that=this;
 		this.board.addPiecePostAddCallback(function(boardPiece,piecePosition) {
@@ -116,6 +128,18 @@ var SvgBoard=Class.create(
 		}
 	},
 	/**
+		@description Draw the boarder
+		@returns nothing
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
+	drawBorder: function() {
+		this.texts=[];
+		for(var y=0;y<8;y++) {
+			var txt=this.paper.text(3,(y+0.5)*this.square+this.offY,y+1);
+			this.texts.push(txt);
+		}
+	},
+	/**
 		@description Draw the board (which and black squares)
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -126,7 +150,12 @@ var SvgBoard=Class.create(
 		for(var x=0;x<8;x++) {
 			var rec_line=[];
 			for(var y=0;y<8;y++) {
-				var rec=this.paper.rect(x*this.square,y*this.square,this.square,this.square);
+				var rec=this.paper.rect(
+					x*this.square+this.offX,
+					y*this.square+this.offY,
+					this.square,
+					this.square
+				);
 				rec.attr({
 					stroke:this.config['rec_stroke_color'],
 					"stroke-width":this.config['rec_stroke_width']
@@ -182,13 +211,13 @@ var SvgBoard=Class.create(
 		rec.attr({fill:Raphael.getColor()});
 		rec.attr({opacity:0.0});
 		rec.mousemove(function(evt,x,y) {
-			that.eventGlobal(evt,x,y,'mousemove');
+			that.eventGlobal(evt,x-that.startX,y-that.startY,'mousemove');
 		});
 		rec.mouseover(function(evt,x,y) {
-			that.eventGlobal(evt,x,y,'mouseover');
+			that.eventGlobal(evt,x-that.startX,y-that.startY,'mouseover');
 		});
 		rec.mouseout(function(evt,x,y) {
-			that.eventGlobal(evt,x,y,'mouseout');
+			that.eventGlobal(evt,x-that.startX,y-that.startY,'mouseout');
 		});
 		rec.toFront();
 		this.fullRec=rec;
@@ -245,13 +274,13 @@ var SvgBoard=Class.create(
 	posToPixels: function(piecePosition) {
 		if(this.flipview===true) {
 			return new SvgPixelPosition(
-				(7-piecePosition.x)*this.square,
-				piecePosition.y*this.square
+				(7-piecePosition.x)*this.square+this.offX,
+				piecePosition.y*this.square+this.offY
 			);
 		} else {
 			return new SvgPixelPosition(
-				piecePosition.x*this.square,
-				(7-piecePosition.y)*this.square
+				piecePosition.x*this.square+this.offX,
+				(7-piecePosition.y)*this.square+this.offY
 			);
 		}
 	},
@@ -262,8 +291,8 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	pixelsToPos: function(svgPixelPosition) {
-		var x=Math.floor((svgPixelPosition.x-this.startX)/this.square);
-		var y=Math.floor((svgPixelPosition.y-this.startY)/this.square);
+		var x=Math.floor((svgPixelPosition.x-this.offX)/this.square);
+		var y=Math.floor((svgPixelPosition.y-this.offY)/this.square);
 		if(this.flipview===true) {
 			return new PiecePosition(7-x,y);
 		} else {
