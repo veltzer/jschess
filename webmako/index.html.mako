@@ -141,6 +141,7 @@ ${jsFiles()}
 				<li><a href="demo_moving_pieces.html">moving pieces</a></li>
 				<li><a href="demo_fen.html">showing a FEN position</a></li>
 				<li><a href="demo_pgn.html">showing a PGN game</a></li>
+				<li><a href="demo_controls.html">showing controls</a></li>
 			</ul>
 			Misc pages that help develop <b>jschess</b>...
 			<ul>

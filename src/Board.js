@@ -198,8 +198,8 @@ var Board=Class.create(
 		@returns boolean that indicates whether there is a piece at position. 
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
-	hasPieceAtPosition: function(position) {
-		return this.bd[position.x][position.y]!==undefined;
+	hasPieceAtPosition: function(piecePosition) {
+		return this.bd[piecePosition.x][piecePosition.y]!==undefined;
 	},
 	/**
 		@description Do we have a piece in a specific position?

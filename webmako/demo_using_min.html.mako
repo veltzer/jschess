@@ -41,24 +41,25 @@ ${jsThirdParty()}
 		In order to use <b>jschess</b> you will either need to .pack.js file which contains all needed libraries (which is discussed
 		elsewhere) or you will need to download the minified version (.min.js) which is discussed here.
 		This is the list of third party libraries used by <b>jschess</b> and their download location...
-		<table border="1">
-			<tr>
-				<td>name</td>
-				<td>version</td>
-				<td>web</td>
-				<td>documentation</td>
-				<td>from me</td>
-			</tr>
-			% for dep in deps:
-			<tr>
-				<td>${dep.name}</td>
-				<td>${dep.version}</td>
-				<td><a href="${dep.downloadUrl}">download</a></td>
-				<td><a href="${dep.documentation}">link</a></td>
-				<td><a href="../${dep.myFile}">my download</a></td>
-			</tr>
-			% endfor
-		</table>
+			<table border="1">
+				<tr>
+					<td>name</td>
+					<td>version</td>
+					<td>web</td>
+					<td>documentation</td>
+					<td>from me</td>
+				</tr>
+				% for dep in deps:
+				<tr>
+					<td>${dep.name}</td>
+					<td>${dep.version}</td>
+					<td><a href="${dep.downloadUrl}">download</a></td>
+					<td><a href="${dep.documentation}">link</a></td>
+					<td><a href="../${dep.myFile}">my download</a></td>
+				</tr>
+				% endfor
+			</table>
+		</p>
 		<p>
 		Then download the minified <b>jschess</b> file from <a title="jschess compressed download" href="../out/jschess-${ver}.min.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
