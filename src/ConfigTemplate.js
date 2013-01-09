@@ -11,13 +11,16 @@ var ConfigTemplate=Class.create(
 		- an optional validation function.
 		- is this option required
 		- description of the option
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	initialize: function() {
 		// the dictionary holding the current config
 		this.tuples={};
+		this.tuplist=[];
 	},
 	/**
 		@description add another options to this template
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	add: function(s) {
 		Utils.checkContains(s,ConfigTemplate.fullSet);
@@ -28,9 +31,15 @@ var ConfigTemplate=Class.create(
 			throw 'repeat of key ['+s.name+']';
 		}
 		this.tuples[s.name]=s;
+		this.tuplist.push(s);
 	},
 	/**
 		@description check that a key,value combo is ok
+		This method will throw an exception if it finds anything wrong.
+		@param key key to check
+		@param value value to check
+		@returns nothing
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	check: function(key,value) {
 		if(!(key in this.tuples)) {
@@ -42,18 +51,48 @@ var ConfigTemplate=Class.create(
 	},
 	/**
 		@description return whether the template has a key
+		@param key the key to check
+		@returns boolean is the key part of this config template
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	hasKey: function(key) {
 		return key in this.tuples;
 	},
 	/**
 		@description return the default value for a key
+		@param key the key to fetch the value for 
+		@returns the default value for the given key
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	getDefaultValue: function(key) {
 		return this.tuples[key].defaultValue;
 	},
+	/**
+		@description show HTML that lists all config options for the current template
+		@returns nothing
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
 	getHTML: function() {
-		return '<h1>foobar</h1>';
+		var shtml='';
+		shtml+='<table border="1">';
+		shtml+='<tr>';
+		shtml+='<td>name</td>';
+		shtml+='<td>type</td>';
+		shtml+='<td>required</td>';
+		shtml+='<td>description</td>';
+		shtml+='<td>defaultValue</td>';
+		shtml+='</tr>';
+		this.tuplist.forEach(function(e) {
+			shtml+='<tr>';
+			shtml+='<td>'+e.name+'</td>';
+			shtml+='<td>'+e.type+'</td>';
+			shtml+='<td>'+e.required+'</td>';
+			shtml+='<td>'+e.description+'</td>';
+			shtml+='<td>'+e.defaultValue+'</td>';
+			shtml+='</tr>';
+		});
+		shtml+='</table>';
+		return shtml;
 	}
 });
 // static data
