@@ -91,7 +91,7 @@ ${jsFiles()}
 	<body>
 		<h1>Welcome to the <b>jschess</b> project</h1>
 		<p>
-			<b>jschess</b> is a JavaScript library that enables:
+			<b>jschess</b> is a pure JavaScript library that enables:
 			<ul>
 				<li>Showing chess games in <a href="http://en.wikipedia.org/wiki/Portable_Game_Notation">PGN</a> format (hardcoded or coming from a server)</li>
 				<li>Showing chess positions in <a href="http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation">FEN</a> format (hardcoded or coming from a server)</li>
@@ -99,20 +99,20 @@ ${jsFiles()}
 				<li>Writing a web app that enables the end user to create chess positions and save them (in FEN or other format)</li>
 				<li>Allows to build a chess game where the player plays a server or some other player</li>
 				<li>Allows to build live broadcast systems for competitions</li>
-				<li>Other things I did not think about...</li>
+				<li>Other things I did not think about</li>
 			</ul>
 		</p>
 		<p>
-			What makes <b>jschess</b> special?
+			What makes <b>jschess</b> special:
 			<ul>
 				<li>Pure object oriented javascript</li>
 				<li>No images - totally scalable graphics</li>
 				<li>You can have your board at any size you want (because of scalable graphics)</li>
 				<li>As a result of being pure javascript totally controllable programatically</li>
 				<li>Looks best (can animate the pieces, show arrows and what not)</li>
-				<li>Free source. Full freedom to tweak or you can ask me for help with implementing a feature.</li>
-				<li>Sits on top of <a href="http://raphaeljs.com">raphael.js</a> for high level SVG capabilities</li>
-				<li>Sits on top of <a href="http://prototypejs.org">prototype</a> to make object oriented easier and more error free</li>
+				<li>Free source. Full freedom to tweak or you can ask me for help with implementing a feature</li>
+				<li>Sits on top of <a href="http://raphaeljs.com">raphaeljs</a> for high level SVG capabilities</li>
+				<li>Sits on top of <a href="http://prototypejs.org">prototypejs</a> to make object oriented easier and more error free</li>
 			</ul>
 		</p>
 		<p>
@@ -120,6 +120,8 @@ ${jsFiles()}
 			<ul>
 				<li><a href="http://www.javascriptlint.com/download.htm">jsl</a> to make sure javascript code is standards complient</li>
 				<li><a href="http://qunitjs.com">qunitjs</a> for testing</li>
+				<li><a href="http://developer.yahoo.com/yui/compressor">YUI compressor</a> is used for compressing</li>
+				<li><a href="http://www.crockford.com/javascript/jsmin.html">jsmin</a> is used for compressing</li>
 			</ul>
 		</p>
 		<p>The current version of <b>jschess</b> is ${ver}
