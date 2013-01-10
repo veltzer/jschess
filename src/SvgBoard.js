@@ -136,10 +136,6 @@ var SvgBoard=Class.create(
 	*/
 	drawBorder: function() {
 		this.texts=[];
-		console.log(this.offX);
-		console.log(this.offY);
-		console.log(this.square);
-		console.log(this.size);
 		var part=0.5;
 		var partial=this.getValue('partial');
 		for(var y=0;y<8;y++) {
@@ -491,7 +487,6 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	eventSquare: function(piecePosition,rec,type) {
-		//console.log('eventSquare '+piecePosition+','+rec+','+type);
 		//Utils.fakeUse(rec);
 		//Utils.fakeUse(piecePosition);
 		// going into a rectangle - set the selected color
@@ -518,7 +513,6 @@ var SvgBoard=Class.create(
 		}
 	},
 	eventGlobal: function(eventtype,x,y,type) {
-		//console.dir(arguments);
 		Utils.fakeUse(eventtype);
 		if(type=='mouseover' || type=='mousemove') {
 			var piecePosition=this.pixelsToPosForgiving(new SvgPixelPosition(x,y));
@@ -546,7 +540,6 @@ var SvgBoard=Class.create(
 		}
 	},
 	newPosition: function() {
-		//console.log(SvgBoard.currentPos,SvgBoard.lastPos);
 		if(SvgBoard.currentPos==undefined) {
 			if(SvgBoard.selectedPiece!=undefined) {
 				if(this.getValue('do_select_piece')) {

@@ -35,9 +35,6 @@ RUtils.setGlow=function(paper,set,glow_obj) {
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 RUtils.eventRegister=function(set,f,names) {
-	//console.log(typeof(Raphael));
-	//console.log(Raphael);
-	//console.log(set);
 	names.forEach(function(eventName) {
 		set.forEach(function(e) {
 			switch(eventName) {

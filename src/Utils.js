@@ -51,7 +51,7 @@ Utils.clone=function(o) {
 */
 Utils.fakeUse=function(o) {
 	if(Utils.nottrue) {
-		console.log(o);
+		window.junkVar=o;
 	}
 };
 /**

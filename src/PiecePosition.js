@@ -37,8 +37,6 @@ var PiecePosition=Class.create(
 		@return true or false
 	*/
 	notEqual: function(otherPos) {
-		//console.log(this);
-		//console.log(otherPos);
 		if(!(otherPos instanceof PiecePosition)) {
 			return true;
 		}
