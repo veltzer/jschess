@@ -1,7 +1,11 @@
 now:
 ====
-- border letters and numbers do not flip when the board flips.
-- make select by click work on pieces also.
+- fix flipping the board:
+	- when flipping the board selection goes hay wire.
+	- border letters and numbers do not flip when the board flips.
+- selecting of pieces:
+	- make selecting of squares by click work also when highlighting works.
+	- make select by click work on pieces also.
 - make the border with color.
 - do it so I could get the current version of jschess directly
 	from the JavaScript API.
