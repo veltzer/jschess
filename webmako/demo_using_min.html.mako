@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Using the jschess-[ver].min.js distribution</title>
+		<title>Using the jschess-${ver}.min.js distribution</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
 ${jsThirdParty()}
@@ -36,7 +36,7 @@ ${jsThirdParty()}
 		</script>
 	</head>
 	<body>
-		<h1>Using the jschess-[ver].min.js distribution</h1>
+		<h1>Using the jschess-${ver}.min.js distribution</h1>
 		<p>
 		In order to use <b>jschess</b> you will either need to .pack.js file which contains all needed libraries (which is discussed
 		elsewhere) or you will need to download the minified version (.min.js) which is discussed here.
@@ -66,7 +66,7 @@ ${jsThirdParty()}
 		</p>
 		<pre class="brush: xml">
 			&lt;script src="jschess-${ver}.min.js"&gt;&lt;/script&gt;</pre>
-		If you want to help me debug jschess or are experiencing problems you can download the uncompressed file
+		If you want to help me debug <b>jschess</b> or are experiencing problems you can download the uncompressed file
 		from <a title="jschess uncompressed download" href="../out/jschess-${ver}.js">here</a> and use it like this:
 		<pre class="brush: xml">
 			&lt;script src="jschess-${ver}.js"&gt;&lt;/script&gt;</pre>

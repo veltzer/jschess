@@ -15,6 +15,7 @@ var RUtils=Class.create(
 	@description Get glow set for a set
 	@param paper paper to work on
 	@param set set to work on
+	@param glow_obj options for the Raphael.js glow method
 	@returns the set of glow objects
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
@@ -29,7 +30,7 @@ RUtils.setGlow=function(paper,set,glow_obj) {
 	@description setup a click callback for a set
 	@param set set to work on
 	@param f callback. Callback should receive the type of the event
-	@param names of events to register. supported are: click, mouseover, mouseout
+	@param names of events to register. supported are: click, mouseover, mouseout, mousemove
 	@returns nothing
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
