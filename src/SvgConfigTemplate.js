@@ -129,14 +129,14 @@ var SvgConfigTemplate=Class.create(ConfigTemplate,
 			type:'boolean',
 			required:false,
 			description:'should we select squares',
-			defaultValue:false
+			defaultValue:true
 		});
 		this.add({
 			name:'do_select_piece',
 			type:'boolean',
 			required:false,
 			description:'should we select pieces',
-			defaultValue:false
+			defaultValue:true
 		});
 		this.add({
 			name:'do_select_global',
@@ -144,6 +144,13 @@ var SvgConfigTemplate=Class.create(ConfigTemplate,
 			required:false,
 			description:'should we select pieces via the global variables',
 			defaultValue:false
+		});
+		this.add({
+			name:'do_select_piecerec',
+			type:'boolean',
+			required:false,
+			description:'should we select pieces via the global variables',
+			defaultValue:true
 		});
 		this.add({
 			name:'do_letters',

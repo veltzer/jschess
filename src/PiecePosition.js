@@ -35,11 +35,23 @@ var PiecePosition=Class.create(
 	/**
 		@description compare one position to another
 		@return true or false
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	notEqual: function(otherPos) {
 		if(!(otherPos instanceof PiecePosition)) {
-			return true;
+			throw 'bad type passed';
 		}
 		return otherPos.x!=this.x || otherPos.y!=this.y;
+	},
+	/**
+		@description compare one position to another
+		@return true or false
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
+	equal: function(otherPos) {
+		if(!(otherPos instanceof PiecePosition)) {
+			throw 'bad type passed';
+		}
+		return otherPos.x==this.x && otherPos.y==this.y;
 	}
 });

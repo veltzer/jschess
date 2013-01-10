@@ -482,8 +482,18 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	eventPiece: function(boardPiece,type) {
-		Utils.fakeUse(boardPiece);
-		Utils.fakeUse(type);
+		//Utils.fakeUse(boardPiece);
+		//Utils.fakeUse(type);
+		if(this.getValue('do_select_piecerec')) {
+			if(type=='mouseover') {
+				var piecePosition=this.board.getPiecePosition(boardPiece);
+				if(this.currentPos==undefined || piecePosition.notEqual(this.currentPos)) {
+					this.lastPos=this.currentPos;
+					this.currentPos=piecePosition;
+					this.newPosition();
+				}
+			}
+		}
 	},
 	/**
 		@description Events for squares.
@@ -495,53 +505,85 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	eventSquare: function(piecePosition,rec,type) {
+		if(this.getValue('do_select_piecerec')) {
+			if(type=='mouseover') {
+				this.lastPos=this.currentPos;
+				this.currentPos=piecePosition;
+				this.newPosition();
+			}
+			/*
+			if(type=='mouseout') {
+				// this is done with a timeout just for getting out of the board...
+				var pos=this.currentPos;
+				var that=this;
+				window.setTimeout(function() {
+					if(pos!=undefined && pos.equal(that.currentPos)) {
+						that.lastPos=that.currentPos;
+						that.currentPos=undefined;
+						that.newPosition();
+					}
+				},100);
+			}
+			*/
+		}
 		if(this.getValue('do_select_click')) {
 			if(type=='click') {
-				if(SvgBoard.selected) {
-					if(SvgBoard.selected==rec) {
-						this.setRectFill(SvgBoard.selected,SvgBoard.selectedPos);
-						SvgBoard.selected=undefined;
-						SvgBoard.selectedPos=undefined;
+				if(this.selected) {
+					if(this.selected==rec) {
+						this.setRectFill(this.selected,this.selectedPos);
+						this.selected=undefined;
+						this.selectedPos=undefined;
 					} else {
-						this.setRectFill(SvgBoard.selected,SvgBoard.selectedPos);
+						this.setRectFill(this.selected,this.selectedPos);
 						rec.attr('fill',this.getValue('select_color'));
-						SvgBoard.selected=rec;
-						SvgBoard.selectedPos=piecePosition;
+						this.selected=rec;
+						this.selectedPos=piecePosition;
 					}
 				} else {
 					rec.attr('fill',this.getValue('select_color'));
-					SvgBoard.selected=rec;
-					SvgBoard.selectedPos=piecePosition;
+					this.selected=rec;
+					this.selectedPos=piecePosition;
 				}
 			}
 		}
 	},
 	eventGlobal: function(eventtype,x,y,type) {
 		Utils.fakeUse(eventtype);
-		if(type=='mouseover' || type=='mousemove') {
-			var piecePosition=this.pixelsToPosForgiving(new SvgPixelPosition(x,y));
-			if(piecePosition!=undefined) {
-				if(this.currentPos==undefined) {
-					this.lastPos=undefined;
-					this.currentPos=piecePosition;
-					this.newPosition();
-				} else {
-					if(piecePosition.notEqual(this.currentPos)) {
-						this.lastPos=this.currentPos;
+		if(this.getValue('do_select_global')) {
+			if(type=='mouseover' || type=='mousemove') {
+				var piecePosition=this.pixelsToPosForgiving(new SvgPixelPosition(x,y));
+				if(piecePosition!=undefined) {
+					if(this.currentPos==undefined) {
+						this.lastPos=undefined;
 						this.currentPos=piecePosition;
 						this.newPosition();
+					} else {
+						if(piecePosition.notEqual(this.currentPos)) {
+							this.lastPos=this.currentPos;
+							this.currentPos=piecePosition;
+							this.newPosition();
+						}
 					}
+				} else {
+					// forget about this event?!?
+					Utils.pass();
 				}
-			} else {
-				// forget about this event?!?
-				Utils.pass();
+			}
+			if(type=='mouseout') {
+				this.lastPos=this.currentPos;
+				this.currentPos=undefined;
+				this.newPosition();
 			}
 		}
-		if(type=='mouseout') {
-			this.lastPos=this.currentPos;
-			this.currentPos=undefined;
-			this.newPosition();
+		/*
+		if(this.getValue('do_select_piecerec')) {
+			if(type=='mouseout') {
+				this.lastPos=this.currentPos;
+				this.currentPos=undefined;
+				this.newPosition();
+			}
 		}
+		*/
 	},
 	/**
 		@description Internal method. This method is called whenever
