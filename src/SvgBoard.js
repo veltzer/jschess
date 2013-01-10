@@ -285,7 +285,7 @@ var SvgBoard=Class.create(
 			return function(eventName) {
 				that.eventPiece(iboardPiece,eventName);
 			};
-		}(boardPiece),['click','mouseover','mouseout']);
+		}(boardPiece),['click','mouseover','mouseout','mousemove','mouseup','mousedown']);
 		// lets put our own data with the piece
 		var svgPieceData=new SvgPieceData(set,pixelPos);
 		boardPiece.setData(svgPieceData);
