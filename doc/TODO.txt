@@ -1,7 +1,6 @@
 now:
 ====
-- test recent changes
-
+- border letters and numbers do not flip when the board flips.
 - make select by click work on pieces also.
 - consider again whether I want the selection to work at the pixel level
 	and move.
