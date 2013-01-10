@@ -3,7 +3,6 @@
 /*jsl:import SvgPixelPosition.js*/
 /*jsl:import PiecePosition.js*/
 /*jsl:import Board.js*/
-/*jsl:import RUtils.js*/
 /*jsl:import WRaphael.js*/
 /*jsl:import Utils.js*/
 /*jsl:import Config.js*/
@@ -282,8 +281,7 @@ var SvgBoard=Class.create(
 		var transform=m.toTransformString();
 		// now put it on the paper
 		var set=svgPiece.toSet(this.paper,transform);
-		RUtils.eventRegister(set,function(iboardPiece) {
-		//set.eventRegister(function(iboardPiece) {
+		set.eventRegister(function(iboardPiece) {
 			return function(eventName) {
 				that.eventPiece(iboardPiece,eventName);
 			};
@@ -458,7 +456,7 @@ var SvgBoard=Class.create(
 	glow: function(boardPiece,glow) {
 		var svgPieceData=boardPiece.getData();
 		if(glow) {
-			svgPieceData.extra=RUtils.setGlow(this.paper,svgPieceData.set,this.glow_obj);
+			svgPieceData.extra=svgPieceData.set.glow(this.glow_obj);
 		} else {
 			svgPieceData.extra.remove();
 			svgPieceData.extra=undefined;
