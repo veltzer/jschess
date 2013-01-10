@@ -258,6 +258,16 @@ var SvgBoard=Class.create(
 			rec.toFront();
 			this.fullRec=rec;
 		}
+		/*
+		if(this.getValue('do_select_piecerec')) {
+			var rec_out=this.paper.rect(this.offX+delta,this.offY+delta,this.square*8.0-delta,this.square*8.0-delta);
+			rec_out.attr({opacity:0.0});
+			rec_out.mouseout(function(evt,x,y) {
+				that.eventGlobal(evt,x-that.startX-that.offX,y-that.startY-that.offY,'mouseout');
+			});
+			rec_out.toFront();
+		}
+		*/
 	},
 	postGraphics: function() {
 		if(this.getValue('do_select_global')) {
@@ -575,7 +585,6 @@ var SvgBoard=Class.create(
 				this.newPosition();
 			}
 		}
-		/*
 		if(this.getValue('do_select_piecerec')) {
 			if(type=='mouseout') {
 				this.lastPos=this.currentPos;
@@ -583,7 +592,6 @@ var SvgBoard=Class.create(
 				this.newPosition();
 			}
 		}
-		*/
 	},
 	/**
 		@description Internal method. This method is called whenever
