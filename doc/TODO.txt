@@ -1,14 +1,14 @@
 now:
 ====
-- do it so I could get the current version of jschess directly
-	from the JavaScript API.
+- make the board with color.
 - consider again whether I want the selection to work at the pixel level
 	and move.
 	Thinking about it: bring back the old event handling. Don't do anything on
 		rectangle mouseout, instead do stuff on mousein of rectanges and shapes
 		and on mouseout of the invisible rectange surrounding the entire
 		frame.
-- add letters and numbers around the board.
+- do it so I could get the current version of jschess directly
+	from the JavaScript API.
 - bring back click on a square.
 - do the demos that I know how to do.
 	moving pieces + deleting pieces.

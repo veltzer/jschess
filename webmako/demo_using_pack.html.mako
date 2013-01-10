@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Using the jschess-[ver].pack.js distribution</title>
+		<title>Using the jschess-${ver}.pack.js distribution</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
 		<script src="../out/jschess-${ver}.pack.js"></script>
@@ -35,7 +35,7 @@
 		</script>
 	</head>
 	<body>
-		<h1>Using the jschess-[ver].pack.js distribution</h1>
+		<h1>Using the jschess-${ver}.pack.js distribution</h1>
 		<p>
 		When you want to use jschess there are two options. One is to use the .min.js file in which case you need
 		to import all third party modules yourself. The second is to use the .pack.js file in which case you get
