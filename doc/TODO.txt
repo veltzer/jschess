@@ -1,5 +1,6 @@
 now:
 ====
+- make select by click work on pieces also.
 - consider again whether I want the selection to work at the pixel level
 	and move.
 	Thinking about it: bring back the old event handling. Don't do anything on

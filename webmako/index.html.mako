@@ -32,7 +32,7 @@ ${jsFiles()}
 					id:'myid',
 					do_select_square:true,
 					do_select_piece:true,
-					do_select_global:true,
+					do_select_global:false,
 					do_select_click:true,
 					do_letters:true,
 					glow_width:7,

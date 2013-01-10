@@ -68,6 +68,15 @@ var SvgBoard=Class.create(
 		this.glow_obj.offsetx=this.getValue('glow_offsetx');
 		this.glow_obj.offsety=this.getValue('glow_offsety');
 		this.glow_obj.color=this.getValue('glow_color');
+		// selection variables
+		// last board position
+		this.lastPos=undefined;
+		// current board position
+		this.currentPos=undefined;
+		// selected piece
+		this.selectedPiece=undefined;
+		// selected rec
+		this.selectedRec=undefined;
 	},
 	getBoard: function() {
 		return this.board;
@@ -232,7 +241,7 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	overlay: function() {
-		if(this.getValue('useGlobalForNewPosition')) {
+		if(this.getValue('do_select_global')) {
 			var that=this;
 			var delta=0;
 			var rec=this.paper.rect(this.offX+delta,this.offY+delta,this.square*8.0-delta,this.square*8.0-delta);
@@ -252,7 +261,7 @@ var SvgBoard=Class.create(
 		}
 	},
 	postGraphics: function() {
-		if(this.getValue('useGlobalForNewPosition')) {
+		if(this.getValue('do_select_global')) {
 			this.fullRec.toFront();
 		}
 	},
@@ -488,8 +497,8 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	eventSquare: function(piecePosition,rec,type) {
-		if(type=='click') {
-			if(this.getValue('do_select_click')) {
+		if(this.getValue('do_select_click')) {
+			if(type=='click') {
 				if(SvgBoard.selected) {
 					if(SvgBoard.selected==rec) {
 						this.setRectFill(SvgBoard.selected,SvgBoard.selectedPos);
@@ -514,14 +523,14 @@ var SvgBoard=Class.create(
 		if(type=='mouseover' || type=='mousemove') {
 			var piecePosition=this.pixelsToPosForgiving(new SvgPixelPosition(x,y));
 			if(piecePosition!=undefined) {
-				if(SvgBoard.currentPos==undefined) {
-					SvgBoard.lastPos=undefined;
-					SvgBoard.currentPos=piecePosition;
+				if(this.currentPos==undefined) {
+					this.lastPos=undefined;
+					this.currentPos=piecePosition;
 					this.newPosition();
 				} else {
-					if(piecePosition.notEqual(SvgBoard.currentPos)) {
-						SvgBoard.lastPos=SvgBoard.currentPos;
-						SvgBoard.currentPos=piecePosition;
+					if(piecePosition.notEqual(this.currentPos)) {
+						this.lastPos=this.currentPos;
+						this.currentPos=piecePosition;
 						this.newPosition();
 					}
 				}
@@ -531,56 +540,66 @@ var SvgBoard=Class.create(
 			}
 		}
 		if(type=='mouseout') {
-			SvgBoard.lastPos=SvgBoard.currentPos;
-			SvgBoard.currentPos=undefined;
+			this.lastPos=this.currentPos;
+			this.currentPos=undefined;
 			this.newPosition();
 		}
 	},
+	/**
+		@description Internal method. This method is called whenever
+		the cursor changes position over the board and ONLY when
+		it changes position.
+		No parameters are passed because This method uses:
+		this.selectedPiece, this.selectedRec, this.lastPos, this.currentPos
+		to do it's work.
+		@returns nothing
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
 	newPosition: function() {
-		if(SvgBoard.currentPos==undefined) {
-			if(SvgBoard.selectedPiece!=undefined) {
+		if(this.currentPos==undefined) {
+			if(this.selectedPiece!=undefined) {
 				if(this.getValue('do_select_piece')) {
-					this.glow(SvgBoard.selectedPiece,false);
-					SvgBoard.selectedPiece=undefined;
+					this.glow(this.selectedPiece,false);
+					this.selectedPiece=undefined;
 				}
 			}
-			if(SvgBoard.selectedRec!=undefined) {
+			if(this.selectedRec!=undefined) {
 				if(this.getValue('do_select_square')) {
-					this.setRectFill(SvgBoard.selectedRec,SvgBoard.lastPos);
-					SvgBoard.selectedRec=undefined;
+					this.setRectFill(this.selectedRec,this.lastPos);
+					this.selectedRec=undefined;
 				}
 			}
 		} else {
-			if(this.board.hasPieceAtPosition(SvgBoard.currentPos)) {
-				var boardPiece=this.board.getPieceAtPosition(SvgBoard.currentPos);
+			if(this.board.hasPieceAtPosition(this.currentPos)) {
+				var boardPiece=this.board.getPieceAtPosition(this.currentPos);
 				//this.eventPiece(boardPiece,'square'+type);
 				if(this.getValue('do_select_piece')) {
-					if(SvgBoard.selectedPiece==undefined) {
-						SvgBoard.selectedPiece=boardPiece;
-						this.glow(SvgBoard.selectedPiece,true);
+					if(this.selectedPiece==undefined) {
+						this.selectedPiece=boardPiece;
+						this.glow(this.selectedPiece,true);
 					} else {
-						this.glow(SvgBoard.selectedPiece,false);
-						SvgBoard.selectedPiece=boardPiece;
-						this.glow(SvgBoard.selectedPiece,true);
+						this.glow(this.selectedPiece,false);
+						this.selectedPiece=boardPiece;
+						this.glow(this.selectedPiece,true);
 					}
 				}
 			} else {
-				if(SvgBoard.selectedPiece!=undefined) {
+				if(this.selectedPiece!=undefined) {
 					if(this.getValue('do_select_piece')) {
-						this.glow(SvgBoard.selectedPiece,false);
-						SvgBoard.selectedPiece=undefined;
+						this.glow(this.selectedPiece,false);
+						this.selectedPiece=undefined;
 					}
 				}
 			}
 			if(this.getValue('do_select_square')) {
-				var rec=this.getRec(SvgBoard.currentPos);
-				if(SvgBoard.selectedRec==undefined) {
-					SvgBoard.selectedRec=rec;
-					SvgBoard.selectedRec.attr('fill',this.getValue('over_color'));
+				var rec=this.getRec(this.currentPos);
+				if(this.selectedRec==undefined) {
+					this.selectedRec=rec;
+					this.selectedRec.attr('fill',this.getValue('over_color'));
 				} else {
-					this.setRectFill(SvgBoard.selectedRec,SvgBoard.lastPos);
-					SvgBoard.selectedRec=rec;
-					SvgBoard.selectedRec.attr('fill',this.getValue('over_color'));
+					this.setRectFill(this.selectedRec,this.lastPos);
+					this.selectedRec=rec;
+					this.selectedRec.attr('fill',this.getValue('over_color'));
 				}
 			}
 		}
@@ -599,12 +618,3 @@ var SvgBoard=Class.create(
 		}
 	}
 });
-// static data
-// last board position
-SvgBoard.lastPos=undefined;
-// current board position
-SvgBoard.currentPos=undefined;
-// selected piece
-SvgBoard.selectedPiece=undefined;
-// selected rec
-SvgBoard.selectedRec=undefined;
