@@ -93,8 +93,13 @@ ${jsThirdParty()}
 				new PiecePosition(fromX,fromY),
 				new PiecePosition(toX,toY)
 			);</pre>
+		When you build the PiecePosition objects above <b>you</b> must make sure that
+		the <b>fromX, fromY, toX, toY</b> values passed to the method are valid numbers
+		in the [0..8) range. You must also make sure that a piece is in the from position
+		and that the two position does not have a piece. If you fail to do that
+		then the method may fail with an exception or some worse way.
 		Using this method the board will do <b>no verification</b> that the move is
-		valid in any way. You must make sure of that (parse a correct PGN file, do it
+		a valid chess move in any way. You must make sure of that (parse a correct PGN file, do it
 		yourself etc.).
 		Currently the board does not support verficiation of moves, although that is
 		in the TODO list.

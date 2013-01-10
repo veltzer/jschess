@@ -215,6 +215,13 @@ var SvgConfigTemplate=Class.create(ConfigTemplate,
 			description:'how many squares for borders',
 			defaultValue:0.6
 		});
+		this.add({
+			name:'useGlobalForNewPosition',
+			type:'boolean',
+			required:false,
+			description:'do we wish to use a big empty rectangle to draw position changes from',
+			defaultValue:false
+		});
 	}
 });
 // singleton pattern
