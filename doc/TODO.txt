@@ -1,5 +1,9 @@
 now:
 ====
+- create a better set from the current set in raphael
+	and use that in my code.
+	This should make my code simpler and remove the use of RUtils.
+
 - make select by click work on pieces also.
 - consider again whether I want the selection to work at the pixel level
 	and move.
