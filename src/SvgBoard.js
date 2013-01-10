@@ -197,7 +197,7 @@ var SvgBoard=Class.create(
 					"stroke-width":this.getValue('rec_stroke_width')
 				});
 				rec_line.push(rec);
-				var piecePosition=new PiecePosition(x,(7-y));
+				var piecePosition=new PiecePosition(x,7-y);
 				this.setRectFill(rec,piecePosition);
 				rec.click(function(tpos,trec,type) {
 					return function() {
@@ -515,6 +515,12 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	eventSquare: function(piecePosition,rec,type) {
+		/*
+		if(this.flipview===true) {
+			piecePosition.x=7-piecePosition.x;
+			piecePosition.y=7-piecePosition.y;
+		}
+		*/
 		if(this.getValue('do_select_piecerec')) {
 			if(type=='mouseover') {
 				this.lastPos=this.currentPos;
