@@ -150,7 +150,7 @@ var SvgConfigTemplate=Class.create(ConfigTemplate,
 			type:'boolean',
 			required:false,
 			description:'should we select pieces via the global variables',
-			defaultValue:true
+			defaultValue:false
 		});
 		this.add({
 			name:'do_letters',
@@ -178,7 +178,7 @@ var SvgConfigTemplate=Class.create(ConfigTemplate,
 			type:'number',
 			required:false,
 			description:'glow width',
-			defaultValue:10
+			defaultValue:7
 		});
 		this.add({
 			name:'glow_fill',

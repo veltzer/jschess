@@ -2,12 +2,6 @@ now:
 ====
 - border letters and numbers do not flip when the board flips.
 - make select by click work on pieces also.
-- consider again whether I want the selection to work at the pixel level
-	and move.
-	Thinking about it: bring back the old event handling. Don't do anything on
-		rectangle mouseout, instead do stuff on mousein of rectanges and shapes
-		and on mouseout of the invisible rectange surrounding the entire
-		frame.
 - make the border with color.
 - do it so I could get the current version of jschess directly
 	from the JavaScript API.
