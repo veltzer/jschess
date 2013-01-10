@@ -173,7 +173,7 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	drawBoard: function() {
-		//var that=this;
+		var that=this;
 		this.recs=[];
 		for(var x=0;x<8;x++) {
 			var rec_line=[];
@@ -191,7 +191,6 @@ var SvgBoard=Class.create(
 				rec_line.push(rec);
 				var piecePosition=new PiecePosition(x,(7-y));
 				this.setRectFill(rec,piecePosition);
-				/*
 				rec.click(function(tpos,trec,type) {
 					return function() {
 						that.eventSquare(tpos,trec,type);
@@ -222,7 +221,6 @@ var SvgBoard=Class.create(
 						that.eventSquare(tpos,trec,type);
 					};
 				}(piecePosition,rec,"mouseup"));
-				*/
 			}
 			rec_line.reverse();
 			this.recs.push(rec_line);
@@ -234,25 +232,29 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	overlay: function() {
-		var that=this;
-		var delta=0;
-		var rec=this.paper.rect(this.offX+delta,this.offY+delta,this.square*8.0-delta,this.square*8.0-delta);
-		rec.attr({fill:Raphael.getColor()});
-		rec.attr({opacity:0.0});
-		rec.mousemove(function(evt,x,y) {
-			that.eventGlobal(evt,x-that.startX-that.offX,y-that.startY-that.offY,'mousemove');
-		});
-		rec.mouseover(function(evt,x,y) {
-			that.eventGlobal(evt,x-that.startX-that.offX,y-that.startY-that.offY,'mouseover');
-		});
-		rec.mouseout(function(evt,x,y) {
-			that.eventGlobal(evt,x-that.startX-that.offX,y-that.startY-that.offY,'mouseout');
-		});
-		rec.toFront();
-		this.fullRec=rec;
+		if(this.getValue('useGlobalForNewPosition')) {
+			var that=this;
+			var delta=0;
+			var rec=this.paper.rect(this.offX+delta,this.offY+delta,this.square*8.0-delta,this.square*8.0-delta);
+			rec.attr({fill:Raphael.getColor()});
+			rec.attr({opacity:0.0});
+			rec.mousemove(function(evt,x,y) {
+				that.eventGlobal(evt,x-that.startX-that.offX,y-that.startY-that.offY,'mousemove');
+			});
+			rec.mouseover(function(evt,x,y) {
+				that.eventGlobal(evt,x-that.startX-that.offX,y-that.startY-that.offY,'mouseover');
+			});
+			rec.mouseout(function(evt,x,y) {
+				that.eventGlobal(evt,x-that.startX-that.offX,y-that.startY-that.offY,'mouseout');
+			});
+			rec.toFront();
+			this.fullRec=rec;
+		}
 	},
 	postGraphics: function() {
-		this.fullRec.toFront();
+		if(this.getValue('useGlobalForNewPosition')) {
+			this.fullRec.toFront();
+		}
 	},
 	/**
 		@description Callback method to create graphics and place them when adding a piece.
@@ -393,30 +395,28 @@ var SvgBoard=Class.create(
 	},
 	/**
 		@description Move a piece on the board (including animation if so configured)
-		@param piece of type Piece - the piece to move
-		@param posTo of type Position - the position to move the piece to
+		@param boardPiece [BoardPiece] the piece to move
+		@param fromPiecePosition [PiecePosition] position from which to move
+		@param toPiecePosition [PiecePosition] position to which to move
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
-	postMovePiece: function(boardPiece,posFrom,posTo) {
-		Utils.fakeUse(posFrom);
-		this.timeMovePiece(boardPiece,posFrom,posTo,this.getValue('move_ms'));
+	postMovePiece: function(boardPiece,fromPiecePosition,toPiecePosition) {
+		this.timeMovePiece(boardPiece,fromPiecePosition,toPiecePosition,this.getValue('move_ms'));
 	},
-	positionPiece: function(piece,posTo) {
-		this.timeMovePiece(piece,posTo,0);
+	positionPiece: function(boardPiece,toPiecePosition) {
+		this.timeMovePiece(boardPiece,toPiecePosition,0);
 	},
-	timeMovePiece: function(piece,posFrom,posTo,ms) {
-		Utils.fakeUse(posFrom);
-		var pixelPosFrom=piece.getData().pixelPos;
-		var pixelPosTo=this.posToPixels(posTo);
-		piece.getData().forEach(function(el) {
+	timeMovePiece: function(boardPiece,fromPiecePosition,toPiecePosition,ms) {
+		Utils.fakeUse(fromPiecePosition);
+		var pixelPosFrom=boardPiece.getData().pixelPos;
+		var pixelPosTo=this.posToPixels(toPiecePosition);
+		boardPiece.getData().forEach(function(el) {
 			var m=Raphael.matrix();
 			m.translate(pixelPosTo.x-pixelPosFrom.x,pixelPosTo.y-pixelPosFrom.y);
-			//m.scale(this.square/piece.rect,this.square/piece.rect);
 			var transformString=m.toTransformString();
 			el.animate({transform: transformString},ms);
 		});
-		//piece.getData().pixelPos=pixelPosTo;
 	},
 	/**
 		@description Flips the board (see it from the other side)
@@ -441,7 +441,8 @@ var SvgBoard=Class.create(
 	},
 	/**
 		@description Make a piece glow
-		@param boardPiece the piece to make glow
+		@param boardPiece [BoardPiece] the piece to make glow
+		@param glow [object] properties to pass to the glow function as per Raphael.js
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -468,7 +469,7 @@ var SvgBoard=Class.create(
 	/**
 		@description Event handler for events happening on the pieces.
 		Types of events: click, mouseover and more...
-		@param boardPiece the BoardPiece instance the event happened on
+		@param boardPiece [BoardPiece] instance the event happened on
 		@param type the type of event that happened
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -487,10 +488,6 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	eventSquare: function(piecePosition,rec,type) {
-		//Utils.fakeUse(rec);
-		//Utils.fakeUse(piecePosition);
-		// going into a rectangle - set the selected color
-		// selecting a rectangle - fill with select_color
 		if(type=='click') {
 			if(this.getValue('do_select_click')) {
 				if(SvgBoard.selected) {
