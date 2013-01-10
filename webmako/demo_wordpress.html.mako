@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Configuration options for JsChess</title>
+		<title>Using the JsChess Wordpress plugin</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
 ${jsThirdParty()}
@@ -27,19 +27,13 @@ ${jsThirdParty()}
 			document.observe('dom:loaded', function() {
 				// Finally, to actually run the highlighter, you need to include this JS on your page
 				SyntaxHighlighter.all()
-				// print the configuration to div 'myid'
-				var config=SvgConfigTemplate.getInstance();
-				var myhtml=config.getHTML();
-				$('myid').innerHTML=myhtml;
 			})
 		</script>
 	</head>
 	<body>
-		<h1>Configuration options for JsChess</h1>
+		<h1>Using the JsChess Wordpress plugin</h1>
 		<p>
-		These are the configuration options that <b>jschess</b> supports:
-			<div id="myid">
-			</div>
+		TBD
 		</p>
 		<p>
 			Mark Veltzer, Copyright ${copyright_years(2012)}
