@@ -7,7 +7,7 @@
 		<!-- third parties -->
 ${jsThirdParty()}
 		<!--script src="../out/jschess-${ver}.min.js"></script!-->
-		<script src="../out/jschess-${ver}.js"></script>
+		<script src="../out/jschess-${ver}.min.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
@@ -69,10 +69,10 @@ ${jsThirdParty()}
 					if(toY<0 || toY>7) {
 						error('bad toY value');
 					}
-					if(!board.hasPieceAtPosition(new PiecePosition(fromX,fromY)) {
+					if(!board.hasPieceAtPosition(new PiecePosition(fromX,fromY))) {
 						error('dont have piece at '+fromX+','+fromY);
 					}
-					if(board.hasPieceAtPosition(new PiecePosition(toX,toY)) {
+					if(board.hasPieceAtPosition(new PiecePosition(toX,toY))) {
 						error('have piece at '+toX+','+toY);
 					}
 					board.movePieceByPos(
@@ -104,6 +104,9 @@ ${jsThirdParty()}
 		fromY: <input id='fromY'></input>
 		toX: <input id='toX'></input>
 		toY: <input id='toY'></input>
+		<br/>
+		<button id='move'>move</button>
+		<br/>
 		errors: <div id='errors'></div>
 		<p>
 			Mark Veltzer, Copyright ${copyright_years(2012)}
