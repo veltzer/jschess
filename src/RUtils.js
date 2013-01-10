@@ -58,6 +58,16 @@ RUtils.eventRegister=function(set,f,names) {
 						f(eventName);
 					});
 					break;
+				case 'mouseup':
+					e.mouseup(function() {
+						f(eventName);
+					});
+					break;
+				case 'mousedown':
+					e.mousedown(function() {
+						f(eventName);
+					});
+					break;
 				default:
 					throw 'unknown event name '+eventName;
 			}
