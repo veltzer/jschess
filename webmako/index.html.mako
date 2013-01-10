@@ -30,13 +30,14 @@ ${jsFiles()}
 				var board=new Board();
 				var svgBoard=new SvgBoard(board,{
 					id:'myid',
-					do_select_square:true,
-					do_select_piece:true,
-					do_select_global:true,
-					do_select_click:true,
-					do_letters:true,
-					glow_width:7,
-					partial:0.6
+					do_select_square:true,//default:true
+					do_select_piece:true,//default:true
+					do_select_global:false,//default:false
+					do_select_piecerec:true,//default:true
+					do_select_click:true,//default:false
+					do_letters:true,//default:true
+					glow_width:7,//default:10
+					partial:0.6//default:0.6
 				})
 				board.startPosition();
 				$('startpos').observe('click',function() {
