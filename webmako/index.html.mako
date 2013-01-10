@@ -80,9 +80,6 @@ ${jsFiles()}
 				$('glow').observe('click',function() {
 					svgBoard.glow(board.getPieceAtPosition(new PiecePosition(0,0)),true);
 				});
-				$('toString').observe('click',function() {
-					console.log(svgBoard);
-				});
 				$('clear').observe('click',function() {
 					board.clearPieces()
 				});
@@ -164,7 +161,6 @@ ${jsFiles()}
 			<button id="movebishops">movebishops</button>
 			<button id="flip">flip</button>
 			<button id="glow">glow</button>
-			<button id="toString">toString</button>
 			<button id="clear">clear</button>
 		</p>
 		<p>

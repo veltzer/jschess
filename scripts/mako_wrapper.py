@@ -42,6 +42,7 @@ def get_attr():
 	attr['copyright_years']=years
 	attr['deps']=deps.deps
 	attr['jsThirdParty']=deps.getJsThirdParty
+	attr['jsThirdPartyDebug']=deps.getJsThirdPartyDebug
 	attr['jsFiles']=jsFiles
 	return attr
 

@@ -1,6 +1,7 @@
 now:
 ====
-- make the board with color.
+- do demo of moving the pieces.
+- make the border with color.
 - consider again whether I want the selection to work at the pixel level
 	and move.
 	Thinking about it: bring back the old event handling. Don't do anything on
