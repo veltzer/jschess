@@ -49,30 +49,30 @@ var Board=Class.create(
 	},
 	/**
 		@description Check that no piece is at a certain position. Will throw an exception if that is not the case.
-		@param position position to check that no piece is at
+		@param piecePosition [PiecePosition] position to check that no piece is at
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
-	checkNoPieceAt: function(position) {
-		if(this.bd[position.x][position.y]!==undefined) {
-			throw 'already have piece at position '+position.toString();
+	checkNoPieceAt: function(piecePosition) {
+		if(this.bd[piecePosition.x][piecePosition.y]!==undefined) {
+			throw 'already have piece at position '+piecePosition.toString();
 		}
 	},
 	/**
 		@description Check that piece is at a certain position. Will throw an exception if that is not the case.
-		@param position position to check that a piece is at
+		@param piecePosition [PiecePosition] position to check that a piece is at
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
-	checkPieceAt: function(position) {
-		if(this.bd[position.x][position.y]===undefined) {
-			throw 'dont have piece at position '+position.toString();
+	checkPieceAt: function(piecePosition) {
+		if(this.bd[piecePosition.x][piecePosition.y]===undefined) {
+			throw 'dont have piece at position '+piecePosition.toString();
 		}
 	},
 	/**
 		@description Check that a certain piece is at a certain position. Will throw an exception if that is not the case.
-		@param boardPiece the piece in question
-		@param position position to check that a piece is at
+		@param boardPiece [BoardPiece] the piece in question
+		@param piecePosition [PiecePosition] position to check that a piece is at
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -83,23 +83,25 @@ var Board=Class.create(
 	},
 	/**
 		@description Add a piece to the position
-		@param boardPiece piece to add
+		@param boardPiece [BoardPiece] piece to add
+		@param piecePosition [PiecePosition] where to add the piece
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
-	addPiece: function(boardPiece,position) {
+	addPiece: function(boardPiece,piecePosition) {
 		this.preAddCB.forEach(function(f) {
-			f(boardPiece,position);
+			f(boardPiece,piecePosition);
 		});
-		this.checkNoPieceAt(position);
-		this.bd[position.x][position.y]=boardPiece;
+		this.checkNoPieceAt(piecePosition);
+		this.bd[piecePosition.x][piecePosition.y]=boardPiece;
 		this.postAddCB.forEach(function(f) {
-			f(boardPiece,position);
+			f(boardPiece,piecePosition);
 		});
 	},
 	/**
 		@description Remove a piece
-		@param boardPiece piece to remove
+		@param boardPiece [BoardPiece] piece to remove
+		@param piecePosition [PiecePosition] the position to remove it from
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -115,21 +117,22 @@ var Board=Class.create(
 	},
 	/**
 		@description Move a piece
-		@param boardPiece piece to move
-		@param piecePosition where to move it to
+		@param boardPiece [BoardPiece] piece to move
+		@param fromPiecePosition [PiecePosition] from where to move the piece
+		@param toPiecePosition [PiecePosition] to where to move the piece
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
-	movePiece: function(boardPiece,fromPosition,toPosition) {
-		this.checkPieceAt(fromPosition);
-		this.checkNoPieceAt(toPosition);
+	movePiece: function(boardPiece,fromPiecePosition,toPiecePosition) {
+		this.checkPieceAt(fromPiecePosition);
+		this.checkNoPieceAt(toPiecePosition);
 		this.preMoveCB.forEach(function(f) {
-			f(boardPiece,fromPosition,toPosition);
+			f(boardPiece,fromPiecePosition,toPiecePosition);
 		});
-		this.bd[fromPosition.x][fromPosition.y]=undefined;
-		this.bd[toPosition.x][toPosition.y]=boardPiece;
+		this.bd[fromPiecePosition.x][fromPiecePosition.y]=undefined;
+		this.bd[toPiecePosition.x][toPiecePosition.y]=boardPiece;
 		this.postMoveCB.forEach(function(f) {
-			f(boardPiece,fromPosition,toPosition);
+			f(boardPiece,fromPiecePosition,toPiecePosition);
 		});
 	},
 	/**
@@ -174,13 +177,13 @@ var Board=Class.create(
 	},
 	/**
 		@description Get a piece at a specific position
-		@param position position to get the piece at
-		@returns the piece at the specified position
+		@param piecePositon [PiecePosition] position to get the piece at
+		@returns [BoardPiece] the piece at the specified position
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
-	getPieceAtPosition: function(position) {
-		this.checkPieceAt(position);
-		return this.bd[position.x][position.y];
+	getPieceAtPosition: function(piecePosition) {
+		this.checkPieceAt(piecePosition);
+		return this.bd[piecePosition.x][piecePosition.y];
 	},
 	/**
 		@description Get a piece at a specific position (in parts)
@@ -240,7 +243,7 @@ var Board=Class.create(
 	},
 	/**
 		@description Clear the board and add a position to the current board
-		@param boardPosition position to set
+		@param boardPosition [BoardPosition] position to set
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -250,7 +253,7 @@ var Board=Class.create(
 		boardPosition.forEachPiece(function(boardPiece,piecePosition) { that.addPiece(boardPiece,piecePosition); });
 	},
 	/**
-		@description Put the board in starting position
+		@description Put the board in starting position of standard chess.
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -262,13 +265,14 @@ var Board=Class.create(
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
-	movePieceByPos: function(fromPos,toPos) {
-		var boardPiece=this.getPieceAtPosition(fromPos);
-		this.movePiece(boardPiece,fromPos,toPos);
+	movePieceByPos: function(fromPiecePosition,toPiecePosition) {
+		var boardPiece=this.getPieceAtPosition(fromPiecePosition);
+		this.movePiece(boardPiece,fromPiecePosition,toPiecePosition);
 	},
 	/**
 		@description Get the position of a piece
-		@returns piecePosition which is the position of the piece
+		@param boardPiece [BoardPiece] piece to get the position for
+		@returns [PiecePosition] the position of the piece in question
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	getPiecePosition: function(boardPiece) {
