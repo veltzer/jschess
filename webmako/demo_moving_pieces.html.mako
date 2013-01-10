@@ -55,31 +55,9 @@ ${jsThirdParty()}
 	</head>
 	<body>
 		<h1>Moving pieces</h1>
-		First download the minified file from <a title="jschess download" href="../out/jschess-${ver}.min.js">here</a>.
-		Place the file somewhere on your web server and import it from your HTML like this:
-		<pre class="brush: xml">
-			&lt;script src="jschess-${ver}.min.js"&gt;&lt;/script&gt;</pre>
-		You need a place for your board, so place something like this somewhere in your html:
-		<pre class="brush: xml">
-			&lt;div id="myid"&gt;
-			&lt;/div&gt;</pre>
-		Then you can create a board from your javascript code by calling the constructor of SvgBoard. The board will be empty so we call startpos to get initial game position:
-		<pre class="brush: js">
-			var board=new Board()
-			var svgBoard=new SvgBoard(board,{
-				id:'myid'
-			})
-			board.startPosition()</pre>
-		Here is the result:
-		<div id="myid">
-		</div>
-		<button id="startpos">startpos</button>
-		<button id="moverooks">moverooks</button>
-		<button id="moveknights">moveknights</button>
-		<button id="movebishops">movebishops</button>
-		<button id="flip">flip</button>
-		<button id="dump">dump</button>
-		<br/>
+		<p>
+		TBD
+		</p>
 		<p>
 			Mark Veltzer, Copyright ${copyright_years(2012)}
 			<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
