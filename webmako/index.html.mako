@@ -116,6 +116,10 @@ ${jsFiles()}
 				<li><a href="http://qunitjs.com">qunitjs</a> for testing</li>
 				<li><a href="http://developer.yahoo.com/yui/compressor">YUI compressor</a> is used for compressing</li>
 				<li><a href="http://www.crockford.com/javascript/jsmin.html">jsmin</a> is used for compressing</li>
+				<li><a href="http://www.python.org">python</a> is used for scripting</li>
+				<li><a href="http://www.makotemplates.org">mako</a> is used for templating the web site</li>
+				<li><a href="http://www.gnu.org/software/make">GNU make</a> is used for building</li>
+				<li><a href="http://www.javascriptlint.com">JavaScript Lint</a> is used for checking the source code</li>
 			</ul>
 		</p>
 		<p>The current version of <b>jschess</b> is ${ver}
