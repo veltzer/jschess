@@ -1,7 +1,6 @@
 now:
 ====
 - fix flipping the board:
-	- when flipping the board selection goes hay wire.
 	- border letters and numbers do not flip when the board flips.
 - selecting of pieces:
 	- make selecting of squares by click work also when highlighting works.
