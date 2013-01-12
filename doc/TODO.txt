@@ -1,5 +1,6 @@
 now:
 ====
+- add a demo page which shows how to convert a board to a FEN string.
 - clear does not clear glowing pieces and selection.
 - fix flipping the board:
 	- border letters and numbers do not flip when the board flips.
