@@ -59,6 +59,9 @@ ${jsThirdParty()}
 				</tr>
 				% endfor
 			</table>
+		Import them so:
+		<pre class="brush: xml">
+${jsThirdPartyEscape()}></pre>
 		</p>
 		<p>
 		Then download the minified <b>jschess</b> file from <a title="jschess compressed download" href="../out/jschess-${ver}.min.js">here</a>.
