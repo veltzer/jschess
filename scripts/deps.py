@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from __future__ import print_function
+import cgi # for escape
 
 """
 module to help handle javascript dependencies for a piece of software
@@ -43,7 +44,11 @@ def getJsThirdParty():
 		l.append('<script src="../'+dep.myFile+'"></script>')
 	l.append('<!-- end of auto tool -->');
 	return '\n'.join(l)
-
+def getJsThirdPartyEscape():
+	l=[]
+	for dep in deps:
+		l.append('<script src="../'+dep.myFile+'"></script>')
+	return cgi.escape('\n'.join(l))
 def getJsThirdPartyDebug():
 	l=[]
 	l.append('<!-- placed by auto tool, do not edit -->');
