@@ -44,12 +44,9 @@
 		<p>
 		When using the .pack.js file download it from <a title="jschess package download" href="../out/jschess-${ver}.pack.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
-		<pre class="brush: xml">
-			&lt;script src="jschess-${ver}.pack.js"&gt;&lt;/script&gt;</pre>
+		<pre class="brush: xml"><%block filter="h"><script src="jschess-${ver}.pack.js"></script></%block></pre>
 		You need a place for your board, so place something like this somewhere in your html:
-		<pre class="brush: xml">
-			&lt;div id="myid"&gt;
-			&lt;/div&gt;</pre>
+		<pre class="brush: xml"><%block filter="h"><div id="myid"></div></%block></pre>
 		In order to get a board with initial position we must:
 		<ul>
 			<li>create a board using the constructor of Board.</li>
@@ -58,12 +55,12 @@
 		The SvgBoard will also need the id you prepared since it is the one doing the actual drawing on the screen.
 		To do "chess stuff" we will mainly interact with the board: move pieces, delete pieces etc.
 		So we will also call the startPosition method to setup a classic chess start position.
-		<pre class="brush: js">
+		<pre class="brush: js"><%block filter="h">
 			var board=new Board()
 			var svgBoard=new SvgBoard(board,{
 				id:'myid'
 			})
-			board.startPosition()</pre>
+			board.startPosition()</%block></pre>
 		</div>
 		Here is the result:
 		<div id="myid">
