@@ -14,7 +14,8 @@ var SvgBoard=Class.create(
 		@class a whole board to play with
 		@description creates a new instance
 		@constructor
-		@param config configuration for this board
+		@param board [Board] instance to use as the abstract board
+		@param dict [object] overridables to the configuration for this object
 		@returns the new instance
 		@constructs
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -77,9 +78,20 @@ var SvgBoard=Class.create(
 		// selected rec
 		this.selectedRec=undefined;
 	},
+	/**
+		@description get the logical board [Board] associated with this [SvgBoard]
+		@returns [Board] the logical board associated with this [SvgBoard]
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
 	getBoard: function() {
 		return this.board;
 	},
+	/**
+		@description get the config value for a key
+		@param key [string] the key to get the config for
+		@returns the value of the configuration option
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
 	getValue: function(key) {
 		return this.config.getValue(key);
 	},
@@ -117,8 +129,12 @@ var SvgBoard=Class.create(
 	},
 	/**
 		@description Fill a rectangle using the default color
+		This method must take board rotation into consideration
+		It currently doesn't because the board looks the same in terms
+		of white/black square when you totally flip it. If we ever support
+		90% flips then this method must be modified.
 		@param rec Raphael.js rectangle object to fill
-		@param piecePosition PiecePosition object that describes the position of the rectangle
+		@param piecePosition [PiecePosition] object that describes the position of the rectangle
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -176,7 +192,21 @@ var SvgBoard=Class.create(
 		}
 	},
 	/**
-		@description Draw the board (which and black squares)
+		@description Translate a position from a rectangle position
+		to a logical position according to board rotation.
+		@param [PiecePosition] the position to translate
+		@returns [PiecePosition] the logical position
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
+	translatePos: function(pos) {
+		if(this.flipview===true) {
+			return new PiecePosition(7-pos.x,7-pos.y);
+		} else {
+			return new PiecePosition(pos.x,pos.y);
+		}
+	},
+	/**
+		@description Draw the board (white and black squares)
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -201,32 +231,40 @@ var SvgBoard=Class.create(
 				this.setRectFill(rec,piecePosition);
 				rec.click(function(tpos,trec,type) {
 					return function() {
-						that.eventSquare(tpos,trec,type);
+						var ttpos=that.translatePos(tpos);
+						that.eventPosition(ttpos,trec,type);
 					};
 				}(piecePosition,rec,"click"));
 				rec.mousedown(function(tpos,trec,type) {
 					return function() {
-						that.eventSquare(tpos,trec,type);
+						var ttpos=that.translatePos(tpos);
+						that.eventPosition(ttpos,trec,type);
 					};
 				}(piecePosition,rec,"mousedown"));
+				/*
 				rec.mousemove(function(tpos,trec,type) {
 					return function() {
-						that.eventSquare(tpos,trec,type);
+						var ttpos=that.translatePos(tpos);
+						that.eventPosition(ttpos,trec,type);
 					};
 				}(piecePosition,rec,"mousemove"));
+				*/
 				rec.mouseout(function(tpos,trec,type) {
 					return function() {
-						that.eventSquare(tpos,trec,type);
+						var ttpos=that.translatePos(tpos);
+						that.eventPosition(ttpos,trec,type);
 					};
 				}(piecePosition,rec,"mouseout"));
 				rec.mouseover(function(tpos,trec,type) {
 					return function() {
-						that.eventSquare(tpos,trec,type);
+						var ttpos=that.translatePos(tpos);
+						that.eventPosition(ttpos,trec,type);
 					};
 				}(piecePosition,rec,"mouseover"));
 				rec.mouseup(function(tpos,trec,type) {
 					return function() {
-						that.eventSquare(tpos,trec,type);
+						var ttpos=that.translatePos(tpos);
+						that.eventPosition(ttpos,trec,type);
 					};
 				}(piecePosition,rec,"mouseup"));
 			}
@@ -246,9 +284,11 @@ var SvgBoard=Class.create(
 			var rec=this.paper.rect(this.offX+delta,this.offY+delta,this.square*8.0-delta,this.square*8.0-delta);
 			rec.attr({fill:Raphael.getColor()});
 			rec.attr({opacity:0.0});
+			/*
 			rec.mousemove(function(evt,x,y) {
 				that.eventGlobal(evt,x-that.startX-that.offX,y-that.startY-that.offY,'mousemove');
 			});
+			*/
 			rec.mouseover(function(evt,x,y) {
 				that.eventGlobal(evt,x-that.startX-that.offX,y-that.startY-that.offY,'mouseover');
 			});
@@ -269,14 +309,22 @@ var SvgBoard=Class.create(
 		}
 		*/
 	},
+	/**
+		@description Callback method that is called whenever a piece is added to the board 
+		This method is to be used to do something after a piece is added, removed etc.
+		@returns nothing
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
 	postGraphics: function() {
 		if(this.getValue('do_select_global')) {
 			this.fullRec.toFront();
 		}
 	},
 	/**
-		@description Callback method to create graphics and place them when adding a piece.
-		@param boardPiece the piece to add.
+		@description Callback method that is called after the logical board adds a piece.
+		This is where we add the SVG representation of the piece in real graphics.
+		@param boardPiece [BoardPiece] the piece that was added.
+		@param piecePosition [PiecePosition] the position where the piece was added.
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -295,15 +343,17 @@ var SvgBoard=Class.create(
 			return function(eventName) {
 				that.eventPiece(iboardPiece,eventName);
 			};
-		}(boardPiece),['click','mouseover','mouseout','mousemove','mouseup','mousedown']);
+		}(boardPiece),['click','mouseover','mouseout']);
+		//}(boardPiece),['click','mouseover','mouseout','mousemove','mouseup','mousedown']);
 		// lets put our own data with the piece
 		var svgPieceData=new SvgPieceData(set,pixelPos);
 		boardPiece.setData(svgPieceData);
 		this.postGraphics();
 	},
 	/**
-		@description Callback method to create graphics and place them when adding a piece.
-		@param boardPiece the piece to add.
+		@description Callback method that is called after the logical board removes a piece.
+		@param boardPiece [BoardPiece] the piece to add.
+		@param piecePosition [PiecePosition] the position where the piece was removed.
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -315,8 +365,9 @@ var SvgBoard=Class.create(
 	},
 	/**
 		@description Translates position (0..7,0..7) to pixels
-		@param piecePosition PiecePosition (0..7,0..7) to translate
-		@returns position in pixels
+		This method must take board rotation into consideration
+		@param piecePosition [PiecePosition] logical (0..7,0..7) to translate
+		@returns [SvgPixelPosition] position in pixels
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	posToPixels: function(piecePosition) {
@@ -334,8 +385,9 @@ var SvgBoard=Class.create(
 	},
 	/**
 		@description Translates pixel position (x,y) to board position (0..7,0..7)
-		@param svgPixelPosition SvgPixelPosition object to translate
-		@returns position (0..7,0..7)
+		This method must take board rotation into consideration
+		@param svgPixelPosition [SvgPixelPosition] object to translate
+		@returns [PiecePosition] logical position
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	pixelsToPos: function(svgPixelPosition) {
@@ -377,8 +429,8 @@ var SvgBoard=Class.create(
 	},
 	/**
 		@description Shows or hides a given piece according to parameter
-		@param piece of type Piece, the piece to show or hide
-		@param hide boolean - show or hide the piece
+		@param boardPiece [BoardPiece] piece to show or hide
+		@param hide [boolean] show or hide the piece
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -394,21 +446,21 @@ var SvgBoard=Class.create(
 	},
 	/**
 		@description Quick method to show a piece
-		@param piece of type Piece - the piece to show
+		@param boardPiece [BoardPiece] the piece to show
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
-	showPiece: function(piece) {
-		this.showHidePiece(piece,false);
+	showPiece: function(boardPiece) {
+		this.showHidePiece(boardPiece,false);
 	},
 	/**
 		@description Quick method to hide a piece
-		@param piece of type Piece - the piece to hide
+		@param boardPiece [BoardPiece] the piece to hide
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
-	hidePiece: function(piece) {
-		this.showHidePiece(piece,true);
+	hidePiece: function(boardPiece) {
+		this.showHidePiece(boardPiece,true);
 	},
 	/**
 		@description Move a piece on the board (including animation if so configured)
@@ -450,11 +502,12 @@ var SvgBoard=Class.create(
 	},
 	/**
 		@description toString function
+		This method is not yet implemented and will throw an exception.
 		@returns a string representation of this object
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	toString: function() {
-		return 'no dump now';
+		throw 'not yet implemented';
 	},
 	/**
 		@description Make a piece glow
@@ -487,7 +540,7 @@ var SvgBoard=Class.create(
 		@description Event handler for events happening on the pieces.
 		Types of events: click, mouseover and more...
 		@param boardPiece [BoardPiece] instance the event happened on
-		@param type the type of event that happened
+		@param type [string] the type of event that happened
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -506,21 +559,16 @@ var SvgBoard=Class.create(
 		}
 	},
 	/**
-		@description Events for squares.
+		@description Events for position. Positions are logical and do
+		not depend on the flipping of the board.
 		Types of events: mouseover, mouseout, click and more.
-		@param piecePosition the position of the event
+		@param piecePosition [PiecePosition] the position of the event
 		@param rec the Raphael.js rectangle where the event happened
 		@param type string which is the name of the event that happened
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
-	eventSquare: function(piecePosition,rec,type) {
-		/*
-		if(this.flipview===true) {
-			piecePosition.x=7-piecePosition.x;
-			piecePosition.y=7-piecePosition.y;
-		}
-		*/
+	eventPosition: function(piecePosition,rec,type) {
 		if(this.getValue('do_select_piecerec')) {
 			if(type=='mouseover') {
 				this.lastPos=this.currentPos;
@@ -660,7 +708,8 @@ var SvgBoard=Class.create(
 	},
 	/**
 		@description Return the square at a position.
-		@param piecePosition the position for which to return the square.
+		This method must take into consideraton board rotation
+		@param piecePosition [PiecePosition] the logical position for which to return the square.
 		@returns the Raphael.js rec in question
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
