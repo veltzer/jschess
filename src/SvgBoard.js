@@ -29,7 +29,7 @@ var SvgBoard=Class.create(
 		this.config.check();
 		// now we are ready to go...
 		// get RW vars from the config
-		this.flipview=this.getValue('flipview');
+		this.boardview=this.getValue('boardview');
 		this.size=this.getValue('size');
 		if(this.getValue('do_letters')) {
 			var partial=this.getValue('partial');
@@ -199,11 +199,19 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	translatePos: function(pos) {
-		if(this.flipview===true) {
-			return new PiecePosition(7-pos.x,7-pos.y);
-		} else {
+		if(this.boardview=='white') {
 			return new PiecePosition(pos.x,pos.y);
 		}
+		if(this.boardview=='black') {
+			return new PiecePosition(7-pos.x,7-pos.y);
+		}
+		if(this.boardview=='left') {
+			return new PiecePosition(pos.y,pos.x);
+		}
+		if(this.boardview=='right') {
+			return new PiecePosition(7-pos.y,7-pos.x);
+		}
+		throw 'boardview is not correct';
 	},
 	/**
 		@description Draw the board (white and black squares)
@@ -371,17 +379,31 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	posToPixels: function(piecePosition) {
-		if(this.flipview===true) {
-			return new SvgPixelPosition(
-				(7-piecePosition.x)*this.square,
-				piecePosition.y*this.square
-			);
-		} else {
+		if(this.boardview=='white') {
 			return new SvgPixelPosition(
 				piecePosition.x*this.square,
 				(7-piecePosition.y)*this.square
 			);
 		}
+		if(this.boardview=='black') {
+			return new SvgPixelPosition(
+				(7-piecePosition.x)*this.square,
+				piecePosition.y*this.square
+			);
+		}
+		if(this.boardview=='left') {
+			return new SvgPixelPosition(
+				piecePosition.y*this.square,
+				(7-piecePosition.x)*this.square
+			);
+		}
+		if(this.boardview=='right') {
+			return new SvgPixelPosition(
+				(7-piecePosition.y)*this.square,
+				piecePosition.x*this.square
+			);
+		}
+		throw 'boardview is bad';
 	},
 	/**
 		@description Translates pixel position (x,y) to board position (0..7,0..7)
@@ -393,11 +415,19 @@ var SvgBoard=Class.create(
 	pixelsToPos: function(svgPixelPosition) {
 		var x=Math.floor((svgPixelPosition.x)/this.square);
 		var y=Math.floor((svgPixelPosition.y)/this.square);
-		if(this.flipview===true) {
-			return new PiecePosition(7-x,y);
-		} else {
+		if(this.boardview=='white') {
 			return new PiecePosition(x,7-y);
 		}
+		if(this.boardview=='black') {
+			return new PiecePosition(7-x,y);
+		}
+		if(this.boardview=='left') {
+			return new PiecePosition(y,7-x);
+		}
+		if(this.boardview=='right') {
+			return new PiecePosition(7-y,x);
+		}
+		throw 'boardview is bad';
 	},
 	pixelsToPosForgiving: function(svgPixelPosition) {
 		var x=Math.floor((svgPixelPosition.x)/this.square);
@@ -405,11 +435,19 @@ var SvgBoard=Class.create(
 		if(x>7 || x<0 || y>7 || y<0) {
 			return undefined;
 		}
-		if(this.flipview===true) {
-			return new PiecePosition(7-x,y);
-		} else {
+		if(this.boardview=='white') {
 			return new PiecePosition(x,7-y);
 		}
+		if(this.boardview=='black') {
+			return new PiecePosition(7-x,y);
+		}
+		if(this.boardview=='left') {
+			return new PiecePosition(y,7-x);
+		}
+		if(this.boardview=='right') {
+			return new PiecePosition(7-y,x);
+		}
+		throw 'boardview is bad';
 	},
 	/**
 		@description Resize the board
@@ -493,11 +531,39 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	flip: function() {
-		if(this.flipview===true) {
-			this.flipview=false;
-		} else {
-			this.flipview=true;
+		switch(this.boardview) {
+			case 'white':
+				this.boardview='black';
+				break;
+			case 'black':
+				this.boardview='white';
+				break;
+			case 'left':
+				this.boardview='right';
+				break;
+			case 'right':
+				this.boardview='left';
+				break;
+			default:
+				throw 'boardview is bad';
 		}
+		// now redraw the board (after the change of view)
+		this.redraw();
+	},
+	rotateright: function() {
+		if(!this.boardview in SvgBoard.ObjRotateRight) {
+			throw 'boardview is bad';
+		}
+		this.boardview=SvgBoard.ObjRotateRight[this.boardview];
+		// now redraw the board (after the change of view)
+		this.redraw();
+	},
+	rotateleft: function() {
+		if(!this.boardview in SvgBoard.ObjRotateLeft) {
+			throw 'boardview is bad';
+		}
+		this.boardview=SvgBoard.ObjRotateLeft[this.boardview];
+		// now redraw the board (after the change of view)
 		this.redraw();
 	},
 	/**
@@ -714,10 +780,31 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	getRec: function(piecePosition) {
-		if(this.flipview===true) {
-			return this.recs[7-piecePosition.x][7-piecePosition.y];
-		} else {
+		if(this.boardview=='white') {
 			return this.recs[piecePosition.x][piecePosition.y];
 		}
+		if(this.boardview=='black') {
+			return this.recs[7-piecePosition.x][7-piecePosition.y];
+		}
+		if(this.boardview=='left') {
+			return this.recs[piecePosition.y][piecePosition.x];
+		}
+		if(this.boardview=='right') {
+			return this.recs[7-piecePosition.y][7-piecePosition.x];
+		}
+		throw 'boardview is bad';
 	}
 });
+// static data
+SvgBoard.ObjRotateRight={
+	white:'left',
+	left:'black',
+	black:'right',
+	right:'white'
+};
+SvgBoard.ObjRotateLeft={
+	white:'right',
+	right:'black',
+	black:'left',
+	left:'white'
+};
