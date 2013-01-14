@@ -68,12 +68,13 @@ var SvgConfigTemplate=Class.create(ConfigTemplate,
 			description:'gradient for white squares',
 			defaultValue:'0-#eee:0-#fff:50-#fff:100'
 		});
+		// TODO: turn this to an enum: white, black, left, right
 		this.add({
-			name:'flipview',
-			type:'boolean',
+			name:'boardview',
+			type:'string',
 			required:false,
-			description:'is the board flipped',
-			defaultValue:false
+			description:'what board view to use',
+			defaultValue:'white'
 		});
 		this.add({
 			name:'move_ms',

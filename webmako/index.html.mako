@@ -73,6 +73,12 @@ ${jsFiles()}
 				$('flip').observe('click',function() {
 					svgBoard.flip()
 				});
+				$('rotateright').observe('click',function() {
+					svgBoard.rotateright()
+				});
+				$('rotateleft').observe('click',function() {
+					svgBoard.rotateleft()
+				});
 				$('glow').observe('click',function() {
 					svgBoard.glow(board.getPieceAtPosition(new PiecePosition(0,0)),true);
 				});
@@ -160,6 +166,8 @@ ${jsFiles()}
 			<button id="moveknights">moveknights</button>
 			<button id="movebishops">movebishops</button>
 			<button id="flip">flip</button>
+			<button id="rotateright">rotateright</button>
+			<button id="rotateleft">rotateleft</button>
 			<button id="glow">glow</button>
 			<button id="clear">clear</button>
 		</p>
