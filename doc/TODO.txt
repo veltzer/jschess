@@ -1,5 +1,6 @@
 now:
 ====
+- add gradient to the selection (green) fill also.
 - add a demo page which shows how to convert a board to a FEN string.
 - clear does not clear glowing pieces and selection.
 - fix flipping the board:
