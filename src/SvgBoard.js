@@ -134,23 +134,42 @@ var SvgBoard=Class.create(
 		of white/black square when you totally flip it. If we ever support
 		90% flips then this method must be modified.
 		@param rec Raphael.js rectangle object to fill
-		@param piecePosition [PiecePosition] object that describes the position of the rectangle
+		@param anim [boolean] do you want animation (slow transition)
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
-	setRectFill: function(rec,piecePosition) {
-		if((piecePosition.x+piecePosition.y)%2==1) {
+	rectFill: function(rec,anim) {
+		var piecePosition=rec.data('pos');
+		var mod;
+		if(this.boardview=='white' || this.boardview=='black') {
+			mod=1;
+		} else {
+			mod=0;
+		}
+		var val;
+		if((piecePosition.x+piecePosition.y)%2==mod) {
 			if(this.getValue('gradients')) {
-				rec.attr('fill',this.getValue('white_square_gradient'));
+				val=this.getValue('white_square_gradient');
 			} else {
-				rec.attr('fill',this.getValue('white_square_color'));
+				val=this.getValue('white_square_color');
 			}
 		} else {
 			if(this.getValue('gradients')) {
-				rec.attr('fill',this.getValue('black_square_gradient'));
+				val=this.getValue('black_square_gradient');
 			} else {
-				rec.attr('fill',this.getValue('black_square_color'));
+				val=this.getValue('black_square_color');
 			}
+		}
+		if(anim) {
+			// TODO: animation with gradients looks bad
+			if(this.getValue('gradients')) {
+				rec.attr('fill',val);
+			} else {
+				var ms=this.getValue('move_ms');
+				rec.animate({fill:val},ms);
+			}
+		} else {
+			rec.attr('fill',val);
 		}
 	},
 	/**
@@ -236,7 +255,8 @@ var SvgBoard=Class.create(
 				});
 				rec_line.push(rec);
 				var piecePosition=new PiecePosition(x,7-y);
-				this.setRectFill(rec,piecePosition);
+				rec.data('pos',piecePosition);
+				this.rectFill(rec,false);
 				rec.click(function(tpos,trec,type) {
 					return function() {
 						var ttpos=that.translatePos(tpos);
@@ -501,7 +521,7 @@ var SvgBoard=Class.create(
 		this.showHidePiece(boardPiece,true);
 	},
 	/**
-		@description Move a piece on the board (including animation if so configured)
+		@description Callback called when the logical board moves a piece
 		@param boardPiece [BoardPiece] the piece to move
 		@param fromPiecePosition [PiecePosition] position from which to move
 		@param toPiecePosition [PiecePosition] position to which to move
@@ -509,13 +529,19 @@ var SvgBoard=Class.create(
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	postMovePiece: function(boardPiece,fromPiecePosition,toPiecePosition) {
-		this.timeMovePiece(boardPiece,fromPiecePosition,toPiecePosition,this.getValue('move_ms'));
+		this.timeMovePiece(boardPiece,fromPiecePosition,toPiecePosition);
 	},
-	positionPiece: function(boardPiece,toPiecePosition) {
-		this.timeMovePiece(boardPiece,toPiecePosition,0);
-	},
-	timeMovePiece: function(boardPiece,fromPiecePosition,toPiecePosition,ms) {
+	/**
+		@description Move a piece on the board (including animation if so configured)
+		@param boardPiece [BoardPiece] the piece to move
+		@param fromPiecePosition [PiecePosition] position from which to move
+		@param toPiecePosition [PiecePosition] position to which to move
+		@returns nothing
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
+	timeMovePiece: function(boardPiece,fromPiecePosition,toPiecePosition) {
 		Utils.fakeUse(fromPiecePosition);
+		var ms=this.getValue('move_ms');
 		var pixelPosFrom=boardPiece.getData().pixelPos;
 		var pixelPosTo=this.posToPixels(toPiecePosition);
 		boardPiece.getData().forEach(function(el) {
@@ -527,10 +553,13 @@ var SvgBoard=Class.create(
 	},
 	/**
 		@description Flips the board (see it from the other side)
+		If the board is 90 deg left it be will 90 deg right.
+		Black view will turn to white and white to black.
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	flip: function() {
+		var oldview=this.boardview;
 		switch(this.boardview) {
 			case 'white':
 				this.boardview='black';
@@ -548,23 +577,35 @@ var SvgBoard=Class.create(
 				throw 'boardview is bad';
 		}
 		// now redraw the board (after the change of view)
-		this.redraw();
+		this.redraw(oldview);
 	},
+	/**
+		@description Rotate the board to the right 90 degrees
+		@returns nothing
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
 	rotateright: function() {
+		var oldview=this.boardview;
 		if(!this.boardview in SvgBoard.ObjRotateRight) {
 			throw 'boardview is bad';
 		}
 		this.boardview=SvgBoard.ObjRotateRight[this.boardview];
 		// now redraw the board (after the change of view)
-		this.redraw();
+		this.redraw(oldview);
 	},
+	/**
+		@description Rotate the board to the left 90 degrees
+		@returns nothing
+		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	*/
 	rotateleft: function() {
+		var oldview=this.boardview;
 		if(!this.boardview in SvgBoard.ObjRotateLeft) {
 			throw 'boardview is bad';
 		}
 		this.boardview=SvgBoard.ObjRotateLeft[this.boardview];
 		// now redraw the board (after the change of view)
-		this.redraw();
+		this.redraw(oldview);
 	},
 	/**
 		@description toString function
@@ -596,11 +637,19 @@ var SvgBoard=Class.create(
 		@returns nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
-	redraw: function() {
+	redraw: function(oldview) {
+		Utils.fakeUse(oldview);
+		// redraw the pieces
 		var that=this;
 		this.board.forEachPiece(function(boardPiece,position) {
-			that.timeMovePiece(boardPiece,position,position,that.config.getValue('flip_ms'));
+			that.timeMovePiece(boardPiece,position,position);
 		});
+		// redraw the squares
+		for(var x=0;x<8;x++) {
+			for(var y=0;y<8;y++) {
+				this.rectFill(this.getRec(new PiecePosition(x,y)),true);
+			}
+		}
 	},
 	/**
 		@description Event handler for events happening on the pieces.
@@ -660,19 +709,16 @@ var SvgBoard=Class.create(
 			if(type=='click') {
 				if(this.selected) {
 					if(this.selected==rec) {
-						this.setRectFill(this.selected,this.selectedPos);
+						this.rectFill(this.selected,false);
 						this.selected=undefined;
-						this.selectedPos=undefined;
 					} else {
-						this.setRectFill(this.selected,this.selectedPos);
+						this.rectFill(this.selected,false);
 						rec.attr('fill',this.getValue('select_color'));
 						this.selected=rec;
-						this.selectedPos=piecePosition;
 					}
 				} else {
 					rec.attr('fill',this.getValue('select_color'));
 					this.selected=rec;
-					this.selectedPos=piecePosition;
 				}
 			}
 		}
@@ -733,7 +779,7 @@ var SvgBoard=Class.create(
 			}
 			if(this.selectedRec!=undefined) {
 				if(this.getValue('do_select_square')) {
-					this.setRectFill(this.selectedRec,this.lastPos);
+					this.rectFill(this.selectedRec,false);
 					this.selectedRec=undefined;
 				}
 			}
@@ -765,7 +811,7 @@ var SvgBoard=Class.create(
 					this.selectedRec=rec;
 					this.selectedRec.attr('fill',this.getValue('over_color'));
 				} else {
-					this.setRectFill(this.selectedRec,this.lastPos);
+					this.rectFill(this.selectedRec,false);
 					this.selectedRec=rec;
 					this.selectedRec.attr('fill',this.getValue('over_color'));
 				}
