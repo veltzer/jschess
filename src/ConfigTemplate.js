@@ -11,7 +11,7 @@ var ConfigTemplate = Class.create(
 		- an optional validation function.
 		- is this option required
 		- description of the option
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	initialize: function() {
 		// the dictionary holding the current config
@@ -20,7 +20,7 @@ var ConfigTemplate = Class.create(
 	},
 	/**
 		add another options to this template
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	add: function(s) {
 		Utils.checkContains(s, ConfigTemplate.fullSet);
@@ -39,7 +39,7 @@ var ConfigTemplate = Class.create(
 		@param key key to check.
 		@param value value to check.
 		@return nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	check: function(key,value) {
 		if (!(key in this.tuples)) {
@@ -55,7 +55,7 @@ var ConfigTemplate = Class.create(
 		return whether the template has a key
 		@param key the key to check.
 		@return boolean is the key part of this config template
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	hasKey: function(key) {
 		return key in this.tuples;
@@ -64,7 +64,7 @@ var ConfigTemplate = Class.create(
 		return the default value for a key
 		@param key the key to fetch the value for.
 		@return the default value for the given key
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	getDefaultValue: function(key) {
 		return this.tuples[key].defaultValue;
@@ -72,11 +72,11 @@ var ConfigTemplate = Class.create(
 	/**
 		show HTML that lists all config options for the current template
 		@return nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	getHTML: function() {
 		var shtml = '';
-		shtml += '<table border="1">';
+		shtml += '<table border=\'1\'>';
 		shtml += '<tr>';
 		shtml += '<td>name</td>';
 		shtml += '<td>type</td>';

@@ -7,14 +7,14 @@ var Game = Class.create(
 		constructs a new Game
 		@constructor
 		@return nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	initialize: function() {
 	},
 	/**
 		toString method that allows you to get a nice printout for this type
 		@return nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	toString: function() {
 		return 'no toString for type Game';

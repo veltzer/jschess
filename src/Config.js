@@ -15,7 +15,7 @@ var Config = Class.create(
 		two boards on the page and have each configured differently.
 		creates a new instance.
 		@constructor
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	initialize: function(tmpl) {
 		// the dictionary holding the current config
@@ -36,7 +36,7 @@ var Config = Class.create(
 	},
 	/**
 		set a key to a certain value in the current configuration
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	setValue: function(key,value) {
 		// check that the key and value are ok.
@@ -46,7 +46,7 @@ var Config = Class.create(
 	/**
 		set many values at once
 		@param d dictionary of values.
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	override: function(d) {
 		for (var x in d) {
@@ -56,7 +56,7 @@ var Config = Class.create(
 	/**
 		check that the config is good to go
 		for instance: check that all required arguments are set
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	check: function() {
 		// TODO
