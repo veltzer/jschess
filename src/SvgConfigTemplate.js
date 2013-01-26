@@ -4,7 +4,7 @@ var SvgConfigTemplate = Class.create(ConfigTemplate,
 {
 	/**
 		@class Singleton configuration for jschess
-		@description creates a new instance
+		creates a new instance
 		@constructor
 		@param config configuration for this board.
 		@return the new instance

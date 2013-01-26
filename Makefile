@@ -65,7 +65,7 @@ $(JSZIP): $(SOURCES)
 $(JSCHECK): $(SOURCES)
 	$(info doing [$@])
 	$(Q)~/install/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES)
-	#$(Q)gjslint $(SOURCES) 
+	$(Q)gjslint $(SOURCES) 
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 

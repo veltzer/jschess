@@ -8,7 +8,7 @@ var Board = Class.create(
 {
 	/**
 		@class Represents a full board This is the main class to interact with. Using this class you can: 1. Use pieces: put, remove and move them. 2. Do something with all pieces.
-		@description creates a new instance
+		creates a new instance
 		@return the new object created
 		@constructs
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -33,7 +33,7 @@ var Board = Class.create(
 		this.postMoveCB = [];
 	},
 	/**
-		@description toString method that allows you to get a nice printout for this type
+		toString method that allows you to get a nice printout for this type
 		@return string representation of this object
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -48,7 +48,7 @@ var Board = Class.create(
 		return str;
 	},
 	/**
-		@description Check that no piece is at a certain position. Will throw an exception if that is not the case.
+		Check that no piece is at a certain position. Will throw an exception if that is not the case.
 		@param piecePosition [PiecePosition] position to check that no piece is at.
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -59,7 +59,7 @@ var Board = Class.create(
 		}
 	},
 	/**
-		@description Check that piece is at a certain position. Will throw an exception if that is not the case.
+		Check that piece is at a certain position. Will throw an exception if that is not the case.
 		@param piecePosition [PiecePosition] position to check that a piece is at.
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -70,7 +70,7 @@ var Board = Class.create(
 		}
 	},
 	/**
-		@description Check that a certain piece is at a certain position. Will throw an exception if that is not the case.
+		Check that a certain piece is at a certain position. Will throw an exception if that is not the case.
 		@param boardPiece [BoardPiece] the piece in question.
 		@param piecePosition [PiecePosition] position to check that a piece is at.
 		@return nothing
@@ -82,7 +82,7 @@ var Board = Class.create(
 		}
 	},
 	/**
-		@description Add a piece to the position
+		Add a piece to the position
 		@param boardPiece [BoardPiece] piece to add.
 		@param piecePosition [PiecePosition] where to add the piece.
 		@return nothing
@@ -99,7 +99,7 @@ var Board = Class.create(
 		});
 	},
 	/**
-		@description Remove a piece
+		Remove a piece
 		@param boardPiece [BoardPiece] piece to remove.
 		@param piecePosition [PiecePosition] the position to remove it from.
 		@return nothing
@@ -116,7 +116,7 @@ var Board = Class.create(
 		});
 	},
 	/**
-		@description Move a piece
+		Move a piece
 		@param boardPiece [BoardPiece] piece to move.
 		@param fromPiecePosition [PiecePosition] from where to move the piece.
 		@param toPiecePosition [PiecePosition] to where to move the piece.
@@ -136,7 +136,7 @@ var Board = Class.create(
 		});
 	},
 	/**
-		@description Clear the board
+		Clear the board
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -145,7 +145,7 @@ var Board = Class.create(
 		this.forEachPiece(function(boardPiece,piecePosition) { that.removePiece(boardPiece, piecePosition); });
 	},
 	/**
-		@description Add a piece to the position (seperate pieces of data).
+		Add a piece to the position (seperate pieces of data).
 		@param color color of the piece (black/white).
 		@param type type of the piece (rook/knight/bishop/queen/king/pawn).
 		@param x x location of the piece [0..8).
@@ -161,7 +161,7 @@ var Board = Class.create(
 		this.addPiece(boardPiece, new PiecePosition(x, y));
 	},
 	/**
-		@description Run a function for each piece in this position
+		Run a function for each piece in this position
 		@param f function to be called back for each piece.This function should receive the piece to work on.
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -176,7 +176,7 @@ var Board = Class.create(
 		}
 	},
 	/**
-		@description Get a piece at a specific position
+		Get a piece at a specific position
 		@param piecePositon [PiecePosition] position to get the piece at.
 		@return [BoardPiece] the piece at the specified position
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -186,7 +186,7 @@ var Board = Class.create(
 		return this.bd[piecePosition.x][piecePosition.y];
 	},
 	/**
-		@description Get a piece at a specific position (in parts)
+		Get a piece at a specific position (in parts)
 		@param x x position to get piece at [0..8).
 		@param y y position to get piece at [0..8).
 		@return the piece at the specified position
@@ -196,7 +196,7 @@ var Board = Class.create(
 		return this.getPieceAtPosition(new PiecePosition(x, y));
 	},
 	/**
-		@description Do we have a piece in a specific position?
+		Do we have a piece in a specific position?
 		@param position position to check for a piece at.
 		@return boolean that indicates whether there is a piece at position.
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -205,7 +205,7 @@ var Board = Class.create(
 		return this.bd[piecePosition.x][piecePosition.y] !== undefined;
 	},
 	/**
-		@description Do we have a piece in a specific position?
+		Do we have a piece in a specific position?
 		@param x x position to check for piece at [0..8).
 		@param y y position to check for piece at [0..8).
 		@return boolean that indicates whether there is a piece at position.
@@ -215,7 +215,7 @@ var Board = Class.create(
 		return this.hasPieceAtPosition(new PiecePosition(x, y));
 	},
 	/**
-		@description Add a callback for adding a piece
+		Add a callback for adding a piece
 		@param f callback function.
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -224,7 +224,7 @@ var Board = Class.create(
 		this.postAddCB.push(f);
 	},
 	/**
-		@description Add a callback for removing a piece
+		Add a callback for removing a piece
 		@param f callback function.
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -233,7 +233,7 @@ var Board = Class.create(
 		this.postRemoveCB.push(f);
 	},
 	/**
-		@description Add a callback for moving a piece
+		Add a callback for moving a piece
 		@param f callback function.
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -242,7 +242,7 @@ var Board = Class.create(
 		this.postMoveCB.push(f);
 	},
 	/**
-		@description Clear the board and add a position to the current board
+		Clear the board and add a position to the current board
 		@param boardPosition [BoardPosition] position to set.
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -253,7 +253,7 @@ var Board = Class.create(
 		boardPosition.forEachPiece(function(boardPiece,piecePosition) { that.addPiece(boardPiece, piecePosition); });
 	},
 	/**
-		@description Put the board in starting position of standard chess.
+		Put the board in starting position of standard chess.
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -261,7 +261,7 @@ var Board = Class.create(
 		this.setPosition(BoardPosition.startPos());
 	},
 	/**
-		@description Move a piece according to positions.
+		Move a piece according to positions.
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -270,7 +270,7 @@ var Board = Class.create(
 		this.movePiece(boardPiece, fromPiecePosition, toPiecePosition);
 	},
 	/**
-		@description Get the position of a piece
+		Get the position of a piece
 		@param boardPiece [BoardPiece] piece to get the position for.
 		@return [PiecePosition] the position of the piece in question
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>

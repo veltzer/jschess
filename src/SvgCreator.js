@@ -6,7 +6,7 @@ var SvgCreator = Class.create(
 {
 	/**
 		@class static class to have just static methods for creating pieces
-		@description creates a new instance
+		creates a new instance
 		@constructs
 		@return the new instance
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -15,7 +15,7 @@ var SvgCreator = Class.create(
 	}
 });
 /**
-	@description Method which creates a piece according to color and type
+	Method which creates a piece according to color and type
 	@param config A configuration to work with.
 	@param pieceColor the color of the piece.
 	@param pieceType the type of the piece.

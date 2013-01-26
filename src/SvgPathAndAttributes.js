@@ -3,7 +3,7 @@ var SvgPathAndAttributes = Class.create(
 {
 	/**
 		@class a path + attributes two tuple object
-		@description creates a new instance
+		creates a new instance
 		@param path string representing SVG path.
 		@param attr object with attributes for said path.
 		@constructs
@@ -15,7 +15,7 @@ var SvgPathAndAttributes = Class.create(
 		this.attr = attr;
 	},
 	/**
-		@description toString method that allows you to get a nice printout for this type
+		toString method that allows you to get a nice printout for this type
 		@return string representation of this instance
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/

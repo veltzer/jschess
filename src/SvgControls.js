@@ -4,7 +4,7 @@ var SvgControls = Class.create(
 {
 	/**
 		@class Forward/Backwards controls.
-		@description creates a new instance
+		creates a new instance
 		@constructor
 		@param config configuration for this instance.
 		@return the new instance

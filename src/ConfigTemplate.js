@@ -19,7 +19,7 @@ var ConfigTemplate = Class.create(
 		this.tuplist = [];
 	},
 	/**
-		@description add another options to this template
+		add another options to this template
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	add: function(s) {
@@ -34,7 +34,7 @@ var ConfigTemplate = Class.create(
 		this.tuplist.push(s);
 	},
 	/**
-		@description check that a key,value combo is ok
+		check that a key,value combo is ok
 		This method will throw an exception if it finds anything wrong.
 		@param key key to check.
 		@param value value to check.
@@ -50,7 +50,7 @@ var ConfigTemplate = Class.create(
 		}
 	},
 	/**
-		@description return whether the template has a key
+		return whether the template has a key
 		@param key the key to check.
 		@return boolean is the key part of this config template
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -59,7 +59,7 @@ var ConfigTemplate = Class.create(
 		return key in this.tuples;
 	},
 	/**
-		@description return the default value for a key
+		return the default value for a key
 		@param key the key to fetch the value for.
 		@return the default value for the given key
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -68,7 +68,7 @@ var ConfigTemplate = Class.create(
 		return this.tuples[key].defaultValue;
 	},
 	/**
-		@description show HTML that lists all config options for the current template
+		show HTML that lists all config options for the current template
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
