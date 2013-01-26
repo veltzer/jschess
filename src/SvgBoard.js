@@ -361,7 +361,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     var pixelPos = this.posToPixels(piecePosition);
     var m = Raphael.matrix();
     m.translate(pixelPos.x + this.offX, pixelPos.y + this.offY);
-    m.scale(this.square / svgPiece.rect, this.square / svgPiece.rect);
+    m.scale(this.square / svgPiece.size, this.square / svgPiece.size);
     var transform = m.toTransformString();
     // now put it on the paper
     var set = svgPiece.toSet(this.paper, transform);
