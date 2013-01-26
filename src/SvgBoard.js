@@ -11,7 +11,6 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     @class a whole board to play with
     creates a new instance
-    @constructor
     @param {Board} board instance to use as the abstract board.
     @param {object} dict overridables to the configuration for this object.
     @return the new instance

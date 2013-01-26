@@ -3,7 +3,6 @@ var SvgConfigTemplate = Class.create(ConfigTemplate,/** @lends SvgConfigTemplate
   /**
     @class Singleton configuration for jschess
     creates a new instance
-    @constructor
     @param config configuration for this board.
     @return the new instance
     @constructor
