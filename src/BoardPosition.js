@@ -7,7 +7,7 @@ var BoardPosition = Class.create(
 	{
 	/**
 		@class represents a full position of the board
-		@description constructs a new object
+		constructs a new object
 		@return a new object of this type
 		@constructs
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -16,7 +16,7 @@ var BoardPosition = Class.create(
 		this.pieces = [];
 	},
 	/**
-		@description toString method that allows you to get a nice printout for this type
+		toString method that allows you to get a nice printout for this type
 		@return a string representation of this object
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -24,7 +24,7 @@ var BoardPosition = Class.create(
 		return this.pieces.join();
 	},
 	/**
-		@description Add a piece to the position
+		Add a piece to the position
 		@param color the color of the piece (black/white).
 		@param type the type of the piece (rook/knight/bishop/queen/king/pawn).
 		@param x the x position of the piece [0..8).
@@ -38,7 +38,7 @@ var BoardPosition = Class.create(
 		this.pieces.push([boardPiece, piecePosition]);
 	},
 	/**
-		@description Run a function for each piece in this position
+		Run a function for each piece in this position
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -51,7 +51,7 @@ var BoardPosition = Class.create(
 	}
 });
 /**
-	@description Static method that returns a starting position in standard chess.
+	Static method that returns a starting position in standard chess.
 	@return A standard chess starting position.
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
@@ -96,7 +96,7 @@ BoardPosition.startPos = function() {
 	return BoardPosition.setupFEN('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
 };
 /**
-	@description Setup a position according to FEN notation.
+	Setup a position according to FEN notation.
 	See <a href="http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation">Forsyth–Edwards Notation</a> for more details.
 	Example of start position is:
 	"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"

@@ -4,7 +4,7 @@ var Game = Class.create(
 	/**
 		@class A full game of chess. Contains the starting position
 		including a full set of moves of type GameMove.
-		@description constructs a new Game
+		constructs a new Game
 		@constructs
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -12,7 +12,7 @@ var Game = Class.create(
 	initialize: function() {
 	},
 	/**
-		@description toString method that allows you to get a nice printout for this type
+		toString method that allows you to get a nice printout for this type
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/

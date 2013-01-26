@@ -12,7 +12,7 @@ var SvgBoard = Class.create(
 {
 	/**
 		@class a whole board to play with
-		@description creates a new instance
+		creates a new instance
 		@constructor
 		@param board [Board] instance to use as the abstract board.
 		@param dict [object] overridables to the configuration for this object.
@@ -79,7 +79,7 @@ var SvgBoard = Class.create(
 		this.selectedRec = undefined;
 	},
 	/**
-		@description get the logical board [Board] associated with this [SvgBoard]
+		get the logical board [Board] associated with this [SvgBoard]
 		@return [Board] the logical board associated with this [SvgBoard]
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -87,7 +87,7 @@ var SvgBoard = Class.create(
 		return this.board;
 	},
 	/**
-		@description get the config value for a key
+		get the config value for a key
 		@param key [string] the key to get the config for.
 		@return the value of the configuration option
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -96,7 +96,7 @@ var SvgBoard = Class.create(
 		return this.config.getValue(key);
 	},
 	/**
-		@description Prepare the raphael paper so we could do graphics
+		Prepare the raphael paper so we could do graphics
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -128,7 +128,7 @@ var SvgBoard = Class.create(
 		this.startY = offset.top;
 	},
 	/**
-		@description Fill a rectangle using the default color
+		Fill a rectangle using the default color
 		This method must take board rotation into consideration
 		It currently doesn't because the board looks the same in terms
 		of white/black square when you totally flip it. If we ever support
@@ -173,7 +173,7 @@ var SvgBoard = Class.create(
 		}
 	},
 	/**
-		@description Draw the boarder
+		Draw the boarder
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -211,7 +211,7 @@ var SvgBoard = Class.create(
 		}
 	},
 	/**
-		@description Translate a position from a rectangle position
+		Translate a position from a rectangle position
 		to a logical position according to board rotation.
 		@param [PiecePosition] the position to translate.
 		@return [PiecePosition] the logical position
@@ -233,7 +233,7 @@ var SvgBoard = Class.create(
 		throw 'boardview is not correct';
 	},
 	/**
-		@description Draw the board (white and black squares)
+		Draw the board (white and black squares)
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -301,7 +301,7 @@ var SvgBoard = Class.create(
 		}
 	},
 	/**
-		@description Create an overlay rectange for the entire board
+		Create an overlay rectange for the entire board
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -338,7 +338,7 @@ var SvgBoard = Class.create(
 		*/
 	},
 	/**
-		@description Callback method that is called whenever a piece is added to the board
+		Callback method that is called whenever a piece is added to the board
 		This method is to be used to do something after a piece is added, removed etc.
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -349,7 +349,7 @@ var SvgBoard = Class.create(
 		}
 	},
 	/**
-		@description Callback method that is called after the logical board adds a piece.
+		Callback method that is called after the logical board adds a piece.
 		This is where we add the SVG representation of the piece in real graphics.
 		@param boardPiece [BoardPiece] the piece that was added.
 		@param piecePosition [PiecePosition] the position where the piece was added.
@@ -379,7 +379,7 @@ var SvgBoard = Class.create(
 		this.postGraphics();
 	},
 	/**
-		@description Callback method that is called after the logical board removes a piece.
+		Callback method that is called after the logical board removes a piece.
 		@param boardPiece [BoardPiece] the piece to add.
 		@param piecePosition [PiecePosition] the position where the piece was removed.
 		@return nothing
@@ -392,7 +392,7 @@ var SvgBoard = Class.create(
 		boardPiece.unsetData();
 	},
 	/**
-		@description Translates position (0..7,0..7) to pixels
+		Translates position (0..7,0..7) to pixels
 		This method must take board rotation into consideration
 		@param piecePosition [PiecePosition] logical (0..7,0..7) to translate.
 		@return [SvgPixelPosition] position in pixels
@@ -426,7 +426,7 @@ var SvgBoard = Class.create(
 		throw 'boardview is bad';
 	},
 	/**
-		@description Translates pixel position (x,y) to board position (0..7,0..7)
+		Translates pixel position (x,y) to board position (0..7,0..7)
 		This method must take board rotation into consideration
 		@param svgPixelPosition [SvgPixelPosition] object to translate.
 		@return [PiecePosition] logical position
@@ -470,7 +470,7 @@ var SvgBoard = Class.create(
 		throw 'boardview is bad';
 	},
 	/**
-		@description Resize the board
+		Resize the board
 		@param set Raphael set to resize.
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -486,7 +486,7 @@ var SvgBoard = Class.create(
 		},this);
 	},
 	/**
-		@description Shows or hides a given piece according to parameter
+		Shows or hides a given piece according to parameter
 		@param boardPiece [BoardPiece] piece to show or hide.
 		@param hide [boolean] show or hide the piece.
 		@return nothing
@@ -503,7 +503,7 @@ var SvgBoard = Class.create(
 		});
 	},
 	/**
-		@description Quick method to show a piece
+		Quick method to show a piece
 		@param boardPiece [BoardPiece] the piece to show.
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -512,7 +512,7 @@ var SvgBoard = Class.create(
 		this.showHidePiece(boardPiece, false);
 	},
 	/**
-		@description Quick method to hide a piece
+		Quick method to hide a piece
 		@param boardPiece [BoardPiece] the piece to hide.
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -521,7 +521,7 @@ var SvgBoard = Class.create(
 		this.showHidePiece(boardPiece, true);
 	},
 	/**
-		@description Callback called when the logical board moves a piece
+		Callback called when the logical board moves a piece
 		@param boardPiece [BoardPiece] the piece to move.
 		@param fromPiecePosition [PiecePosition] position from which to move.
 		@param toPiecePosition [PiecePosition] position to which to move.
@@ -532,7 +532,7 @@ var SvgBoard = Class.create(
 		this.timeMovePiece(boardPiece, fromPiecePosition, toPiecePosition);
 	},
 	/**
-		@description Move a piece on the board (including animation if so configured)
+		Move a piece on the board (including animation if so configured)
 		@param boardPiece [BoardPiece] the piece to move.
 		@param fromPiecePosition [PiecePosition] position from which to move.
 		@param toPiecePosition [PiecePosition] position to which to move.
@@ -552,7 +552,7 @@ var SvgBoard = Class.create(
 		});
 	},
 	/**
-		@description Flips the board (see it from the other side)
+		Flips the board (see it from the other side)
 		If the board is 90 deg left it be will 90 deg right.
 		Black view will turn to white and white to black.
 		@return nothing
@@ -580,7 +580,7 @@ var SvgBoard = Class.create(
 		this.redraw(oldview);
 	},
 	/**
-		@description Rotate the board to the right 90 degrees
+		Rotate the board to the right 90 degrees
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -594,7 +594,7 @@ var SvgBoard = Class.create(
 		this.redraw(oldview);
 	},
 	/**
-		@description Rotate the board to the left 90 degrees
+		Rotate the board to the left 90 degrees
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -608,7 +608,7 @@ var SvgBoard = Class.create(
 		this.redraw(oldview);
 	},
 	/**
-		@description toString function
+		toString function
 		This method is not yet implemented and will throw an exception.
 		@return a string representation of this object
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -617,7 +617,7 @@ var SvgBoard = Class.create(
 		throw 'not yet implemented';
 	},
 	/**
-		@description Make a piece glow
+		Make a piece glow
 		@param boardPiece [BoardPiece] the piece to make glow.
 		@param glow [object] properties to pass to the glow function as per Raphael.js.
 		@return nothing
@@ -633,7 +633,7 @@ var SvgBoard = Class.create(
 		}
 	},
 	/**
-		@description Redraw the entire board
+		Redraw the entire board
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -652,7 +652,7 @@ var SvgBoard = Class.create(
 		}
 	},
 	/**
-		@description Event handler for events happening on the pieces.
+		Event handler for events happening on the pieces.
 		Types of events: click, mouseover and more...
 		@param boardPiece [BoardPiece] instance the event happened on.
 		@param type [string] the type of event that happened.
@@ -674,7 +674,7 @@ var SvgBoard = Class.create(
 		}
 	},
 	/**
-		@description Events for position. Positions are logical and do
+		Events for position. Positions are logical and do
 		not depend on the flipping of the board.
 		Types of events: mouseover, mouseout, click and more.
 		@param piecePosition [PiecePosition] the position of the event.
@@ -760,7 +760,7 @@ var SvgBoard = Class.create(
 		}
 	},
 	/**
-		@description Internal method. This method is called whenever
+		Internal method. This method is called whenever
 		the cursor changes position over the board and ONLY when
 		it changes position.
 		No parameters are passed because This method uses:
@@ -819,7 +819,7 @@ var SvgBoard = Class.create(
 		}
 	},
 	/**
-		@description Return the square at a position.
+		Return the square at a position.
 		This method must take into consideraton board rotation
 		@param piecePosition [PiecePosition] the logical position for which to return the square.
 		@return the Raphael.js rec in question

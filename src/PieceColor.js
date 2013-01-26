@@ -3,7 +3,7 @@ var PieceColor = Class.create(
 {
 	/**
 		@class represents a piece color (white,black)
-		@description creates a new instance
+		creates a new instance
 		@param string - the color of the piece.
 		@constructs
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -15,14 +15,14 @@ var PieceColor = Class.create(
 		this.color = color;
 	},
 	/**
-		@description toString method that allows you to get a nice printout for this type
+		toString method that allows you to get a nice printout for this type
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	toString: function() {
 		return this.color;
 	},
 	/**
-		@description Return whether the piece is white
+		Return whether the piece is white
 		@return boolean indicating whether the piece is white
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -30,7 +30,7 @@ var PieceColor = Class.create(
 		return this.color == 'white';
 	},
 	/**
-		@description Return whether the piece is black
+		Return whether the piece is black
 		@return boolean indicating whether the piece is black
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -39,7 +39,7 @@ var PieceColor = Class.create(
 	}
 });
 /**
-	@description Array of piece colors
+	Array of piece colors
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 PieceColor.colors = {

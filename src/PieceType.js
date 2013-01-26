@@ -3,7 +3,7 @@ var PieceType = Class.create(
 {
 	/**
 		@class represents a piece type (rook,knight,bishop,queen,king,pawn)
-		@description creates a new instance
+		creates a new instance
 		@param string - the type of the piece.
 		@constructs
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -15,14 +15,14 @@ var PieceType = Class.create(
 		this.type = type;
 	},
 	/**
-		@description toString method that allows you to get a nice printout for this type
+		toString method that allows you to get a nice printout for this type
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	toString: function() {
 		return this.type;
 	},
 	/**
-		@description Return whether the piece is a rook
+		Return whether the piece is a rook
 		@return is this piece a rook
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -30,7 +30,7 @@ var PieceType = Class.create(
 		return this.type == 'rook';
 	},
 	/**
-		@description Return whether the piece is a knight
+		Return whether the piece is a knight
 		@return is this piece a knight
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -38,7 +38,7 @@ var PieceType = Class.create(
 		return this.type == 'knight';
 	},
 	/**
-		@description Return whether the piece is a bishop
+		Return whether the piece is a bishop
 		@return is this piece a bishop
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -46,7 +46,7 @@ var PieceType = Class.create(
 		return this.type == 'bishop';
 	},
 	/**
-		@description Return whether the piece is a queen
+		Return whether the piece is a queen
 		@return is this piece a queen
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -54,7 +54,7 @@ var PieceType = Class.create(
 		return this.type == 'queen';
 	},
 	/**
-		@description Return whether the piece is a king
+		Return whether the piece is a king
 		@return is this piece a king
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -62,7 +62,7 @@ var PieceType = Class.create(
 		return this.type == 'king';
 	},
 	/**
-		@description Return whether the piece is a pawn
+		Return whether the piece is a pawn
 		@return is this piece a pawn
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -71,7 +71,7 @@ var PieceType = Class.create(
 	}
 });
 /**
-	@description Array of piece types
+	Array of piece types
 	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 */
 PieceType.types = {

@@ -4,7 +4,7 @@ var PiecePosition = Class.create(
 {
 	/**
 		@class represents a position on the board
-		@description creates a new instance
+		creates a new instance
 		@param x x co-ordinate.
 		@param y y co-ordinate.
 		@return the new instance of this class
@@ -25,7 +25,7 @@ var PiecePosition = Class.create(
 		this.y = y;
 	},
 	/**
-		@description toString method so that you can get a nice printout of instances of this type
+		toString method so that you can get a nice printout of instances of this type
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -33,7 +33,7 @@ var PiecePosition = Class.create(
 		return 'PiecePosition: (' + this.x + ',' + this.y + ')';
 	},
 	/**
-		@description compare one position to another
+		compare one position to another
 		@return true or false.
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -44,7 +44,7 @@ var PiecePosition = Class.create(
 		return otherPos.x != this.x || otherPos.y != this.y;
 	},
 	/**
-		@description compare one position to another
+		compare one position to another
 		@return true or false.
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/

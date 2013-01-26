@@ -13,7 +13,7 @@ var Config = Class.create(
 		will override anything in the default config.
 		This class SHOULD NOT be a singleton since the user may want to put
 		two boards on the page and have each configured differently.
-		@description creates a new instance.
+		creates a new instance.
 		@constructs
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -35,7 +35,7 @@ var Config = Class.create(
 		}
 	},
 	/**
-		@description set a key to a certain value in the current configuration
+		set a key to a certain value in the current configuration
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	setValue: function(key,value) {
@@ -44,7 +44,7 @@ var Config = Class.create(
 		this.d[key] = value;
 	},
 	/**
-		@description set many values at once
+		set many values at once
 		@param d dictionary of values.
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -54,7 +54,7 @@ var Config = Class.create(
 		}
 	},
 	/**
-		@description check that the config is good to go
+		check that the config is good to go
 		for instance: check that all required arguments are set
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/

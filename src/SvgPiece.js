@@ -5,7 +5,7 @@ var SvgPiece = Class.create(
 		@class A single piece description.
 		This includes: rectangle size (assumes piece is 0,0,rect,rect)
 		and array of paths and attributes to draw the path
-		@description creates a new instance
+		creates a new instance
 		@param rect rect size.
 		@return a new object of this type
 		@constructs
@@ -16,7 +16,7 @@ var SvgPiece = Class.create(
 		this.paas = [];
 	},
 	/**
-		@description Adds a new path section to a piece description
+		Adds a new path section to a piece description
 		@param paa PathAndAttributes object to be added.
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -25,7 +25,7 @@ var SvgPiece = Class.create(
 		this.paas.push(paa);
 	},
 	/**
-		@description Create a Raphael.js set from this object
+		Create a Raphael.js set from this object
 		@param paper Raphael.js paper to work on.
 		@param transform Raphael.js transformating for this object.
 		@return the set after the transformation

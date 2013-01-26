@@ -3,7 +3,7 @@ var BoardPiece = Class.create(
 {
 	/**
 		@class represents a piece on the board: color, type The instance also has a data field that could be used for private data attached to the piece.
-		@description constructs a new object
+		constructs a new object
 		@param color color of this piece (black/white).
 		@param type type of this piece (rook/knight/bishop/queen/king/pawn).
 		@return the new object created
@@ -16,7 +16,7 @@ var BoardPiece = Class.create(
 		this.data = undefined;
 	},
 	/**
-		@description toString method that allows you to get a nice printout for this type
+		toString method that allows you to get a nice printout for this type
 		@return string representation of this object
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -24,7 +24,7 @@ var BoardPiece = Class.create(
 		return 'BoardPiece: ' + [this.color, this.type, this.data].join();
 	},
 	/**
-		@description Method to set secret data for this piece
+		Method to set secret data for this piece
 		@param data the extra data to hold for this piece.
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -33,7 +33,7 @@ var BoardPiece = Class.create(
 		this.data = data;
 	},
 	/**
-		@description Method to get secret data for this piece
+		Method to get secret data for this piece
 		@return the secret data associated with this piece.
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -41,7 +41,7 @@ var BoardPiece = Class.create(
 		return this.data;
 	},
 	/**
-		@description Method to unset secret data for this piece
+		Method to unset secret data for this piece
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/

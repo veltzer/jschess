@@ -3,7 +3,7 @@ var SvgPieceData = Class.create(
 {
 	/**
 		@class represents a position + graphics
-		@description creates a new instance
+		creates a new instance
 		@param set raphael set for the piece.
 		@param pixelPos position for the pieces origin. This is important to be able to move it to other places
 		pixelPos is not the translation of pos to pixels!!!
@@ -18,7 +18,7 @@ var SvgPieceData = Class.create(
 		this.extra = undefined;
 	},
 	/**
-		@description toString method that allows you to get a nice printout for this type
+		toString method that allows you to get a nice printout for this type
 		@return a string representation of this instance
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -26,7 +26,7 @@ var SvgPieceData = Class.create(
 		return [this.set, this.pixelPos, this.extra].join();
 	},
 	/**
-		@description ForEach method on all presentation elements
+		ForEach method on all presentation elements
 		@param f function to activate on each element.
 		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>

@@ -3,7 +3,7 @@ var Utils = Class.create(
 {
     /**
         @class a class to have static utility functions
-        @description creates a new instance
+        creates a new instance
         @return the new instance.
         @constructs
         @author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -12,7 +12,7 @@ var Utils = Class.create(
     }
 });
 /**
-     @description Unite two javascript objects into a third one.
+     Unite two javascript objects into a third one.
     Second trumps the first.
     @param o1 first object.
     @param o2 first object.
@@ -30,7 +30,7 @@ Utils.unite = function(o1,o2) {
     return ret;
 };
 /**
-    @description Clone a javascript object
+    Clone a javascript object
     @param o the object to shalow clone.
     @return object which is a clone of the original one.
     @author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -43,7 +43,7 @@ Utils.clone = function(o) {
     return ret;
 };
 /**
-    @description Fake using a parameter.
+    Fake using a parameter.
     This is mainly used to avoid lint warnings.
     @param o the object to use.
     @return nothing.
@@ -55,7 +55,7 @@ Utils.fakeUse = function(o) {
     }
 };
 /**
-    @description Fake doing something
+    Fake doing something
     This is mainly used to avoid lint warnings.
     @return nothing.
     @author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -63,7 +63,7 @@ Utils.fakeUse = function(o) {
 Utils.pass = function() {
 };
 /**
-    @description Shallow copy an array
+    Shallow copy an array
     @param a the array to copy.
     @return The copy of the array.
     @author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
@@ -84,7 +84,7 @@ Utils.checkType = function(v,t) {
     }
 };
 /**
-    @description Checks whether one dictionary contains all the keys of the other Throws an exceptions if that is not the case.
+    Checks whether one dictionary contains all the keys of the other Throws an exceptions if that is not the case.
     @param s1 first set.
     @param s2 second set.
     @return nothing.

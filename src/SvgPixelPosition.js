@@ -3,7 +3,7 @@ var SvgPixelPosition = Class.create(
 {
 	/**
 		@class represents a position on the screen (in pixels)
-		@description creates a new instance
+		creates a new instance
 		@param x x co-ordinate.
 		@param y y co-ordinate.
 		@return the new instance
@@ -23,7 +23,7 @@ var SvgPixelPosition = Class.create(
 		this.y = y;
 	},
 	/**
-		@description toString method so that you can get a nice printout of instances of this type
+		toString method so that you can get a nice printout of instances of this type
 		@return string representation of this object
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
