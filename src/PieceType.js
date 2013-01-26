@@ -5,7 +5,7 @@ var PieceType = Class.create(
 		@class represents a piece type (rook,knight,bishop,queen,king,pawn)
 		creates a new instance
 		@param string - the type of the piece.
-		@constructs
+		@constructor
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	initialize: function(type) {

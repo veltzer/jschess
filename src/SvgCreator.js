@@ -7,7 +7,7 @@ var SvgCreator = Class.create(
 	/**
 		@class static class to have just static methods for creating pieces
 		creates a new instance
-		@constructs
+		@constructor
 		@return the new instance
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
