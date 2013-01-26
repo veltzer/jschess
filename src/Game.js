@@ -1,4 +1,4 @@
-var Game=Class.create(
+var Game = Class.create(
 	/** @lends Game# */
 {
 	/**
@@ -6,14 +6,14 @@ var Game=Class.create(
 		including a full set of moves of type GameMove.
 		@description constructs a new Game
 		@constructs
-		@returns nothing
+		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	initialize: function() {
 	},
 	/**
 		@description toString method that allows you to get a nice printout for this type
-		@returns nothing
+		@return nothing
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	toString: function() {

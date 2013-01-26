@@ -1,4 +1,4 @@
-var PgnReader=Class.create(
+var PgnReader = Class.create(
 	/** @lends PgnReader# */
 {
 	/**
@@ -19,8 +19,8 @@ var PgnReader=Class.create(
 	},
 	/**
 		@description A method to read a pgn file via ajax.
-		@param url url to do the GET from (same server)
-		@param func a function to be called once the game is parsed
+		@param url url to do the GET from (same server).
+		@param func a function to be called once the game is parsed.
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	get: function() {

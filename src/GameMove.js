@@ -1,4 +1,4 @@
-var GameMove=Class.create(
+var GameMove = Class.create(
 	/** @lends GameMove# */
 {
 	/**

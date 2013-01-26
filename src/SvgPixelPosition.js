@@ -1,12 +1,12 @@
-var SvgPixelPosition=Class.create(
+var SvgPixelPosition = Class.create(
 	/** @lends SvgPixelPosition# */
 {
 	/**
 		@class represents a position on the screen (in pixels)
 		@description creates a new instance
-		@param x x co-ordinate
-		@param y y co-ordinate
-		@returns the new instance
+		@param x x co-ordinate.
+		@param y y co-ordinate.
+		@return the new instance
 		@constructs
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
@@ -19,15 +19,15 @@ var SvgPixelPosition=Class.create(
 			throw 'bad value for y '+y+','+typeof(y);
 		}
 		*/
-		this.x=x;
-		this.y=y;
+		this.x = x;
+		this.y = y;
 	},
 	/**
 		@description toString method so that you can get a nice printout of instances of this type
-		@returns string representation of this object
+		@return string representation of this object
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	toString: function() {
-		return '('+this.x+','+this.y+')';
+		return '(' + this.x + ',' + this.y + ')';
 	}
 });
