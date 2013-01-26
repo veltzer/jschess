@@ -3,9 +3,7 @@
 /*jsl:import PieceColor.js*/
 /*jsl:import PieceType.js*/
 /*jsl:import PiecePosition.js*/
-var Board = Class.create(
-  /** @lends Board# */
-{
+var Board = Class.create(/** @lends Board# */{
   /**
     @class Represents a full board This is the main class to interact with. Using this class you can: 1. Use pieces: put, remove and move them. 2. Do something with all pieces.
     creates a new instance
