@@ -10,7 +10,7 @@ var PiecePosition = Class.create(
 		@return the new instance of this class
 		The method checks if the values given to it are in the 0..7 range.
 		@constructor
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	initialize: function(x,y) {
 		Utils.checkType(x, 'number');
@@ -27,7 +27,7 @@ var PiecePosition = Class.create(
 	/**
 		toString method so that you can get a nice printout of instances of this type
 		@return nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	toString: function() {
 		return 'PiecePosition: (' + this.x + ',' + this.y + ')';
@@ -35,7 +35,7 @@ var PiecePosition = Class.create(
 	/**
 		compare one position to another
 		@return true or false.
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	notEqual: function(otherPos) {
 		if (!(otherPos instanceof PiecePosition)) {
@@ -46,7 +46,7 @@ var PiecePosition = Class.create(
 	/**
 		compare one position to another
 		@return true or false.
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	equal: function(otherPos) {
 		if (!(otherPos instanceof PiecePosition)) {

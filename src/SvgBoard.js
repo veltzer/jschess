@@ -18,7 +18,7 @@ var SvgBoard = Class.create(
 		@param {object} dict overridables to the configuration for this object.
 		@return the new instance
 		@constructor
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	initialize: function(board,dict) {
 		// lets create a config connected to our template
@@ -81,7 +81,7 @@ var SvgBoard = Class.create(
 	/**
 		get the logical board [Board] associated with this [SvgBoard]
 		@return [Board] the logical board associated with this [SvgBoard]
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	getBoard: function() {
 		return this.board;
@@ -90,7 +90,7 @@ var SvgBoard = Class.create(
 		get the config value for a key
 		@param {string} key the key to get the config for.
 		@return {anything} the value of the configuration option
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	getValue: function(key) {
 		return this.config.getValue(key);
@@ -98,7 +98,7 @@ var SvgBoard = Class.create(
 	/**
 		Prepare the raphael paper so we could do graphics
 		@return nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	raphaelPrep: function() {
 		// async way
@@ -136,7 +136,7 @@ var SvgBoard = Class.create(
 		@param {rect} rec Raphael.js rectangle object to fill.
 		@param {boolean} anim do you want animation (slow transition).
 		@return nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	rectFill: function(rec,anim) {
 		var piecePosition = rec.data('pos');
@@ -175,7 +175,7 @@ var SvgBoard = Class.create(
 	/**
 		Draw the boarder
 		@return nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	drawBorder: function() {
 		this.texts = [];
@@ -215,7 +215,7 @@ var SvgBoard = Class.create(
 		to a logical position according to board rotation.
 		@param {PiecePosition} pos the position to translate.
 		@return {PiecePosition} the logical position
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	translatePos: function(pos) {
 		if (this.boardview == 'white') {
@@ -235,7 +235,7 @@ var SvgBoard = Class.create(
 	/**
 		Draw the board (white and black squares)
 		@return nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	drawBoard: function() {
 		var that = this;
@@ -275,7 +275,7 @@ var SvgBoard = Class.create(
 						var ttpos=that.translatePos(tpos);
 						that.eventPosition(ttpos,trec,type);
 					};
-				}(piecePosition,rec,"mousemove"));
+				}(piecePosition,rec,'mousemove'));
 				*/
 				rec.mouseout(function(tpos,trec,type) {
 					return function() {
@@ -303,7 +303,7 @@ var SvgBoard = Class.create(
 	/**
 		Create an overlay rectange for the entire board
 		@return nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	overlay: function() {
 		if (this.getValue('do_select_global')) {
@@ -341,7 +341,7 @@ var SvgBoard = Class.create(
 		Callback method that is called whenever a piece is added to the board
 		This method is to be used to do something after a piece is added, removed etc.
 		@return nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	postGraphics: function() {
 		if (this.getValue('do_select_global')) {
@@ -354,7 +354,7 @@ var SvgBoard = Class.create(
 		@param {BoardPiece} boardPiece the piece that was added.
 		@param {PiecePosition} piecePosition the position where the piece was added.
 		@return nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	postAddPiece: function(boardPiece,piecePosition) {
 		var that = this;
@@ -383,7 +383,7 @@ var SvgBoard = Class.create(
 		@param {BoardPiece} boardPiece the piece to add.
 		@param {PiecePosition} piecePosition the position where the piece was removed.
 		@return nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	postRemovePiece: function(boardPiece,piecePosition) {
 		Utils.fakeUse(piecePosition);
@@ -396,7 +396,7 @@ var SvgBoard = Class.create(
 		This method must take board rotation into consideration
 		@param {PiecePosition} piecePosition logical (0..7,0..7) to translate.
 		@return {SvgPixelPosition} position in pixels
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	posToPixels: function(piecePosition) {
 		if (this.boardview == 'white') {
@@ -430,7 +430,7 @@ var SvgBoard = Class.create(
 		This method must take board rotation into consideration
 		@param {SvgPixelPosition} svgPixelPosition object to translate.
 		@return {PiecePosition} logical position.
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	pixelsToPos: function(svgPixelPosition) {
 		var x = Math.floor((svgPixelPosition.x) / this.square);
@@ -473,7 +473,7 @@ var SvgBoard = Class.create(
 		Resize the board
 		@param {set} set Raphael set to resize.
 		@return {nothing} nothing.
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	resize: function(set) {
 		var m = Raphael.matrix();
@@ -490,7 +490,7 @@ var SvgBoard = Class.create(
 		@param {BoardPiece} boardPiece piece to show or hide.
 		@param {boolean} hide show or hide the piece.
 		@return nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	showHidePiece: function(boardPiece,hide) {
 		var data = boardPiece.getData();
@@ -506,7 +506,7 @@ var SvgBoard = Class.create(
 		Quick method to show a piece
 		@param {BoardPiece} boardPiece the piece to show.
 		@return {nothing} nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	showPiece: function(boardPiece) {
 		this.showHidePiece(boardPiece, false);
@@ -515,7 +515,7 @@ var SvgBoard = Class.create(
 		Quick method to hide a piece
 		@param {BoardPiece} boardPiece the piece to hide.
 		@return {nothing} nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	hidePiece: function(boardPiece) {
 		this.showHidePiece(boardPiece, true);
@@ -526,7 +526,7 @@ var SvgBoard = Class.create(
 		@param {PiecePosition} fromPiecePosition position from which to move.
 		@param {PiecePosition} toPiecePosition position to which to move.
 		@return {nothing} nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	postMovePiece: function(boardPiece,fromPiecePosition,toPiecePosition) {
 		this.timeMovePiece(boardPiece, fromPiecePosition, toPiecePosition);
@@ -537,7 +537,7 @@ var SvgBoard = Class.create(
 		@param {PiecePosition} fromPiecePosition position from which to move.
 		@param {PiecePosition} toPiecePosition position to which to move.
 		@return {nothing} nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	timeMovePiece: function(boardPiece,fromPiecePosition,toPiecePosition) {
 		Utils.fakeUse(fromPiecePosition);
@@ -556,7 +556,7 @@ var SvgBoard = Class.create(
 		If the board is 90 deg left it be will 90 deg right.
 		Black view will turn to white and white to black.
 		@return {nothing} nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	flip: function() {
 		var oldview = this.boardview;
@@ -582,7 +582,7 @@ var SvgBoard = Class.create(
 	/**
 		Rotate the board to the right 90 degrees
 		@return {nothing} nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	rotateright: function() {
 		var oldview = this.boardview;
@@ -596,7 +596,7 @@ var SvgBoard = Class.create(
 	/**
 		Rotate the board to the left 90 degrees
 		@return {nothing} nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	rotateleft: function() {
 		var oldview = this.boardview;
@@ -611,7 +611,7 @@ var SvgBoard = Class.create(
 		toString function
 		This method is not yet implemented and will throw an exception.
 		@return {string} a string representation of this object
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	toString: function() {
 		throw 'not yet implemented';
@@ -621,7 +621,7 @@ var SvgBoard = Class.create(
 		@param {BoardPiece} boardPiece the piece to make glow.
 		@param {object} glow properties to pass to the glow function as per Raphael.js.
 		@return {nothing} nothing.
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	glow: function(boardPiece,glow) {
 		var svgPieceData = boardPiece.getData();
@@ -636,7 +636,7 @@ var SvgBoard = Class.create(
 		Redraw the entire board
 		@param {viewType} oldview the old view of the board.
 		@return {nothing} nothing.
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	redraw: function(oldview) {
 		Utils.fakeUse(oldview);
@@ -658,7 +658,7 @@ var SvgBoard = Class.create(
 		@param {BoardPiece} boardPiece instance the event happened on.
 		@param {string} type the type of event that happened.
 		@return {nothing} nothing.
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	eventPiece: function(boardPiece, type) {
 		//Utils.fakeUse(boardPiece);
@@ -682,7 +682,7 @@ var SvgBoard = Class.create(
 		@param {rect} rec the Raphael.js rectangle where the event happened.
 		@param {string} type which is the name of the event that happened.
 		@return {nothing} nothing.
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	eventPosition: function(piecePosition,rec,type) {
 		if (this.getValue('do_select_piecerec')) {
@@ -768,7 +768,7 @@ var SvgBoard = Class.create(
 		this.selectedPiece, this.selectedRec, this.lastPos, this.currentPos
 		to do it's work.
 		@return {nothing} nothing.
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	newPosition: function() {
 		if (this.currentPos == undefined) {
@@ -824,7 +824,7 @@ var SvgBoard = Class.create(
 		This method must take into consideraton board rotation
 		@param {PiecePosition} piecePosition the logical position for which to return the square.
 		@return {rec} the Raphael.js rec in question
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	getRec: function(piecePosition) {
 		if (this.boardview == 'white') {

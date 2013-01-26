@@ -9,7 +9,7 @@ var SvgControls = Class.create(
 		@param config configuration for this instance.
 		@return the new instance
 		@constructor
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	initialize: function(config) {
 		Utils.pass(config);

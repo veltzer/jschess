@@ -9,7 +9,7 @@ var SvgCreator = Class.create(
 		creates a new instance
 		@constructor
 		@return the new instance
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	initialize: function() {
 	}
@@ -19,7 +19,7 @@ var SvgCreator = Class.create(
 	@param config A configuration to work with.
 	@param pieceColor the color of the piece.
 	@param pieceType the type of the piece.
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	@author mark.veltzer@gmail.com (Mark Veltzer)
 */
 SvgCreator.createPiece = function(config,pieceColor,pieceType) {
 	// the 240.0 was found found empirically...

@@ -10,7 +10,7 @@ var BoardPosition = Class.create(
 		constructs a new object
 		@return a new object of this type
 		@constructor
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	initialize: function() {
 		this.pieces = [];
@@ -18,7 +18,7 @@ var BoardPosition = Class.create(
 	/**
 		toString method that allows you to get a nice printout for this type
 		@return a string representation of this object
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	toString: function() {
 		return this.pieces.join();
@@ -30,7 +30,7 @@ var BoardPosition = Class.create(
 		@param x the x position of the piece [0..8).
 		@param y the y position of the piece [0..8).
 		@return nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	addPiece: function(color,type,x,y) {
 		var boardPiece = new BoardPiece(new PieceColor(color), new PieceType(type));
@@ -40,7 +40,7 @@ var BoardPosition = Class.create(
 	/**
 		Run a function for each piece in this position
 		@return nothing
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	forEachPiece: function(f) {
 		this.pieces.forEach(function(pieceAndPos) {
@@ -53,7 +53,7 @@ var BoardPosition = Class.create(
 /**
 	Static method that returns a starting position in standard chess.
 	@return A standard chess starting position.
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	@author mark.veltzer@gmail.com (Mark Veltzer)
 */
 BoardPosition.startPos = function() {
 	/*
@@ -97,12 +97,12 @@ BoardPosition.startPos = function() {
 };
 /**
 	Setup a position according to FEN notation.
-	See <a href="http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation">Forsyth–Edwards Notation</a> for more details.
+	See <a href='http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation'>Forsyth–Edwards Notation</a> for more details.
 	Example of start position is:
-	"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+	'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
 	@param fen a string describing a chess board position in FEN notation.
 	@return A position object corresponding to the FEN notation given.
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	@author mark.veltzer@gmail.com (Mark Veltzer)
 	@todo add more sanity tests (regexp) for the whole input
 	@todo parse the 5 other blocks after the position itself (what do I do with that ?!?)
 */

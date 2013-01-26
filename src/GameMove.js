@@ -17,13 +17,13 @@ var GameMove = Class.create(
 		into some other piece like in the case of coronation).
 		creates a new instance
 		@constructor
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	initialize: function() {
 	},
 	/**
 		Debug method that allows you to get a nice printout for this type
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	toString: function() {
 		return 'no toString for type GameMove';

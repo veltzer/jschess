@@ -8,7 +8,7 @@ var SvgPathAndAttributes = Class.create(
 		@param attr object with attributes for said path.
 		@constructor
 		@return the new instance
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	initialize: function(path,attr) {
 		this.path = path;
@@ -17,7 +17,7 @@ var SvgPathAndAttributes = Class.create(
 	/**
 		toString method that allows you to get a nice printout for this type
 		@return string representation of this instance
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	toString: function() {
 		return [this.path, this.attr].join();

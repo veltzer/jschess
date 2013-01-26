@@ -9,7 +9,7 @@ var SvgConfigTemplate = Class.create(ConfigTemplate,
 		@param config configuration for this board.
 		@return the new instance
 		@constructor
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	initialize: function($super) {
 		$super();

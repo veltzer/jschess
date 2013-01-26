@@ -6,7 +6,7 @@ var PieceColor = Class.create(
 		creates a new instance
 		@param string - the color of the piece.
 		@constructor
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	initialize: function(color) {
 		if (!(color in PieceColor.colors)) {
@@ -16,7 +16,7 @@ var PieceColor = Class.create(
 	},
 	/**
 		toString method that allows you to get a nice printout for this type
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	toString: function() {
 		return this.color;
@@ -24,7 +24,7 @@ var PieceColor = Class.create(
 	/**
 		Return whether the piece is white
 		@return boolean indicating whether the piece is white
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	isWhite: function() {
 		return this.color == 'white';
@@ -32,7 +32,7 @@ var PieceColor = Class.create(
 	/**
 		Return whether the piece is black
 		@return boolean indicating whether the piece is black
-		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+		@author mark.veltzer@gmail.com (Mark Veltzer)
 	*/
 	isBlack: function() {
 		return this.color == 'black';
@@ -40,7 +40,7 @@ var PieceColor = Class.create(
 });
 /**
 	Array of piece colors
-	@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
+	@author mark.veltzer@gmail.com (Mark Veltzer)
 */
 PieceColor.colors = {
 	white: undefined,
