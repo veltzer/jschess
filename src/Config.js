@@ -1,5 +1,5 @@
 /*jsl:import Utils.js*/
-var Config=Class.create(
+var Config = Class.create(
 	/** @lends Config# */
 {
 	/**
@@ -19,19 +19,19 @@ var Config=Class.create(
 	*/
 	initialize: function(tmpl) {
 		// the dictionary holding the current config
-		this.d={};
+		this.d = {};
 		// the template to be used
-		this.tmpl=tmpl;
+		this.tmpl = tmpl;
 	},
 	getValue: function(key) {
-		if(this.tmpl.hasKey(key)) {
-			if(key in this.d) {
+		if (this.tmpl.hasKey(key)) {
+			if (key in this.d) {
 				return this.d[key];
 			} else {
 				return this.tmpl.getDefaultValue(key);
 			}
 		} else {
-			throw 'request for bad key ['+key+']';
+			throw 'request for bad key [' + key + ']';
 		}
 	},
 	/**
@@ -40,17 +40,17 @@ var Config=Class.create(
 	*/
 	setValue: function(key,value) {
 		// check that the key and value are ok.
-		this.tmpl.check(key,value);
-		this.d[key]=value;
+		this.tmpl.check(key, value);
+		this.d[key] = value;
 	},
 	/**
 		@description set many values at once
-		@param d dictionary of values
+		@param d dictionary of values.
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	override: function(d) {
-		for(var x in d) {
-			this.setValue(x,d[x]);
+		for (var x in d) {
+			this.setValue(x, d[x]);
 		}
 	},
 	/**
