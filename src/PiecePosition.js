@@ -9,7 +9,7 @@ var PiecePosition = Class.create(
 		@param y y co-ordinate.
 		@return the new instance of this class
 		The method checks if the values given to it are in the 0..7 range.
-		@constructs
+		@constructor
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	initialize: function(x,y) {

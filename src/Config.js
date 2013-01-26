@@ -14,7 +14,7 @@ var Config = Class.create(
 		This class SHOULD NOT be a singleton since the user may want to put
 		two boards on the page and have each configured differently.
 		creates a new instance.
-		@constructs
+		@constructor
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	initialize: function(tmpl) {

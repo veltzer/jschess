@@ -9,7 +9,7 @@ var BoardPosition = Class.create(
 		@class represents a full position of the board
 		constructs a new object
 		@return a new object of this type
-		@constructs
+		@constructor
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	initialize: function() {

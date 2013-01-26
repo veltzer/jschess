@@ -6,7 +6,7 @@ var SvgPathAndAttributes = Class.create(
 		creates a new instance
 		@param path string representing SVG path.
 		@param attr object with attributes for said path.
-		@constructs
+		@constructor
 		@return the new instance
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/

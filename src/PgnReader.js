@@ -5,7 +5,7 @@ var PgnReader = Class.create(
 		@class A PGN reader. A class that knows how to read a PGN file and give instructions
 		to a board.
 		creates a new instance
-		@constructs
+		@constructor
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	initialize: function() {

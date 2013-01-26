@@ -7,7 +7,7 @@ var SvgPixelPosition = Class.create(
 		@param x x co-ordinate.
 		@param y y co-ordinate.
 		@return the new instance
-		@constructs
+		@constructor
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	initialize: function(x,y) {

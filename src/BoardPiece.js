@@ -7,7 +7,7 @@ var BoardPiece = Class.create(
 		@param color color of this piece (black/white).
 		@param type type of this piece (rook/knight/bishop/queen/king/pawn).
 		@return the new object created
-		@constructs
+		@constructor
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	initialize: function(color,type) {

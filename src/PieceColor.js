@@ -5,7 +5,7 @@ var PieceColor = Class.create(
 		@class represents a piece color (white,black)
 		creates a new instance
 		@param string - the color of the piece.
-		@constructs
+		@constructor
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	initialize: function(color) {

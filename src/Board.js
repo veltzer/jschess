@@ -10,7 +10,7 @@ var Board = Class.create(
 		@class Represents a full board This is the main class to interact with. Using this class you can: 1. Use pieces: put, remove and move them. 2. Do something with all pieces.
 		creates a new instance
 		@return the new object created
-		@constructs
+		@constructor
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	initialize: function() {

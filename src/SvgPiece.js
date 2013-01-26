@@ -8,7 +8,7 @@ var SvgPiece = Class.create(
 		creates a new instance
 		@param rect rect size.
 		@return a new object of this type
-		@constructs
+		@constructor
 		@author <a href="mailto:mark.veltzer@gmail.com">Mark Veltzer</a>
 	*/
 	initialize: function(rect) {
