@@ -45,7 +45,9 @@ var ConfigTemplate = Class.create(
 		if (!(key in this.tuples)) {
 			throw 'wrong key [' + key + ']';
 		}
-		if (typeof(value) != this.tuples[key].type) {
+		var type_to_check=this.tuples[key].type;
+		var our_type=ConfigTemplate.types[type_to_check];
+		if (typeof(value) != our_type) {
 			throw 'wrong type for key [' + key + '] and value [' + value + ']';
 		}
 	},
@@ -104,7 +106,7 @@ ConfigTemplate.fullSet = {
 	defaultValue: undefined
 };
 ConfigTemplate.types = {
-	t_string: undefined,
-	t_number: undefined,
-	t_boolean: undefined
+	t_string: 'string',
+	t_number: 'number',
+	t_boolean: 'boolean'
 };
