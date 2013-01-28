@@ -1,13 +1,13 @@
 /*jsl:import ConfigTemplate.js*/
 var SvgConfigTemplate = Class.create(ConfigTemplate,/** @lends SvgConfigTemplate# */{
-  /**
-    @class Singleton configuration for jschess
-    creates a new instance
-    @param config configuration for this board.
-    @return the new instance
-    @constructor
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
+      /**
+        @class Singleton configuration for jschess
+        creates a new instance
+        @param config configuration for this board.
+        @return the new instance
+        @constructor
+        @author mark.veltzer@gmail.com (Mark Veltzer)
+      */
   initialize: function($super) {
     $super();
     this.add({
