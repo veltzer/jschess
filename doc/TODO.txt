@@ -18,6 +18,10 @@ now:
 	selecting a square.
 - pgn parsing.
 
+graphics:
+=========
+- make each shape zoom out a little before move and zoom back in after move.
+
 mako:
 =====
 - make mako files include individual js files in the file by file version in the right order
