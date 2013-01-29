@@ -336,8 +336,8 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Callback method that is called whenever a piece is added to the board
-    This method is to be used to do something after a piece is added, removed etc.
-    @return nothing
+    This method is to be used to do something after a piece is added,
+    removed etc.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   postGraphics: function() {
@@ -350,12 +350,12 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     This is where we add the SVG representation of the piece in real graphics.
     @param {BoardPiece} boardPiece the piece that was added.
     @param {PiecePosition} piecePosition the position where the piece was added.
-    @return nothing
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
-  postAddPiece: function(boardPiece,piecePosition) {
+  postAddPiece: function(boardPiece, piecePosition) {
     var that = this;
-    var svgPiece = SvgCreator.createPiece(this.config, boardPiece.color, boardPiece.type);
+    var svgPiece = SvgCreator.createPiece(
+        this.config, boardPiece.color, boardPiece.type);
     // calculate transform (move and scale)
     var pixelPos = this.posToPixels(piecePosition);
     var m = Raphael.matrix();
@@ -378,11 +378,11 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     Callback method that is called after the logical board removes a piece.
     @param {BoardPiece} boardPiece the piece to add.
-    @param {PiecePosition} piecePosition the position where the piece was removed.
-    @return nothing
+    @param {PiecePosition} piecePosition the position where the piece was
+    removed.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
-  postRemovePiece: function(boardPiece,piecePosition) {
+  postRemovePiece: function(boardPiece, piecePosition) {
     Utils.fakeUse(piecePosition);
     var svgPieceData = boardPiece.getData();
     svgPieceData.set.remove();
@@ -392,32 +392,32 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     Translates position (0..7,0..7) to pixels
     This method must take board rotation into consideration
     @param {PiecePosition} piecePosition logical (0..7,0..7) to translate.
-    @return {SvgPixelPosition} position in pixels
+    @return {SvgPixelPosition} position in pixels.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   posToPixels: function(piecePosition) {
     if (this.boardview == 'white') {
       return new SvgPixelPosition(
-        piecePosition.x * this.square,
-        (7 - piecePosition.y) * this.square
+          piecePosition.x * this.square,
+          (7 - piecePosition.y) * this.square
       );
     }
     if (this.boardview == 'black') {
       return new SvgPixelPosition(
-        (7 - piecePosition.x) * this.square,
-        piecePosition.y * this.square
+          (7 - piecePosition.x) * this.square,
+          piecePosition.y * this.square
       );
     }
     if (this.boardview == 'left') {
       return new SvgPixelPosition(
-        piecePosition.y * this.square,
-        (7 - piecePosition.x) * this.square
+          piecePosition.y * this.square,
+          (7 - piecePosition.x) * this.square
       );
     }
     if (this.boardview == 'right') {
       return new SvgPixelPosition(
-        (7 - piecePosition.y) * this.square,
-        piecePosition.x * this.square
+          (7 - piecePosition.y) * this.square,
+          piecePosition.x * this.square
       );
     }
     throw 'boardview is bad';
@@ -486,10 +486,9 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     Shows or hides a given piece according to parameter
     @param {BoardPiece} boardPiece piece to show or hide.
     @param {boolean} hide show or hide the piece.
-    @return nothing
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
-  showHidePiece: function(boardPiece,hide) {
+  showHidePiece: function(boardPiece, hide) {
     var data = boardPiece.getData();
     data.forEach(function(el) {
       if (hide) {
@@ -502,7 +501,6 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     Quick method to show a piece
     @param {BoardPiece} boardPiece the piece to show.
-    @return {nothing} nothing
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   showPiece: function(boardPiece) {
@@ -511,7 +509,6 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     Quick method to hide a piece
     @param {BoardPiece} boardPiece the piece to hide.
-    @return {nothing} nothing
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   hidePiece: function(boardPiece) {
@@ -522,10 +519,9 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     @param {BoardPiece} boardPiece the piece to move.
     @param {PiecePosition} fromPiecePosition position from which to move.
     @param {PiecePosition} toPiecePosition position to which to move.
-    @return {nothing} nothing
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
-  postMovePiece: function(boardPiece,fromPiecePosition,toPiecePosition) {
+  postMovePiece: function(boardPiece, fromPiecePosition, toPiecePosition) {
     this.timeMovePiece(boardPiece, fromPiecePosition, toPiecePosition);
   },
   /**
@@ -533,10 +529,9 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     @param {BoardPiece} boardPiece the piece to move.
     @param {PiecePosition} fromPiecePosition position from which to move.
     @param {PiecePosition} toPiecePosition position to which to move.
-    @return {nothing} nothing
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
-  timeMovePiece: function(boardPiece,fromPiecePosition,toPiecePosition) {
+  timeMovePiece: function(boardPiece, fromPiecePosition, toPiecePosition) {
     Utils.fakeUse(fromPiecePosition);
     var ms = this.getValue('move_ms');
     var pixelPosFrom = boardPiece.getData().pixelPos;
@@ -552,7 +547,6 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     Flips the board (see it from the other side)
     If the board is 90 deg left it be will 90 deg right.
     Black view will turn to white and white to black.
-    @return {nothing} nothing
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   flip: function() {
@@ -578,7 +572,6 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Rotate the board to the right 90 degrees
-    @return {nothing} nothing
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   rotateright: function() {
@@ -592,7 +585,6 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Rotate the board to the left 90 degrees
-    @return {nothing} nothing
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   rotateleft: function() {
@@ -607,7 +599,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     toString function
     This method is not yet implemented and will throw an exception.
-    @return {string} a string representation of this object
+    @return {string} a string representation of this object.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   toString: function() {
@@ -616,11 +608,12 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     Make a piece glow
     @param {BoardPiece} boardPiece the piece to make glow.
-    @param {object} glow properties to pass to the glow function as per Raphael.js.
+    @param {object} glow properties to pass to the glow function as per
+    Raphael.js.
     @return {nothing} nothing.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
-  glow: function(boardPiece,glow) {
+  glow: function(boardPiece, glow) {
     var svgPieceData = boardPiece.getData();
     if (glow) {
       svgPieceData.extra = svgPieceData.set.glow(this.glow_obj);
@@ -639,7 +632,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     Utils.fakeUse(oldview);
     // redraw the pieces
     var that = this;
-    this.board.forEachPiece(function(boardPiece,position) {
+    this.board.forEachPiece(function(boardPiece, position) {
       that.timeMovePiece(boardPiece, position, position);
     });
     // redraw the squares
@@ -662,7 +655,8 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     if (this.getValue('do_select_piecerec')) {
       if (type == 'mouseover') {
         var piecePosition = this.board.getPiecePosition(boardPiece);
-        if (this.currentPos == undefined || piecePosition.notEqual(this.currentPos)) {
+        if (this.currentPos == undefined ||
+            piecePosition.notEqual(this.currentPos)) {
           this.lastPos = this.currentPos;
           this.currentPos = piecePosition;
           this.newPosition();
@@ -680,7 +674,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     @return {nothing} nothing.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
-  eventPosition: function(piecePosition,rec,type) {
+  eventPosition: function(piecePosition, rec, type) {
     if (this.getValue('do_select_piecerec')) {
       if (type == 'mouseover') {
         this.lastPos = this.currentPos;
@@ -720,11 +714,12 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
       }
     }
   },
-  eventGlobal: function(eventtype,x,y,type) {
+  eventGlobal: function(eventtype, x, y, type) {
     Utils.fakeUse(eventtype);
     if (this.getValue('do_select_global')) {
       if (type == 'mouseover' || type == 'mousemove') {
-        var piecePosition = this.pixelsToPosForgiving(new SvgPixelPosition(x, y));
+        var piecePosition =
+            this.pixelsToPosForgiving(new SvgPixelPosition(x, y));
         if (piecePosition != undefined) {
           if (this.currentPos == undefined) {
             this.lastPos = undefined;
@@ -818,7 +813,8 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     Return the square at a position.
     This method must take into consideraton board rotation
-    @param {PiecePosition} piecePosition the logical position for which to return the square.
+    @param {PiecePosition} piecePosition the logical position for which to
+    return the square.
     @return {rec} the Raphael.js rec in question.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
