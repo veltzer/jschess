@@ -6,7 +6,7 @@
 /*jsl:import WRaphael.js*/
 /*jsl:import Utils.js*/
 /*jsl:import Config.js*/
-/*jsl:import SvgConfigTemplate.js*/
+/*jsl:import SvgConfigTmpl.js*/
 var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     @class a whole board to play with
@@ -19,7 +19,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   */
   initialize: function(board,dict) {
     // lets create a config connected to our template
-    this.config = new Config(SvgConfigTemplate.getInstance());
+    this.config = new Config(SvgConfigTmpl.getInstance());
     // lets override with user preferences
     this.config.override(dict);
     // lets check the config

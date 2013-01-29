@@ -28,7 +28,7 @@ ${jsThirdParty()}
 				// Finally, to actually run the highlighter, you need to include this JS on your page
 				SyntaxHighlighter.all()
 				// print the configuration to div 'myid'
-				var config=SvgConfigTemplate.getInstance();
+				var config=SvgConfigTmpl.getInstance();
 				var myhtml=config.getHTML();
 				$('myid').innerHTML=myhtml;
 			})

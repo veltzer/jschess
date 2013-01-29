@@ -1,5 +1,5 @@
 /*jsl:import Utils.js*/
-var ConfigTemplate = Class.create(/** @lends ConfigTemplate# */{
+var ConfigTmpl = Class.create(/** @lends ConfigTmpl# */{
   /**
     @class Type safe config class
     This is a configuration template, it has, for each configuration key, the following:
@@ -21,8 +21,8 @@ var ConfigTemplate = Class.create(/** @lends ConfigTemplate# */{
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   add: function(s) {
-    Utils.checkContains(s, ConfigTemplate.fullSet);
-    if (!(s.type in ConfigTemplate.types)) {
+    Utils.checkContains(s, ConfigTmpl.fullSet);
+    if (!(s.type in ConfigTmpl.types)) {
       throw 'bad type [' + s.type + ']';
     }
     if (s.name in this.tuples) {
@@ -44,7 +44,7 @@ var ConfigTemplate = Class.create(/** @lends ConfigTemplate# */{
       throw 'wrong key [' + key + ']';
     }
     var type_to_check=this.tuples[key].type;
-    var our_type=ConfigTemplate.types[type_to_check];
+    var our_type=ConfigTmpl.types[type_to_check];
     if (typeof(value) != our_type) {
       throw 'wrong type for key [' + key + '] and value [' + value + ']';
     }
@@ -96,14 +96,14 @@ var ConfigTemplate = Class.create(/** @lends ConfigTemplate# */{
   }
 });
 // static data
-ConfigTemplate.fullSet = {
+ConfigTmpl.fullSet = {
   name: undefined,
   type: undefined,
   required: undefined,
   description: undefined,
   defaultValue: undefined
 };
-ConfigTemplate.types = {
+ConfigTmpl.types = {
   t_string: 'string',
   t_number: 'number',
   t_boolean: 'boolean'
