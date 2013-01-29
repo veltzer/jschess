@@ -1,13 +1,14 @@
 /*jsl:import ConfigTmpl.js*/
 var SvgConfigTmpl = Class.create(ConfigTmpl,/** @lends SvgConfigTmpl# */{
-      /**
-        @class Singleton configuration for jschess
-        creates a new instance
-        @param config configuration for this board.
-        @return the new instance
-        @constructor
-        @author mark.veltzer@gmail.com (Mark Veltzer)
-      */
+  /**
+    @class Singleton configuration for jschess
+    creates a new instance
+    @param {parent} $super prototype.js parent to enable to call the
+    parent constructur.
+    @return {SvgConfigTmpl} the new instance.
+    @constructor
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
   initialize: function($super) {
     $super();
     this.add({
@@ -222,8 +223,22 @@ var SvgConfigTmpl = Class.create(ConfigTmpl,/** @lends SvgConfigTmpl# */{
     });
   }
 });
-// singleton pattern
+
+
+/**
+  The static singleton instance.
+  This is part of the singleton pattern.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 SvgConfigTmpl.instance = undefined;
+
+
+/**
+  The static singleton instance.
+  This is part of the singleton pattern.
+  @return {SvgConfigTmpl} the singleton SvgConfigTmpl instance.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 SvgConfigTmpl.getInstance = function() {
   if (SvgConfigTmpl.instance == undefined) {
     SvgConfigTmpl.instance = new SvgConfigTmpl();
