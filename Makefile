@@ -68,7 +68,7 @@ check: $(JSCHECK)
 $(JSCHECK): $(SOURCES)
 	$(info doing [$@])
 	$(Q)~/install/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES)
-	$(Q)gjslint --strict $(SOURCES) 
+	$(Q)scripts/wrapper.py gjslint --strict --nosummary $(SOURCES)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
