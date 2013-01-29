@@ -3,14 +3,14 @@ var PiecePosition = Class.create(/** @lends PiecePosition# */{
   /**
     @class represents a position on the board
     creates a new instance
-    @param x x co-ordinate.
-    @param y y co-ordinate.
-    @return the new instance of this class
+    @param {number} x x co-ordinate.
+    @param {number} y y co-ordinate.
+    @return {PiecePosition} the new instance of this class.
     The method checks if the values given to it are in the 0..7 range.
     @constructor
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
-  initialize: function(x,y) {
+  initialize: function(x, y) {
     Utils.checkType(x, 'number');
     Utils.checkType(y, 'number');
     if (x < 0 || x > 7) {
@@ -23,8 +23,9 @@ var PiecePosition = Class.create(/** @lends PiecePosition# */{
     this.y = y;
   },
   /**
-    toString method so that you can get a nice printout of instances of this type
-    @return nothing
+    toString method so that you can get a nice printout of
+    instances of this type
+    @return {string} the string representation of this instance.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   toString: function() {
@@ -32,7 +33,7 @@ var PiecePosition = Class.create(/** @lends PiecePosition# */{
   },
   /**
     compare one position to another
-    @return true or false.
+    @return {boolean} is this position to some other position.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   notEqual: function(otherPos) {
@@ -43,7 +44,7 @@ var PiecePosition = Class.create(/** @lends PiecePosition# */{
   },
   /**
     compare one position to another
-    @return true or false.
+    @return {boolean} is this position to some other position.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   equal: function(otherPos) {

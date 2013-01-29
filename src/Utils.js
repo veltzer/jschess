@@ -49,12 +49,12 @@ Utils.clone = function(o) {
 /**
   Fake using a parameter.
   This is mainly used to avoid lint warnings.
-  @param {anything} o the object to use.
+  Pass as many args as you like to this function.
   @author mark.veltzer@gmail.com (Mark Veltzer)
 */
-Utils.fakeUse = function(o) {
+Utils.fakeUse = function() {
   if (Utils.nottrue) {
-    window.junkVar = o;
+    window.junkVar = 'junkVal';
   }
 };
 

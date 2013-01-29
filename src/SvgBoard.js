@@ -658,8 +658,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   eventPiece: function(boardPiece, type) {
-    //Utils.fakeUse(boardPiece);
-    //Utils.fakeUse(type);
+    //Utils.fakeUse(boardPiece,type);
     if (this.getValue('do_select_piecerec')) {
       if (type == 'mouseover') {
         var piecePosition = this.board.getPiecePosition(boardPiece);
@@ -820,7 +819,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     Return the square at a position.
     This method must take into consideraton board rotation
     @param {PiecePosition} piecePosition the logical position for which to return the square.
-    @return {rec} the Raphael.js rec in question
+    @return {rec} the Raphael.js rec in question.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   getRec: function(piecePosition) {
