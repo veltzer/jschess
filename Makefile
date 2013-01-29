@@ -62,9 +62,13 @@ $(JSZIP): $(SOURCES)
 	$(info doing [$@])
 	$(Q)zip -qr $@ $(SOURCES)
 
+.PHONY: check
+check: $(JSCHECK)
+
 $(JSCHECK): $(SOURCES)
 	$(info doing [$@])
 	$(Q)~/install/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES)
+	#$(Q)gjslint --strict $(SOURCES) 
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
@@ -150,7 +154,6 @@ $(WEB_FILES_OTHER): $(WEB_FOLDER)/%: $(WEBMAKO_FOLDER)/% $(MAKO_WRAPPER_DEP) $(A
 	$(Q)mkdir -p $(dir $@)
 	$(Q)cp $< $@
 
-.PHONY: check
-check:
-	$(Q)-git grep "\"" src/ | grep -v author
-	$(Q)-git grep "\ \ " src/
+.PHONY: grep
+grep:
+	$(Q)-git grep "\"" src/
