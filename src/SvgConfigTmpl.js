@@ -1,5 +1,5 @@
-/*jsl:import ConfigTemplate.js*/
-var SvgConfigTemplate = Class.create(ConfigTemplate,/** @lends SvgConfigTemplate# */{
+/*jsl:import ConfigTmpl.js*/
+var SvgConfigTmpl = Class.create(ConfigTmpl,/** @lends SvgConfigTmpl# */{
       /**
         @class Singleton configuration for jschess
         creates a new instance
@@ -223,10 +223,10 @@ var SvgConfigTemplate = Class.create(ConfigTemplate,/** @lends SvgConfigTemplate
   }
 });
 // singleton pattern
-SvgConfigTemplate.instance = undefined;
-SvgConfigTemplate.getInstance = function() {
-  if (SvgConfigTemplate.instance == undefined) {
-    SvgConfigTemplate.instance = new SvgConfigTemplate();
+SvgConfigTmpl.instance = undefined;
+SvgConfigTmpl.getInstance = function() {
+  if (SvgConfigTmpl.instance == undefined) {
+    SvgConfigTmpl.instance = new SvgConfigTmpl();
   }
-  return SvgConfigTemplate.instance;
+  return SvgConfigTmpl.instance;
 };
