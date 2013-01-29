@@ -13,11 +13,11 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     creates a new instance
     @param {Board} board instance to use as the abstract board.
     @param {object} dict overridables to the configuration for this object.
-    @return the new instance
+    @return {SvgBoard} the new instance.
     @constructor
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
-  initialize: function(board,dict) {
+  initialize: function(board, dict) {
     // lets create a config connected to our template
     this.config = new Config(SvgConfigTmpl.getInstance());
     // lets override with user preferences
@@ -47,13 +47,13 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     }
     // hook the board to our graphics
     var that = this;
-    this.board.addPiecePostAddCallback(function(boardPiece,piecePosition) {
+    this.board.addPiecePostAddCallback(function(boardPiece, piecePosition) {
       that.postAddPiece(boardPiece, piecePosition);
     });
-    this.board.addPiecePostRemoveCallback(function(boardPiece,piecePosition) {
+    this.board.addPiecePostRemoveCallback(function(boardPiece, piecePosition) {
       that.postRemovePiece(boardPiece, piecePosition);
     });
-    this.board.addPiecePostMoveCallback(function(boardPiece,fromPos,toPos) {
+    this.board.addPiecePostMoveCallback(function(boardPiece, fromPos, toPos) {
       that.postMovePiece(boardPiece, fromPos, toPos);
     });
     this.overlay();
@@ -76,8 +76,8 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     this.selectedRec = undefined;
   },
   /**
-    get the logical board [Board] associated with this [SvgBoard]
-    @return [Board] the logical board associated with this [SvgBoard]
+    get the logical board [Board] associated with this SvgBoard
+    @return {Board} the logical board associated with this SvgBoard.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   getBoard: function() {
@@ -86,7 +86,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     get the config value for a key
     @param {string} key the key to get the config for.
-    @return {anything} the value of the configuration option
+    @return {anything} the value of the configuration option.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   getValue: function(key) {
@@ -94,30 +94,28 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Prepare the raphael paper so we could do graphics
-    @return nothing
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   raphaelPrep: function() {
     // async way
     /*
     var widget=this
-    Raphael(this.getValue('id'),this.getValue('size'),this.getValue('size'),function() {
+    Raphael(this.getValue('id'),this.getValue('size'),
+        this.getValue('size'),function() {
       widget.paper=this
       widget.drawBoard()
     })
     */
     // sync way
     this.paper = new WRaphael(
-      this.getValue('id'),
-      this.getValue('size'),
-      this.getValue('size')
-    );
+        this.getValue('id'),
+        this.getValue('size'),
+        this.getValue('size'));
     /*
     this.paper=Raphael(
-      this.getValue('id'),
-      this.getValue('size'),
-      this.getValue('size')
-    );
+        this.getValue('id'),
+        this.getValue('size'),
+        this.getValue('size'));
     */
     this.elem = $(this.getValue('id'));
     var offset = this.elem.cumulativeOffset();
@@ -132,10 +130,9 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     90% flips then this method must be modified.
     @param {rect} rec Raphael.js rectangle object to fill.
     @param {boolean} anim do you want animation (slow transition).
-    @return nothing
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
-  rectFill: function(rec,anim) {
+  rectFill: function(rec, anim) {
     var piecePosition = rec.data('pos');
     var mod;
     if (this.boardview == 'white' || this.boardview == 'black') {
@@ -171,7 +168,6 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Draw the boarder
-    @return nothing
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   drawBorder: function() {
@@ -180,30 +176,26 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     var partial = this.getValue('partial');
     for (var y = 0; y < 8; y++) {
       var txt1 = this.paper.text(
-        this.square * (partial / 2) * part,
-        (y + 0.5) * this.square + this.offY,
-        8 - y
-      );
+          this.square * (partial / 2) * part,
+          (y + 0.5) * this.square + this.offY,
+          8 - y);
       this.texts.push(txt1);
       var txt2 = this.paper.text(
-        this.offX + this.square * 8.0 + this.square * (partial / 2) * part,
-        (y + 0.5) * this.square + this.offY,
-        8 - y
-      );
+          this.offX + this.square * 8.0 + this.square * (partial / 2) * part,
+          (y + 0.5) * this.square + this.offY,
+          8 - y);
       this.texts.push(txt2);
     }
     for (var x = 0; x < 8; x++) {
       var txt3 = this.paper.text(
-        (x + 0.5) * this.square + this.offX,
-        this.square * (partial / 2) * part,
-        String.fromCharCode(x + 'A'.charCodeAt(0))
-      );
+          (x + 0.5) * this.square + this.offX,
+          this.square * (partial / 2) * part,
+          String.fromCharCode(x + 'A'.charCodeAt(0)));
       this.texts.push(txt3);
       var txt4 = this.paper.text(
-        (x + 0.5) * this.square + this.offX,
-        this.offY + this.square * 8.0 + this.square * (partial / 2) * part,
-        String.fromCharCode(x + 'A'.charCodeAt(0))
-      );
+          (x + 0.5) * this.square + this.offX,
+          this.offY + this.square * 8.0 + this.square * (partial / 2) * part,
+          String.fromCharCode(x + 'A'.charCodeAt(0)));
       this.texts.push(txt4);
     }
   },
@@ -211,7 +203,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     Translate a position from a rectangle position
     to a logical position according to board rotation.
     @param {PiecePosition} pos the position to translate.
-    @return {PiecePosition} the logical position
+    @return {PiecePosition} the logical position.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   translatePos: function(pos) {
@@ -231,7 +223,6 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Draw the board (white and black squares)
-    @return nothing
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   drawBoard: function() {
@@ -241,11 +232,10 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
       var rec_line = [];
       for (var y = 0; y < 8; y++) {
         var rec = this.paper.rect(
-          x * this.square + this.offX,
-          y * this.square + this.offY,
-          this.square,
-          this.square
-        );
+            x * this.square + this.offX,
+            y * this.square + this.offY,
+            this.square,
+            this.square);
         rec.attr({
           stroke: this.getValue('rec_stroke_color'),
           'stroke-width': this.getValue('rec_stroke_width')
@@ -254,39 +244,39 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
         var piecePosition = new PiecePosition(x, 7 - y);
         rec.data('pos', piecePosition);
         this.rectFill(rec, false);
-        rec.click(function(tpos,trec,type) {
+        rec.click(function(tpos, trec, type) {
           return function() {
             var ttpos = that.translatePos(tpos);
             that.eventPosition(ttpos, trec, type);
           };
         }(piecePosition, rec, 'click'));
-        rec.mousedown(function(tpos,trec,type) {
+        rec.mousedown(function(tpos, trec, type) {
           return function() {
             var ttpos = that.translatePos(tpos);
             that.eventPosition(ttpos, trec, type);
           };
         }(piecePosition, rec, 'mousedown'));
         /*
-        rec.mousemove(function(tpos,trec,type) {
+        rec.mousemove(function(tpos, trec, type) {
           return function() {
             var ttpos=that.translatePos(tpos);
             that.eventPosition(ttpos,trec,type);
           };
         }(piecePosition,rec,'mousemove'));
         */
-        rec.mouseout(function(tpos,trec,type) {
+        rec.mouseout(function(tpos, trec, type) {
           return function() {
             var ttpos = that.translatePos(tpos);
             that.eventPosition(ttpos, trec, type);
           };
         }(piecePosition, rec, 'mouseout'));
-        rec.mouseover(function(tpos,trec,type) {
+        rec.mouseover(function(tpos, trec, type) {
           return function() {
             var ttpos = that.translatePos(tpos);
             that.eventPosition(ttpos, trec, type);
           };
         }(piecePosition, rec, 'mouseover'));
-        rec.mouseup(function(tpos,trec,type) {
+        rec.mouseup(function(tpos, trec, type) {
           return function() {
             var ttpos = that.translatePos(tpos);
             that.eventPosition(ttpos, trec, type);
@@ -299,35 +289,38 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Create an overlay rectange for the entire board
-    @return nothing
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   overlay: function() {
     if (this.getValue('do_select_global')) {
       var that = this;
       var delta = 0;
-      var rec = this.paper.rect(this.offX + delta, this.offY + delta, this.square * 8.0 - delta, this.square * 8.0 - delta);
+      var rec = this.paper.rect(this.offX + delta, this.offY + delta,
+          this.square * 8.0 - delta, this.square * 8.0 - delta);
       rec.attr({fill: Raphael.getColor()});
       rec.attr({opacity: 0.0});
       /*
-      rec.mousemove(function(evt,x,y) {
+      rec.mousemove(function(evt, x, y) {
         that.eventGlobal(evt,x-that.startX-that.offX,y-that.startY-that.offY,'mousemove');
       });
       */
-      rec.mouseover(function(evt,x,y) {
-        that.eventGlobal(evt, x - that.startX - that.offX, y - that.startY - that.offY, 'mouseover');
+      rec.mouseover(function(evt, x, y) {
+        that.eventGlobal(evt, x - that.startX - that.offX,
+            y - that.startY - that.offY, 'mouseover');
       });
-      rec.mouseout(function(evt,x,y) {
-        that.eventGlobal(evt, x - that.startX - that.offX, y - that.startY - that.offY, 'mouseout');
+      rec.mouseout(function(evt, x, y) {
+        that.eventGlobal(evt, x - that.startX - that.offX,
+            y - that.startY - that.offY, 'mouseout');
       });
       rec.toFront();
       this.fullRec = rec;
     }
     /*
     if(this.getValue('do_select_piecerec')) {
-      var rec_out=this.paper.rect(this.offX+delta,this.offY+delta,this.square*8.0-delta,this.square*8.0-delta);
+      var rec_out=this.paper.rect(this.offX+delta,this.offY+delta,
+          this.square*8.0-delta,this.square*8.0-delta);
       rec_out.attr({opacity:0.0});
-      rec_out.mouseout(function(evt,x,y) {
+      rec_out.mouseout(function(evt, x, y) {
         that.eventGlobal(evt,x-that.startX-that.offX,y-that.startY-that.offY,'mouseout');
       });
       rec_out.toFront();
@@ -834,13 +827,24 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     throw 'boardview is bad';
   }
 });
-// static data
+
+
+/**
+  Which sides go to which when rotating right.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 SvgBoard.ObjRotateRight = {
   white: 'left',
   left: 'black',
   black: 'right',
   right: 'white'
 };
+
+
+/**
+  Which sides go to which when rotating left.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 SvgBoard.ObjRotateLeft = {
   white: 'right',
   right: 'black',
