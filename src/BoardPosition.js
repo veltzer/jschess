@@ -6,7 +6,7 @@ var BoardPosition = Class.create(/** @lends BoardPosition# */{
   /**
     @class represents a full position of the board
     constructs a new object
-    @return a new object of this type
+    @return {BoardPosition} a new object of this type.
     @constructor
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
@@ -15,7 +15,7 @@ var BoardPosition = Class.create(/** @lends BoardPosition# */{
   },
   /**
     toString method that allows you to get a nice printout for this type
-    @return a string representation of this object
+    @return {string} a string representation of this object.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   toString: function() {
@@ -23,21 +23,21 @@ var BoardPosition = Class.create(/** @lends BoardPosition# */{
   },
   /**
     Add a piece to the position
-    @param color the color of the piece (black/white).
-    @param type the type of the piece (rook/knight/bishop/queen/king/pawn).
-    @param x the x position of the piece [0..8).
-    @param y the y position of the piece [0..8).
-    @return nothing
+    @param {string} color the color of the piece (black/white).
+    @param {string} type the type of the piece
+    (rook/knight/bishop/queen/king/pawn).
+    @param {number} x the x position of the piece [0..8).
+    @param {number} y the y position of the piece [0..8).
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
-  addPiece: function(color,type,x,y) {
+  addPiece: function(color, type, x, y) {
     var boardPiece = new BoardPiece(new PieceColor(color), new PieceType(type));
     var piecePosition = new PiecePosition(x, y);
     this.pieces.push([boardPiece, piecePosition]);
   },
   /**
     Run a function for each piece in this position
-    @return nothing
+    @param {function} f function to run getting each piece in turn.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   forEachPiece: function(f) {
@@ -48,9 +48,11 @@ var BoardPosition = Class.create(/** @lends BoardPosition# */{
     });
   }
 });
+
+
 /**
   Static method that returns a starting position in standard chess.
-  @return A standard chess starting position.
+  @return {BoardPosition} A standard chess starting position.
   @author mark.veltzer@gmail.com (Mark Veltzer)
 */
 BoardPosition.startPos = function() {
@@ -91,18 +93,26 @@ BoardPosition.startPos = function() {
   newPos.addPiece('black','pawn',7,6);
   return newPos;
   */
-  return BoardPosition.setupFEN('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
+  return BoardPosition.setupFEN(
+      'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+  );
 };
+
+
 /**
   Setup a position according to FEN notation.
-  See <a href='http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation'>Forsyth–Edwards Notation</a> for more details.
+  See Forsyth–Edwards Notation in wikipedia for more details.
   Example of start position is:
   'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
-  @param fen a string describing a chess board position in FEN notation.
-  @return A position object corresponding to the FEN notation given.
+  @param {string} fen a string describing a chess board position in FEN
+  notation.
+  @return {BoardPosition} A position object corresponding to the FEN
+  notation given.
   @author mark.veltzer@gmail.com (Mark Veltzer)
-  @todo add more sanity tests (regexp) for the whole input
-  @todo parse the 5 other blocks after the position itself (what do I do with that ?!?)
+  TODO
+  - add more sanity tests (regexp) for the whole input.
+  - parse the 5 other blocks after the position itself
+  (what do I do with that ?!?).
 */
 BoardPosition.setupFEN = function(fen) {
   var blocks = fen.split(' ');

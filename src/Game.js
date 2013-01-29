@@ -4,14 +4,14 @@ var Game = Class.create(/** @lends Game# */{
     including a full set of moves of type GameMove.
     constructs a new Game
     @constructor
-    @return nothing
+    @return {Game} new instance of this class.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   initialize: function() {
   },
   /**
     toString method that allows you to get a nice printout for this type
-    @return nothing
+    @return {string} string representation of this instance.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   toString: function() {

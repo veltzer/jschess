@@ -2,13 +2,15 @@
 var ConfigTmpl = Class.create(/** @lends ConfigTmpl# */{
   /**
     @class Type safe config class
-    This is a configuration template, it has, for each configuration key, the following:
+    This is a configuration template, it has, for each configuration key,
+    the following:
     - the key itself (string).
     - the type of the value for that key.
     - the default value for the key (of the same type).
     - an optional validation function.
     - is this option required
     - description of the option
+    @return {ConfigTmpl} a new instance of this class.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   initialize: function() {
@@ -17,7 +19,8 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl# */{
     this.tuplist = [];
   },
   /**
-    add another options to this template
+    add another option to this template
+    @param {object} s config option with all needed properties.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   add: function(s) {
@@ -34,25 +37,24 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl# */{
   /**
     check that a key,value combo is ok
     This method will throw an exception if it finds anything wrong.
-    @param key key to check.
-    @param value value to check.
-    @return nothing
+    @param {string} key key to check.
+    @param {anything} value value to check.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
-  check: function(key,value) {
+  check: function(key, value) {
     if (!(key in this.tuples)) {
       throw 'wrong key [' + key + ']';
     }
-    var type_to_check=this.tuples[key].type;
-    var our_type=ConfigTmpl.types[type_to_check];
+    var type_to_check = this.tuples[key].type;
+    var our_type = ConfigTmpl.types[type_to_check];
     if (typeof(value) != our_type) {
       throw 'wrong type for key [' + key + '] and value [' + value + ']';
     }
   },
   /**
     return whether the template has a key
-    @param key the key to check.
-    @return boolean is the key part of this config template
+    @param {string} key the key to check.
+    @return {boolean} is the key part of this config template.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   hasKey: function(key) {
@@ -60,8 +62,8 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl# */{
   },
   /**
     return the default value for a key
-    @param key the key to fetch the value for.
-    @return the default value for the given key
+    @param {string} key the key to fetch the value for.
+    @return {anything} the default value for the given key.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   getDefaultValue: function(key) {
@@ -69,7 +71,7 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl# */{
   },
   /**
     show HTML that lists all config options for the current template
-    @return nothing
+    @return {string} HTML representation of this config template.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   getHTML: function() {
@@ -95,7 +97,12 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl# */{
     return shtml;
   }
 });
-// static data
+
+
+/**
+  All needed properties for each config option.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 ConfigTmpl.fullSet = {
   name: undefined,
   type: undefined,
@@ -103,6 +110,12 @@ ConfigTmpl.fullSet = {
   description: undefined,
   defaultValue: undefined
 };
+
+
+/**
+  All allowed types for config options.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 ConfigTmpl.types = {
   t_string: 'string',
   t_number: 'number',
