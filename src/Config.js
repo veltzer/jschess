@@ -34,16 +34,18 @@ var Config = Class.create(/** @lends Config# */{
   },
   /**
     set a key to a certain value in the current configuration
+    @param {anything} key key to store in the config.
+    @param {anything} value value to store in the config.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
-  setValue: function(key,value) {
+  setValue: function(key, value) {
     // check that the key and value are ok.
     this.tmpl.check(key, value);
     this.d[key] = value;
   },
   /**
     set many values at once
-    @param d dictionary of values.
+    @param {object} d dictionary of values.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   override: function(d) {
