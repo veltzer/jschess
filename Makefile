@@ -5,6 +5,8 @@
 DO_MKDBG?=0
 # should we depend on versions of wrappers ?
 DO_WRAPDEPS:=1
+# should we depend on the date of the makefile itself ?
+DO_ALL_DEP?=1
 
 #############
 # VARIABLES #
@@ -44,6 +46,11 @@ else
 	MAKO_WRAPPER_DEP:=
 endif
 
+ALL_DEP:=
+ifeq ($(DO_ALL_DEP),1)
+	ALL_DEP:=$(ALL_DEP) Makefile
+endif
+
 ifeq ($(DO_MKDBG),1)
 Q=
 # we are not silent in this branch
@@ -53,46 +60,46 @@ Q=@
 endif # DO_MKDBG
 
 .PHONY: all
-all: $(JSPACK) $(JSZIP) $(JSDOC_FILE) $(WEB_FILES)
+all: $(JSPACK) $(JSZIP) $(JSDOC_FILE) $(WEB_FILES) $(ALL_DEP)
 
 .PHONY: all_no_doc
-all_no_doc: $(JSPACK) $(JSZIP) $(WEB_FILES)
+all_no_doc: $(JSPACK) $(JSZIP) $(WEB_FILES) $(ALL_DEP)
 
-$(JSZIP): $(SOURCES)
+$(JSZIP): $(SOURCES) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)zip -qr $@ $(SOURCES)
 
 .PHONY: check
-check: $(JSCHECK)
+check: $(JSCHECK) $(ALL_DEP)
 
-$(JSCHECK): $(SOURCES)
+$(JSCHECK): $(SOURCES) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)~/install/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES)
-	$(Q)scripts/wrapper.py gjslint --strict --nosummary $(SOURCES)
+	$(Q)scripts/wrapper.py gjslint --strict $(SOURCES)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
-$(JSFULL): $(SOURCES) $(JSCHECK)
+$(JSFULL): $(SOURCES) $(JSCHECK) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
 	$(Q)cat $(SOURCES) > $@
 
-$(JSMIN): $(JSFULL)
+$(JSMIN): $(JSFULL) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
 	$(Q)jsmin < $< > $@
 #$(Q)yui-compressor $< -o $@
 
-$(JSPACK): $(JSMIN)
+$(JSPACK): $(JSMIN) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
 	$(Q)cat $(DEPS) $(JSMIN) > $(JSPACK)
 
 .PHONY: jsdoc
-jsdoc: $(JSDOC_FILE)
+jsdoc: $(JSDOC_FILE) $(ALL_DEP)
 	$(info doing [$@])
 
-$(JSDOC_FILE): $(SOURCES)
+$(JSDOC_FILE): $(SOURCES) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)-rm -rf $(JSDOC_FOLDER)
 	$(Q)mkdir -p $(dir $@)
@@ -122,7 +129,7 @@ debug:
 	$(info DEPS is $(DEPS))
 
 .PHONY: install
-install: all
+install: all $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)sudo rm -rf $(WEB_DIR)
 	$(Q)sudo mkdir -p $(WEB_DIR)
@@ -131,7 +138,7 @@ install: all
 	$(Q)sudo ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
 
 .PHONY: install_no_doc
-install_no_doc: all_no_doc
+install_no_doc: all_no_doc $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)sudo rm -rf $(WEB_DIR)
 	$(Q)sudo mkdir -p $(WEB_DIR)
@@ -156,4 +163,4 @@ $(WEB_FILES_OTHER): $(WEB_FOLDER)/%: $(WEBMAKO_FOLDER)/% $(MAKO_WRAPPER_DEP) $(A
 
 .PHONY: grep
 grep:
-	$(Q)-git grep "\"" src/
+	$(Q)scripts/wrapper_noerr.py git grep "\"" src/
