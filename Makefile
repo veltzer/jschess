@@ -6,7 +6,7 @@ DO_MKDBG?=0
 # should we depend on versions of wrappers ?
 DO_WRAPDEPS:=1
 # should we depend on the date of the makefile itself ?
-DO_ALL_DEP?=1
+DO_ALL_DEP:=1
 
 #############
 # VARIABLES #
@@ -127,6 +127,7 @@ debug:
 	$(info WEBMAKO_FILES is $(WEBMAKO_FILES))
 	$(info WEB_FILES is $(WEB_FILES))
 	$(info DEPS is $(DEPS))
+	$(info ALL_DEP is $(ALL_DEP))
 
 .PHONY: install
 install: all $(ALL_DEP)

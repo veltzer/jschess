@@ -24,8 +24,6 @@ graphics:
 
 mako:
 =====
-- make mako files include individual js files in the file by file version in the right order
-	(prepare an order file which says which is the right order).
 
 site:
 =====
@@ -35,9 +33,12 @@ site:
 
 build system:
 =============
+- unite the wrapper.py and wrapper_noerr.py scripts.
 
 code:
 =====
+- disallow flip when the flip has not yet ended (using an event at the end of the animation
+	which will re-enable the flip).
 - consider moving pieces at certain speeds and having the speed and not the
 	time of the animation recorded in the config.
 - consider morphing one piece into another using raphael.js animations
