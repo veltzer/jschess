@@ -110,7 +110,6 @@ Utils.checkType = function(v, t) {
   other Throws an exceptions if that is not the case.
   @param {object} s1 first set.
   @param {object} s2 second set.
-  @return {nothing} nothing.
   @author mark.veltzer@gmail.com (Mark Veltzer)
 */
 Utils.checkContains = function(s1, s2) {
