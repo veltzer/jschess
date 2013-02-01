@@ -67,7 +67,6 @@ var WSet = Class.create(/** @lends WSet# */{
     @param {object} names of events to register.
     supported are: click, mouseover, mouseout, mousemove, mouseup,
     mousedown.
-    @return {nothing} nothing.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   eventRegister: function(f, names) {

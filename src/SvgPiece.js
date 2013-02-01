@@ -20,7 +20,6 @@ var SvgPiece = Class.create(/** @lends SvgPiece# */{
   /**
     Adds a new path section to a piece description
     @param {PathAndAttributes} paa object to be added.
-    @return {nothing} nothing.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   add: function(paa) {

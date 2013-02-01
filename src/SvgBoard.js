@@ -466,7 +466,6 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     Resize the board
     @param {set} set Raphael set to resize.
-    @return {nothing} nothing.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   resize: function(set) {
@@ -607,7 +606,6 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     @param {BoardPiece} boardPiece the piece to make glow.
     @param {object} glow properties to pass to the glow function as per
     Raphael.js.
-    @return {nothing} nothing.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   glow: function(boardPiece, glow) {
@@ -622,7 +620,6 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     Redraw the entire board
     @param {viewType} oldview the old view of the board.
-    @return {nothing} nothing.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   redraw: function(oldview) {
@@ -644,7 +641,6 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     Types of events: click, mouseover and more...
     @param {BoardPiece} boardPiece instance the event happened on.
     @param {string} type the type of event that happened.
-    @return {nothing} nothing.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   eventPiece: function(boardPiece, type) {
@@ -668,7 +664,6 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     @param {PiecePosition} piecePosition the position of the event.
     @param {rect} rec the Raphael.js rectangle where the event happened.
     @param {string} type which is the name of the event that happened.
-    @return {nothing} nothing.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   eventPosition: function(piecePosition, rec, type) {
@@ -755,7 +750,6 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     No parameters are passed because This method uses:
     this.selectedPiece, this.selectedRec, this.lastPos, this.currentPos
     to do it's work.
-    @return {nothing} nothing.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   newPosition: function() {
