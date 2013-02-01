@@ -1,15 +1,21 @@
 /*jsl:import Utils.js*/
+
+
+/**
+  @class Type safe config class
+  This is a configuration template, it has, for each configuration key,
+  the following:
+  - the key itself (string).
+  - the type of the value for that key.
+  - the default value for the key (of the same type).
+  - an optional validation function.
+  - is this option required
+  - description of the option
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 var ConfigTmpl = Class.create(/** @lends ConfigTmpl# */{
   /**
-    @class Type safe config class
-    This is a configuration template, it has, for each configuration key,
-    the following:
-    - the key itself (string).
-    - the type of the value for that key.
-    - the default value for the key (of the same type).
-    - an optional validation function.
-    - is this option required
-    - description of the option
+    create a new instance of this class.
     @return {ConfigTmpl} a new instance of this class.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */

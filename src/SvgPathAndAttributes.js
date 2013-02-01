@@ -1,10 +1,14 @@
+
+
+/**
+  @class a path + attributes two tuple object
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 var SvgPathAndAttributes = Class.create(/** @lends SvgPathAndAttributes# */{
   /**
-    @class a path + attributes two tuple object
     creates a new instance
     @param {string} path string representing SVG path.
     @param {object} attr object with attributes for said path.
-    @constructor
     @return {SvgPathAndAttributes} the new instance.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */

@@ -2,12 +2,16 @@
 /*jsl:import PieceColor.js*/
 /*jsl:import PieceType.js*/
 /*jsl:import PiecePosition.js*/
+
+
+/**
+  @class represents a full position of the board
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 var BoardPosition = Class.create(/** @lends BoardPosition# */{
   /**
-    @class represents a full position of the board
     constructs a new object
     @return {BoardPosition} a new object of this type.
-    @constructor
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   initialize: function() {

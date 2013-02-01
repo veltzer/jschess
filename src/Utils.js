@@ -1,9 +1,13 @@
+
+
+/**
+  @class a class to have static utility functions
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 var Utils = Class.create(/** @lends Utils# */{
   /**
-    @class a class to have static utility functions
     creates a new instance
     @return {Utils} the new instance.
-    @constructor
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   initialize: function() {

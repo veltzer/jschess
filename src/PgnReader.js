@@ -1,11 +1,15 @@
 /*jsl:import Utils.js*/
+
+
+/**
+  @class A PGN reader. A class that knows how to read a PGN file and give
+  instructions to a board.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 var PgnReader = Class.create(/** @lends PgnReader# */{
   /**
-    @class A PGN reader. A class that knows how to read a PGN file and give
-    instructions to a board.
     creates a new instance
     @return {PgnReader} the new instance.
-    @constructor
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   initialize: function() {
