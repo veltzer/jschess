@@ -1,12 +1,16 @@
+
+
+/**
+  @class A single piece description.
+  This includes: square size (assumes piece is 0,0,size,size)
+  and array of paths and attributes to draw the path
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 var SvgPiece = Class.create(/** @lends SvgPiece# */{
   /**
-    @class A single piece description.
-    This includes: square size (assumes piece is 0,0,size,size)
-    and array of paths and attributes to draw the path
     creates a new instance
     @param {number} size of the square of the piece.
     @return {SvgPiece} a new object of this type.
-    @constructor
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   initialize: function(size) {

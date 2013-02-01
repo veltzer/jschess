@@ -1,13 +1,17 @@
 /*jsl:import Utils.js*/
+
+
+/**
+  @class represents a position on the board
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 var PiecePosition = Class.create(/** @lends PiecePosition# */{
   /**
-    @class represents a position on the board
     creates a new instance
     @param {number} x x co-ordinate.
     @param {number} y y co-ordinate.
     @return {PiecePosition} the new instance of this class.
     The method checks if the values given to it are in the 0..7 range.
-    @constructor
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   initialize: function(x, y) {

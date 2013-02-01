@@ -1,10 +1,14 @@
+
+
+/**
+  @class represents a piece type (rook,knight,bishop,queen,king,pawn)
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 var PieceType = Class.create(/** @lends PieceType# */{
   /**
-    @class represents a piece type (rook,knight,bishop,queen,king,pawn)
     creates a new instance
     @param {string} type the type of the piece.
     @return {PieceType} the new instance.
-    @constructor
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   initialize: function(type) {

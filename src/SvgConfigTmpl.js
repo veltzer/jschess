@@ -1,12 +1,16 @@
 /*jsl:import ConfigTmpl.js*/
-var SvgConfigTmpl = Class.create(ConfigTmpl,/** @lends SvgConfigTmpl# */{
+
+
+/**
+  @class Singleton configuration for jschess
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var SvgConfigTmpl = Class.create(ConfigTmpl,/** @lends SvgConfigTmpl# */ {
   /**
-    @class Singleton configuration for jschess
     creates a new instance
     @param {parent} $super prototype.js parent to enable to call the
     parent constructur.
     @return {SvgConfigTmpl} the new instance.
-    @constructor
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   initialize: function($super) {

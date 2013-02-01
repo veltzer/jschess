@@ -1,10 +1,14 @@
+
+
+/**
+  @class Wrapper for Raphael.js set
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 var WSet = Class.create(/** @lends WSet# */{
   /**
-    @class Wrapper for Raphael.js set
     @param {set} the raphael set that this wraps.
     @param {wrapper} the raphael wrapper (with paper and all).
     @return {WSet} a new instance of this class.
-    @constructor
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   initialize: function(set, wrapper) {
@@ -109,13 +113,16 @@ var WSet = Class.create(/** @lends WSet# */{
   }
 });
 
+
+/**
+  @class Wrapper for Raphael.js
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 var WRaphael = Class.create(/** @lends WRaphael# */{
   /**
-    @class Wrapper for Raphael.js
     creates a new instance
     @param {anything} anything you pass to Raphael for initialization.
     @return {WRaphael} a new instance of this class.
-    @constructor
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   initialize: function() {

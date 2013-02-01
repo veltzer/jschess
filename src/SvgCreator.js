@@ -1,11 +1,15 @@
 /*jsl:import Utils.js*/
 /*jsl:import SvgPathAndAttributes.js*/
 /*jsl:import SvgPiece.js*/
+
+
+/**
+  @class static class to have just static methods for creating pieces
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 var SvgCreator = Class.create(/** @lends SvgCreator# */{
   /**
-    @class static class to have just static methods for creating pieces
     creates a new instance
-    @constructor
     @return {SvgCreator} the new instance.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */

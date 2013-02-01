@@ -1,9 +1,13 @@
+
+
+/**
+  @class A full game of chess. Contains the starting position
+  including a full set of moves of type GameMove.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 var Game = Class.create(/** @lends Game# */{
   /**
-    @class A full game of chess. Contains the starting position
-    including a full set of moves of type GameMove.
-    constructs a new Game
-    @constructor
+    creates a new instance of this class.
     @return {Game} new instance of this class.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */

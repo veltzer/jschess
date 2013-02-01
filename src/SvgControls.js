@@ -1,11 +1,15 @@
 /*jsl:import Utils.js*/
+
+
+/**
+  @class Forward/Backwards controls.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 var SvgControls = Class.create(/** @lends SvgControls# */{
   /**
-    @class Forward/Backwards controls.
     creates a new instance
     @param {Config} config configuration for this instance.
     @return {SvgControls} the new instance.
-    @constructor
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   initialize: function(config) {

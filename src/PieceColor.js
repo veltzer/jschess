@@ -1,11 +1,15 @@
+
+
+/**
+  @class represents a piece color (white,black)
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 var PieceColor = Class.create(/** @lends PieceColor# */{
   /**
-    @class represents a piece color (white,black)
     creates a new instance
     @param {string} color string which represents
     the color of the piece. Must be one of 'white' or 'black'.
     @return {PieceColor} new instance of this class.
-    @constructor
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   initialize: function(color) {

@@ -7,14 +7,18 @@
 /*jsl:import Utils.js*/
 /*jsl:import Config.js*/
 /*jsl:import SvgConfigTmpl.js*/
+
+
+/**
+  @class a whole board to play with
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
-    @class a whole board to play with
     creates a new instance
     @param {Board} board instance to use as the abstract board.
     @param {object} dict overridables to the configuration for this object.
     @return {SvgBoard} the new instance.
-    @constructor
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   initialize: function(board, dict) {

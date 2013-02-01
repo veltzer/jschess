@@ -1,13 +1,17 @@
+
+
+/**
+  @class represents a piece on the board: color, type The instance also has
+  a data field that could be used for private data attached to the piece.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 var BoardPiece = Class.create(/** @lends BoardPiece# */{
   /**
-    @class represents a piece on the board: color, type The instance also has
-    a data field that could be used for private data attached to the piece.
-    constructs a new object
+    constructs a new object.
     @param {string} color color of this piece (black/white).
     @param {string} type type of this piece
     (rook/knight/bishop/queen/king/pawn).
     @return {BoardPiece} the new object created.
-    @constructor
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   initialize: function(color, type) {

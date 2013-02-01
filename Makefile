@@ -103,7 +103,10 @@ $(JSDOC_FILE): $(SOURCES) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)-rm -rf $(JSDOC_FOLDER)
 	$(Q)mkdir -p $(dir $@)
-	$(Q)jsdoc -d=$(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
+	$(Q)~/install/jsdoc/jsdoc -d $(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
+
+# 2.4 (ubuntu default) jsdoc
+#$(Q)jsdoc -d=$(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
 
 .PHONY: clean
 clean:

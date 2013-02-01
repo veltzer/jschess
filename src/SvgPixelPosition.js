@@ -1,11 +1,15 @@
+
+
+/**
+  @class represents a position on the screen (in pixels)
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
 var SvgPixelPosition = Class.create(/** @lends SvgPixelPosition# */{
   /**
-    @class represents a position on the screen (in pixels)
     creates a new instance
     @param {number} x x co-ordinate.
     @param {number} y y co-ordinate.
     @return {SvgPixelPosition} the new instance.
-    @constructor
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   initialize: function(x, y) {
