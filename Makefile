@@ -168,3 +168,5 @@ $(WEB_FILES_OTHER): $(WEB_FOLDER)/%: $(WEBMAKO_FOLDER)/% $(MAKO_WRAPPER_DEP) $(A
 .PHONY: grep
 grep:
 	$(Q)scripts/wrapper_noerr.py git grep "\"" src/
+	$(Q)scripts/wrapper_noerr.py git grep " $$" src/
+	$(Q)scripts/wrapper_noerr.py git grep "eval" src/
