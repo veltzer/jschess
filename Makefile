@@ -109,12 +109,12 @@ $(JSDOC_FILE): $(SOURCES) $(ALL_DEP)
 #$(Q)jsdoc -d=$(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
 
 .PHONY: clean
-clean:
+clean: $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)-rm -rf $(JSDOC_FOLDER) $(OUT_FOLDER) $(WEB_FOLDER)
 
 .PHONY: debug
-debug:
+debug: $(ALL_DEP)
 	$(info VER is $(VER))
 	$(info PROJECT is $(PROJECT))
 	$(info SOURCES is $(SOURCES))
@@ -166,7 +166,13 @@ $(WEB_FILES_OTHER): $(WEB_FOLDER)/%: $(WEBMAKO_FOLDER)/% $(MAKO_WRAPPER_DEP) $(A
 	$(Q)cp $< $@
 
 .PHONY: grep
-grep:
+grep: $(ALL_DEP)
+	$(info doing [$@])
 	$(Q)scripts/wrapper_noerr.py git grep "\"" src/
 	$(Q)scripts/wrapper_noerr.py git grep " $$" src/
 	$(Q)scripts/wrapper_noerr.py git grep "eval" src/
+
+.PHONY: webserver
+webserve: $(ALL_DEP)
+	$(info doing [$@])
+	$(Q)sudo /etc/init.d/apache2 start
