@@ -7,17 +7,17 @@ DO_MKDBG?=0
 DO_WRAPDEPS:=1
 # should we depend on the date of the makefile itself ?
 DO_ALL_DEP:=1
+# should we do documentation ?
+DO_DOCS?=1
 
 #############
 # VARIABLES #
 #############
-#VER:=$(shell git tag)
 VER:=$(shell scripts/tagname.py)
 PROJECT=jschess
 SRC_FOLDER=src
 TESTS_FOLDER=tests
 THIRDPARTY_FOLDER=thirdparty
-#SOURCES:=$(shell find $(SRC_FOLDER) -name "*.js")
 SOURCES:=$(shell scripts/mylist.py)
 JSDOC_FOLDER:=jsdoc
 JSDOC_FILE:=$(JSDOC_FOLDER)/index.html
@@ -62,18 +62,18 @@ Q=@
 #.SILENT:
 endif # DO_MKDBG
 
-.PHONY: all
-all: $(JSPACK) $(JSZIP) $(JSDOC_FILE) $(WEB_FILES) $(ALL_DEP)
+ALL:=$(JSPACK) $(JSZIP) $(WEB_FILES)
+ifeq ($(DO_DOC),1)
+ALL+=$(JSDOC_FILE)
+endif # DO_DOC
 
-.PHONY: all_no_doc
-all_no_doc: $(JSPACK) $(JSZIP) $(WEB_FILES) $(ALL_DEP)
+.PHONY: all
+all: $(ALL) $(ALL_DEP)
+	$(info doing [$@])
 
 $(JSZIP): $(SOURCES) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)zip -qr $@ $(SOURCES)
-
-.PHONY: check
-check: $(JSCHECK) $(ALL_DEP)
 
 $(JSCHECK): $(SOURCES) $(ALL_DEP)
 	$(info doing [$@])
@@ -100,17 +100,21 @@ $(JSPACK): $(JSMIN) $(ALL_DEP)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)cat $(DEPS) $(JSMIN) > $(JSPACK)
 
-.PHONY: jsdoc
-jsdoc: $(JSDOC_FILE) $(ALL_DEP)
-	$(info doing [$@])
-
 $(JSDOC_FILE): $(SOURCES) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)-rm -rf $(JSDOC_FOLDER)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)~/install/jsdoc/jsdoc -d $(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
 	$(Q)# 2.4 (ubuntu default) jsdoc
-	$(Q)#$(Q)jsdoc -d=$(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
+	$(Q)#jsdoc -d=$(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
+
+.PHONY: check
+check: $(JSCHECK) $(ALL_DEP)
+	$(info doing [$@])
+
+.PHONY: jsdoc
+jsdoc: $(JSDOC_FILE) $(ALL_DEP)
+	$(info doing [$@])
 
 .PHONY: clean
 clean: $(ALL_DEP)
@@ -154,12 +158,9 @@ install_no_doc: all_no_doc $(ALL_DEP)
 	$(Q)sudo ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
 	$(Q)sudo ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
 
-
-.PHONY: sloccount
-sloccount: $(ALL_DEP)
-	$(info doing [$@])
-	$(Q)sloccount .
-
+#########
+# rules #
+#########
 $(WEB_FILES_MAKO): $(WEB_FOLDER)/%: $(WEBMAKO_FOLDER)/%.mako $(MAKO_WRAPPER_DEP) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
@@ -169,14 +170,20 @@ $(WEB_FILES_OTHER): $(WEB_FOLDER)/%: $(WEBMAKO_FOLDER)/% $(MAKO_WRAPPER_DEP) $(A
 	$(Q)mkdir -p $(dir $@)
 	$(Q)cp $< $@
 
-.PHONY: grep
-grep: $(ALL_DEP)
+########
+# misc #
+########
+.PHONY: check_grep
+check_grep: $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)scripts/wrapper_noerr.py git grep "\"" src/
 	$(Q)scripts/wrapper_noerr.py git grep " $$" src/
 	$(Q)scripts/wrapper_noerr.py git grep "eval" src/
-
 .PHONY: webserver
 webserve: $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)sudo /etc/init.d/apache2 start
+.PHONY: sloccount
+sloccount: $(ALL_DEP)
+	$(info doing [$@])
+	$(Q)sloccount .
