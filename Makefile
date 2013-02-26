@@ -26,6 +26,9 @@ OUT_FOLDER:=out
 JSCHECK:=$(OUT_FOLDER)/$(PROJECT)-$(VER).stamp
 JSFULL:=$(OUT_FOLDER)/$(PROJECT)-$(VER).js
 JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js
+JSMIN_JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.jsmin.js
+JSMIN_YUI:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.yui.js
+JSMIN_CLOSURE:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.closure.js
 JSPACK:=$(OUT_FOLDER)/$(PROJECT)-$(VER).pack.js
 JSZIP:=$(OUT_FOLDER)/$(PROJECT)-$(VER).zip
 WEB_DIR:=/var/www/$(PROJECT)
@@ -87,8 +90,10 @@ $(JSFULL): $(SOURCES) $(JSCHECK) $(ALL_DEP)
 $(JSMIN): $(JSFULL) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)jsmin < $< > $@
-#$(Q)yui-compressor $< -o $@
+	$(Q)jsmin < $< > $(JSMIN_JSMIN)
+	$(Q)yui-compressor $< -o $(JSMIN_YUI)
+	$(Q)~/install/bin/compiler.jar $< --js_output_file $(JSMIN_CLOSURE)
+	$(Q)cp $(JSMIN_YUI) $(JSMIN)
 
 $(JSPACK): $(JSMIN) $(ALL_DEP)
 	$(info doing [$@])
