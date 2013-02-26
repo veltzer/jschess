@@ -63,9 +63,9 @@ Q=@
 endif # DO_MKDBG
 
 ALL:=$(JSPACK) $(JSZIP) $(WEB_FILES)
-ifeq ($(DO_DOC),1)
+ifeq ($(DO_DOCS),1)
 ALL+=$(JSDOC_FILE)
-endif # DO_DOC
+endif # DO_DOCS
 
 .PHONY: all
 all: $(ALL) $(ALL_DEP)
