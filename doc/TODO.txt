@@ -21,6 +21,7 @@ now:
 graphics:
 =========
 - make each shape zoom out a little before move and zoom back in after move.
+- add drag and drop when moving pieces.
 
 mako:
 =====
