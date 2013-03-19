@@ -30,6 +30,7 @@ site:
 - add a git changelog on my site (with tags).
 - make the site carry older versions of jschess too.
 - consider changing the name of this project to chess.js.
+- add a page showing how to create a full screen chess board.
 
 build system:
 =============
