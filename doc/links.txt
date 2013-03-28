@@ -15,6 +15,8 @@ similar or related projects:
 	http://code.google.com/p/jspgnviewer/
 	http://code.google.com/p/jschessboard/
 	http://chesstempo.com/pgn-viewer.html
+	https://github.com/bmarini/jchess
+	https://github.com/jhlywa/chess.js
 PGN reference:
 	http://www.thechessdrum.net/PGN_Reference.txt
 	http://en.wikipedia.org/wiki/Portable_Game_Notation
