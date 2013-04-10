@@ -43,6 +43,10 @@ WEB_FILES:=$(WEB_FILES_MAKO) $(WEB_FILES_OTHER)
 MAKO_WRAPPER:=scripts/mako_wrapper.py
 DEPS:=$(shell scripts/deps.py)
 
+# tools
+TOOL_COMPILER:=~/install/closure/compiler.jar
+TOOL_JSMIN:=~/install/jsmin/jsmin
+
 ifeq ($(DO_WRAPDEPS),1)
 	MAKO_WRAPPER_DEP:=$(MAKO_WRAPPER)
 else
@@ -90,9 +94,9 @@ $(JSFULL): $(SOURCES) $(JSCHECK) $(ALL_DEP)
 $(JSMIN): $(JSFULL) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)jsmin < $< > $(JSMIN_JSMIN)
+	$(Q)$(TOOL_JSMIN) < $< > $(JSMIN_JSMIN)
 	$(Q)yui-compressor $< -o $(JSMIN_YUI)
-	$(Q)~/install/bin/compiler.jar $< --js_output_file $(JSMIN_CLOSURE)
+	$(Q)$(TOOL_COMPILER) $< --js_output_file $(JSMIN_CLOSURE)
 	$(Q)cp $(JSMIN_YUI) $(JSMIN)
 
 $(JSPACK): $(JSMIN) $(ALL_DEP)
