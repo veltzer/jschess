@@ -31,7 +31,7 @@ JSMIN_YUI:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.yui.js
 JSMIN_CLOSURE:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.closure.js
 JSPACK:=$(OUT_FOLDER)/$(PROJECT)-$(VER).pack.js
 JSZIP:=$(OUT_FOLDER)/$(PROJECT)-$(VER).zip
-WEB_DIR:=/var/www/$(PROJECT)
+WEB_DIR:=~mark/public_html/public/$(PROJECT)
 WEB_FOLDER:=web
 WEBMAKO_FOLDER:=webmako
 WEBMAKO_FILES_MAKO:=$(shell find $(WEBMAKO_FOLDER) -type f -and -name "*.mako")
@@ -147,22 +147,22 @@ debug: $(ALL_DEP)
 .PHONY: install
 install: all $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)sudo rm -rf $(WEB_DIR)
-	$(Q)sudo mkdir -p $(WEB_DIR)
-	$(Q)sudo cp -r index.html $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(TESTS_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
-	$(Q)sudo ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
-	$(Q)sudo ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
-	$(Q)sudo chmod -R go+rx $(WEB_DIR)
+	$(Q)rm -rf $(WEB_DIR)
+	$(Q)mkdir -p $(WEB_DIR)
+	$(Q)cp -r index.html $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(TESTS_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
+	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
+	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
+	$(Q)chmod -R go+rx $(WEB_DIR)
 
 .PHONY: install_no_doc
 install_no_doc: all_no_doc $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)sudo rm -rf $(WEB_DIR)
-	$(Q)sudo mkdir -p $(WEB_DIR)
-	$(Q)sudo cp -r index.html $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(TESTS_FOLDER) $(WEB_DIR)
-	$(Q)sudo ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
-	$(Q)sudo ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
-	$(Q)sudo chmod -R go+rx $(WEB_DIR)
+	$(Q)rm -rf $(WEB_DIR)
+	$(Q)mkdir -p $(WEB_DIR)
+	$(Q)cp -r index.html $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(TESTS_FOLDER) $(WEB_DIR)
+	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
+	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
+	$(Q)chmod -R go+rx $(WEB_DIR)
 
 #########
 # rules #
@@ -185,10 +185,6 @@ check_grep: $(ALL_DEP)
 	$(Q)scripts/wrapper_noerr.py git grep "\"" src/
 	$(Q)scripts/wrapper_noerr.py git grep " $$" src/
 	$(Q)scripts/wrapper_noerr.py git grep "eval" src/
-.PHONY: webserver
-webserve: $(ALL_DEP)
-	$(info doing [$@])
-	$(Q)sudo /etc/init.d/apache2 start
 .PHONY: sloccount
 sloccount: $(ALL_DEP)
 	$(info doing [$@])
