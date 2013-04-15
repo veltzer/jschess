@@ -167,8 +167,8 @@ install_no_doc: all_no_doc $(ALL_DEP)
 .PHONY: chmod
 chmod:
 	$(info doing [$@])
-	$(Q)chmod -R go+rx `find . -type d`
-	$(Q)chmod -R go+r `find . -type f`
+	$(Q)chmod go+rx `find . -type d`
+	$(Q)chmod go+r `find . -type f`
 
 #########
 # rules #
