@@ -25,6 +25,7 @@ def files_in_order():
 		'src/SvgBoard.js',
 		'src/Board.js',
 		'src/SvgControls.js',
+		'src/Controls.js',
 		'src/SvgCreator.js',
 		'src/SvgPathAndAttributes.js',
 		'src/SvgPieceData.js',
