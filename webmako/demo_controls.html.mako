@@ -6,7 +6,8 @@
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
 ${jsThirdParty()}
-		<script src="../out/jschess-${ver}.min.js"></script>
+		<!--script src="../out/jschess-${ver}.min.js"></script-->
+		<script src="../out/jschess-${ver}.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
@@ -27,7 +28,7 @@ ${jsThirdParty()}
 			document.observe('dom:loaded', function() {
 				// Finally, to actually run the highlighter, you need to include this JS on your page
 				SyntaxHighlighter.all()
-				var svgControls=new SvgControls({
+				var controls=new Controls({
 					id:'myid'
 				})
 			})
@@ -36,11 +37,20 @@ ${jsThirdParty()}
 	<body>
 		<h1>Controls demo</h1>
 		<p>
-		In order to use the controls you need to [bla bla bla...]...
-		</p>
-		Here is the result:
-		<div id="myid">
+		A controls object is one which allows you to control a prerecorded game.
+		It provides with about 6 buttons to control the game.
+		You need a place for your controls, so place something like this somewhere in your html:
+		<pre class="brush: xml"><%block filter="h">
+		<div id="myid"></div></%block></pre>
+		Then you can create a Controls object from your javascript code by calling the constructor of Controls.
+		<pre class="brush: js"><%block filter="h">
+			var controls=new Controls({
+				id:'myid'
+			})</%block></pre>
 		</div>
+		Here is the result:
+		<div id="myid"></div>
+		</p>
 		<p>
 			Mark Veltzer, Copyright ${copyright_years(2012)}
 			<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
