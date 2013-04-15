@@ -1,6 +1,0 @@
-Web site:
-	https://developers.google.com/closure/utilities/docs/linter_howto
-
-How to install?
-	cd /tmp
-	sudo easy_install http://closure-linter.googlecode.com/files/closure_linter-latest.tar.gz

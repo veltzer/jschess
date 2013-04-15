@@ -1,3 +1,0 @@
-You can find documentation on them here:
-http://daringfireball.net/projects/markdown/syntax
-http://github.github.com/github-flavored-markdown
