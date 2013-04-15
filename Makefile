@@ -164,6 +164,12 @@ install_no_doc: all_no_doc $(ALL_DEP)
 	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
 	$(Q)chmod -R go+rx $(WEB_DIR)
 
+.PHONY: chmod
+chmod:
+	$(info doing [$@])
+	$(Q)chmod -R go+rx `find . -type d`
+	$(Q)chmod -R go+r `find . -type f`
+
 #########
 # rules #
 #########

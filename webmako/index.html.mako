@@ -149,8 +149,8 @@ ${jsFiles()}
 				<li><a href="demo_using_min.html">using the min.js file</a></li>
 				<li><a href="demo_moving_pieces.html">moving pieces</a></li>
 				<li><a href="demo_fen.html">showing a FEN position</a></li>
-				<li><a href="demo_pgn.html">showing a PGN game</a></li>
 				<li><a href="demo_controls.html">showing controls</a></li>
+				<li><a href="demo_pgn.html">showing a PGN game</a></li>
 				<li><a href="demo_config.html">config options</a></li>
 				<li><a href="demo_wordpress.html">using it from within wordpress</a></li>
 			</ul>
