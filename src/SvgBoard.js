@@ -171,7 +171,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     }
   },
   /**
-    Draw the boarder
+    Draw the border
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   drawBorder: function() {
