@@ -14,7 +14,18 @@ var Controls = Class.create(/** @lends Controls# */{
   */
   initialize: function(dict) {
     this.id = dict['id'];
-    console.log('this.id is ' + this.id);
+    this.b_goto_start = new Element('button').update('goto_start');
+    this.b_prev_move = new Element('button').update('prev_move');
+    this.b_prev_play = new Element('button').update('prev_play');
+    this.b_next_play = new Element('button').update('next_play');
+    this.b_next_move = new Element('button').update('next_move');
+    this.b_goto_end = new Element('button').update('goto_end');
+    $(this.id).appendChild(this.b_goto_start);
+    $(this.id).appendChild(this.b_prev_move);
+    $(this.id).appendChild(this.b_prev_play);
+    $(this.id).appendChild(this.b_next_play);
+    $(this.id).appendChild(this.b_next_move);
+    $(this.id).appendChild(this.b_goto_end);
   },
   /**
     toString method that allows you to get a nice printout for this type

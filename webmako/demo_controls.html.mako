@@ -38,7 +38,7 @@ ${jsThirdParty()}
 		<h1>Controls demo</h1>
 		<p>
 		A controls object is one which allows you to control a prerecorded game.
-		It provides with about 6 buttons to control the game.
+		It provides with 6 buttons to control the game.
 		You need a place for your controls, so place something like this somewhere in your html:
 		<pre class="brush: xml"><%block filter="h">
 		<div id="myid"></div></%block></pre>
