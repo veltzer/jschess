@@ -9,6 +9,7 @@ Technologies used
 -----------------
 * Prototype javascript library (http://prototypejs.org).
 * Raphael javascript library (http://raphaeljs.com).
+* chess.java javascript library (https://github.com/jhlywa/chess.js).
 
 Demo
 ----
@@ -21,7 +22,7 @@ What makes jschess different?
 * You can have your board at any size you want (because of scalable graphics).
 * As a result of being pure javascript totally controllable programatically.
 * Looks best.
-* Sits on top of good infrastructure (prototype.js,raphael.js).
+* Sits on top of good infrastructure (prototype.js,raphael.js,chess.js).
 
 Monetary contribution
 ---------------------
