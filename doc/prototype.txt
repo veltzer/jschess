@@ -1,9 +1,0 @@
-The prototype web site does not carry a minified version of prototype.js nor do they
-correctly stamp the downloaded file with the prototype.js version number.
-
-Here is what you do:
-1. Download prototype.js from the official site (http://prototypejs.org/download/).
-2. Give it the right name:
-	mv prototype.js prototype-1.7.1.js
-3. Compress it via yui-compressor:
-	yui-compressor prototype-1.7.1.js > prototype-1.7.1.min.js
