@@ -66,6 +66,7 @@ Utils.fakeUse = function() {
 /**
   Fake doing something
   This is mainly used to avoid lint warnings.
+  Pass as many args as you like to this function.
   @author mark.veltzer@gmail.com (Mark Veltzer)
 */
 Utils.pass = function() {

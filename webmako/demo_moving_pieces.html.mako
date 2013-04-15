@@ -7,7 +7,7 @@
 		<!-- third parties -->
 ${jsThirdParty()}
 		<!--script src="../out/jschess-${ver}.min.js"></script!-->
-		<script src="../out/jschess-${ver}.min.js"></script>
+		<script src="../out/jschess-${ver}.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->

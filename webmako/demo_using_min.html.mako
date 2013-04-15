@@ -6,8 +6,8 @@
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
 ${jsThirdParty()}
-		<!-- our minified file -->
-		<script src="../out/jschess-${ver}.min.js"></script>
+		<!--script src="../out/jschess-${ver}.min.js"></script-->
+		<script src="../out/jschess-${ver}.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->

@@ -23,6 +23,7 @@ JSDOC_FOLDER:=jsdoc
 JSDOC_FILE:=$(JSDOC_FOLDER)/index.html
 WEB_FOLDER:=web
 OUT_FOLDER:=out
+PGN_FOLDER:=pgn
 JSCHECK:=$(OUT_FOLDER)/$(PROJECT)-$(VER).stamp
 JSFULL:=$(OUT_FOLDER)/$(PROJECT)-$(VER).js
 JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js
@@ -46,6 +47,8 @@ DEPS:=$(shell scripts/deps.py)
 # tools
 TOOL_COMPILER:=~/install/closure/compiler.jar
 TOOL_JSMIN:=~/install/jsmin/jsmin
+TOOL_JSDOC:=~/install/jsdoc/jsdoc
+TOOL_JSL:=~/install/jsl/jsl
 
 ifeq ($(DO_WRAPDEPS),1)
 	MAKO_WRAPPER_DEP:=$(MAKO_WRAPPER)
@@ -81,7 +84,7 @@ $(JSZIP): $(SOURCES) $(ALL_DEP)
 
 $(JSCHECK): $(SOURCES) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)~/install/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES)
+	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES)
 	$(Q)scripts/wrapper.py gjslint --strict $(SOURCES)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
@@ -108,7 +111,7 @@ $(JSDOC_FILE): $(SOURCES) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)-rm -rf $(JSDOC_FOLDER)
 	$(Q)mkdir -p $(dir $@)
-	$(Q)~/install/jsdoc/jsdoc -d $(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
+	$(Q)$(TOOL_JSDOC) -d $(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
 	$(Q)# 2.4 (ubuntu default) jsdoc
 	$(Q)#jsdoc -d=$(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
 
@@ -134,6 +137,7 @@ debug: $(ALL_DEP)
 	$(info JSMIN is $(JSMIN))
 	$(info OUT_FOLDER is $(OUT_FOLDER))
 	$(info JSDOC_FOLDER is $(JSDOC_FOLDER))
+	$(info PGN_FOLDER is $(PGN_FOLDER))
 	$(info JSDOC_FILE is $(JSDOC_FILE))
 	$(info WEB_DIR is $(WEB_DIR))
 	$(info SRC_FOLDER is $(SRC_FOLDER))
@@ -149,7 +153,7 @@ install: all $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)rm -rf $(WEB_DIR)
 	$(Q)mkdir -p $(WEB_DIR)
-	$(Q)cp -r index.html $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(TESTS_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
+	$(Q)cp -r index.html $(PGN_FOLDER) $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(TESTS_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
 	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
 	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
 	$(Q)chmod -R go+rx $(WEB_DIR)
@@ -159,7 +163,7 @@ install_no_doc: all_no_doc $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)rm -rf $(WEB_DIR)
 	$(Q)mkdir -p $(WEB_DIR)
-	$(Q)cp -r index.html $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(TESTS_FOLDER) $(WEB_DIR)
+	$(Q)cp -r index.html $(PGN_FOLDER) $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(TESTS_FOLDER) $(WEB_DIR)
 	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
 	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
 	$(Q)chmod -R go+rx $(WEB_DIR)
@@ -180,6 +184,7 @@ $(WEB_FILES_MAKO): $(WEB_FOLDER)/%: $(WEBMAKO_FOLDER)/%.mako $(MAKO_WRAPPER_DEP)
 $(WEB_FILES_OTHER): $(WEB_FOLDER)/%: $(WEBMAKO_FOLDER)/% $(MAKO_WRAPPER_DEP) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
+	$(Q)rm -f $@
 	$(Q)cp $< $@
 	$(Q)chmod a-w $@
 

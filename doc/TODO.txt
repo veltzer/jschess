@@ -21,10 +21,24 @@ now:
 	selecting a square.
 - pgn parsing.
 
-graphics:
-=========
+wordpress plugin
+================
+1'st phase: Just a plugin that does showing of a single game. The game would be a server url or a string.
+2'nd phase: show a collection of games from the server.
+
+audio:
+======
+- add playing of audio on each move.
+	look at the new web audio standard and libraries for this.
+
+SVG graphics:
+=============
 - make each shape zoom out a little before move and zoom back in after move.
 - add drag and drop when moving pieces.
+
+Canvas graphics:
+================
+- use one of the canvas libraries for this.
 
 mako:
 =====

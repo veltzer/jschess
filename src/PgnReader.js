@@ -21,16 +21,30 @@ var PgnReader = Class.create(/** @lends PgnReader# */{
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   toString: function() {
-    throw 'this is not implemented yet';
+    throw 'toString for PgnReader not implemented yet';
   },
   /**
     A method to read a pgn file via ajax.
     @param {string} url url to do the GET from (same server).
-    @param {function} func a function to be called once the game is parsed.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
-  get: function(url, func) {
-    Utils.fakeUse(url, func);
-    // use prototype to do HTTP GET
+  get: function(url) {
+    //Utils.fakeUse(url);
+    // we use prototype to do HTTP GET
+    var req = new Ajax.Request(url, {
+      method: 'get',
+      onSuccess: function(transport) {
+        var response = transport.responseText;
+        //console.log('got response ' + response);
+        var chess = new Chess();
+        chess.load_pgn(response);
+        console.log(chess.history({ verbose: true }));
+      },
+      onFailure: function(transport) {
+        console.log('error in transport for url ' + url);
+        console.dir(transport);
+      }
+    });
+    Utils.fakeUse(req);
   }
 });

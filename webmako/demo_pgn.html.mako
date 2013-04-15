@@ -6,7 +6,8 @@
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
 ${jsThirdParty()}
-		<script src="../out/jschess-${ver}.min.js"></script>
+		<!--script src="../out/jschess-${ver}.min.js"></script-->
+		<script src="../out/jschess-${ver}.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
@@ -27,6 +28,9 @@ ${jsThirdParty()}
 			document.observe('dom:loaded', function() {
 				// Finally, to actually run the highlighter, you need to include this JS on your page
 				SyntaxHighlighter.all()
+				console.log('in here');
+				var pgnReader=new PgnReader();
+				pgnReader.get('../pgn/karpov_kasparov_1975.pgn');
 			})
 		</script>
 	</head>
