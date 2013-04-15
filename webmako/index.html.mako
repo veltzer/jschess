@@ -113,6 +113,7 @@ ${jsFiles()}
 				<li>Free source. Full freedom to tweak or you can ask me for help with implementing a feature</li>
 				<li>Sits on top of <a href="http://raphaeljs.com">raphaeljs</a> for high level SVG capabilities</li>
 				<li>Sits on top of <a href="http://prototypejs.org">prototypejs</a> to make object oriented easier and more error free</li>
+				<li>Sits on top of <a href="https://github.com/jhlywa/chess.js">chess.js</a> to do game parsing and validation</li>
 			</ul>
 		</p>
 		<p>
