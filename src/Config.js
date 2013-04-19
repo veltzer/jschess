@@ -3,10 +3,19 @@
 
 /**
   @class Type safe config class
+  The config class is basically a fancy dictionary. The difference
+  between it and a dictionary is that it consults a template object
+  when setting and getting a value.
+  - When setting a value it makes sure that you are giving a name
+  of a parameter that exists in the template and that the value
+  that you gave to the parameter is correctly converted to the
+  type expected.
+  - When getting a value it makes sure you use the right name for
+  the key.
   The idea is that the user will not be able to accidently put config
   options which are not used and will only be able to supply the right
   types.
-  In addition, some config options will HAVE to be supplied by the user
+  In addition, some config options will <b>have</b> to be supplied by the user
   (div id where to create some HTML elements is an example of this).
   Config will also supply a method by which config options by the user
   will override anything in the default config.

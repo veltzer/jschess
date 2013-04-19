@@ -30,7 +30,7 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl# */{
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   add: function(s) {
-    Utils.checkContains(s, ConfigTmpl.fullSet);
+    Utils.checkEquals(s, ConfigTmpl.fullSet);
     if (!(s.type in ConfigTmpl.types)) {
       throw 'bad type [' + s.type + ']';
     }
