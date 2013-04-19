@@ -22,7 +22,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
   initialize: function(board, dict) {
-    // lets create a config connected to our template
+    // lets create a config connected to our singleton template
     this.config = new Config(SvgConfigTmpl.getInstance());
     // lets override with user preferences
     this.config.override(dict);

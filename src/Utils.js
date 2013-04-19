@@ -120,3 +120,16 @@ Utils.checkContains = function(s1, s2) {
     }
   }
 };
+
+
+/**
+  Checks whether one dictionary key set equals that of another.
+  other Throws an exceptions if that is not the case.
+  @param {object} s1 first set.
+  @param {object} s2 second set.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+Utils.checkEquals = function(s1, s2) {
+  Utils.checkContains(s1, s2);
+  Utils.checkContains(s2, s1);
+};

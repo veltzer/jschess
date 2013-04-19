@@ -19,7 +19,8 @@ var SvgConfigTmpl = Class.create(ConfigTmpl,/** @lends SvgConfigTmpl# */ {
       name: 'id',
       type: 't_string',
       required: true,
-      description: 'id where to place the board'
+      description: 'id where to place the board',
+      defaultValue: undefined
     });
     this.add({
       name: 'size',
