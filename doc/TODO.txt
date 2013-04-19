@@ -31,10 +31,16 @@ audio:
 - add playing of audio on each move.
 	look at the new web audio standard and libraries for this.
 
+HTML graphics:
+==============
+Have a plugin to do the screen using regular HTML.
+
 SVG graphics:
 =============
 - make each shape zoom out a little before move and zoom back in after move.
 - add drag and drop when moving pieces.
+- if you try to drag pieces of the board (the board, not necessarily piece of the board)
+then you manage to do so. Stop this weird behaviour.
 
 Canvas graphics:
 ================
