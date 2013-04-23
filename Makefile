@@ -49,6 +49,7 @@ TOOL_COMPILER:=~/install/closure/compiler.jar
 TOOL_JSMIN:=~/install/jsmin/jsmin
 TOOL_JSDOC:=~/install/jsdoc/jsdoc
 TOOL_JSL:=~/install/jsl/jsl
+TOOL_GJSLINT:=/usr/local/bin/gjslint
 
 ifeq ($(DO_WRAPDEPS),1)
 	MAKO_WRAPPER_DEP:=$(MAKO_WRAPPER)
@@ -85,7 +86,7 @@ $(JSZIP): $(SOURCES) $(ALL_DEP)
 $(JSCHECK): $(SOURCES) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES)
-	$(Q)scripts/wrapper.py gjslint --strict $(SOURCES)
+	$(Q)scripts/wrapper.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
