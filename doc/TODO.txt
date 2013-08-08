@@ -59,6 +59,7 @@ site:
 build system:
 =============
 - unite the wrapper.py and wrapper_noerr.py scripts.
+- add jshint (www.jshint.com) as checker for the project.
 
 code:
 =====
