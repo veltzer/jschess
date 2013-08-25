@@ -50,6 +50,7 @@ TOOL_JSMIN:=~/install/jsmin/jsmin
 TOOL_JSDOC:=~/install/jsdoc/jsdoc
 TOOL_JSL:=~/install/jsl/jsl
 TOOL_GJSLINT:=/usr/local/bin/gjslint
+TOOL_YUICOMPRESSOR:=yui-compressor
 
 ifeq ($(DO_WRAPDEPS),1)
 	MAKO_WRAPPER_DEP:=$(MAKO_WRAPPER)
@@ -99,7 +100,7 @@ $(JSMIN): $(JSFULL) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(TOOL_JSMIN) < $< > $(JSMIN_JSMIN)
-	$(Q)yui-compressor $< -o $(JSMIN_YUI)
+	$(Q)$(TOOL_YUICOMPRESS) $< -o $(JSMIN_YUI)
 	$(Q)$(TOOL_COMPILER) $< --js_output_file $(JSMIN_CLOSURE)
 	$(Q)cp $(JSMIN_YUI) $(JSMIN)
 
