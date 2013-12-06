@@ -33,47 +33,72 @@ ${jsThirdParty()}
 					id:'myid'
 				})
 				board.startPosition()
-				function error(msg) {
-					$('errors').innerHTML=msg;
+				var have_errors;
+				function error_reset() {
+					$('errors').innerHTML='';
+					have_errors=0;
+				}
+				function error_add(msg) {
+					if(have_errors>0) {
+						$('errors').innerHTML+=', ';
+					}
+					$('errors').innerHTML+=msg;
+					have_errors+=1;
+				}
+				function error_have() {
+					return have_errors!=0;
+				}
+				function isNumber(n) {
+					return !isNaN(parseFloat(n)) && isFinite(n);
 				}
 				$('move').observe('click',function() {
+					error_reset();
 					var fromX=$('fromX').value;
 					var fromY=$('fromY').value;
 					var toX=$('toX').value;
 					var toY=$('toY').value;
-					fromX=parseInt(fromX,10);
-					fromY=parseInt(fromY,10);
-					toX=parseInt(toX,10);
-					toY=parseInt(toY,10);
-					if(fromX==NaN) {
-						error('cannot parse fromX');
+					if(!isNumber(fromX)) {
+						error_add('fromX is not a number');
 					}
-					if(fromY==NaN) {
-						error('cannot parse fromY');
+					if(!isNumber(fromY)) {
+						error_add('fromY is not a number');
 					}
-					if(toX==NaN) {
-						error('cannot parse toX');
+					if(!isNumber(toX)) {
+						error_add('toX is not a number');
 					}
-					if(toY==NaN) {
-						error('cannot parse toY');
+					if(!isNumber(toY)) {
+						error_add('toY is not a number');
 					}
+					if(error_have()) {
+						return;
+					}
+					fromX=parseInt(fromX);
+					fromY=parseInt(fromY);
+					toX=parseInt(toX);
+					toY=parseInt(toY);
 					if(fromX<0 || fromX>7) {
-						error('bad fromX value');
+						error_add('bad fromX value');
 					}
 					if(fromY<0 || fromY>7) {
-						error('bad fromY value');
+						error_add('bad fromY value');
 					}
 					if(toX<0 || toX>7) {
-						error('bad toX value');
+						error_add('bad toX value');
 					}
 					if(toY<0 || toY>7) {
-						error('bad toY value');
+						error_add('bad toY value');
+					}
+					if(error_have()) {
+						return;
 					}
 					if(!board.hasPieceAtPosition(new PiecePosition(fromX,fromY))) {
-						error('dont have piece at '+fromX+','+fromY);
+						error_add('dont have piece at '+fromX+','+fromY);
 					}
 					if(board.hasPieceAtPosition(new PiecePosition(toX,toY))) {
-						error('have piece at '+toX+','+toY);
+						error_add('have piece at '+toX+','+toY);
+					}
+					if(error_have()) {
+						return;
 					}
 					board.movePieceByPos(
 						new PiecePosition(fromX,fromY),

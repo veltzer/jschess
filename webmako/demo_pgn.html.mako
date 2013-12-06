@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Showing PGN files</title>
+		<title>Showing a PGN game</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
 ${jsThirdParty()}
@@ -35,7 +35,7 @@ ${jsThirdParty()}
 		</script>
 	</head>
 	<body>
-		<h1>Showing PGN files</h1>
+		<h1>Showing a PGN game</h1>
 		<p>
 		TBD
 		</p>
