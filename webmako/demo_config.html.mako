@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Configuration options for JsChess</title>
+		<title>Config options</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
 ${jsThirdParty()}
@@ -36,7 +36,7 @@ ${jsThirdParty()}
 		</script>
 	</head>
 	<body>
-		<h1>Configuration options for JsChess</h1>
+		<h1>Config options</h1>
 		<p>
 		These are the configuration options that <b>jschess</b> supports:
 			<div id="myid">

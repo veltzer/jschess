@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Using the JsChess Wordpress plugin</title>
+		<title>Using the Wordpress plugin</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
 ${jsThirdParty()}
@@ -32,7 +32,7 @@ ${jsThirdParty()}
 		</script>
 	</head>
 	<body>
-		<h1>Using the JsChess Wordpress plugin</h1>
+		<h1>Using the Wordpress plugin</h1>
 		<p>
 		TBD
 		</p>

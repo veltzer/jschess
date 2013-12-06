@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Controls demo</title>
+		<title>Showing controls</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
 ${jsThirdParty()}
@@ -35,7 +35,7 @@ ${jsThirdParty()}
 		</script>
 	</head>
 	<body>
-		<h1>Controls demo</h1>
+		<h1>Showing controls</h1>
 		<p>
 		A controls object is one which allows you to control a prerecorded game.
 		It provides with 6 buttons to control the game.
