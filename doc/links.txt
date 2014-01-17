@@ -13,3 +13,4 @@ similar or related projects:
 	http://chesstempo.com/pgn-viewer.html
 	https://github.com/bmarini/jchess
 	https://github.com/jhlywa/chess.js
+	http://chessboardjs.com

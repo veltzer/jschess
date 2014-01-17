@@ -15,7 +15,7 @@ import deps
 
 def years(x):
 	curr_year=datetime.datetime.now().year
-	return ','.join(map(str,range(x,curr_year+1)))
+	return ', '.join(map(str,range(x,curr_year+1)))
 
 def jsFiles():
 	#files=glob.glob('src/*.js')
