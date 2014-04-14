@@ -13,7 +13,7 @@ Technologies used
 
 Demo
 ----
-Is at my machine at (http://veltzer.net/jschess).
+Is at my machine at (https://veltzer.net/jschess).
 
 What makes jschess different?
 -----------------------------
@@ -28,8 +28,8 @@ Monetary contribution
 ---------------------
 If you'd like to see a feature added to jschess or would just like to show
 your appreciation you are welcome to contribute to it's development at
-(http://veltzer.net/jschess).
+(https://veltzer.net/jschess).
 I am ready to work with any chess organization wishing to incorporate jschess
 into their infrastructre and am already working with two such organizations...
 
-	Mark Veltzer, 2012-2013, mark.veltzer@gmail.com
+	Mark Veltzer, 2012-2014, mark.veltzer@gmail.com
