@@ -8,6 +8,7 @@ import subprocess # for check_call
 packs=[
 	'yui-compressor',
 	'jsdoc-toolkit',
+	'closure-linter',
 ]
 args=['sudo','apt-get','install','--assume-yes']
 args.extend(packs)
