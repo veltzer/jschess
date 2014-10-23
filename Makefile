@@ -2,13 +2,13 @@
 # PARAMETERS #
 ##############
 # should we show commands executed ?
-DO_MKDBG?=0
+DO_MKDBG:=0
 # should we depend on versions of wrappers ?
 DO_WRAPDEPS:=1
 # should we depend on the date of the makefile itself ?
 DO_ALL_DEP:=1
 # should we do documentation ?
-DO_DOCS?=1
+DO_DOCS:=1
 
 #############
 # VARIABLES #
