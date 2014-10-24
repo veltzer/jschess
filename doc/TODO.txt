@@ -1,5 +1,6 @@
 now:
 ====
+- unify the template handling with the other project.
 - add an object which is a chess game controller with buttons for next prev etc.
 	take the buttons from the world chess championship site.
 - add PGN display using https://github.com/jhlywa/chess.js.
