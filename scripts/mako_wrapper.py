@@ -1,6 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
-from __future__ import print_function
 import sys
 import mako.template # for mako.template.Template
 import mako.lookup # for mako.lookup.TemplateLookup
