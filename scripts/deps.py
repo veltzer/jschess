@@ -1,11 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
-from __future__ import print_function
-import cgi # for escape
-
-"""
+'''
 module to help handle javascript dependencies for a piece of software
-"""
+'''
+
+import cgi # for escape
 
 class Dep:
 	def __init__(self,name,version,website,downloadUrl,downloadUrlDebug,myFile,myFileDebug,documentation):

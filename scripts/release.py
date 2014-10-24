@@ -1,19 +1,22 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
-# this is a release script.
-# it runs git status -s in order to see that everything is commited.
-# it then tags the current tree with one + the old tag.
-# it then cleans and then rebuilds everything and puts the results in the output.
+'''
+this is a release script.
+it runs git status -s in order to see that everything is commited.
+it then tags the current tree with one + the old tag.
+it then cleans and then rebuilds everything and puts the results in the output.
 
-# TODO:
-# - add integration with twitter and facebook to announce new versions.
-# - try to use a better git interface (there are native python git interfaces).
+TODO:
+- add integration with twitter and facebook to announce new versions.
+- try to use a better git interface (there are native python git interfaces).
+'''
 
-# this is for running the various commands that we need
-import subprocess
+###########
+# imports #
+###########
+import subprocess # for check_output, check_call
 import os # for getcwd
-import releasemanager
-
+import releasemanager # for ReleaseManager
 import versioncheck
 
 ##############
@@ -38,9 +41,9 @@ def get_version():
 	except:
 		return 'test'
 
-######################
-# script starts here #
-######################
+########
+# code #
+########
 if check:
 	out=subprocess.check_output(['git','status','-s'])
 	if out!='':

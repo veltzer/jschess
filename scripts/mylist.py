@@ -1,10 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
-from __future__ import print_function
-
-"""
+'''
 Show the list of sources for this project in right order
-"""
+'''
 
 import myutils
 
