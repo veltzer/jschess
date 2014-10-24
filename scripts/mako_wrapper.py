@@ -54,16 +54,10 @@ try:
 	mylookup=mako.lookup.TemplateLookup(directories=['.'],input_encoding=input_encoding,output_encoding=output_encoding)
 	template=mako.template.Template(filename=p_input,lookup=mylookup,output_encoding=output_encoding,input_encoding=input_encoding)
 	file=open(p_output,'w')
-	# python 3
-	#file.write((template.render_unicode(attributes={})))
-	# python 2
-	file.write(template.render(**get_attr()))
+	file.write(template.render_unicode(**get_attr()))
 	file.close()
-	# python 3
-	#os.chmod(p_output,0o0444)
-	# python 2
-	os.chmod(p_output,0444)
-except Exception,e:
+	os.chmod(p_output,0o0444)
+except Exception as e:
 	print('unlinking output')
 	os.unlink(p_output)
 	raise e
