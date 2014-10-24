@@ -54,6 +54,7 @@ def getJsThirdParty():
 	for dep in deps:
 		l.append('<script src="../'+dep.myFile+'"></script>')
 	return '\n'.join(l)
+
 def getJsThirdPartyDebug():
 	l=[]
 	for dep in deps:
