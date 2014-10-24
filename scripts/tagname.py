@@ -9,7 +9,7 @@ import subprocess # for check_output
 def get_version():
 	try:
 		f=open('/dev/null')
-		ver=subprocess.check_output(['git', 'describe'],stderr=f).rstrip()
+		ver=subprocess.check_output(['git', 'describe'],stderr=f).decode().rstrip()
 		return ver
 	except:
 		return 'test'
