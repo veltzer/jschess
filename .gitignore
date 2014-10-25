@@ -1,9 +1,13 @@
+# our output folders
 /out
 /web
 /jsdoc
 
-# python stuff
+# python cache in any folder
 __pycache__
+
+# nodejs modules
+/node_modules
 
 # template config file
 .attr.config
