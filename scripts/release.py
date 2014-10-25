@@ -14,7 +14,7 @@ TODO:
 ###########
 # imports #
 ###########
-import subprocess # for check_output, check_call
+import subprocess # for check_output, check_call, DEVNULL
 import os # for getcwd
 import versioncheck
 
@@ -37,7 +37,7 @@ opt_release=False
 def get_version():
 	try:
 		f=open('/dev/null')
-		ver=subprocess.check_output(['git', 'describe','--abbrev=0'],stderr=f).rstrip()
+		ver=subprocess.check_output(['git', 'describe','--abbrev=0'],stderr=f).decode().rstrip()
 		return int(ver)
 	except:
 		return 'test'
@@ -46,7 +46,7 @@ def get_version():
 # code #
 ########
 if opt_check:
-	out=subprocess.check_output(['git','status','-s'])
+	out=subprocess.check_output(['git','status','-s']).decode()
 	if out!='':
 		raise ValueError('first commit everything, then call me...')
 tag=get_version();
@@ -58,7 +58,7 @@ if tag!='test':
 		print('new tag is [{0}]'.format(tag))
 	tag=str(tag)
 	# tag the new tag
-	subprocess.check_output(['git','tag','-s','-m',opt_project+' version '+tag,tag])
+	subprocess.check_call(['git','tag','-s','-m',opt_project+' version '+tag,tag], stdout=subprocess.DEVNULL)
 
 subprocess.check_call(['make','clean'])
 subprocess.check_call(['make','install'])
