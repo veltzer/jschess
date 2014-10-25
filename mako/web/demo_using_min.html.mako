@@ -6,8 +6,8 @@
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
 ${attr.project_jsThirdParty}
-		<!--script src="../out/jschess-$(attr.git_describe).min.js"></script-->
-		<script src="../out/jschess-$(attr.git_describe).js"></script>
+		<!--script src="../out/jschess-${attr.git_describe}.min.js"></script-->
+		<script src="../out/jschess-${attr.git_describe}.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
@@ -65,15 +65,15 @@ ${attr.project_jsThirdParty}
 ${attr.project_jsThirdParty}></%block></pre>
 		</p>
 		<p>
-		Then download the minified <b>jschess</b> file from <a title="jschess compressed download" href="../out/jschess-$(attr.git_describe).min.js">here</a>.
+		Then download the minified <b>jschess</b> file from <a title="jschess compressed download" href="../out/jschess-${attr.git_describe}.min.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
 		</p>
 		<pre class="brush: xml"><%block filter="h">
-		<script src="jschess-$(attr.git_describe).min.js"></script></%block></pre>
+		<script src="jschess-${attr.git_describe}.min.js"></script></%block></pre>
 		If you want to help me debug <b>jschess</b> or are experiencing problems you can download the uncompressed file
-		from <a title="jschess uncompressed download" href="../out/jschess-$(attr.git_describe).js">here</a> and use it like this:
+		from <a title="jschess uncompressed download" href="../out/jschess-${attr.git_describe}.js">here</a> and use it like this:
 		<pre class="brush: xml"><%block filter="h">
-		<script src="jschess-$(attr.git_describe).js"></script></%block></pre>
+		<script src="jschess-${attr.git_describe}.js"></script></%block></pre>
 		You need a place for your board, so place something like this somewhere in your html:
 		<pre class="brush: xml"><%block filter="h">
 		<div id="myid"></div></%block></pre>

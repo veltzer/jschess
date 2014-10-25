@@ -5,7 +5,7 @@
 		<title>Using the pack.js file</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
-		<script src="../out/jschess-$(attr.git_describe).pack.js"></script>
+		<script src="../out/jschess-${attr.git_describe}.pack.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
@@ -42,9 +42,9 @@
 		all the third parties built in.
 		</p>
 		<p>
-		When using the .pack.js file download it from <a title="jschess package download" href="../out/jschess-$(attr.git_describe).pack.js">here</a>.
+		When using the .pack.js file download it from <a title="jschess package download" href="../out/jschess-${attr.git_describe}.pack.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
-		<pre class="brush: xml"><%block filter="h"><script src="jschess-$(attr.git_describe).pack.js"></script></%block></pre>
+		<pre class="brush: xml"><%block filter="h"><script src="jschess-${attr.git_describe}.pack.js"></script></%block></pre>
 		You need a place for your board, so place something like this somewhere in your html:
 		<pre class="brush: xml"><%block filter="h"><div id="myid"></div></%block></pre>
 		In order to get a board with initial position we must:

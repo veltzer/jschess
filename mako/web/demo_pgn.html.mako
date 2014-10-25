@@ -6,8 +6,8 @@
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
 ${attr.project_jsThirdParty}
-		<!--script src="../out/jschess-$(attr.git_describe).min.js"></script-->
-		<script src="../out/jschess-$(attr.git_describe).js"></script>
+		<!--script src="../out/jschess-${attr.git_describe}.min.js"></script-->
+		<script src="../out/jschess-${attr.git_describe}.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
