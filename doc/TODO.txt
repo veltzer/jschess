@@ -1,3 +1,7 @@
+check that all still works in jschess.
+favicon is not installed.
+move more of the variables inside the makefile to the templating solution.
+
 now:
 ====
 - unify the template handling with the other project.

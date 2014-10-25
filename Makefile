@@ -1,4 +1,3 @@
-.DEFAULT_GOAL=all
 ############
 # includes #
 ############
@@ -9,8 +8,6 @@ include Makefile.prep
 ##############
 # should we show commands executed ?
 DO_MKDBG:=0
-# should we depend on versions of wrappers ?
-DO_WRAPDEPS:=1
 # should we depend on the date of the makefile itself ?
 DO_ALL_DEP:=1
 # should we do documentation ?
@@ -46,7 +43,6 @@ WEBMAKO_FILES:=$(WEBMAKO_FILES_MAKO) $(WEBMAKO_FILES_OTHER)
 WEB_FILES_MAKO:=$(addprefix $(WEB_FOLDER)/,$(notdir $(basename $(WEBMAKO_FILES_MAKO))))
 WEB_FILES_OTHER:=$(addprefix $(WEB_FOLDER)/,$(notdir $(WEBMAKO_FILES_OTHER)))
 WEB_FILES:=$(WEB_FILES_MAKO) $(WEB_FILES_OTHER)
-MAKO_WRAPPER:=scripts/templar_cmd.py
 DEPS:=$(shell scripts/deps.py)
 
 # tools
@@ -57,12 +53,6 @@ TOOL_JSL:=~/install/jsl/jsl
 # gjslint is taken from ubuntu package
 TOOL_GJSLINT:=gjslint
 TOOL_YUICOMPRESSOR:=yui-compressor
-
-ifeq ($(DO_WRAPDEPS),1)
-	MAKO_WRAPPER_DEP:=$(MAKO_WRAPPER)
-else
-	MAKO_WRAPPER_DEP:=
-endif
 
 ifeq ($(DO_ALL_DEP),1)
 	ALL_DEP:=$(ALL_DEP) Makefile
@@ -84,6 +74,7 @@ endif # DO_DOCS
 ###########
 # targets #
 ###########
+.DEFAULT_GOAL=all
 .PHONY: all
 all: $(ALL) $(ALL_DEP)
 	$(info doing [$@])
@@ -148,6 +139,7 @@ clean: $(ALL_DEP)
 
 .PHONY: debug
 debug: $(ALL_DEP)
+	$(info ALL is $(ALL))
 	$(info PROJECT is $(PROJECT))
 	$(info SOURCES is $(SOURCES))
 	$(info JSFULL is $(JSFULL))
@@ -205,7 +197,7 @@ sloccount: $(ALL_DEP)
 #################
 # pattern rules #
 #################
-$(WEB_FILES_OTHER): $(WEB_FOLDER)/%: $(WEBMAKO_FOLDER)/% $(MAKO_WRAPPER_DEP) $(ALL_DEP)
+$(WEB_FILES_OTHER): $(WEB_FOLDER)/%: $(WEBMAKO_FOLDER)/% $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
 	$(Q)rm -f $@
