@@ -1,4 +1,4 @@
-
+.DEFAULT_GOAL=all
 ############
 # includes #
 ############
