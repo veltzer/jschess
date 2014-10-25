@@ -1,7 +1,7 @@
 ############
 # includes #
 ############
-include /usr/share/templar/Makefile.prep
+include /usr/share/templar/Makefile
 
 ##############
 # parameters #
