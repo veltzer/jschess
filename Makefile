@@ -133,7 +133,12 @@ jsdoc: $(JSDOC_FILE) $(ALL_DEP)
 	$(info doing [$@])
 
 .PHONY: clean
-clean: $(ALL_DEP)
+clean:
+	$(info doing [$@])
+	$(Q)git clean -xdf
+
+.PHONY: clean_manual
+clean_manual:
 	$(info doing [$@])
 	$(Q)-rm -rf $(JSDOC_FOLDER) $(OUT_FOLDER) $(WEB_FOLDER)
 
