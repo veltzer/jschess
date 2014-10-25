@@ -1,3 +1,9 @@
+
+############
+# includes #
+############
+include Makefile.prep
+
 ##############
 # PARAMETERS #
 ##############
@@ -23,14 +29,14 @@ JSDOC_FILE:=$(JSDOC_FOLDER)/index.html
 WEB_FOLDER:=web
 OUT_FOLDER:=out
 PGN_FOLDER:=pgn
-JSCHECK:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).stamp
-JSFULL:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).js
-JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).min.js
-JSMIN_JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).min.jsmin.js
-JSMIN_YUI:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).min.yui.js
-JSMIN_CLOSURE:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).min.closure.js
-JSPACK:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).pack.js
-JSZIP:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).zip
+JSCHECK:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).stamp
+JSFULL:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).js
+JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).min.js
+JSMIN_JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).min.jsmin.js
+JSMIN_YUI:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).min.yui.js
+JSMIN_CLOSURE:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).min.closure.js
+JSPACK:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).pack.js
+JSZIP:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).zip
 WEB_DIR:=~mark/public_html/public/$(PROJECT)
 WEB_FOLDER:=web
 WEBMAKO_FOLDER:=mako
@@ -140,7 +146,6 @@ clean: $(ALL_DEP)
 
 .PHONY: debug
 debug: $(ALL_DEP)
-	$(info VER is $(attr.git_tagname))
 	$(info PROJECT is $(PROJECT))
 	$(info SOURCES is $(SOURCES))
 	$(info JSFULL is $(JSFULL))
@@ -164,8 +169,8 @@ install: all $(ALL_DEP)
 	$(Q)rm -rf $(WEB_DIR)
 	$(Q)mkdir -p $(WEB_DIR)
 	$(Q)cp -r index.html $(PGN_FOLDER) $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(TESTS_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
-	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
-	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
+	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
+	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
 	$(Q)chmod -R go+rx $(WEB_DIR)
 
 .PHONY: install_no_doc
@@ -174,8 +179,8 @@ install_no_doc: all_no_doc $(ALL_DEP)
 	$(Q)rm -rf $(WEB_DIR)
 	$(Q)mkdir -p $(WEB_DIR)
 	$(Q)cp -r index.html $(PGN_FOLDER) $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(TESTS_FOLDER) $(WEB_DIR)
-	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
-	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
+	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
+	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
 	$(Q)chmod -R go+rx $(WEB_DIR)
 
 .PHONY: chmod
@@ -207,5 +212,3 @@ check_grep: $(ALL_DEP)
 sloccount: $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)sloccount .
-
-include Makefile.prep
