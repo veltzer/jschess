@@ -135,7 +135,7 @@ jsdoc: $(JSDOC_FILE) $(ALL_DEP)
 .PHONY: clean
 clean:
 	$(info doing [$@])
-	$(Q)git clean -xdf
+	$(Q)git clean -xdf > /dev/null
 
 .PHONY: clean_manual
 clean_manual:
