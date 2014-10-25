@@ -13,7 +13,6 @@ DO_DOCS:=1
 #############
 # VARIABLES #
 #############
-VER:=$(shell scripts/tagname.py)
 PROJECT=jschess
 SRC_FOLDER=src
 TESTS_FOLDER=tests
@@ -24,14 +23,14 @@ JSDOC_FILE:=$(JSDOC_FOLDER)/index.html
 WEB_FOLDER:=web
 OUT_FOLDER:=out
 PGN_FOLDER:=pgn
-JSCHECK:=$(OUT_FOLDER)/$(PROJECT)-$(VER).stamp
-JSFULL:=$(OUT_FOLDER)/$(PROJECT)-$(VER).js
-JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js
-JSMIN_JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.jsmin.js
-JSMIN_YUI:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.yui.js
-JSMIN_CLOSURE:=$(OUT_FOLDER)/$(PROJECT)-$(VER).min.closure.js
-JSPACK:=$(OUT_FOLDER)/$(PROJECT)-$(VER).pack.js
-JSZIP:=$(OUT_FOLDER)/$(PROJECT)-$(VER).zip
+JSCHECK:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).stamp
+JSFULL:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).js
+JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).min.js
+JSMIN_JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).min.jsmin.js
+JSMIN_YUI:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).min.yui.js
+JSMIN_CLOSURE:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).min.closure.js
+JSPACK:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).pack.js
+JSZIP:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).zip
 WEB_DIR:=~mark/public_html/public/$(PROJECT)
 WEB_FOLDER:=web
 WEBMAKO_FOLDER:=mako
@@ -41,7 +40,7 @@ WEBMAKO_FILES:=$(WEBMAKO_FILES_MAKO) $(WEBMAKO_FILES_OTHER)
 WEB_FILES_MAKO:=$(addprefix $(WEB_FOLDER)/,$(notdir $(basename $(WEBMAKO_FILES_MAKO))))
 WEB_FILES_OTHER:=$(addprefix $(WEB_FOLDER)/,$(notdir $(WEBMAKO_FILES_OTHER)))
 WEB_FILES:=$(WEB_FILES_MAKO) $(WEB_FILES_OTHER)
-MAKO_WRAPPER:=scripts/mako_wrapper.py
+MAKO_WRAPPER:=scripts/templar_cmd.py
 DEPS:=$(shell scripts/deps.py)
 
 # tools
@@ -141,7 +140,7 @@ clean: $(ALL_DEP)
 
 .PHONY: debug
 debug: $(ALL_DEP)
-	$(info VER is $(VER))
+	$(info VER is $(attr.git_tagname))
 	$(info PROJECT is $(PROJECT))
 	$(info SOURCES is $(SOURCES))
 	$(info JSFULL is $(JSFULL))
@@ -165,8 +164,8 @@ install: all $(ALL_DEP)
 	$(Q)rm -rf $(WEB_DIR)
 	$(Q)mkdir -p $(WEB_DIR)
 	$(Q)cp -r index.html $(PGN_FOLDER) $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(TESTS_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
-	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
-	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
+	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
+	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
 	$(Q)chmod -R go+rx $(WEB_DIR)
 
 .PHONY: install_no_doc
@@ -175,8 +174,8 @@ install_no_doc: all_no_doc $(ALL_DEP)
 	$(Q)rm -rf $(WEB_DIR)
 	$(Q)mkdir -p $(WEB_DIR)
 	$(Q)cp -r index.html $(PGN_FOLDER) $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(TESTS_FOLDER) $(WEB_DIR)
-	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
-	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(VER).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
+	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
+	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(attr.git_tagname).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
 	$(Q)chmod -R go+rx $(WEB_DIR)
 
 .PHONY: chmod
@@ -188,10 +187,6 @@ chmod:
 #########
 # rules #
 #########
-$(WEB_FILES_MAKO): $(WEB_FOLDER)/%: $(WEBMAKO_FOLDER)/%.mako $(MAKO_WRAPPER_DEP) $(ALL_DEP)
-	$(info doing [$@])
-	$(Q)mkdir -p $(dir $@)
-	$(Q)$(MAKO_WRAPPER) $< $@
 $(WEB_FILES_OTHER): $(WEB_FOLDER)/%: $(WEBMAKO_FOLDER)/% $(MAKO_WRAPPER_DEP) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)

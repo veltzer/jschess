@@ -5,9 +5,9 @@
 		<title>Showing controls</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
-${jsThirdParty()}
-		<!--script src="../out/jschess-${ver}.min.js"></script-->
-		<script src="../out/jschess-${ver}.js"></script>
+${attr.project_jsThirdParty}
+		<!--script src="../out/jschess-${attr.git_describe}.min.js"></script-->
+		<script src="../out/jschess-${attr.git_describe}.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
@@ -52,7 +52,7 @@ ${jsThirdParty()}
 		<div id="myid"></div>
 		</p>
 		<p>
-			Mark Veltzer, Copyright ${copyright_years(2012)}
+			Mark Veltzer, Copyright ${attr.project_copyright_years(2012)}
 			<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
 		</p>
 	</body>

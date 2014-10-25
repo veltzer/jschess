@@ -5,9 +5,9 @@
 		<title>Using the min.js file</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
-${jsThirdParty()}
-		<!--script src="../out/jschess-${ver}.min.js"></script-->
-		<script src="../out/jschess-${ver}.js"></script>
+${attr.project_jsThirdParty}
+		<!--script src="../out/jschess-$(attr.git_describe).min.js"></script-->
+		<script src="../out/jschess-$(attr.git_describe).js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
@@ -50,7 +50,7 @@ ${jsThirdParty()}
 					<td>documentation</td>
 					<td>from me</td>
 				</tr>
-				% for dep in deps:
+				% for dep in attr.project_deps:
 				<tr>
 					<td>${dep.name}</td>
 					<td>${dep.version}</td>
@@ -62,18 +62,18 @@ ${jsThirdParty()}
 			</table>
 		Import them so:
 		<pre class="brush: xml"><%block filter="h">
-${jsThirdParty()}></%block></pre>
+${attr.project_jsThirdParty}></%block></pre>
 		</p>
 		<p>
-		Then download the minified <b>jschess</b> file from <a title="jschess compressed download" href="../out/jschess-${ver}.min.js">here</a>.
+		Then download the minified <b>jschess</b> file from <a title="jschess compressed download" href="../out/jschess-$(attr.git_describe).min.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
 		</p>
 		<pre class="brush: xml"><%block filter="h">
-		<script src="jschess-${ver}.min.js"></script></%block></pre>
+		<script src="jschess-$(attr.git_describe).min.js"></script></%block></pre>
 		If you want to help me debug <b>jschess</b> or are experiencing problems you can download the uncompressed file
-		from <a title="jschess uncompressed download" href="../out/jschess-${ver}.js">here</a> and use it like this:
+		from <a title="jschess uncompressed download" href="../out/jschess-$(attr.git_describe).js">here</a> and use it like this:
 		<pre class="brush: xml"><%block filter="h">
-		<script src="jschess-${ver}.js"></script></%block></pre>
+		<script src="jschess-$(attr.git_describe).js"></script></%block></pre>
 		You need a place for your board, so place something like this somewhere in your html:
 		<pre class="brush: xml"><%block filter="h">
 		<div id="myid"></div></%block></pre>
@@ -88,7 +88,7 @@ ${jsThirdParty()}></%block></pre>
 		Here is the result:
 		<div id="myid"></div>
 		<p>
-			Mark Veltzer, Copyright ${copyright_years(2012)}
+			Mark Veltzer, Copyright ${attr.project_copyright_years(2012)}
 			<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
 		</p>
 	</body>
