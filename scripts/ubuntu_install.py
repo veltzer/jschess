@@ -13,6 +13,8 @@ packs=[
 	'closure-linter',
 	'python-tweepy',
 	'python-tweepy-doc',
+	'python-twitter',
+	'python-twitter-doc',
 
 	# my own
 	'templar',
