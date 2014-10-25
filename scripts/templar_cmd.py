@@ -11,6 +11,29 @@ import glob # for glob
 import socket # for gethostname
 import configparser # for ConfigParser
 import templar.cmdline # for cmdline
+import deps # for deps, getJsThirdParty, getJsThirdPartyDebug
+import myutils # for files_in_order
+
+def copyright_years(x):
+	curr_year=datetime.datetime.now().year
+	return ', '.join(map(str,range(x,curr_year+1)))
+
+def git_describe():
+	try:
+		ver=subprocess.check_output(['git', 'describe'],stderr=subprocess.DEVNULL).decode().rstrip()
+		return ver
+	except:
+		return 'test'
+
+def jsFiles():
+	#files=glob.glob('src/*.js')
+	files=myutils.files_in_order();
+	l=[]
+	l.append('<!-- placed by jsFiles() macro -->')
+	for f in files:
+		l.append('<script src="../'+f+'"></script>')
+	l.append('<!-- end of jsFiles() macro -->')
+	return '\n'.join(l)
 
 class Attr(object):
 
@@ -33,6 +56,16 @@ class Attr(object):
 		#cls.general_hostname=subprocess.check_output(['hostname']).decode().rstrip()
 		cls.general_hostname=socket.gethostname()
 		cls.general_domainname=subprocess.check_output(['hostname','--domain']).decode().rstrip()
+
+		# git stuff
+		cls.git_describe=git_describe();
+
+		# project
+		cls.project_copyright_years=copyright_years
+		cls.project_deps=deps.deps
+		cls.project_jsThirdParty=deps.getJsThirdParty()
+		cls.project_jsThirdPartyDebug=deps.getJsThirdPartyDebug()
+		cls.project_jsFiles=jsFiles()
 
 		# ini files
 		cls.read_ini('~/.details.ini',['personal', 'github'])

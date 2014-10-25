@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<title>SVG path calculator</title>
 		<!-- third parties -->
-${jsThirdParty()}
+${attr.project_jsThirdParty}
 		<script>
 			document.observe('dom:loaded', function() {
 				$('calc').observe('click',function() {
@@ -38,7 +38,7 @@ ${jsThirdParty()}
 		y: 6<br/>
 		</p>
 		<p>
-			Mark Veltzer, Copyright ${copyright_years(2012)}
+			Mark Veltzer, Copyright ${attr.project_copyright_years(2012)}
 			<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
 		</p>
 	</body>
