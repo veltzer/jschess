@@ -11,6 +11,9 @@ packs=[
 	'yui-compressor',
 	'jsdoc-toolkit',
 	'closure-linter',
+
+	# my own
+	'templar',
 ]
 args=['sudo','apt-get','install','--assume-yes']
 args.extend(packs)

@@ -34,7 +34,7 @@ JSPACK:=$(OUT_FOLDER)/$(PROJECT)-$(VER).pack.js
 JSZIP:=$(OUT_FOLDER)/$(PROJECT)-$(VER).zip
 WEB_DIR:=~mark/public_html/public/$(PROJECT)
 WEB_FOLDER:=web
-WEBMAKO_FOLDER:=webmako
+WEBMAKO_FOLDER:=mako
 WEBMAKO_FILES_MAKO:=$(shell find $(WEBMAKO_FOLDER) -type f -and -name "*.mako")
 WEBMAKO_FILES_OTHER:=$(shell find $(WEBMAKO_FOLDER) -type f -and -not -name "*.mako")
 WEBMAKO_FILES:=$(WEBMAKO_FILES_MAKO) $(WEBMAKO_FILES_OTHER)
@@ -212,3 +212,5 @@ check_grep: $(ALL_DEP)
 sloccount: $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)sloccount .
+
+include Makefile.prep
