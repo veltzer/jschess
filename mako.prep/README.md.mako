@@ -32,4 +32,4 @@ your appreciation you are welcome to contribute to it's development at
 I am ready to work with any chess organization wishing to incorporate jschess
 into their infrastructre and am already working with two such organizations...
 
-	Mark Veltzer <mark.veltzer@gmail.com>, 2012-2014
+	${attr.personal_origin}, 2012-${attr.general_current_year}

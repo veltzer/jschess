@@ -4,3 +4,6 @@
 
 # python stuff
 __pycache__
+
+# template config file
+.attr.config
