@@ -5,7 +5,7 @@
 include Makefile.prep
 
 ##############
-# PARAMETERS #
+# parameters #
 ##############
 # should we show commands executed ?
 DO_MKDBG:=0
@@ -16,9 +16,9 @@ DO_ALL_DEP:=1
 # should we do documentation ?
 DO_DOCS:=1
 
-#############
-# VARIABLES #
-#############
+########
+# code #
+########
 PROJECT=jschess
 SRC_FOLDER=src
 TESTS_FOLDER=tests
@@ -64,7 +64,6 @@ else
 	MAKO_WRAPPER_DEP:=
 endif
 
-ALL_DEP:=
 ifeq ($(DO_ALL_DEP),1)
 	ALL_DEP:=$(ALL_DEP) Makefile
 endif
@@ -82,6 +81,9 @@ ifeq ($(DO_DOCS),1)
 ALL+=$(JSDOC_FILE)
 endif # DO_DOCS
 
+###########
+# targets #
+###########
 .PHONY: all
 all: $(ALL) $(ALL_DEP)
 	$(info doing [$@])
@@ -189,19 +191,6 @@ chmod:
 	$(Q)chmod go+rx `find . -type d`
 	$(Q)chmod go+r `find . -type f`
 
-#########
-# rules #
-#########
-$(WEB_FILES_OTHER): $(WEB_FOLDER)/%: $(WEBMAKO_FOLDER)/% $(MAKO_WRAPPER_DEP) $(ALL_DEP)
-	$(info doing [$@])
-	$(Q)mkdir -p $(dir $@)
-	$(Q)rm -f $@
-	$(Q)cp $< $@
-	$(Q)chmod a-w $@
-
-########
-# misc #
-########
 .PHONY: check_grep
 check_grep: $(ALL_DEP)
 	$(info doing [$@])
@@ -212,3 +201,13 @@ check_grep: $(ALL_DEP)
 sloccount: $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)sloccount .
+
+#################
+# pattern rules #
+#################
+$(WEB_FILES_OTHER): $(WEB_FOLDER)/%: $(WEBMAKO_FOLDER)/% $(MAKO_WRAPPER_DEP) $(ALL_DEP)
+	$(info doing [$@])
+	$(Q)mkdir -p $(dir $@)
+	$(Q)rm -f $@
+	$(Q)cp $< $@
+	$(Q)chmod a-w $@
