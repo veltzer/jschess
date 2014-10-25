@@ -5,9 +5,9 @@
 		<title>JsChess QUnit testing page</title>
 		<link rel="stylesheet" href="../thirdparty/qunit-1.10.0.css"/>
 ${attr.project_jsThirdParty}
-		<!--script src="../out/jschess-$(attr.git_describe).pack.js"></script-->
-		<!--script src="../out/jschess-$(attr.git_describe).min.js"></script-->
-		<!--script src="../out/jschess-$(attr.git_describe).js"></script-->
+		<!--script src="../out/jschess-${attr.git_describe}.pack.js"></script-->
+		<!--script src="../out/jschess-${attr.git_describe}.min.js"></script-->
+		<!--script src="../out/jschess-${attr.git_describe}.js"></script-->
 ${attr.project_jsFiles}
 	</head>
 	<body>
