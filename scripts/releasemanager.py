@@ -2,7 +2,7 @@
 
 import smtplib
 import email.mime.text
-import ConfigParser
+import configparser # ConfigParser
 import os
 import sys
 import tweepy
@@ -12,7 +12,7 @@ import versioncheck
 class ReleaseManager:
 	def __init__(self):
 		self.debug=False
-		self.config=ConfigParser.ConfigParser()
+		self.config=configparser.ConfigParser()
 		self.name='releasemanager'
 		self.config.read([
 			self.name+'.cfg',
