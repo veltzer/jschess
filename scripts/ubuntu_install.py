@@ -11,6 +11,8 @@ packs=[
 	'yui-compressor',
 	'jsdoc-toolkit',
 	'closure-linter',
+	'python-tweepy',
+	'python-tweepy-doc',
 
 	# my own
 	'templar',

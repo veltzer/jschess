@@ -51,10 +51,10 @@ if check:
 tag=get_version();
 if tag!='test':
 	if debug:
-		print 'old tag is '+str(tag)
+		print('old tag is [{0}]'.format(tag))
 	tag+=1
 	if debug:
-		print 'new tag is '+str(tag)
+		print('new tag is [{0}]'.format(tag))
 	tag=str(tag)
 	# tag the new tag
 	subprocess.check_output(['git','tag','-s','-m',project+' version '+tag,tag])
