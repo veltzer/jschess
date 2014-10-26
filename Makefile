@@ -8,8 +8,6 @@ include /usr/share/templar/Makefile
 ##############
 # should we show commands executed ?
 DO_MKDBG:=0
-# should we depend on the date of the makefile itself ?
-DO_ALL_DEP:=1
 # should we do documentation ?
 DO_DOCS:=1
 
@@ -45,9 +43,7 @@ TOOL_JSL:=~/install/jsl/jsl
 TOOL_GJSLINT:=gjslint
 TOOL_YUICOMPRESSOR:=yui-compressor
 
-ifeq ($(DO_ALL_DEP),1)
-	ALL_DEP:=$(ALL_DEP) Makefile
-endif
+ALL_DEP:=$(TEMPLAR_ALL_DEP)
 
 ifeq ($(DO_MKDBG),1)
 Q=
@@ -57,7 +53,7 @@ Q=@
 #.SILENT:
 endif # DO_MKDBG
 
-ALL:=$(JSPACK) $(JSZIP) $(WEB_FILES)
+ALL:=$(TEMPLAR_ALL) $(JSPACK) $(JSZIP) $(WEB_FILES)
 ifeq ($(DO_DOCS),1)
 ALL+=$(JSDOC_FILE)
 endif # DO_DOCS
