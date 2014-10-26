@@ -61,8 +61,8 @@ def getJsThirdPartyDebug():
 		l.append('<script src="../'+dep.myFileDebug+'"></script>')
 	return '\n'.join(l)
 
-if __name__=='__main__':
+def depslist():
 	l=[]
 	for dep in deps:
 		l.append(dep.myFile)
-	print(' '.join(l))
+	return ' '.join(l)

@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 '''
 templating solution for this project
 '''
@@ -10,9 +8,9 @@ import os.path # for join, expanduser
 import glob # for glob
 import socket # for gethostname
 import configparser # for ConfigParser
-import templar.cmdline # for cmdline
-import deps # for deps, getJsThirdParty, getJsThirdPartyDebug
-import myutils # for files_in_order
+
+import templardefs.deps # for deps, getJsThirdParty, getJsThirdPartyDebug
+import templardefs.myutils # for files_in_order
 
 def copyright_years(x):
 	curr_year=datetime.datetime.now().year
@@ -27,7 +25,7 @@ def git_describe():
 
 def jsFiles():
 	#files=glob.glob('src/*.js')
-	files=myutils.files_in_order();
+	files=templardefs.myutils.files_in_order();
 	l=[]
 	l.append('<!-- placed by jsFiles() macro -->')
 	for f in files:
@@ -62,9 +60,9 @@ class Attr(object):
 
 		# project
 		cls.project_copyright_years=copyright_years
-		cls.project_deps=deps.deps
-		cls.project_jsThirdParty=deps.getJsThirdParty()
-		cls.project_jsThirdPartyDebug=deps.getJsThirdPartyDebug()
+		cls.project_deps=templardefs.deps.deps
+		cls.project_jsThirdParty=templardefs.deps.getJsThirdParty()
+		cls.project_jsThirdPartyDebug=templardefs.deps.getJsThirdPartyDebug()
 		cls.project_jsFiles=jsFiles()
 
 		# ini files
@@ -85,11 +83,14 @@ class Attr(object):
 		cls.apt_keyfile='public_key.gpg'
 		cls.apt_apache_site_file='{0}.apt'.format(cls.personal_slug)
 
+		# ours
+		cls.depslist=templardefs.deps.depslist()
+		cls.sources=templardefs.myutils.sources()
+
 	@classmethod
 	def getdeps(cls):
 		return ' '.join([
+			'templardefs/attr.py',
 			os.path.expanduser('~/.details.ini'),
 			'/etc/hostname',
 		])
-
-templar.cmdline.cmdline({'attr':Attr})

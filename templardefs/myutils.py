@@ -26,3 +26,6 @@ def files_in_order():
 		'src/WRaphael.js',
 	];
 	return mylist
+
+def sources():
+	return ' '.join(files_in_order())
