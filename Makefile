@@ -20,7 +20,6 @@ PROJECT=jschess
 SRC_FOLDER=src
 TESTS_FOLDER=tests
 THIRDPARTY_FOLDER=thirdparty
-SOURCES:=$(shell scripts/mylist.py)
 JSDOC_FOLDER:=jsdoc
 JSDOC_FILE:=$(JSDOC_FOLDER)/index.html
 WEB_FOLDER:=web
@@ -36,14 +35,6 @@ JSPACK:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).pack.js
 JSZIP:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).zip
 WEB_DIR:=~mark/public_html/public/$(PROJECT)
 WEB_FOLDER:=web
-WEBMAKO_FOLDER:=mako
-WEBMAKO_FILES_MAKO:=$(shell find $(WEBMAKO_FOLDER) -type f -and -name "*.mako")
-WEBMAKO_FILES_OTHER:=$(shell find $(WEBMAKO_FOLDER) -type f -and -not -name "*.mako")
-WEBMAKO_FILES:=$(WEBMAKO_FILES_MAKO) $(WEBMAKO_FILES_OTHER)
-WEB_FILES_MAKO:=$(addprefix $(WEB_FOLDER)/,$(notdir $(basename $(WEBMAKO_FILES_MAKO))))
-WEB_FILES_OTHER:=$(addprefix $(WEB_FOLDER)/,$(notdir $(WEBMAKO_FILES_OTHER)))
-WEB_FILES:=$(WEB_FILES_MAKO) $(WEB_FILES_OTHER)
-DEPS:=$(shell scripts/deps.py)
 
 # tools
 TOOL_COMPILER:=~/install/closure/compiler.jar
@@ -79,21 +70,21 @@ endif # DO_DOCS
 all: $(ALL) $(ALL_DEP)
 	$(info doing [$@])
 
-$(JSZIP): $(SOURCES) $(ALL_DEP)
+$(JSZIP): $(attr.sources) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)zip -qr $@ $(SOURCES)
+	$(Q)zip -qr $@ $(attr.sources)
 
-$(JSCHECK): $(SOURCES) $(ALL_DEP)
+$(JSCHECK): $(attr.sources) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES)
-	$(Q)scripts/wrapper_ok.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES)
+	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(attr.sources)
+	$(Q)scripts/wrapper_ok.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(attr.sources)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
-$(JSFULL): $(SOURCES) $(JSCHECK) $(ALL_DEP)
+$(JSFULL): $(attr.sources) $(JSCHECK) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)cat $(SOURCES) > $@
+	$(Q)cat $(attr.sources) > $@
 
 $(JSMIN): $(JSFULL) $(ALL_DEP)
 	$(info doing [$@])
@@ -106,9 +97,9 @@ $(JSMIN): $(JSFULL) $(ALL_DEP)
 $(JSPACK): $(JSMIN) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)cat $(DEPS) $(JSMIN) > $(JSPACK)
+	$(Q)cat $(attr.depslist) $(JSMIN) > $(JSPACK)
 
-$(JSDOC_FILE): $(SOURCES) $(ALL_DEP)
+$(JSDOC_FILE): $(attr.sources) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)-rm -rf $(JSDOC_FOLDER)
 	$(Q)mkdir -p $(dir $@)
@@ -146,7 +137,6 @@ clean_manual:
 debug: $(ALL_DEP)
 	$(info ALL is $(ALL))
 	$(info PROJECT is $(PROJECT))
-	$(info SOURCES is $(SOURCES))
 	$(info JSFULL is $(JSFULL))
 	$(info JSMIN is $(JSMIN))
 	$(info OUT_FOLDER is $(OUT_FOLDER))
@@ -159,7 +149,6 @@ debug: $(ALL_DEP)
 	$(info WEB_FOLDER is $(WEB_FOLDER))
 	$(info WEBMAKO_FILES is $(WEBMAKO_FILES))
 	$(info WEB_FILES is $(WEB_FILES))
-	$(info DEPS is $(DEPS))
 	$(info ALL_DEP is $(ALL_DEP))
 
 .PHONY: install
