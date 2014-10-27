@@ -3,17 +3,9 @@ templating solution for this project
 '''
 
 import datetime # for datetime
-import subprocess # for check_output
-import os.path # for join, expanduser
-import glob # for glob
-import socket # for gethostname
-import configparser # for ConfigParser
+import subprocess # for check_output, DEVNULL
 
-import templardefs.deps # for deps, getJsThirdParty, getJsThirdPartyDebug
-
-def copyright_years(x):
-	curr_year=datetime.datetime.now().year
-	return ', '.join(map(str,range(x,curr_year+1)))
+import templardefs.deps # for deps, getJsThirdParty
 
 def git_describe():
 	try:
@@ -52,7 +44,6 @@ def sources():
 	return ' '.join(files_in_order())
 
 def jsFiles():
-	#files=glob.glob('src/*.js')
 	files=files_in_order();
 	l=[]
 	l.append('<!-- placed by jsFiles() macro -->')
@@ -74,4 +65,4 @@ class Attr(object):
 
 	@classmethod
 	def getdeps(cls):
-		return 'templardefs/attr.py'
+		return __file__
