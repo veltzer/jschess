@@ -36,8 +36,7 @@ opt_release=False
 #############
 def get_version():
 	try:
-		f=open('/dev/null')
-		ver=subprocess.check_output(['git', 'describe','--abbrev=0'],stderr=f).decode().rstrip()
+		ver=subprocess.check_output(['git', 'describe','--abbrev=0'], stderr=subprocess.DEVNULL).decode().rstrip()
 		return int(ver)
 	except:
 		return 'test'
