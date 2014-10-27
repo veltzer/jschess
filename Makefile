@@ -66,21 +66,21 @@ endif # DO_DOCS
 all: $(ALL) $(ALL_DEP)
 	$(info doing [$@])
 
-$(JSZIP): $(attr.sources) $(ALL_DEP)
+$(JSZIP): $(attr_more.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)zip -qr $@ $(attr.sources)
+	$(Q)zip -qr $@ $(attr_more.jschess_sources)
 
-$(JSCHECK): $(attr.sources) $(ALL_DEP)
+$(JSCHECK): $(attr_more.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(attr.sources)
-	$(Q)scripts/wrapper_ok.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(attr.sources)
+	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(attr_more.jschess_sources)
+	$(Q)scripts/wrapper_ok.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(attr_more.jschess_sources)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
-$(JSFULL): $(attr.sources) $(JSCHECK) $(ALL_DEP)
+$(JSFULL): $(attr_more.jschess_sources) $(JSCHECK) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)cat $(attr.sources) > $@
+	$(Q)cat $(attr_more.jschess_sources) > $@
 
 $(JSMIN): $(JSFULL) $(ALL_DEP)
 	$(info doing [$@])
@@ -95,7 +95,7 @@ $(JSPACK): $(JSMIN) $(ALL_DEP)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)cat $(attr.depslist) $(JSMIN) > $(JSPACK)
 
-$(JSDOC_FILE): $(attr.sources) $(ALL_DEP)
+$(JSDOC_FILE): $(attr_more.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)-rm -rf $(JSDOC_FOLDER)
 	$(Q)mkdir -p $(dir $@)
