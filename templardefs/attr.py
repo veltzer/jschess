@@ -10,7 +10,6 @@ import socket # for gethostname
 import configparser # for ConfigParser
 
 import templardefs.deps # for deps, getJsThirdParty, getJsThirdPartyDebug
-import templardefs.myutils # for files_in_order
 
 def copyright_years(x):
 	curr_year=datetime.datetime.now().year
@@ -23,9 +22,38 @@ def git_describe():
 	except:
 		return 'test'
 
+def files_in_order():
+	return [
+		'src/BoardPiece.js',
+		'src/BoardPosition.js',
+		'src/Config.js',
+		'src/ConfigTmpl.js',
+		'src/Game.js',
+		'src/GameMove.js',
+		'src/PgnReader.js',
+		'src/PieceColor.js',
+		'src/PiecePosition.js',
+		'src/PieceType.js',
+		'src/SvgConfigTmpl.js',
+		'src/SvgBoard.js',
+		'src/Board.js',
+		'src/SvgControls.js',
+		'src/Controls.js',
+		'src/SvgCreator.js',
+		'src/SvgPathAndAttributes.js',
+		'src/SvgPieceData.js',
+		'src/SvgPiece.js',
+		'src/SvgPixelPosition.js',
+		'src/Utils.js',
+		'src/WRaphael.js',
+	];
+
+def sources():
+	return ' '.join(files_in_order())
+
 def jsFiles():
 	#files=glob.glob('src/*.js')
-	files=templardefs.myutils.files_in_order();
+	files=files_in_order();
 	l=[]
 	l.append('<!-- placed by jsFiles() macro -->')
 	for f in files:
@@ -36,61 +64,14 @@ def jsFiles():
 class Attr(object):
 
 	@classmethod
-	def read_ini(cls, filename, sections):
-		ini_file=os.path.expanduser(filename)
-		if os.path.isfile(ini_file):
-			ini_config=configparser.ConfigParser()
-			ini_config.read(ini_file)
-			for section in sections:
-				for k,v in ini_config.items(section):
-					setattr(cls, '{0}_{1}'.format(section, k), v)
-
-
-	@classmethod
 	def init(cls):
-		# general # TODO: get homedir in python
-		cls.general_current_year=datetime.datetime.now().year
-		cls.general_homedir='/home/mark'
-		#cls.general_hostname=subprocess.check_output(['hostname']).decode().rstrip()
-		cls.general_hostname=socket.gethostname()
-		cls.general_domainname=subprocess.check_output(['hostname','--domain']).decode().rstrip()
-
-		# git stuff
-		cls.git_describe=git_describe();
-
-		# project
-		cls.project_copyright_years=copyright_years
-		cls.project_deps=templardefs.deps.deps
-		cls.project_jsThirdParty=templardefs.deps.getJsThirdParty()
-		cls.project_jsThirdPartyDebug=templardefs.deps.getJsThirdPartyDebug()
-		cls.project_jsFiles=jsFiles()
-
-		# ini files
-		cls.read_ini('~/.details.ini',['personal', 'github'])
-
-		# apt
-		cls.apt_protocol='https'
-		cls.apt_codename=subprocess.check_output(['lsb_release','--codename', '--short']).decode().rstrip()
-		cls.apt_arch=subprocess.check_output('dpkg-architecture | grep -e ^DEB_BUILD_ARCH= | cut -d = -f 2', shell=True).decode().rstrip()
-		cls.apt_archs='i386 {0} source'.format(cls.apt_arch)
-		cls.apt_component='main'
-		cls.apt_folder='apt'
-		cls.apt_service_dir=os.path.join(cls.general_homedir, 'public_html/public', cls.apt_folder)
-		cls.apt_except='50{0}'.format(cls.personal_slug)
-		cls.apt_pack_list=glob.glob(os.path.join(cls.general_homedir, 'packages', '*.deb'))
-		cls.apt_packlist=' '.join(cls.apt_pack_list)
-		cls.apt_id=subprocess.check_output(['lsb_release','--id', '--short']).decode().rstrip()
-		cls.apt_keyfile='public_key.gpg'
-		cls.apt_apache_site_file='{0}.apt'.format(cls.personal_slug)
-
 		# ours
-		cls.depslist=templardefs.deps.depslist()
-		cls.sources=templardefs.myutils.sources()
+		cls.jschess_depslist=templardefs.deps.depslist()
+		cls.jschess_deps=templardefs.deps.deps
+		cls.jschess_sources=sources()
+		cls.jschess_getJsThirdParty=templardefs.deps.getJsThirdParty()
+		cls.jschess_jsFiles=jsFiles()
 
 	@classmethod
 	def getdeps(cls):
-		return ' '.join([
-			'templardefs/attr.py',
-			os.path.expanduser('~/.details.ini'),
-			'/etc/hostname',
-		])
+		return 'templardefs/attr.py'

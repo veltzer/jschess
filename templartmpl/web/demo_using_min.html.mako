@@ -5,7 +5,7 @@
 		<title>Using the min.js file</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
-${attr.project_jsThirdParty}
+${attr_more.jschess_getJsThirdParty}
 		<!--script src="../out/jschess-${attr.git_describe}.min.js"></script-->
 		<script src="../out/jschess-${attr.git_describe}.js"></script>
 
@@ -50,7 +50,7 @@ ${attr.project_jsThirdParty}
 					<td>documentation</td>
 					<td>from me</td>
 				</tr>
-				% for dep in attr.project_deps:
+				% for dep in attr_more.jschess_deps:
 				<tr>
 					<td>${dep.name}</td>
 					<td>${dep.version}</td>
@@ -62,7 +62,7 @@ ${attr.project_jsThirdParty}
 			</table>
 		Import them so:
 		<pre class="brush: xml"><%block filter="h">
-${attr.project_jsThirdParty}></%block></pre>
+${attr_more.jschess_getJsThirdParty}></%block></pre>
 		</p>
 		<p>
 		Then download the minified <b>jschess</b> file from <a title="jschess compressed download" href="../out/jschess-${attr.git_describe}.min.js">here</a>.
@@ -88,7 +88,7 @@ ${attr.project_jsThirdParty}></%block></pre>
 		Here is the result:
 		<div id="myid"></div>
 		<p>
-			Mark Veltzer, Copyright ${attr.project_copyright_years(2012)}
+			Mark Veltzer, Copyright ${attr.project_copyright_years}
 			<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
 		</p>
 	</body>
