@@ -5,7 +5,7 @@
 		<title>Showing a PGN game</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
-${attr.project_jsThirdParty}
+${attr_more.jschess_getJsThirdParty}
 		<!--script src="../out/jschess-${attr.git_describe}.min.js"></script-->
 		<script src="../out/jschess-${attr.git_describe}.js"></script>
 
@@ -40,7 +40,7 @@ ${attr.project_jsThirdParty}
 		TBD
 		</p>
 		<p>
-			Mark Veltzer, Copyright ${attr.project_copyright_years(2012)}
+			Mark Veltzer, Copyright ${attr.project_copyright_years}
 			<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
 		</p>
 	</body>

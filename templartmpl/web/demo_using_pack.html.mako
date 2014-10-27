@@ -66,7 +66,7 @@
 		<div id="myid">
 		</div>
 		<p>
-			Mark Veltzer, Copyright ${attr.project_copyright_years(2012)}
+			Mark Veltzer, Copyright ${attr.project_copyright_years}
 			<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
 		</p>
 	</body>
