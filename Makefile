@@ -73,7 +73,7 @@ $(JSZIP): $(attr_more.jschess_sources) $(ALL_DEP)
 $(JSCHECK): $(attr_more.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(attr_more.jschess_sources)
-	$(Q)scripts/wrapper_ok.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(attr_more.jschess_sources)
+	$(Q)scripts/wrapper_silent.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(attr_more.jschess_sources)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
