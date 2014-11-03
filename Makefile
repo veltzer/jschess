@@ -73,7 +73,7 @@ $(JSZIP): $(attr_more.jschess_sources) $(ALL_DEP)
 $(JSCHECK): $(attr_more.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(attr_more.jschess_sources)
-	$(Q)scripts/wrapper_silent.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(attr_more.jschess_sources)
+	$(Q)wrapper_silent $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(attr_more.jschess_sources)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
@@ -110,7 +110,7 @@ check: $(JSCHECK) $(ALL_DEP)
 .PHONY: check_veltzer_https
 check_veltzer_https:
 	$(info doing [$@])
-	$(Q)scripts/ok_wrapper.pl git grep "http:\/\/veltzer.net"
+	$(Q)wrapper_ok git grep "http:\/\/veltzer.net"
 
 .PHONY: check_all
 check_all: check_veltzer_https
@@ -174,9 +174,9 @@ chmod:
 .PHONY: check_grep
 check_grep: $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)scripts/wrapper_noerr.py git grep "\"" src/
-	$(Q)scripts/wrapper_noerr.py git grep " $$" src/
-	$(Q)scripts/wrapper_noerr.py git grep "eval" src/
+	$(Q)wrapper_noerr git grep "\"" src/
+	$(Q)wrapper_noerr git grep " $$" src/
+	$(Q)wrapper_noerr git grep "eval" src/
 .PHONY: sloccount
 sloccount: $(ALL_DEP)
 	$(info doing [$@])
