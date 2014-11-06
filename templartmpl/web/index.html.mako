@@ -174,18 +174,11 @@ ${attr_more.jschess_jsFiles}
 			<button id="clear">clear</button>
 		</p>
 		<p>
-			To donate to <b>jschess</b> please use the following button:
-			<!-- start of code from paypal -->
-			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-				<input type="hidden" name="cmd" value="_s-xclick">
-				<input type="hidden" name="hosted_button_id" value="XKSSBRVJM7HHA">
-				<input type="image" src="https://www.paypalobjects.com/en_US/IL/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-				<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-			</form>
-			<!-- end of code from paypal -->
+			To donate to <b>${attr.project_name}</b> please use the following button:
+			${attr.project_paypal_donate_button_snipplet}
 		<p>
 			Mark Veltzer, Copyright ${attr.project_copyright_years}
-			<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
+			<a href="${attr.personal_email}">${attr.personal_email}</a>
 		</p>
 	</body>
 </html>
