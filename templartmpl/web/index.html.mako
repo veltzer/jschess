@@ -176,6 +176,7 @@ ${attr_more.jschess_jsFiles}
 		<p>
 			To donate to <b>${attr.project_name}</b> please use the following button:
 			${attr.project_paypal_donate_button_snipplet}
+		</p>
 		<p>
 			Mark Veltzer, Copyright ${attr.project_copyright_years}
 			<a href="${attr.personal_email}">${attr.personal_email}</a>
