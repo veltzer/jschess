@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>jschess</title>
+		<title>${attr.project_name}</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<!-- third parties -->
 ${attr_more.jschess_getJsThirdParty}
@@ -89,9 +89,9 @@ ${attr_more.jschess_jsFiles}
 		</script>
 	</head>
 	<body>
-		<h1>Welcome to the <b>jschess</b> project</h1>
+		<h1>Welcome to the <b>${attr.project_name}</b> project</h1>
 		<p>
-			<b>jschess</b> is a pure JavaScript library that enables:
+			<b>${attr.project_name}</b> is a pure JavaScript library that enables:
 			<ul>
 				<li>Showing chess games in <a href="http://en.wikipedia.org/wiki/Portable_Game_Notation">PGN</a> format (hardcoded or coming from a server)</li>
 				<li>Showing chess positions in <a href="http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation">FEN</a> format (hardcoded or coming from a server)</li>
@@ -103,7 +103,7 @@ ${attr_more.jschess_jsFiles}
 			</ul>
 		</p>
 		<p>
-			What makes <b>jschess</b> special:
+			What makes <b>${attr.project_name}</b> special:
 			<ul>
 				<li>Pure object oriented javascript</li>
 				<li>No images - totally scalable graphics</li>
@@ -117,7 +117,7 @@ ${attr_more.jschess_jsFiles}
 			</ul>
 		</p>
 		<p>
-			Technologies used to develop <b>jschess</b>...
+			Technologies used to develop <b>${attr.project_name}</b>...
 			<ul>
 				<li><a href="http://www.javascriptlint.com/download.htm">jsl</a> to make sure javascript code is standards complient</li>
 				<li><a href="http://qunitjs.com">qunitjs</a> for testing</li>
@@ -130,21 +130,21 @@ ${attr_more.jschess_jsFiles}
 				<li><a href="https://developers.google.com/closure/utilities/docs/linter_howto">Closure Linter</a> is used for checking the source code</li>
 			</ul>
 		</p>
-		<p>The current version of <b>jschess</b> is ${attr.git_describe}
+		<p>The current version of <b>${attr.project_name}</b> is ${attr.git_describe}
 		</p>
 		<p>
 			<b>This is alpha material at the moment, use at your own risk! API is subject to change!</b>
 		</p>
 			Some links:
 			<ul>
-				<li><b>jschess</b> API is <a href="../jsdoc">here</a></li>
-				<li><b>jschess</b> github projec is <a href="https://github.com/veltzer/jschess">here</a></li>
-				<li>latest full <b>jschess</b> is <a href="https://veltzer.net/jschess/out/jschess-${attr.git_describe}.js">jschess-${attr.git_describe}.js</a></li>
-				<li>latest minified <b>jschess</b> is <a href="https://veltzer.net/jschess/out/jschess-${attr.git_describe}.min.js">jschess-${attr.git_describe}.min.js</a></li>
-				<li>latest package (with third parties) <b>jschess</b> is <a href="https://veltzer.net/jschess/out/jschess-${attr.git_describe}.pack.js">jschess-${attr.git_describe}.pack.js</a></li>
-				<li>latest sources for <b>jschess</b> is <a href="https://veltzer.net/jschess/out/jschess-${attr.git_describe}.zip">jschess-${attr.git_describe}.zip</a></li>
+				<li><b>${attr.project_name}</b> API is <a href="../jsdoc">here</a></li>
+				<li><b>${attr.project_name}</b> github projec is <a href="https://github.com/veltzer/jschess">here</a></li>
+				<li>latest full <b>${attr.project_name}</b> is <a href="https://veltzer.net/jschess/out/jschess-${attr.git_describe}.js">jschess-${attr.git_describe}.js</a></li>
+				<li>latest minified <b>${attr.project_name}</b> is <a href="https://veltzer.net/jschess/out/jschess-${attr.git_describe}.min.js">jschess-${attr.git_describe}.min.js</a></li>
+				<li>latest package (with third parties) <b>${attr.project_name}</b> is <a href="https://veltzer.net/jschess/out/jschess-${attr.git_describe}.pack.js">jschess-${attr.git_describe}.pack.js</a></li>
+				<li>latest sources for <b>${attr.project_name}</b> is <a href="https://veltzer.net/jschess/out/jschess-${attr.git_describe}.zip">jschess-${attr.git_describe}.zip</a></li>
 			</ul>
-			Demos of <b>jschess</b>...
+			Demos of <b>${attr.project_name}</b>...
 			<ul>
 				<li><a href="demo_using_pack.html">Using the pack.js file</a></li>
 				<li><a href="demo_using_min.html">Using the min.js file</a></li>
@@ -155,10 +155,10 @@ ${attr_more.jschess_jsFiles}
 				<li><a href="demo_config.html">Config options</a></li>
 				<li><a href="demo_wordpress.html">Using the Wordpress plugin</a></li>
 			</ul>
-			Misc pages that help develop <b>jschess</b>...
+			Misc pages that help develop <b>${attr.project_name}</b>...
 			<ul>
 				<li><a href="calc.html">SVG path calculator (comes in handy when doing SVG graphics)</a></li>
-				<li><a href="tests.html">JSChess QUnit tests</a></li>
+				<li><a href="tests.html">${attr.project_name} QUnit tests</a></li>
 			</ul>
 			Here is a quick demo (go ahead and zoom it with Ctrl+[+/-] to see what SVG is all about...):
 			<div id="myid">
@@ -178,7 +178,7 @@ ${attr_more.jschess_jsFiles}
 			${attr.project_paypal_donate_button_snipplet}
 		</p>
 		<p>
-			Mark Veltzer, Copyright ${attr.project_copyright_years}
+			Copyright ${attr.personal_fullname}, Copyright ${attr.project_copyright_years}
 			<a href="${attr.personal_email}">${attr.personal_email}</a>
 		</p>
 	</body>
