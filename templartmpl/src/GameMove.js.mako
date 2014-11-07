@@ -14,18 +14,18 @@
   needed for castling).
   - info about what the piece turns to (in case the piece turns
   into some other piece like in the case of coronation).
-  @author ${attr.personal_jsdoc_author}
+  @author ${tdefs.personal_jsdoc_author}
 */
 var GameMove = Class.create(/** @lends GameMove# */{
   /**
     creates a new instance
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   initialize: function() {
   },
   /**
     Debug method that allows you to get a nice printout for this type
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   toString: function() {
     return 'no toString for type GameMove';

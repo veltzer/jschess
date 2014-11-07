@@ -4,14 +4,14 @@
   @class A single piece description.
   This includes: square size (assumes piece is 0,0,size,size)
   and array of paths and attributes to draw the path
-  @author ${attr.personal_jsdoc_author}
+  @author ${tdefs.personal_jsdoc_author}
 */
 var SvgPiece = Class.create(/** @lends SvgPiece# */{
   /**
     creates a new instance
     @param {number} size of the square of the piece.
     @return {SvgPiece} a new object of this type.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   initialize: function(size) {
     this.size = size;
@@ -20,7 +20,7 @@ var SvgPiece = Class.create(/** @lends SvgPiece# */{
   /**
     Adds a new path section to a piece description
     @param {PathAndAttributes} paa object to be added.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   add: function(paa) {
     this.paas.push(paa);
@@ -30,7 +30,7 @@ var SvgPiece = Class.create(/** @lends SvgPiece# */{
     @param {paper} paper Raphael.js paper to work on.
     @param {transform} transform Raphael.js transformating for this object.
     @return {set} the set after the transformation.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   toSet: function(paper, transform) {
     var set = paper.set();

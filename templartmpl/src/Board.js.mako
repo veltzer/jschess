@@ -9,13 +9,13 @@
   @class Represents a full board This is the main class to interact with.
   Using this class you can: 1. Use pieces: put, remove and move them.
   2. Do something with all pieces.
-  @author ${attr.personal_jsdoc_author}
+  @author ${tdefs.personal_jsdoc_author}
 */
 var Board = Class.create(/** @lends Board# */{
   /**
     creates a new instance
     @return {Board} the new object created.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   initialize: function() {
     // create 8x8 undefined squares
@@ -39,7 +39,7 @@ var Board = Class.create(/** @lends Board# */{
   /**
     toString method that allows you to get a nice printout for this type
     @return {string} string representation of this object.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   toString: function() {
     var str = '';
@@ -55,7 +55,7 @@ var Board = Class.create(/** @lends Board# */{
     Check that no piece is at a certain position.
     Will throw an exception if that is not the case.
     @param {PiecePosition} piecePosition position to check that no piece is at.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   checkNoPieceAt: function(piecePosition) {
     if (this.bd[piecePosition.x][piecePosition.y] !== undefined) {
@@ -66,7 +66,7 @@ var Board = Class.create(/** @lends Board# */{
     Check that piece is at a certain position.
     Will throw an exception if that is not the case.
     @param {PiecePosition} piecePosition position to check that a piece is at.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   checkPieceAt: function(piecePosition) {
     if (this.bd[piecePosition.x][piecePosition.y] === undefined) {
@@ -78,7 +78,7 @@ var Board = Class.create(/** @lends Board# */{
     Will throw an exception if that is not the case.
     @param {BoardPiece} boardPiece the piece in question.
     @param {PiecePosition} piecePosition position to check that a piece is at.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   checkBoardPieceAt: function(boardPiece, piecePosition) {
     if (this.bd[piecePosition.x][piecePosition.y] !== boardPiece) {
@@ -89,7 +89,7 @@ var Board = Class.create(/** @lends Board# */{
     Add a piece to the position
     @param {BoardPiece} boardPiece piece to add.
     @param {PiecePosition} piecePosition where to add the piece.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   addPiece: function(boardPiece, piecePosition) {
     this.preAddCB.forEach(function(f) {
@@ -105,7 +105,7 @@ var Board = Class.create(/** @lends Board# */{
     Remove a piece
     @param {BoardPiece} boardPiece piece to remove.
     @param {PiecePosition} piecePosition the position to remove it from.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   removePiece: function(boardPiece, piecePosition) {
     this.checkBoardPieceAt(boardPiece, piecePosition);
@@ -122,7 +122,7 @@ var Board = Class.create(/** @lends Board# */{
     @param {BoardPiece} boardPiece piece to move.
     @param {PiecePosition} fromPiecePosition from where to move the piece.
     @param {PiecePosition} toPiecePosition to where to move the piece.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   movePiece: function(boardPiece, fromPiecePosition, toPiecePosition) {
     this.checkPieceAt(fromPiecePosition);
@@ -138,7 +138,7 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Clear the board
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   clearPieces: function() {
     var that = this;
@@ -151,7 +151,7 @@ var Board = Class.create(/** @lends Board# */{
     @param {string} type type of the piece (rook/knight/bishop/queen/king/pawn).
     @param {number} x x location of the piece [0..8).
     @param {number} y y location of the piece [0..8).
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   addPieceVals: function(color, type , x, y) {
     var boardPiece = new BoardPiece(
@@ -163,7 +163,7 @@ var Board = Class.create(/** @lends Board# */{
     Run a function for each piece in this position
     @param {function} f function to be called back for each piece.
     This function should receive the piece to work on.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   forEachPiece: function(f) {
     for (var i = 0; i < 8; i++) {
@@ -178,7 +178,7 @@ var Board = Class.create(/** @lends Board# */{
     Get a piece at a specific position
     @param {PiecePosition} piecePositon position to get the piece at.
     @return {BoardPiece} the piece at the specified position.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   getPieceAtPosition: function(piecePosition) {
     this.checkPieceAt(piecePosition);
@@ -189,7 +189,7 @@ var Board = Class.create(/** @lends Board# */{
     @param {number} x x position to get piece at [0..8).
     @param {number} y y position to get piece at [0..8).
     @return {BoardPiece} the piece at the specified position.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   getPieceAtPositionVals: function(x, y) {
     return this.getPieceAtPosition(new PiecePosition(x, y));
@@ -198,7 +198,7 @@ var Board = Class.create(/** @lends Board# */{
     Do we have a piece in a specific position?
     @param {PiecePosition} piecePosition position to check for a piece at.
     @return {boolean} whether there is a piece at the position.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   hasPieceAtPosition: function(piecePosition) {
     return this.bd[piecePosition.x][piecePosition.y] !== undefined;
@@ -208,7 +208,7 @@ var Board = Class.create(/** @lends Board# */{
     @param {number} x x position to check for piece at [0..8).
     @param {number} y y position to check for piece at [0..8).
     @return {boolean} is there a piece at position.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   hasPieceAtPositionVals: function(x, y) {
     return this.hasPieceAtPosition(new PiecePosition(x, y));
@@ -216,7 +216,7 @@ var Board = Class.create(/** @lends Board# */{
   /**
     Add a callback for adding a piece
     @param {function} f callback function.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   addPiecePostAddCallback: function(f) {
     this.postAddCB.push(f);
@@ -224,7 +224,7 @@ var Board = Class.create(/** @lends Board# */{
   /**
     Add a callback for removing a piece
     @param {function} f callback function.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   addPiecePostRemoveCallback: function(f) {
     this.postRemoveCB.push(f);
@@ -232,7 +232,7 @@ var Board = Class.create(/** @lends Board# */{
   /**
     Add a callback for moving a piece
     @param {function} f callback function.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   addPiecePostMoveCallback: function(f) {
     this.postMoveCB.push(f);
@@ -240,7 +240,7 @@ var Board = Class.create(/** @lends Board# */{
   /**
     Clear the board and add a position to the current board
     @param {BoardPosition} boardPosition position to set.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   setPosition: function(boardPosition) {
     this.clearPieces();
@@ -250,7 +250,7 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Put the board in starting position of standard chess.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   startPosition: function() {
     this.setPosition(BoardPosition.startPos());
@@ -259,7 +259,7 @@ var Board = Class.create(/** @lends Board# */{
     Move a piece according to positions.
     @param {PiecePosition} fromPiecePosition from where to move.
     @param {PiecePosition} toPiecePosition to where to move.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   movePieceByPos: function(fromPiecePosition, toPiecePosition) {
     var boardPiece = this.getPieceAtPosition(fromPiecePosition);
@@ -269,7 +269,7 @@ var Board = Class.create(/** @lends Board# */{
     Get the position of a piece
     @param {BoardPiece} boardPiece piece to get the position for.
     @return {PiecePosition} the position of the piece in question.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   getPiecePosition: function(boardPiece) {
     for (var i = 0; i < 8; i++) {

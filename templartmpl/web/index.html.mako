@@ -2,19 +2,19 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>${attr.project_name}</title>
+		<title>${tdefs.project_name}</title>
 		<link rel="shortcut icon" href="../static/favicon.ico"/>
-		<meta name="Description" content="${attr.project_long_description}"/>
-		<meta name="Keywords" content="${attr.personal_fullname}, ${attr.personal_slug}, ${attr.project_name}, ${attr.project_keywords}"/>
-		${attr.project_google_analytics_snipplet}
+		<meta name="Description" content="${tdefs.project_long_description}"/>
+		<meta name="Keywords" content="${tdefs.personal_fullname}, ${tdefs.personal_slug}, ${tdefs.project_name}, ${tdefs.project_keywords}"/>
+		${tdefs.project_google_analytics_snipplet}
 
 		<!-- third parties -->
-${attr_more.jschess_getJsThirdParty}
+${tdefs.jschess_getJsThirdParty}
 		<!-- our code, options: full pack, minified, regular or file by file -->
 		<!--script src="../out/jschess.pack.js"></script-->
 		<!--script src="../out/jschess.min.js"></script-->
 		<!--script src="../out/jschess.js"></script-->
-${attr_more.jschess_jsFiles}
+${tdefs.jschess_jsFiles}
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
 		<script type="text/javascript" src="../thirdparty/sh/scripts/shCore.js"></script>
@@ -94,9 +94,9 @@ ${attr_more.jschess_jsFiles}
 		</script>
 	</head>
 	<body>
-		<h1>Welcome to the <b>${attr.project_name}</b> project</h1>
+		<h1>Welcome to the <b>${tdefs.project_name}</b> project</h1>
 		<p>
-			<b>${attr.project_name}</b> is a pure JavaScript library that enables:
+			<b>${tdefs.project_name}</b> is a pure JavaScript library that enables:
 		</p>
 		<ul>
 			<li>Showing chess games in <a href="http://en.wikipedia.org/wiki/Portable_Game_Notation">PGN</a> format (hardcoded or coming from a server)</li>
@@ -108,7 +108,7 @@ ${attr_more.jschess_jsFiles}
 			<li>Other things I did not think about</li>
 		</ul>
 		<p>
-			What makes <b>${attr.project_name}</b> special:
+			What makes <b>${tdefs.project_name}</b> special:
 		</p>
 		<ul>
 			<li>Pure object oriented javascript</li>
@@ -122,7 +122,7 @@ ${attr_more.jschess_jsFiles}
 			<li>Sits on top of <a href="https://github.com/jhlywa/chess.js">chess.js</a> to do game parsing and validation</li>
 		</ul>
 		<p>
-			Technologies used to develop <b>${attr.project_name}</b>...
+			Technologies used to develop <b>${tdefs.project_name}</b>...
 		</p>
 		<ul>
 			<li><a href="http://www.javascriptlint.com/download.htm">jsl</a> to make sure javascript code is standards complient</li>
@@ -135,7 +135,7 @@ ${attr_more.jschess_jsFiles}
 			<li><a href="http://www.javascriptlint.com">JavaScript Lint</a> is used for checking the source code</li>
 			<li><a href="https://developers.google.com/closure/utilities/docs/linter_howto">Closure Linter</a> is used for checking the source code</li>
 		</ul>
-		<p>The current version of <b>${attr.project_name}</b> is ${attr.git_lasttag}
+		<p>The current version of <b>${tdefs.project_name}</b> is ${tdefs.git_lasttag}
 		</p>
 		<p>
 			<b>This is alpha material at the moment, use at your own risk! API is subject to change!</b>
@@ -144,15 +144,15 @@ ${attr_more.jschess_jsFiles}
 			Some links:
 		</p>
 		<ul>
-			<li><b>${attr.project_name}</b> API is <a href="../jsdoc">here</a></li>
-			<li><b>${attr.project_name}</b> github projec is <a href="${attr.project_website_git}">here</a></li>
-			<li>latest full <b>${attr.project_name}</b> is <a href="${attr.project_website}/out/jschess.js">jschess.js</a></li>
-			<li>latest minified <b>${attr.project_name}</b> is <a href="${attr.project_website}/out/jschess.min.js">jschess.min.js</a></li>
-			<li>latest package (with third parties) <b>${attr.project_name}</b> is <a href="${attr.project_website}/out/jschess.pack.js">jschess.pack.js</a></li>
-			<li>latest sources for <b>${attr.project_name}</b> is <a href="${attr.project_website}/out/jschess.zip">jschess.zip</a></li>
+			<li><b>${tdefs.project_name}</b> API is <a href="../jsdoc">here</a></li>
+			<li><b>${tdefs.project_name}</b> github projec is <a href="${tdefs.project_website_git}">here</a></li>
+			<li>latest full <b>${tdefs.project_name}</b> is <a href="${tdefs.project_website}/out/jschess.js">jschess.js</a></li>
+			<li>latest minified <b>${tdefs.project_name}</b> is <a href="${tdefs.project_website}/out/jschess.min.js">jschess.min.js</a></li>
+			<li>latest package (with third parties) <b>${tdefs.project_name}</b> is <a href="${tdefs.project_website}/out/jschess.pack.js">jschess.pack.js</a></li>
+			<li>latest sources for <b>${tdefs.project_name}</b> is <a href="${tdefs.project_website}/out/jschess.zip">jschess.zip</a></li>
 		</ul>
 		<p>
-			Demos of <b>${attr.project_name}</b>...
+			Demos of <b>${tdefs.project_name}</b>...
 		</p>
 		<ul>
 			<li><a href="demo_using_pack.html">Using the pack.js file</a></li>
@@ -165,11 +165,11 @@ ${attr_more.jschess_jsFiles}
 			<li><a href="demo_wordpress.html">Using the Wordpress plugin</a></li>
 		</ul>
 		<p>
-			Misc pages that help develop <b>${attr.project_name}</b>...
+			Misc pages that help develop <b>${tdefs.project_name}</b>...
 		</p>
 		<ul>
 			<li><a href="calc.html">SVG path calculator (comes in handy when doing SVG graphics)</a></li>
-			<li><a href="tests.html">${attr.project_name} QUnit tests</a></li>
+			<li><a href="tests.html">${tdefs.project_name} QUnit tests</a></li>
 		</ul>
 		<p>
 			Here is a quick demo (go ahead and zoom it with Ctrl+[+/-] to see what SVG is all about...):
@@ -186,12 +186,12 @@ ${attr_more.jschess_jsFiles}
 		<button id="glow">glow</button>
 		<button id="clear">clear</button>
 		<p>
-			To donate to <b>${attr.project_name}</b> please use the following button:
+			To donate to <b>${tdefs.project_name}</b> please use the following button:
 		</p>
-		${attr.project_paypal_donate_button_snipplet}
+		${tdefs.project_paypal_donate_button_snipplet}
 		<p>
-			Copyright ${attr.personal_fullname}, Copyright ${attr.project_copyright_years}
-			<a href="${attr.personal_email}">${attr.personal_email}</a>
+			Copyright ${tdefs.personal_fullname}, Copyright ${tdefs.project_copyright_years}
+			<a href="${tdefs.personal_email}">${tdefs.personal_email}</a>
 		</p>
 	</body>
 </html>

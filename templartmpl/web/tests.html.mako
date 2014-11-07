@@ -5,11 +5,11 @@
 		<title>JsChess QUnit testing page</title>
 		<link rel="shortcut icon" href="../static/favicon.ico"/>
 		<link type="text/css" rel="stylesheet" href="../thirdparty/qunit-1.10.0.css"/>
-${attr_more.jschess_getJsThirdParty}
+${tdefs.jschess_getJsThirdParty}
 		<!--script src="../out/jschess.pack.js"></script-->
 		<!--script src="../out/jschess.min.js"></script-->
 		<!--script src="../out/jschess.js"></script-->
-${attr_more.jschess_jsFiles}
+${tdefs.jschess_jsFiles}
 	</head>
 	<body>
 		<div id="qunit"></div>

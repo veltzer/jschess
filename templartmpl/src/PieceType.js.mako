@@ -2,14 +2,14 @@
 
 /**
   @class represents a piece type (rook,knight,bishop,queen,king,pawn)
-  @author ${attr.personal_jsdoc_author}
+  @author ${tdefs.personal_jsdoc_author}
 */
 var PieceType = Class.create(/** @lends PieceType# */{
   /**
     creates a new instance
     @param {string} type the type of the piece.
     @return {PieceType} the new instance.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   initialize: function(type) {
     if (!(type in PieceType.types)) {
@@ -20,7 +20,7 @@ var PieceType = Class.create(/** @lends PieceType# */{
   /**
     toString method that allows you to get a nice printout for this type
     @return {string} string representation of this instance.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   toString: function() {
     return this.type;
@@ -28,7 +28,7 @@ var PieceType = Class.create(/** @lends PieceType# */{
   /**
     Return whether the piece is a rook
     @return {boolean} is this piece a rook.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   isRook: function() {
     return this.type == 'rook';
@@ -36,7 +36,7 @@ var PieceType = Class.create(/** @lends PieceType# */{
   /**
     Return whether the piece is a knight
     @return {boolean} is this piece a knight.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   isKnight: function() {
     return this.type == 'knight';
@@ -44,7 +44,7 @@ var PieceType = Class.create(/** @lends PieceType# */{
   /**
     Return whether the piece is a bishop
     @return {boolean} is this piece a bishop.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   isBishop: function() {
     return this.type == 'bishop';
@@ -52,7 +52,7 @@ var PieceType = Class.create(/** @lends PieceType# */{
   /**
     Return whether the piece is a queen
     @return {boolean} is this piece a queen.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   isQueen: function() {
     return this.type == 'queen';
@@ -60,7 +60,7 @@ var PieceType = Class.create(/** @lends PieceType# */{
   /**
     Return whether the piece is a king
     @return {boolean} is this piece a king.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   isKing: function() {
     return this.type == 'king';
@@ -68,7 +68,7 @@ var PieceType = Class.create(/** @lends PieceType# */{
   /**
     Return whether the piece is a pawn
     @return {boolean} is this piece a pawn.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   isPawn: function() {
     return this.type == 'pawn';
@@ -78,7 +78,7 @@ var PieceType = Class.create(/** @lends PieceType# */{
 
 /**
   Array of piece types
-  @author ${attr.personal_jsdoc_author}
+  @author ${tdefs.personal_jsdoc_author}
 */
 PieceType.types = {
   rook: undefined,
