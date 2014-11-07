@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Moving pieces</title>
 		<link rel="shortcut icon" href="../static/favicon.ico"/>
 		<!-- third parties -->
 ${attr_more.jschess_getJsThirdParty}
 		<!--script src="../out/jschess.min.js"></script!-->
-		<script src="../out/jschess.js"></script>
+		<script type="text/javascript" src="../out/jschess.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
@@ -24,7 +24,7 @@ ${attr_more.jschess_getJsThirdParty}
 
 		<!-- You also need to add some content to highlight, but that is covered elsewhere. -->
 			 
-		<script>
+		<script type="text/javascript">
 			document.observe('dom:loaded', function() {
 				// Finally, to actually run the highlighter, you need to include this JS on your page
 				SyntaxHighlighter.all()
@@ -111,13 +111,15 @@ ${attr_more.jschess_getJsThirdParty}
 	<body>
 		<h1>Moving pieces</h1>
 		<p>
-		In order to move pieces first create a board (see other guides). Then, once
-		you have a board call:
+			In order to move pieces first create a board (see other guides). Then, once
+			you have a board call:
+		</p>
 		<pre class="brush: js">
 			board.movePieceByPos(
 				new PiecePosition(fromX,fromY),
 				new PiecePosition(toX,toY)
 			);</pre>
+		<p>
 		When you build the PiecePosition objects above <b>you</b> must make sure that
 		the <b>fromX, fromY, toX, toY</b> values passed to the method are valid numbers
 		in the [0..8) range. You must also make sure that a piece is in the from position
@@ -130,14 +132,19 @@ ${attr_more.jschess_getJsThirdParty}
 		in the TODO list.
 		</p>
 		<div id='myid'></div>
-		fromX: <input id='fromX'></input>
-		fromY: <input id='fromY'></input>
-		toX: <input id='toX'></input>
-		toY: <input id='toY'></input>
+		<form action="javascript:void(0);">
+			fromX: <input id='fromX'/>
+			fromY: <input id='fromY'/>
+			toX: <input id='toX'/>
+			toY: <input id='toY'/>
+		</form>
 		<br/>
 		<button id='move'>move</button>
 		<br/>
-		errors: <div id='errors'></div>
+		<p>
+			errors:
+		</p>
+		<div id='errors'></div>
 		<p>
 			Mark Veltzer, Copyright ${attr.project_copyright_years}
 			<a href="mailto:${attr.personal_email}">${attr.personal_email}</a>

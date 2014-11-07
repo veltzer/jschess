@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Config options</title>
 		<link rel="shortcut icon" href="../static/favicon.ico"/>
 		<!-- third parties -->
 ${attr_more.jschess_getJsThirdParty}
 		<!-- script src="../out/jschess.min.js"></script -->
-		<script src="../out/jschess.js"></script>
+		<script type="text/javascript" src="../out/jschess.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
@@ -24,7 +24,7 @@ ${attr_more.jschess_getJsThirdParty}
 
 		<!-- You also need to add some content to highlight, but that is covered elsewhere. -->
 			 
-		<script>
+		<script type="text/javascript">
 			document.observe('dom:loaded', function() {
 				// Finally, to actually run the highlighter, you need to include this JS on your page
 				SyntaxHighlighter.all()
@@ -39,9 +39,9 @@ ${attr_more.jschess_getJsThirdParty}
 		<h1>Config options</h1>
 		<p>
 		These are the configuration options that <b>jschess</b> supports:
-			<div id="myid">
-			</div>
 		</p>
+		<div id="myid">
+		</div>
 		<p>
 			Mark Veltzer, Copyright ${attr.project_copyright_years}
 			<a href="mailto:${attr.personal_email}">${attr.personal_email}</a>

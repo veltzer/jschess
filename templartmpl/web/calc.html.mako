@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>SVG path calculator</title>
 		<link rel="shortcut icon" href="../static/favicon.ico"/>
 		<!-- third parties -->
 ${attr_more.jschess_getJsThirdParty}
-		<script>
+		<script type="text/javascript">
 			document.observe('dom:loaded', function() {
 				$('calc').observe('click',function() {
 					var path=$('path').value
@@ -27,11 +27,13 @@ ${attr_more.jschess_getJsThirdParty}
 		This is an svg calculator. Put in an SVG path and a transform x and y and get the resulting
 		path.
 		</p>
-		Enter the path <input style="width:100%" id="path"/><br/>
-		Enter x <input id="x"/><br/>
-		Enter y <input id="y"/><br/>
-		<button id="calc">calc</button><br/>
-		Result <div id="result"></div>
+		<form action="javascript:void(0);">
+			Enter the path <input style="width:100%" id="path"/><br/>
+			Enter x <input id="x"/><br/>
+			Enter y <input id="y"/><br/>
+			<button id="calc">calc</button><br/>
+			Result <div id="result"></div>
+		</form>
 		<p>
 		Example can be:<br/>
 		path: M 34,14 L 31,17 L 14,17 L 11,14<br/>

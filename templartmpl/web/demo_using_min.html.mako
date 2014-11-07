@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Using the min.js file</title>
 		<link rel="shortcut icon" href="../static/favicon.ico"/>
 		<!-- third parties -->
 ${attr_more.jschess_getJsThirdParty}
 		<!--script src="../out/jschess.min.js"></script-->
-		<script src="../out/jschess.js"></script>
+		<script type="text/javascript" src="../out/jschess.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
@@ -24,7 +24,7 @@ ${attr_more.jschess_getJsThirdParty}
 
 		<!-- You also need to add some content to highlight, but that is covered elsewhere. -->
 			 
-		<script>
+		<script type="text/javascript">
 			document.observe('dom:loaded', function() {
 				// Finally, to actually run the highlighter, you need to include this JS on your page
 				SyntaxHighlighter.all()
@@ -39,41 +39,47 @@ ${attr_more.jschess_getJsThirdParty}
 	<body>
 		<h1>Using the min.js file</h1>
 		<p>
-		In order to use <b>jschess</b> you will either need to .pack.js file which contains all needed libraries (which is discussed
-		elsewhere) or you will need to download the minified version (.min.js) which is discussed here.
-		This is the list of third party libraries used by <b>jschess</b> and their download location...
-			<table border="1">
-				<tr>
-					<td>name</td>
-					<td>version</td>
-					<td>web</td>
-					<td>documentation</td>
-					<td>from me</td>
-				</tr>
-				% for dep in attr_more.jschess_deps:
-				<tr>
-					<td>${dep.name}</td>
-					<td>${dep.version}</td>
-					<td><a href="${dep.downloadUrl}">download</a></td>
-					<td><a href="${dep.documentation}">link</a></td>
-					<td><a href="../${dep.myFile}">my download</a></td>
-				</tr>
-				% endfor
-			</table>
+			In order to use <b>jschess</b> you will either need to .pack.js file which contains all needed libraries (which is discussed
+			elsewhere) or you will need to download the minified version (.min.js) which is discussed here.
+			This is the list of third party libraries used by <b>jschess</b> and their download location...
+		</p>
+		<table border="1" summary="no summary for this table">
+			<tr>
+				<td>name</td>
+				<td>version</td>
+				<td>web</td>
+				<td>documentation</td>
+				<td>from me</td>
+			</tr>
+			% for dep in attr_more.jschess_deps:
+			<tr>
+				<td>${dep.name}</td>
+				<td>${dep.version}</td>
+				% if dep.downloadUrl is not None:
+				<td><a href="${dep.downloadUrl}">download</a></td>
+				% else:
+				<td>Not available for download</td>
+				% endif
+				<td><a href="${dep.documentation}">link</a></td>
+				<td><a href="../${dep.myFile}">my download</a></td>
+			</tr>
+			% endfor
+		</table>
+		<p>
 		Import them so:
+		</p>
 		<pre class="brush: xml"><%block filter="h">
 ${attr_more.jschess_getJsThirdParty}></%block></pre>
-		</p>
 		<p>
 		Then download the minified <b>jschess</b> file from <a title="jschess compressed download" href="../out/jschess.min.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
 		</p>
 		<pre class="brush: xml"><%block filter="h">
-		<script src="jschess.min.js"></script></%block></pre>
+		<script type="text/javascript" src="jschess.min.js"></script></%block></pre>
 		If you want to help me debug <b>jschess</b> or are experiencing problems you can download the uncompressed file
 		from <a title="jschess uncompressed download" href="../out/jschess.js">here</a> and use it like this:
 		<pre class="brush: xml"><%block filter="h">
-		<script src="jschess.js"></script></%block></pre>
+		<script type="text/javascript" src="jschess.js"></script></%block></pre>
 		You need a place for your board, so place something like this somewhere in your html:
 		<pre class="brush: xml"><%block filter="h">
 		<div id="myid"></div></%block></pre>
@@ -84,8 +90,9 @@ ${attr_more.jschess_getJsThirdParty}></%block></pre>
 				id:'myid'
 			})
 			board.startPosition()</%block></pre>
-		</div>
+		<p>
 		Here is the result:
+		</p>
 		<div id="myid"></div>
 		<p>
 			Mark Veltzer, Copyright ${attr.project_copyright_years}

@@ -22,7 +22,7 @@ deps.append(Dep(
 	'prototype',
 	'1.7.1',
 	'http://prototypejs.org',
-	'not available from the web',
+	None,
 	'https://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js',
 	'thirdparty/prototype-1.7.1.min.js',
 	'thirdparty/prototype-1.7.1.js',
@@ -52,13 +52,13 @@ deps.append(Dep(
 def getJsThirdParty():
 	l=[]
 	for dep in deps:
-		l.append('<script src="../'+dep.myFile+'"></script>')
+		l.append('<script type="test/javascript" src="../'+dep.myFile+'"></script>')
 	return '\n'.join(l)
 
 def getJsThirdPartyDebug():
 	l=[]
 	for dep in deps:
-		l.append('<script src="../'+dep.myFileDebug+'"></script>')
+		l.append('<script type="test/javascript" src="../'+dep.myFileDebug+'"></script>')
 	return '\n'.join(l)
 
 def depslist():
