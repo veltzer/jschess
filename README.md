@@ -3,7 +3,7 @@ jschess
 
 version: 191
 
-JavaScript based chess board
+jschess is a JavaScript based chess board
 
 jschess is a JavaScript chess board written in pure JavaScript.
 It allows yo to create a chess board, have it show games in PGN

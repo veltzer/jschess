@@ -4,6 +4,10 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>${attr.project_name}</title>
 		<link rel="shortcut icon" href="../static/favicon.ico"/>
+		<meta name="Description" content="${attr.project_long_description}"/>
+		<meta name="Keywords" content="${attr.personal_fullname}, ${attr.personal_slug}, ${attr.project_name}, ${attr.project_keywords}"/>
+		${attr.project_google_analytics_snipplet}
+
 		<!-- third parties -->
 ${attr_more.jschess_getJsThirdParty}
 		<!-- our code, options: full pack, minified, regular or file by file -->
