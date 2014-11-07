@@ -3,6 +3,9 @@
 ############
 include /usr/share/templar/Makefile
 
+ALL:=$(TEMPLAR_ALL)
+ALL_DEP:=$(TEMPLAR_ALL_DEP)
+
 ##############
 # parameters #
 ##############
@@ -14,7 +17,6 @@ DO_DOCS:=1
 ########
 # code #
 ########
-PROJECT=jschess
 SRC_FOLDER=src
 TESTS_FOLDER=tests
 THIRDPARTY_FOLDER=thirdparty
@@ -23,15 +25,15 @@ JSDOC_FILE:=$(JSDOC_FOLDER)/index.html
 WEB_FOLDER:=web
 OUT_FOLDER:=out
 PGN_FOLDER:=pgn
-JSCHECK:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).stamp
-JSFULL:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).js
-JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).min.js
-JSMIN_JSMIN:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).min.jsmin.js
-JSMIN_YUI:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).min.yui.js
-JSMIN_CLOSURE:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).min.closure.js
-JSPACK:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).pack.js
-JSZIP:=$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).zip
-WEB_DIR:=~mark/public_html/public/$(PROJECT)
+JSCHECK:=$(OUT_FOLDER)/$(attr.project_name).stamp
+JSFULL:=$(OUT_FOLDER)/$(attr.project_name).js
+JSMIN:=$(OUT_FOLDER)/$(attr.project_name).min.js
+JSMIN_JSMIN:=$(OUT_FOLDER)/$(attr.project_name).min.jsmin.js
+JSMIN_YUI:=$(OUT_FOLDER)/$(attr.project_name).min.yui.js
+JSMIN_CLOSURE:=$(OUT_FOLDER)/$(attr.project_name).min.closure.js
+JSPACK:=$(OUT_FOLDER)/$(attr.project_name).pack.js
+JSZIP:=$(OUT_FOLDER)/$(attr.project_name).zip
+WEB_DIR:=~mark/public_html/public/$(attr.project_name)
 WEB_FOLDER:=web
 
 # tools
@@ -39,11 +41,10 @@ TOOL_COMPILER:=~/install/closure/compiler.jar
 TOOL_JSMIN:=~/install/jsmin/jsmin
 TOOL_JSDOC:=~/install/jsdoc/jsdoc
 TOOL_JSL:=~/install/jsl/jsl
-# gjslint is taken from ubuntu package
+# gjslint is taken from an ubuntu package
 TOOL_GJSLINT:=gjslint
+# yui-compressor is taken from an ubuntu package
 TOOL_YUICOMPRESSOR:=yui-compressor
-
-ALL_DEP:=$(TEMPLAR_ALL_DEP)
 
 ifeq ($(DO_MKDBG),1)
 Q=
@@ -53,7 +54,7 @@ Q=@
 #.SILENT:
 endif # DO_MKDBG
 
-ALL:=$(TEMPLAR_ALL) $(JSPACK) $(JSZIP) $(WEB_FILES)
+ALL+=$(JSPACK) $(JSZIP) $(WEB_FILES)
 ifeq ($(DO_DOCS),1)
 ALL+=$(JSDOC_FILE)
 endif # DO_DOCS
@@ -132,7 +133,6 @@ clean_manual:
 .PHONY: debug
 debug: $(ALL_DEP)
 	$(info ALL is $(ALL))
-	$(info PROJECT is $(PROJECT))
 	$(info JSFULL is $(JSFULL))
 	$(info JSMIN is $(JSMIN))
 	$(info OUT_FOLDER is $(OUT_FOLDER))
@@ -153,8 +153,8 @@ install: all $(ALL_DEP)
 	$(Q)rm -rf $(WEB_DIR)
 	$(Q)mkdir -p $(WEB_DIR)
 	$(Q)cp -r extra/* index.html $(PGN_FOLDER) $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(TESTS_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
-	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
-	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
+	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).js $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).js
+	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).min.js
 
 .PHONY: install_no_doc
 install_no_doc: all_no_doc $(ALL_DEP)
@@ -162,8 +162,8 @@ install_no_doc: all_no_doc $(ALL_DEP)
 	$(Q)rm -rf $(WEB_DIR)
 	$(Q)mkdir -p $(WEB_DIR)
 	$(Q)cp -r extra/* index.html $(PGN_FOLDER) $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(TESTS_FOLDER) $(WEB_DIR)
-	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).js
-	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT)-$(attr.git_describe).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(PROJECT).min.js
+	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).js $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).js
+	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).min.js
 
 .PHONY: chmod
 chmod:
