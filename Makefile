@@ -101,8 +101,9 @@ $(JSDOC_FILE): $(attr_more.jschess_sources) $(ALL_DEP)
 	$(Q)-rm -rf $(JSDOC_FOLDER)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(TOOL_JSDOC) -d $(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
-	$(Q)# 2.4 (ubuntu default) jsdoc
-	$(Q)#jsdoc -d=$(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
+
+# 2.4 (ubuntu default) jsdoc
+# $(Q)jsdoc -d=$(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
 
 .PHONY: check
 check: $(JSCHECK) $(ALL_DEP)
@@ -113,8 +114,15 @@ check_veltzer_https:
 	$(info doing [$@])
 	$(Q)wrapper_ok git grep "http:\/\/veltzer.net"
 
+.PHONY: check_grep
+check_grep: $(ALL_DEP)
+	$(info doing [$@])
+	$(Q)wrapper_noerr git grep "\"" src/
+	$(Q)wrapper_noerr git grep " $$" src/
+	$(Q)wrapper_noerr git grep "eval" src/
+
 .PHONY: check_all
-check_all: check_veltzer_https
+check_all: check_veltzer_https check_grep
 
 .PHONY: jsdoc
 jsdoc: $(JSDOC_FILE) $(ALL_DEP)
@@ -124,11 +132,6 @@ jsdoc: $(JSDOC_FILE) $(ALL_DEP)
 clean:
 	$(info doing [$@])
 	$(Q)git clean -xdf > /dev/null
-
-.PHONY: clean_manual
-clean_manual:
-	$(info doing [$@])
-	$(Q)-rm -rf $(JSDOC_FOLDER) $(OUT_FOLDER) $(WEB_FOLDER)
 
 .PHONY: debug
 debug: $(ALL_DEP)
@@ -143,7 +146,6 @@ debug: $(ALL_DEP)
 	$(info SRC_FOLDER is $(SRC_FOLDER))
 	$(info THIRDPARTY_FOLDER is $(THIRDPARTY_FOLDER))
 	$(info WEB_FOLDER is $(WEB_FOLDER))
-	$(info WEBMAKO_FILES is $(WEBMAKO_FILES))
 	$(info WEB_FILES is $(WEB_FILES))
 	$(info ALL_DEP is $(ALL_DEP))
 
@@ -156,38 +158,7 @@ install: all $(ALL_DEP)
 	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).js $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).js
 	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).min.js
 
-.PHONY: install_no_doc
-install_no_doc: all_no_doc $(ALL_DEP)
-	$(info doing [$@])
-	$(Q)rm -rf $(WEB_DIR)
-	$(Q)mkdir -p $(WEB_DIR)
-	$(Q)cp -r extra/* index.html $(PGN_FOLDER) $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(TESTS_FOLDER) $(WEB_DIR)
-	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).js $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).js
-	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).min.js
-
-.PHONY: chmod
-chmod:
-	$(info doing [$@])
-	$(Q)chmod go+rx `find . -type d`
-	$(Q)chmod go+r `find . -type f`
-
-.PHONY: check_grep
-check_grep: $(ALL_DEP)
-	$(info doing [$@])
-	$(Q)wrapper_noerr git grep "\"" src/
-	$(Q)wrapper_noerr git grep " $$" src/
-	$(Q)wrapper_noerr git grep "eval" src/
 .PHONY: sloccount
 sloccount: $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)sloccount .
-
-#################
-# pattern rules #
-#################
-$(WEB_FILES_OTHER): $(WEB_FOLDER)/%: $(WEBMAKO_FOLDER)/% $(ALL_DEP)
-	$(info doing [$@])
-	$(Q)mkdir -p $(dir $@)
-	$(Q)rm -f $@
-	$(Q)cp $< $@
-	$(Q)chmod a-w $@
