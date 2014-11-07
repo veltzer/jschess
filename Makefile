@@ -13,6 +13,8 @@ ALL_DEP:=$(TEMPLAR_ALL_DEP)
 DO_MKDBG:=0
 # should we do documentation ?
 DO_DOCS:=1
+# do you want to validate html?
+DO_CHECKHTML:=1
 
 ########
 # code #
@@ -37,9 +39,16 @@ Q=@
 endif # DO_MKDBG
 
 ALL+=$(JSPACK) $(JSZIP)
+
 ifeq ($(DO_DOCS),1)
 ALL+=jsdoc/index.html
 endif # DO_DOCS
+
+SOURCES_HTML:=web/*
+HTMLCHECK:=html.stamp
+ifeq ($(DO_CHECKHTML),1)
+ALL+=$(HTMLCHECK)
+endif # DO_CHECKHTML
 
 ###########
 # targets #
@@ -84,8 +93,12 @@ jsdoc/index.html: $(attr_more.jschess_sources) $(ALL_DEP)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)~/install/jsdoc/jsdoc -d jsdoc src 1> /dev/null
 
-.PHONY: check
-check: $(JSCHECK) $(ALL_DEP)
+.PHONY: check_js
+check_js: $(JSCHECK) $(ALL_DEP)
+	$(info doing [$@])
+
+.PHONY: check_html
+check_html: $(HTMLCHECK)
 	$(info doing [$@])
 
 .PHONY: check_hardcoded_names
@@ -120,6 +133,7 @@ debug: $(ALL_DEP)
 	$(info JSMIN is $(JSMIN))
 	$(info WEB_DIR is $(WEB_DIR))
 	$(info COPY_FOLDERS is $(COPY_FOLDERS))
+	$(info SOURCES_HTML is $(SOURCES_HTML))
 
 .PHONY: install
 install: all $(ALL_DEP)
@@ -133,3 +147,9 @@ install: all $(ALL_DEP)
 sloccount: $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)sloccount .
+
+$(HTMLCHECK): $(SOURCES_HTML) $(ALL_DEP)
+	$(info doing [$@])
+	$(Q)tidy -errors -q -utf8 $(SOURCES_HTML)
+	$(Q)mkdir -p $(dir $@)
+	$(Q)touch $(HTMLCHECK)

@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Showing controls</title>
 		<link rel="shortcut icon" href="../static/favicon.ico"/>
 		<!-- third parties -->
 ${attr_more.jschess_getJsThirdParty}
 		<!--script src="../out/jschess.min.js"></script-->
-		<script src="../out/jschess.js"></script>
+		<script type="text/javascript" src="../out/jschess.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
@@ -24,7 +24,7 @@ ${attr_more.jschess_getJsThirdParty}
 
 		<!-- You also need to add some content to highlight, but that is covered elsewhere. -->
 			 
-		<script>
+		<script type="text/javascript">
 			document.observe('dom:loaded', function() {
 				// Finally, to actually run the highlighter, you need to include this JS on your page
 				SyntaxHighlighter.all()
@@ -40,6 +40,7 @@ ${attr_more.jschess_getJsThirdParty}
 		A controls object is one which allows you to control a prerecorded game.
 		It provides with 6 buttons to control the game.
 		You need a place for your controls, so place something like this somewhere in your html:
+		</p>
 		<pre class="brush: xml"><%block filter="h">
 		<div id="myid"></div></%block></pre>
 		Then you can create a Controls object from your javascript code by calling the constructor of Controls.
@@ -47,10 +48,10 @@ ${attr_more.jschess_getJsThirdParty}
 			var controls=new Controls({
 				id:'myid'
 			})</%block></pre>
-		</div>
+		<p>
 		Here is the result:
-		<div id="myid"></div>
 		</p>
+		<div id="myid"></div>
 		<p>
 			Mark Veltzer, Copyright ${attr.project_copyright_years}
 			<a href="mailto:${attr.personal_email}">${attr.personal_email}</a>

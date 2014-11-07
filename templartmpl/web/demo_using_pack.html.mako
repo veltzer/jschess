@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Using the pack.js file</title>
 		<link rel="shortcut icon" href="../static/favicon.ico"/>
 		<!-- third parties -->
-		<script src="../out/jschess.pack.js"></script>
+		<script type="text/javascript" src="../out/jschess.pack.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
@@ -22,7 +22,7 @@
 
 		<!-- You also need to add some content to highlight, but that is covered elsewhere. -->
 			 
-		<script>
+		<script type="text/javascript">
 			document.observe('dom:loaded', function() {
 				// Finally, to actually run the highlighter, you need to include this JS on your page
 				SyntaxHighlighter.all()
@@ -44,25 +44,33 @@
 		<p>
 		When using the .pack.js file download it from <a title="jschess package download" href="../out/jschess.pack.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
+		</p>
 		<pre class="brush: xml"><%block filter="h"><script src="jschess.pack.js"></script></%block></pre>
+		<p>
 		You need a place for your board, so place something like this somewhere in your html:
+		</p>
 		<pre class="brush: xml"><%block filter="h"><div id="myid"></div></%block></pre>
+		<p>
 		In order to get a board with initial position we must:
+		</p>
 		<ul>
 			<li>create a board using the constructor of Board.</li>
 			<li>attach an SvgBoard to it so that it will reflect graphically the what happens on the board.</li>
 		</ul>
+		<p>
 		The SvgBoard will also need the id you prepared since it is the one doing the actual drawing on the screen.
 		To do "chess stuff" we will mainly interact with the board: move pieces, delete pieces etc.
 		So we will also call the startPosition method to setup a classic chess start position.
+		</p>
 		<pre class="brush: js"><%block filter="h">
 			var board=new Board()
 			var svgBoard=new SvgBoard(board,{
 				id:'myid'
 			})
 			board.startPosition()</%block></pre>
-		</div>
+		<p>
 		Here is the result:
+		</p>
 		<div id="myid">
 		</div>
 		<p>

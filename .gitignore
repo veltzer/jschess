@@ -14,3 +14,6 @@ __pycache__
 
 # template config file
 .attr.config
+
+# stamps for various purposes
+*.stamp
