@@ -1,7 +1,7 @@
 new website on gh-pages:
 ========================
 - the visuals of jschess are not good (colors are off). solve the issue.
-- share release.py script with openbook by moving it to templar, see that it works.
+- check that the common release script from templar works for cutting releases.
 
 now:
 ====
