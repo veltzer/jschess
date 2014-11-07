@@ -52,13 +52,13 @@ deps.append(Dep(
 def getJsThirdParty():
 	l=[]
 	for dep in deps:
-		l.append('<script type="test/javascript" src="../'+dep.myFile+'"></script>')
+		l.append('<script type="text/javascript" src="../'+dep.myFile+'"></script>')
 	return '\n'.join(l)
 
 def getJsThirdPartyDebug():
 	l=[]
 	for dep in deps:
-		l.append('<script type="test/javascript" src="../'+dep.myFileDebug+'"></script>')
+		l.append('<script type="text/javascript" src="../'+dep.myFileDebug+'"></script>')
 	return '\n'.join(l)
 
 def depslist():
