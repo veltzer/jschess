@@ -2,7 +2,7 @@
 
 /**
   @class represents a piece color (white,black)
-  @author mark.veltzer@gmail.com (Mark Veltzer)
+  @author ${attr.personal_jsdoc_author}
 */
 var PieceColor = Class.create(/** @lends PieceColor# */{
   /**
@@ -10,7 +10,7 @@ var PieceColor = Class.create(/** @lends PieceColor# */{
     @param {string} color string which represents
     the color of the piece. Must be one of 'white' or 'black'.
     @return {PieceColor} new instance of this class.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
+    @author ${attr.personal_jsdoc_author}
   */
   initialize: function(color) {
     if (!(color in PieceColor.colors)) {
@@ -21,7 +21,7 @@ var PieceColor = Class.create(/** @lends PieceColor# */{
   /**
     toString method that allows you to get a nice printout for this type
     @return {string} string representation of this instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
+    @author ${attr.personal_jsdoc_author}
   */
   toString: function() {
     return this.color;
@@ -29,7 +29,7 @@ var PieceColor = Class.create(/** @lends PieceColor# */{
   /**
     Return whether the piece is white
     @return {boolean} boolean indicating whether the piece is white.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
+    @author ${attr.personal_jsdoc_author}
   */
   isWhite: function() {
     return this.color == 'white';
@@ -37,7 +37,7 @@ var PieceColor = Class.create(/** @lends PieceColor# */{
   /**
     Return whether the piece is black
     @return {boolean} boolean indicating whether the piece is black.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
+    @author ${attr.personal_jsdoc_author}
   */
   isBlack: function() {
     return this.color == 'black';
@@ -47,7 +47,7 @@ var PieceColor = Class.create(/** @lends PieceColor# */{
 
 /**
   Array of piece colors
-  @author mark.veltzer@gmail.com (Mark Veltzer)
+  @author ${attr.personal_jsdoc_author}
 */
 PieceColor.colors = {
   white: undefined,

@@ -6,13 +6,13 @@
 
 /**
   @class represents a full position of the board
-  @author mark.veltzer@gmail.com (Mark Veltzer)
+  @author ${attr.personal_jsdoc_author}
 */
 var BoardPosition = Class.create(/** @lends BoardPosition# */{
   /**
     constructs a new object
     @return {BoardPosition} a new object of this type.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
+    @author ${attr.personal_jsdoc_author}
   */
   initialize: function() {
     this.pieces = [];
@@ -20,7 +20,7 @@ var BoardPosition = Class.create(/** @lends BoardPosition# */{
   /**
     toString method that allows you to get a nice printout for this type
     @return {string} a string representation of this object.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
+    @author ${attr.personal_jsdoc_author}
   */
   toString: function() {
     return this.pieces.join();
@@ -32,7 +32,7 @@ var BoardPosition = Class.create(/** @lends BoardPosition# */{
     (rook/knight/bishop/queen/king/pawn).
     @param {number} x the x position of the piece [0..8).
     @param {number} y the y position of the piece [0..8).
-    @author mark.veltzer@gmail.com (Mark Veltzer)
+    @author ${attr.personal_jsdoc_author}
   */
   addPiece: function(color, type, x, y) {
     var boardPiece = new BoardPiece(new PieceColor(color), new PieceType(type));
@@ -42,7 +42,7 @@ var BoardPosition = Class.create(/** @lends BoardPosition# */{
   /**
     Run a function for each piece in this position
     @param {function} f function to run getting each piece in turn.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
+    @author ${attr.personal_jsdoc_author}
   */
   forEachPiece: function(f) {
     this.pieces.forEach(function(pieceAndPos) {
@@ -57,7 +57,7 @@ var BoardPosition = Class.create(/** @lends BoardPosition# */{
 /**
   Static method that returns a starting position in standard chess.
   @return {BoardPosition} A standard chess starting position.
-  @author mark.veltzer@gmail.com (Mark Veltzer)
+  @author ${attr.personal_jsdoc_author}
 */
 BoardPosition.startPos = function() {
   /*
@@ -112,7 +112,7 @@ BoardPosition.startPos = function() {
   notation.
   @return {BoardPosition} A position object corresponding to the FEN
   notation given.
-  @author mark.veltzer@gmail.com (Mark Veltzer)
+  @author ${attr.personal_jsdoc_author}
   TODO
   - add more sanity tests (regexp) for the whole input.
   - parse the 5 other blocks after the position itself

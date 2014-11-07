@@ -4,13 +4,13 @@
 /**
   @class A PGN reader. A class that knows how to read a PGN file and give
   instructions to a board.
-  @author mark.veltzer@gmail.com (Mark Veltzer)
+  @author ${attr.personal_jsdoc_author}
 */
 var PgnReader = Class.create(/** @lends PgnReader# */{
   /**
     creates a new instance
     @return {PgnReader} the new instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
+    @author ${attr.personal_jsdoc_author}
   */
   initialize: function() {
   },
@@ -18,7 +18,7 @@ var PgnReader = Class.create(/** @lends PgnReader# */{
     toString method so that you can get a nice printout of instances of
     this type
     @return {string} string representation of this instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
+    @author ${attr.personal_jsdoc_author}
   */
   toString: function() {
     throw 'toString for PgnReader not implemented yet';
@@ -26,7 +26,7 @@ var PgnReader = Class.create(/** @lends PgnReader# */{
   /**
     A method to read a pgn file via ajax.
     @param {string} url url to do the GET from (same server).
-    @author mark.veltzer@gmail.com (Mark Veltzer)
+    @author ${attr.personal_jsdoc_author}
   */
   get: function(url) {
     //Utils.fakeUse(url);

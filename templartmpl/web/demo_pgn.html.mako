@@ -41,7 +41,7 @@ ${attr_more.jschess_getJsThirdParty}
 		</p>
 		<p>
 			Mark Veltzer, Copyright ${attr.project_copyright_years}
-			<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
+			<a href="mailto:${attr.personal_email}">${attr.personal_email}</a>
 		</p>
 	</body>
 </html>

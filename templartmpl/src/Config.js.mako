@@ -21,14 +21,14 @@
   will override anything in the default config.
   This class <b>should not</b> be a singleton since the user may want to put
   two boards on the page and have each configured differently.
-  @author mark.veltzer@gmail.com (Mark Veltzer)
+  @author ${attr.personal_jsdoc_author}
 */
 var Config = Class.create(/** @lends Config# */{
   /**
     creates a new instance.
     @param {object} tmpl template to use.
     @return {Config} new instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
+    @author ${attr.personal_jsdoc_author}
   */
   initialize: function(tmpl) {
     // the dictionary holding the current config
@@ -51,7 +51,7 @@ var Config = Class.create(/** @lends Config# */{
     set a key to a certain value in the current configuration
     @param {anything} key key to store in the config.
     @param {anything} value value to store in the config.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
+    @author ${attr.personal_jsdoc_author}
   */
   setValue: function(key, value) {
     // check that the key and value are ok.
@@ -61,7 +61,7 @@ var Config = Class.create(/** @lends Config# */{
   /**
     set many values at once
     @param {object} d dictionary of values.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
+    @author ${attr.personal_jsdoc_author}
   */
   override: function(d) {
     for (var x in d) {
@@ -71,7 +71,7 @@ var Config = Class.create(/** @lends Config# */{
   /**
     check that the config is good to go
     for instance: check that all required arguments are set
-    @author mark.veltzer@gmail.com (Mark Veltzer)
+    @author ${attr.personal_jsdoc_author}
   */
   check: function() {
     // TODO
