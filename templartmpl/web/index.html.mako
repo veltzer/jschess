@@ -139,11 +139,11 @@ ${attr_more.jschess_jsFiles}
 			Some links:
 			<ul>
 				<li><b>${attr.project_name}</b> API is <a href="../jsdoc">here</a></li>
-				<li><b>${attr.project_name}</b> github projec is <a href="https://github.com/veltzer/jschess">here</a></li>
-				<li>latest full <b>${attr.project_name}</b> is <a href="https://veltzer.net/jschess/out/jschess.js">jschess.js</a></li>
-				<li>latest minified <b>${attr.project_name}</b> is <a href="https://veltzer.net/jschess/out/jschess.min.js">jschess.min.js</a></li>
-				<li>latest package (with third parties) <b>${attr.project_name}</b> is <a href="https://veltzer.net/jschess/out/jschess.pack.js">jschess.pack.js</a></li>
-				<li>latest sources for <b>${attr.project_name}</b> is <a href="https://veltzer.net/jschess/out/jschess.zip">jschess.zip</a></li>
+				<li><b>${attr.project_name}</b> github projec is <a href="${attr.project_website_git}">here</a></li>
+				<li>latest full <b>${attr.project_name}</b> is <a href="${attr.project_website}/out/jschess.js">jschess.js</a></li>
+				<li>latest minified <b>${attr.project_name}</b> is <a href="${attr.project_website}/out/jschess.min.js">jschess.min.js</a></li>
+				<li>latest package (with third parties) <b>${attr.project_name}</b> is <a href="${attr.project_website}/out/jschess.pack.js">jschess.pack.js</a></li>
+				<li>latest sources for <b>${attr.project_name}</b> is <a href="${attr.project_website}/out/jschess.zip">jschess.zip</a></li>
 			</ul>
 			Demos of <b>${attr.project_name}</b>...
 			<ul>

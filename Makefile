@@ -17,29 +17,16 @@ DO_DOCS:=1
 ########
 # code #
 ########
-SRC_FOLDER=src
-JSDOC_FOLDER:=jsdoc
-JSDOC_FILE:=$(JSDOC_FOLDER)/index.html
-OUT_FOLDER:=out
-JSCHECK:=$(OUT_FOLDER)/$(attr.project_name).stamp
-JSFULL:=$(OUT_FOLDER)/$(attr.project_name).js
-JSMIN:=$(OUT_FOLDER)/$(attr.project_name).min.js
-JSMIN_JSMIN:=$(OUT_FOLDER)/$(attr.project_name).min.jsmin.js
-JSMIN_YUI:=$(OUT_FOLDER)/$(attr.project_name).min.yui.js
-JSMIN_CLOSURE:=$(OUT_FOLDER)/$(attr.project_name).min.closure.js
-JSPACK:=$(OUT_FOLDER)/$(attr.project_name).pack.js
-JSZIP:=$(OUT_FOLDER)/$(attr.project_name).zip
+JSCHECK:=out/$(attr.project_name).stamp
+JSFULL:=out/$(attr.project_name).js
+JSMIN:=out/$(attr.project_name).min.js
+JSMIN_JSMIN:=out/$(attr.project_name).min.jsmin.js
+JSMIN_YUI:=out/$(attr.project_name).min.yui.js
+JSMIN_CLOSURE:=out/$(attr.project_name).min.closure.js
+JSPACK:=out/$(attr.project_name).pack.js
+JSZIP:=out/$(attr.project_name).zip
 WEB_DIR:=../jschess-gh-pages
 COPY_FOLDERS:={static,out,jsdoc,thirdparty,pgn,tests,web,src}
-
-# tools we installed
-TOOL_COMPILER:=~/install/closure/compiler.jar
-TOOL_JSMIN:=~/install/jsmin/jsmin
-TOOL_JSDOC:=~/install/jsdoc/jsdoc
-TOOL_JSL:=~/install/jsl/jsl
-# tools taken from ubuntu packages
-TOOL_GJSLINT:=gjslint
-TOOL_YUICOMPRESSOR:=yui-compressor
 
 ifeq ($(DO_MKDBG),1)
 Q=
@@ -51,7 +38,7 @@ endif # DO_MKDBG
 
 ALL+=$(JSPACK) $(JSZIP)
 ifeq ($(DO_DOCS),1)
-ALL+=$(JSDOC_FILE)
+ALL+=jsdoc/index.html
 endif # DO_DOCS
 
 ###########
@@ -68,8 +55,8 @@ $(JSZIP): $(attr_more.jschess_sources) $(ALL_DEP)
 
 $(JSCHECK): $(attr_more.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(attr_more.jschess_sources)
-	$(Q)wrapper_silent $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(attr_more.jschess_sources)
+	$(Q)~/install/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(attr_more.jschess_sources)
+	$(Q)wrapper_silent gjslint --flagfile support/gjslint.cfg $(attr_more.jschess_sources)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
@@ -81,9 +68,9 @@ $(JSFULL): $(attr_more.jschess_sources) $(JSCHECK) $(ALL_DEP)
 $(JSMIN): $(JSFULL) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)$(TOOL_JSMIN) < $< > $(JSMIN_JSMIN)
-	$(Q)$(TOOL_YUICOMPRESSOR) $< -o $(JSMIN_YUI)
-	$(Q)$(TOOL_COMPILER) $< --js_output_file $(JSMIN_CLOSURE)
+	$(Q)~/install/jsmin/jsmin < $< > $(JSMIN_JSMIN)
+	$(Q)yui-compressor $< -o $(JSMIN_YUI)
+	$(Q)~/install/closure/compiler.jar $< --js_output_file $(JSMIN_CLOSURE)
 	$(Q)cp $(JSMIN_YUI) $(JSMIN)
 
 $(JSPACK): $(JSMIN) $(ALL_DEP)
@@ -91,11 +78,11 @@ $(JSPACK): $(JSMIN) $(ALL_DEP)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)cat $(attr.depslist) $(JSMIN) > $(JSPACK)
 
-$(JSDOC_FILE): $(attr_more.jschess_sources) $(ALL_DEP)
+jsdoc/index.html: $(attr_more.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)-rm -rf $(JSDOC_FOLDER)
+	$(Q)-rm -rf jsdoc
 	$(Q)mkdir -p $(dir $@)
-	$(Q)$(TOOL_JSDOC) -d $(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
+	$(Q)~/install/jsdoc/jsdoc -d jsdoc src 1> /dev/null
 
 .PHONY: check
 check: $(JSCHECK) $(ALL_DEP)
@@ -117,7 +104,7 @@ check_grep: $(ALL_DEP)
 check_all: check_hardcoded_names check_grep
 
 .PHONY: jsdoc
-jsdoc: $(JSDOC_FILE) $(ALL_DEP)
+jsdoc: jsdoc/index.html $(ALL_DEP)
 	$(info doing [$@])
 
 .PHONY: clean
@@ -128,14 +115,11 @@ clean:
 .PHONY: debug
 debug: $(ALL_DEP)
 	$(info ALL is $(ALL))
+	$(info ALL_DEP is $(ALL_DEP))
 	$(info JSFULL is $(JSFULL))
 	$(info JSMIN is $(JSMIN))
-	$(info OUT_FOLDER is $(OUT_FOLDER))
-	$(info JSDOC_FOLDER is $(JSDOC_FOLDER))
-	$(info JSDOC_FILE is $(JSDOC_FILE))
 	$(info WEB_DIR is $(WEB_DIR))
-	$(info SRC_FOLDER is $(SRC_FOLDER))
-	$(info ALL_DEP is $(ALL_DEP))
+	$(info COPY_FOLDERS is $(COPY_FOLDERS))
 
 .PHONY: install
 install: all $(ALL_DEP)
