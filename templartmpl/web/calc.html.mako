@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>SVG path calculator</title>
+		<link rel="shortcut icon" href="../static/favicon.ico"/>
 		<!-- third parties -->
 ${attr_more.jschess_getJsThirdParty}
 		<script>

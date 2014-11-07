@@ -1,14 +1,15 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<title>${attr.project_name}</title>
-		<link rel="shortcut icon" href="favicon.ico"/>
+		<link rel="shortcut icon" href="../static/favicon.ico"/>
 		<!-- third parties -->
 ${attr_more.jschess_getJsThirdParty}
 		<!-- our code, options: full pack, minified, regular or file by file -->
-		<!--script src="../out/jschess-${attr.git_describe}.pack.js"></script-->
-		<!--script src="../out/jschess-${attr.git_describe}.min.js"></script-->
-		<!--script src="../out/jschess-${attr.git_describe}.js"></script-->
+		<!--script src="../out/jschess.pack.js"></script-->
+		<!--script src="../out/jschess.min.js"></script-->
+		<!--script src="../out/jschess.js"></script-->
 ${attr_more.jschess_jsFiles}
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
@@ -130,7 +131,7 @@ ${attr_more.jschess_jsFiles}
 				<li><a href="https://developers.google.com/closure/utilities/docs/linter_howto">Closure Linter</a> is used for checking the source code</li>
 			</ul>
 		</p>
-		<p>The current version of <b>${attr.project_name}</b> is ${attr.git_describe}
+		<p>The current version of <b>${attr.project_name}</b> is ${attr.git_lasttag}
 		</p>
 		<p>
 			<b>This is alpha material at the moment, use at your own risk! API is subject to change!</b>
@@ -139,10 +140,10 @@ ${attr_more.jschess_jsFiles}
 			<ul>
 				<li><b>${attr.project_name}</b> API is <a href="../jsdoc">here</a></li>
 				<li><b>${attr.project_name}</b> github projec is <a href="https://github.com/veltzer/jschess">here</a></li>
-				<li>latest full <b>${attr.project_name}</b> is <a href="https://veltzer.net/jschess/out/jschess-${attr.git_describe}.js">jschess-${attr.git_describe}.js</a></li>
-				<li>latest minified <b>${attr.project_name}</b> is <a href="https://veltzer.net/jschess/out/jschess-${attr.git_describe}.min.js">jschess-${attr.git_describe}.min.js</a></li>
-				<li>latest package (with third parties) <b>${attr.project_name}</b> is <a href="https://veltzer.net/jschess/out/jschess-${attr.git_describe}.pack.js">jschess-${attr.git_describe}.pack.js</a></li>
-				<li>latest sources for <b>${attr.project_name}</b> is <a href="https://veltzer.net/jschess/out/jschess-${attr.git_describe}.zip">jschess-${attr.git_describe}.zip</a></li>
+				<li>latest full <b>${attr.project_name}</b> is <a href="https://veltzer.net/jschess/out/jschess.js">jschess.js</a></li>
+				<li>latest minified <b>${attr.project_name}</b> is <a href="https://veltzer.net/jschess/out/jschess.min.js">jschess.min.js</a></li>
+				<li>latest package (with third parties) <b>${attr.project_name}</b> is <a href="https://veltzer.net/jschess/out/jschess.pack.js">jschess.pack.js</a></li>
+				<li>latest sources for <b>${attr.project_name}</b> is <a href="https://veltzer.net/jschess/out/jschess.zip">jschess.zip</a></li>
 			</ul>
 			Demos of <b>${attr.project_name}</b>...
 			<ul>

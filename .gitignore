@@ -1,4 +1,5 @@
 # our output folders
+/src
 /out
 /web
 /jsdoc
