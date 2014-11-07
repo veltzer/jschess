@@ -6,6 +6,8 @@
 
 # python cache in any folder
 __pycache__
+*.pyo
+*.pyc
 
 # nodejs modules
 /node_modules
