@@ -2,13 +2,13 @@
 
 /**
   @class a class to have static utility functions
-  @author ${attr.personal_jsdoc_author}
+  @author ${tdefs.personal_jsdoc_author}
 */
 var Utils = Class.create(/** @lends Utils# */{
   /**
     creates a new instance
     @return {Utils} the new instance.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   initialize: function() {
   }
@@ -21,7 +21,7 @@ var Utils = Class.create(/** @lends Utils# */{
   @param {object} o1 first object.
   @param {object} o2 first object.
   @return {object} object which is the unification of the two objects.
-  @author ${attr.personal_jsdoc_author}
+  @author ${tdefs.personal_jsdoc_author}
 */
 Utils.unite = function(o1, o2) {
   var ret = {};
@@ -39,7 +39,7 @@ Utils.unite = function(o1, o2) {
   Clone a javascript object
   @param {object} o the object to shalow clone.
   @return {object} object which is a clone of the original one.
-  @author ${attr.personal_jsdoc_author}
+  @author ${tdefs.personal_jsdoc_author}
 */
 Utils.clone = function(o) {
   var ret = {};
@@ -54,7 +54,7 @@ Utils.clone = function(o) {
   Fake using a parameter.
   This is mainly used to avoid lint warnings.
   Pass as many args as you like to this function.
-  @author ${attr.personal_jsdoc_author}
+  @author ${tdefs.personal_jsdoc_author}
 */
 Utils.fakeUse = function() {
   if (Utils.nottrue) {
@@ -67,7 +67,7 @@ Utils.fakeUse = function() {
   Fake doing something
   This is mainly used to avoid lint warnings.
   Pass as many args as you like to this function.
-  @author ${attr.personal_jsdoc_author}
+  @author ${tdefs.personal_jsdoc_author}
 */
 Utils.pass = function() {
 };
@@ -77,7 +77,7 @@ Utils.pass = function() {
   Shallow copy an array
   @param {Array} a the array to copy.
   @return {Array} The copy of the array.
-  @author ${attr.personal_jsdoc_author}
+  @author ${tdefs.personal_jsdoc_author}
 */
 Utils.arrClone = function(a) {
   return a.slice();
@@ -97,7 +97,7 @@ Utils.arrClone = function(a) {
   @param {anything} v the variable to check.
   @param {string} t the string representation of the name of the
   type v should be of.
-  @author ${attr.personal_jsdoc_author}
+  @author ${tdefs.personal_jsdoc_author}
 */
 Utils.checkType = function(v, t) {
   if (typeof(v) != t) {
@@ -111,7 +111,7 @@ Utils.checkType = function(v, t) {
   other Throws an exceptions if that is not the case.
   @param {object} s1 first set.
   @param {object} s2 second set.
-  @author ${attr.personal_jsdoc_author}
+  @author ${tdefs.personal_jsdoc_author}
 */
 Utils.checkContains = function(s1, s2) {
   for (var x in s1) {
@@ -127,7 +127,7 @@ Utils.checkContains = function(s1, s2) {
   other Throws an exceptions if that is not the case.
   @param {object} s1 first set.
   @param {object} s2 second set.
-  @author ${attr.personal_jsdoc_author}
+  @author ${tdefs.personal_jsdoc_author}
 */
 Utils.checkEquals = function(s1, s2) {
   Utils.checkContains(s1, s2);

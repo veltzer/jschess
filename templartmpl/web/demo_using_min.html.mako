@@ -5,7 +5,7 @@
 		<title>Using the min.js file</title>
 		<link rel="shortcut icon" href="../static/favicon.ico"/>
 		<!-- third parties -->
-${attr_more.jschess_getJsThirdParty}
+${tdefs.jschess_getJsThirdParty}
 		<!--script src="../out/jschess.min.js"></script-->
 		<script type="text/javascript" src="../out/jschess.js"></script>
 
@@ -51,7 +51,7 @@ ${attr_more.jschess_getJsThirdParty}
 				<td>documentation</td>
 				<td>from me</td>
 			</tr>
-			% for dep in attr_more.jschess_deps:
+			% for dep in tdefs.jschess_deps:
 			<tr>
 				<td>${dep.name}</td>
 				<td>${dep.version}</td>
@@ -69,7 +69,7 @@ ${attr_more.jschess_getJsThirdParty}
 		Import them so:
 		</p>
 		<pre class="brush: xml"><%block filter="h">
-${attr_more.jschess_getJsThirdParty}></%block></pre>
+${tdefs.jschess_getJsThirdParty}></%block></pre>
 		<p>
 		Then download the minified <b>jschess</b> file from <a title="jschess compressed download" href="../out/jschess.min.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
@@ -95,8 +95,8 @@ ${attr_more.jschess_getJsThirdParty}></%block></pre>
 		</p>
 		<div id="myid"></div>
 		<p>
-			Mark Veltzer, Copyright ${attr.project_copyright_years}
-			<a href="mailto:${attr.personal_email}">${attr.personal_email}</a>
+			Mark Veltzer, Copyright ${tdefs.project_copyright_years}
+			<a href="mailto:${tdefs.personal_email}">${tdefs.personal_email}</a>
 		</p>
 	</body>
 </html>

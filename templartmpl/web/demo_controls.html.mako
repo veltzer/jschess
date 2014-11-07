@@ -5,7 +5,7 @@
 		<title>Showing controls</title>
 		<link rel="shortcut icon" href="../static/favicon.ico"/>
 		<!-- third parties -->
-${attr_more.jschess_getJsThirdParty}
+${tdefs.jschess_getJsThirdParty}
 		<!--script src="../out/jschess.min.js"></script-->
 		<script type="text/javascript" src="../out/jschess.js"></script>
 
@@ -53,8 +53,8 @@ ${attr_more.jschess_getJsThirdParty}
 		</p>
 		<div id="myid"></div>
 		<p>
-			Mark Veltzer, Copyright ${attr.project_copyright_years}
-			<a href="mailto:${attr.personal_email}">${attr.personal_email}</a>
+			Mark Veltzer, Copyright ${tdefs.project_copyright_years}
+			<a href="mailto:${tdefs.personal_email}">${tdefs.personal_email}</a>
 		</p>
 	</body>
 </html>

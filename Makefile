@@ -19,14 +19,14 @@ DO_CHECKHTML:=1
 ########
 # code #
 ########
-JSCHECK:=out/$(attr.project_name).stamp
-JSFULL:=out/$(attr.project_name).js
-JSMIN:=out/$(attr.project_name).min.js
-JSMIN_JSMIN:=out/$(attr.project_name).min.jsmin.js
-JSMIN_YUI:=out/$(attr.project_name).min.yui.js
-JSMIN_CLOSURE:=out/$(attr.project_name).min.closure.js
-JSPACK:=out/$(attr.project_name).pack.js
-JSZIP:=out/$(attr.project_name).zip
+JSCHECK:=out/$(tdefs.project_name).stamp
+JSFULL:=out/$(tdefs.project_name).js
+JSMIN:=out/$(tdefs.project_name).min.js
+JSMIN_JSMIN:=out/$(tdefs.project_name).min.jsmin.js
+JSMIN_YUI:=out/$(tdefs.project_name).min.yui.js
+JSMIN_CLOSURE:=out/$(tdefs.project_name).min.closure.js
+JSPACK:=out/$(tdefs.project_name).pack.js
+JSZIP:=out/$(tdefs.project_name).zip
 WEB_DIR:=../jschess-gh-pages
 COPY_FOLDERS:=static out jsdoc thirdparty pgn tests web src
 
@@ -58,21 +58,21 @@ endif # DO_CHECKHTML
 all: $(ALL) $(ALL_DEP)
 	$(info doing [$@])
 
-$(JSZIP): $(attr_more.jschess_sources) $(ALL_DEP)
+$(JSZIP): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)zip -qr $@ $(attr_more.jschess_sources)
+	$(Q)zip -qr $@ $(tdefs.jschess_sources)
 
-$(JSCHECK): $(attr_more.jschess_sources) $(ALL_DEP)
+$(JSCHECK): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)~/install/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(attr_more.jschess_sources)
-	$(Q)wrapper_silent gjslint --flagfile support/gjslint.cfg $(attr_more.jschess_sources)
+	$(Q)~/install/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(tdefs.jschess_sources)
+	$(Q)wrapper_silent gjslint --flagfile support/gjslint.cfg $(tdefs.jschess_sources)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
-$(JSFULL): $(attr_more.jschess_sources) $(JSCHECK) $(ALL_DEP)
+$(JSFULL): $(tdefs.jschess_sources) $(JSCHECK) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)cat $(attr_more.jschess_sources) > $@
+	$(Q)cat $(tdefs.jschess_sources) > $@
 
 $(JSMIN): $(JSFULL) $(ALL_DEP)
 	$(info doing [$@])
@@ -85,9 +85,9 @@ $(JSMIN): $(JSFULL) $(ALL_DEP)
 $(JSPACK): $(JSMIN) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)cat $(attr.depslist) $(JSMIN) > $(JSPACK)
+	$(Q)cat $(tdefs.depslist) $(JSMIN) > $(JSPACK)
 
-jsdoc/index.html: $(attr_more.jschess_sources) $(ALL_DEP)
+jsdoc/index.html: $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)-rm -rf jsdoc
 	$(Q)mkdir -p $(dir $@)
@@ -104,7 +104,7 @@ check_html: $(HTMLCHECK)
 .PHONY: check_hardcoded_names
 check_hardcoded_names:
 	$(info doing [$@])
-	$(Q)wrapper_ok git grep $(attr.personal_slug) 
+	$(Q)wrapper_ok git grep $(tdefs.personal_slug) 
 
 .PHONY: check_grep
 check_grep: $(ALL_DEP)

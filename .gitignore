@@ -13,7 +13,7 @@ __pycache__
 /node_modules
 
 # template config file
-.attr.config
+.tdefs.config
 
 # stamps for various purposes
 *.stamp

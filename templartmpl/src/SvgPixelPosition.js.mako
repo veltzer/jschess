@@ -2,7 +2,7 @@
 
 /**
   @class represents a position on the screen (in pixels)
-  @author ${attr.personal_jsdoc_author}
+  @author ${tdefs.personal_jsdoc_author}
 */
 var SvgPixelPosition = Class.create(/** @lends SvgPixelPosition# */{
   /**
@@ -10,7 +10,7 @@ var SvgPixelPosition = Class.create(/** @lends SvgPixelPosition# */{
     @param {number} x x co-ordinate.
     @param {number} y y co-ordinate.
     @return {SvgPixelPosition} the new instance.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   initialize: function(x, y) {
     /*
@@ -28,7 +28,7 @@ var SvgPixelPosition = Class.create(/** @lends SvgPixelPosition# */{
     toString method so that you can get a nice printout of instances
     of this type
     @return {string} string representation of this object.
-    @author ${attr.personal_jsdoc_author}
+    @author ${tdefs.personal_jsdoc_author}
   */
   toString: function() {
     return '(' + this.x + ',' + this.y + ')';

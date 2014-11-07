@@ -74,8 +74,8 @@
 		<div id="myid">
 		</div>
 		<p>
-			Mark Veltzer, Copyright ${attr.project_copyright_years}
-			<a href="mailto:${attr.personal_email}">${attr.personal_email}</a>
+			Mark Veltzer, Copyright ${tdefs.project_copyright_years}
+			<a href="mailto:${tdefs.personal_email}">${tdefs.personal_email}</a>
 		</p>
 	</body>
 </html>
