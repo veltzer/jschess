@@ -2,6 +2,7 @@ new website on gh-pages:
 ========================
 - pass check_all
 - do installation and see that all works.
+- check the html pages using some sort of validator (tidy like in openbook?!?)
 
 now:
 ====
