@@ -1,6 +1,6 @@
 new website on gh-pages:
 ========================
-- do installation and see that all works.
+- the visuals of jschess are not good (colors are off). solve the issue.
 - share release.py script with openbook by moving it to templar, see that it works.
 
 now:
