@@ -1,9 +1,10 @@
+new website on gh-pages:
+========================
+- pass check_all
+- do installation and see that all works.
+
 now:
 ====
-- move more of the variables from the makefile to templar solution.
-- move to jsdoc3 instead of the currently used 2.4.
-	It seems not to have a package in ubuntu but I can install it
-	via nodejs/npm.
 - add an object which is a chess game controller with buttons for next prev etc.
 	take the buttons from the world chess championship site.
 - add PGN display using https://github.com/jhlywa/chess.js.
