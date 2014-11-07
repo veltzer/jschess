@@ -48,7 +48,7 @@ def jsFiles():
 	l=[]
 	l.append('<!-- placed by jsFiles() macro -->')
 	for f in files:
-		l.append('<script type="test/javascript" src="../'+f+'"></script>')
+		l.append('<script type="text/javascript" src="../'+f+'"></script>')
 	l.append('<!-- end of jsFiles() macro -->')
 	return '\n'.join(l)
 
