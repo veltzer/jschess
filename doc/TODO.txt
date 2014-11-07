@@ -2,6 +2,7 @@ new website on gh-pages:
 ========================
 - the visuals of jschess are not good (colors are off). solve the issue.
 - check that the common release script from templar works for cutting releases.
+- make check_all a target for build and not a target on the side.
 
 now:
 ====

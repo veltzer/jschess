@@ -32,6 +32,7 @@ COPY_FOLDERS:=static out jsdoc thirdparty pgn tests web src
 
 ALL_FILES:=$(shell git ls-files)
 FILES_NOT_GENERATED:=$(filter-out $(TEMPLAR_ALL_MAKO_TGT), $(ALL_FILES))
+FILES_WITHOUT_HARDCODING:=$(filter-out project.ini, $(FILES_NOT_GENERATED))
 
 ifeq ($(DO_MKDBG),1)
 Q=
@@ -108,7 +109,7 @@ check_html: $(HTMLCHECK)
 .PHONY: check_hardcoded_names
 check_hardcoded_names:
 	$(info doing [$@])
-	$(Q)git grep $(tdefs.personal_slug) -- $(FILES_NOT_GENERATED) | wrapper_ok grep -v HARDCODE_OK
+	$(Q)wrapper_ok git grep $(tdefs.personal_slug) -- $(FILES_WITHOUT_HARDCODING)
 
 .PHONY: check_grep
 check_grep: $(ALL_DEP)
@@ -139,6 +140,7 @@ debug: $(ALL_DEP)
 	$(info COPY_FOLDERS is $(COPY_FOLDERS))
 	$(info SOURCES_HTML is $(SOURCES_HTML))
 	$(info FILES_NOT_GENERATED is $(FILES_NOT_GENERATED))
+	$(info FILES_WITHOUT_HARDCODING is $(FILES_WITHOUT_HARDCODING))
 
 .PHONY: install
 install: all $(ALL_DEP)
