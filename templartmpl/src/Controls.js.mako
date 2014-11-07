@@ -4,13 +4,13 @@
   @class A set of controls to control the game of chess.
   Includes 6 buttons: goto_start, prev_move, prev_play, next_play, next_move,
   goto_end
-  @author mark.veltzer@gmail.com (Mark Veltzer)
+  @author ${attr.personal_jsdoc_author}
 */
 var Controls = Class.create(/** @lends Controls# */{
   /**
     creates a new instance of this class.
     @return {Controls} new instance of this class.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
+    @author ${attr.personal_jsdoc_author}
   */
   initialize: function(dict) {
     this.id = dict['id'];
@@ -30,7 +30,7 @@ var Controls = Class.create(/** @lends Controls# */{
   /**
     toString method that allows you to get a nice printout for this type
     @return {string} string representation of this instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
+    @author ${attr.personal_jsdoc_author}
   */
   toString: function() {
     return 'no toString for type Controls';
