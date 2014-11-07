@@ -26,7 +26,7 @@ JSMIN_CLOSURE:=out/$(attr.project_name).min.closure.js
 JSPACK:=out/$(attr.project_name).pack.js
 JSZIP:=out/$(attr.project_name).zip
 WEB_DIR:=../jschess-gh-pages
-COPY_FOLDERS:={static,out,jsdoc,thirdparty,pgn,tests,web,src}
+COPY_FOLDERS:=static out jsdoc thirdparty pgn tests web src
 
 ifeq ($(DO_MKDBG),1)
 Q=
@@ -124,9 +124,9 @@ debug: $(ALL_DEP)
 .PHONY: install
 install: all $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)-rm -rf $(WEB_DIR)/$(COPY_FOLDERS)
-	$(Q)cp -r ./$(COPY_FOLDERS) $(WEB_DIR)
-	$(Q)cp support/redirect.html $(WEB_DIR)/index.html
+	$(Q)-for folder in $(COPY_FOLDERS); do rm -rf $(WEB_DIR)/$$folder; done
+	$(Q)for folder in $(COPY_FOLDERS); do cp -r $$folder $(WEB_DIR); done
+	$(Q)cp support/redirector.html $(WEB_DIR)/index.html
 	$(info now cd $(WEB_DIR); git status; make; git add -A; git push)
 
 .PHONY: sloccount
