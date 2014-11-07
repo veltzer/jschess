@@ -3,11 +3,12 @@
 	<head>
 		<meta charset="utf-8"/>
 		<title>JsChess QUnit testing page</title>
+		<link rel="shortcut icon" href="../static/favicon.ico"/>
 		<link rel="stylesheet" href="../thirdparty/qunit-1.10.0.css"/>
 ${attr_more.jschess_getJsThirdParty}
-		<!--script src="../out/jschess-${attr.git_describe}.pack.js"></script-->
-		<!--script src="../out/jschess-${attr.git_describe}.min.js"></script-->
-		<!--script src="../out/jschess-${attr.git_describe}.js"></script-->
+		<!--script src="../out/jschess.pack.js"></script-->
+		<!--script src="../out/jschess.min.js"></script-->
+		<!--script src="../out/jschess.js"></script-->
 ${attr_more.jschess_jsFiles}
 	</head>
 	<body>

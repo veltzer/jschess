@@ -18,13 +18,9 @@ DO_DOCS:=1
 # code #
 ########
 SRC_FOLDER=src
-TESTS_FOLDER=tests
-THIRDPARTY_FOLDER=thirdparty
 JSDOC_FOLDER:=jsdoc
 JSDOC_FILE:=$(JSDOC_FOLDER)/index.html
-WEB_FOLDER:=web
 OUT_FOLDER:=out
-PGN_FOLDER:=pgn
 JSCHECK:=$(OUT_FOLDER)/$(attr.project_name).stamp
 JSFULL:=$(OUT_FOLDER)/$(attr.project_name).js
 JSMIN:=$(OUT_FOLDER)/$(attr.project_name).min.js
@@ -33,17 +29,16 @@ JSMIN_YUI:=$(OUT_FOLDER)/$(attr.project_name).min.yui.js
 JSMIN_CLOSURE:=$(OUT_FOLDER)/$(attr.project_name).min.closure.js
 JSPACK:=$(OUT_FOLDER)/$(attr.project_name).pack.js
 JSZIP:=$(OUT_FOLDER)/$(attr.project_name).zip
-WEB_DIR:=~mark/public_html/public/$(attr.project_name)
-WEB_FOLDER:=web
+WEB_DIR:=../jschess-gh-pages
+COPY_FOLDERS:={static,out,jsdoc,thirdparty,pgn,tests,web,src}
 
-# tools
+# tools we installed
 TOOL_COMPILER:=~/install/closure/compiler.jar
 TOOL_JSMIN:=~/install/jsmin/jsmin
 TOOL_JSDOC:=~/install/jsdoc/jsdoc
 TOOL_JSL:=~/install/jsl/jsl
-# gjslint is taken from an ubuntu package
+# tools taken from ubuntu packages
 TOOL_GJSLINT:=gjslint
-# yui-compressor is taken from an ubuntu package
 TOOL_YUICOMPRESSOR:=yui-compressor
 
 ifeq ($(DO_MKDBG),1)
@@ -54,7 +49,7 @@ Q=@
 #.SILENT:
 endif # DO_MKDBG
 
-ALL+=$(JSPACK) $(JSZIP) $(WEB_FILES)
+ALL+=$(JSPACK) $(JSZIP)
 ifeq ($(DO_DOCS),1)
 ALL+=$(JSDOC_FILE)
 endif # DO_DOCS
@@ -102,17 +97,14 @@ $(JSDOC_FILE): $(attr_more.jschess_sources) $(ALL_DEP)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(TOOL_JSDOC) -d $(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
 
-# 2.4 (ubuntu default) jsdoc
-# $(Q)jsdoc -d=$(JSDOC_FOLDER) $(SRC_FOLDER) 1> /dev/null
-
 .PHONY: check
 check: $(JSCHECK) $(ALL_DEP)
 	$(info doing [$@])
 
-.PHONY: check_veltzer_https
-check_veltzer_https:
+.PHONY: check_hardcoded_names
+check_hardcoded_names:
 	$(info doing [$@])
-	$(Q)wrapper_ok git grep "http:\/\/veltzer.net"
+	$(Q)wrapper_ok git grep $(attr.personal_slug) 
 
 .PHONY: check_grep
 check_grep: $(ALL_DEP)
@@ -122,7 +114,7 @@ check_grep: $(ALL_DEP)
 	$(Q)wrapper_noerr git grep "eval" src/
 
 .PHONY: check_all
-check_all: check_veltzer_https check_grep
+check_all: check_hardcoded_names check_grep
 
 .PHONY: jsdoc
 jsdoc: $(JSDOC_FILE) $(ALL_DEP)
@@ -140,23 +132,18 @@ debug: $(ALL_DEP)
 	$(info JSMIN is $(JSMIN))
 	$(info OUT_FOLDER is $(OUT_FOLDER))
 	$(info JSDOC_FOLDER is $(JSDOC_FOLDER))
-	$(info PGN_FOLDER is $(PGN_FOLDER))
 	$(info JSDOC_FILE is $(JSDOC_FILE))
 	$(info WEB_DIR is $(WEB_DIR))
 	$(info SRC_FOLDER is $(SRC_FOLDER))
-	$(info THIRDPARTY_FOLDER is $(THIRDPARTY_FOLDER))
-	$(info WEB_FOLDER is $(WEB_FOLDER))
-	$(info WEB_FILES is $(WEB_FILES))
 	$(info ALL_DEP is $(ALL_DEP))
 
 .PHONY: install
 install: all $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)rm -rf $(WEB_DIR)
-	$(Q)mkdir -p $(WEB_DIR)
-	$(Q)cp -r extra/* index.html $(PGN_FOLDER) $(OUT_FOLDER) $(WEB_FOLDER) $(THIRDPARTY_FOLDER) $(SRC_FOLDER) $(TESTS_FOLDER) $(JSDOC_FOLDER) $(WEB_DIR)
-	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).js $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).js
-	$(Q)ln -s $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).min.js $(WEB_DIR)/$(OUT_FOLDER)/$(attr.project_name).min.js
+	$(Q)-rm -rf $(WEB_DIR)/$(COPY_FOLDERS)
+	$(Q)cp -r ./$(COPY_FOLDERS) $(WEB_DIR)
+	$(Q)cp support/redirect.html $(WEB_DIR)/index.html
+	$(info now cd $(WEB_DIR); git status; make; git add -A; git push)
 
 .PHONY: sloccount
 sloccount: $(ALL_DEP)

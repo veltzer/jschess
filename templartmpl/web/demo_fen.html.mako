@@ -3,11 +3,11 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Showing a FEN position</title>
-		<link rel="shortcut icon" href="favicon.ico"/>
+		<link rel="shortcut icon" href="../static/favicon.ico"/>
 		<!-- third parties -->
 ${attr_more.jschess_getJsThirdParty}
-		<!--script src="../out/jschess-${attr.git_describe}.min.js"></script-->
-		<script src="../out/jschess-${attr.git_describe}.js"></script>
+		<!--script src="../out/jschess.min.js"></script-->
+		<script src="../out/jschess.js"></script>
 
 		<!-- syntax highlighter stuff -->
 		<!-- Include required JS files -->
