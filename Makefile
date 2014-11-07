@@ -30,6 +30,9 @@ JSZIP:=out/$(tdefs.project_name).zip
 WEB_DIR:=../jschess-gh-pages
 COPY_FOLDERS:=static out jsdoc thirdparty pgn tests web src
 
+ALL_FILES:=$(shell git ls-files)
+FILES_NOT_GENERATED:=$(filter-out $(TEMPLAR_ALL_MAKO_TGT), $(ALL_FILES))
+
 ifeq ($(DO_MKDBG),1)
 Q=
 # we are not silent in this branch
@@ -105,7 +108,7 @@ check_html: $(HTMLCHECK)
 .PHONY: check_hardcoded_names
 check_hardcoded_names:
 	$(info doing [$@])
-	$(Q)wrapper_ok git grep $(tdefs.personal_slug) 
+	$(Q)git grep $(tdefs.personal_slug) -- $(FILES_NOT_GENERATED) | wrapper_ok grep -v HARDCODE_OK
 
 .PHONY: check_grep
 check_grep: $(ALL_DEP)
@@ -135,6 +138,7 @@ debug: $(ALL_DEP)
 	$(info WEB_DIR is $(WEB_DIR))
 	$(info COPY_FOLDERS is $(COPY_FOLDERS))
 	$(info SOURCES_HTML is $(SOURCES_HTML))
+	$(info FILES_NOT_GENERATED is $(FILES_NOT_GENERATED))
 
 .PHONY: install
 install: all $(ALL_DEP)
