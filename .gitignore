@@ -12,8 +12,5 @@ __pycache__
 # nodejs modules
 /node_modules
 
-# template config file
-/.tdefs.config
-
 # stamps for various purposes
 *.stamp
