@@ -27,7 +27,7 @@ JSMIN_YUI:=out/$(tdefs.project_name).min.yui.js
 JSMIN_CLOSURE:=out/$(tdefs.project_name).min.closure.js
 JSPACK:=out/$(tdefs.project_name).pack.js
 JSZIP:=out/$(tdefs.project_name).zip
-WEB_DIR:=../jschess-gh-pages
+WEB_DIR:=../$(tdefs.project_name)-gh-pages
 COPY_FOLDERS:=static out jsdoc thirdparty pgn tests web src
 
 ALL_FILES:=$(shell git ls-files)
@@ -70,7 +70,7 @@ $(JSZIP): $(tdefs.jschess_sources) $(ALL_DEP)
 $(JSCHECK): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)~/install/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(tdefs.jschess_sources)
-	$(Q)wrapper_silent gjslint --flagfile support/gjslint.cfg $(tdefs.jschess_sources)
+	$(Q)make_helper wrapper-silent gjslint --flagfile support/gjslint.cfg $(tdefs.jschess_sources)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
@@ -109,14 +109,14 @@ check_html: $(HTMLCHECK)
 .PHONY: check_hardcoded_names
 check_hardcoded_names:
 	$(info doing [$@])
-	$(Q)wrapper_ok git grep $(tdefs.personal_slug) -- $(FILES_WITHOUT_HARDCODING)
+	$(Q)make_helper wrapper-ok git grep $(tdefs.personal_slug) -- $(FILES_WITHOUT_HARDCODING)
 
 .PHONY: check_grep
 check_grep: $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)wrapper_noerr git grep "\"" src/
-	$(Q)wrapper_noerr git grep " $$" src/
-	$(Q)wrapper_noerr git grep "eval" src/
+	$(Q)make_helper wrapper-noerr git grep "\"" src/
+	$(Q)make_helper wrapper-noerr git grep " $$" src/
+	$(Q)make_helper wrapper-noerr git grep "eval" src/
 
 .PHONY: check_all
 check_all: check_hardcoded_names check_grep
