@@ -35,35 +35,35 @@ var SvgConfigTmpl = Class.create(ConfigTmpl,/** @lends SvgConfigTmpl# */ {
       type: 't_string',
       required: false,
       description: 'color of the black pieces',
-      defaultValue: '000000'
+      defaultValue: '#000000'
     });
     this.add({
       name: 'white_color',
       type: 't_string',
       required: false,
       description: 'color of the white pieces',
-      defaultValue: 'ffffff'
+      defaultValue: '#ffffff'
     });
     this.add({
       name: 'black_square_color',
       type: 't_string',
       required: false,
       description: 'color of the black squares',
-      defaultValue: '819faa'
+      defaultValue: '#819faa'
     });
     this.add({
       name: 'white_square_color',
       type: 't_string',
       required: false,
       description: 'color of the white squares',
-      defaultValue: 'ffffff'
+      defaultValue: '#ffffff'
     });
     this.add({
       name: 'black_square_gradient',
       type: 't_string',
       required: false,
       description: 'gradient for black squares',
-      defaultValue: '0-#91afba:0-819faa:50-819faa:100'
+      defaultValue: '0-#91afba:0-#819faa:50-#819faa:100'
     });
     this.add({
       name: 'white_square_gradient',
@@ -113,14 +113,14 @@ var SvgConfigTmpl = Class.create(ConfigTmpl,/** @lends SvgConfigTmpl# */ {
       type: 't_string',
       required: false,
       description: 'color of selected squares',
-      defaultValue: 'ffff00'
+      defaultValue: '#ffff00'
     });
     this.add({
       name: 'over_color',
       type: 't_string',
       required: false,
       description: 'color of selected squares',
-      defaultValue: '00ff00'
+      defaultValue: '#00ff00'
     });
     this.add({
       name: 'do_select_click',
