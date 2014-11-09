@@ -5,6 +5,12 @@ new website on gh-pages:
 
 now:
 ====
+- make the snipplets of code that I use be files on the file system.
+	then they can be included into the files.
+	This means that every piece of code will only be written once.
+	When included into html it could be escaped and coloured too.
+	This way I will not need a coloring library at the client side.
+	Find a server side coloring solution for python.
 - add an object which is a chess game controller with buttons for next prev etc.
 	take the buttons from the world chess championship site.
 - add PGN display using https://github.com/jhlywa/chess.js.
