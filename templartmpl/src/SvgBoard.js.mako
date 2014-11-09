@@ -1,3 +1,4 @@
+/* vim:set filetype=javascript:*/
 /*jsl:import SvgPieceData.js*/
 /*jsl:import SvgCreator.js*/
 /*jsl:import SvgPixelPosition.js*/

@@ -1,3 +1,4 @@
+/* vim:set filetype=javascript:*/
 /*jsl:import Utils.js*/
 /*jsl:import SvgPathAndAttributes.js*/
 /*jsl:import SvgPiece.js*/

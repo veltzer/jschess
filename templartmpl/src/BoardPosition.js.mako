@@ -1,3 +1,4 @@
+/* vim:set filetype=javascript:*/
 /*jsl:import BoardPiece.js*/
 /*jsl:import PieceColor.js*/
 /*jsl:import PieceType.js*/
