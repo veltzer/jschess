@@ -1,10 +1,6 @@
-new website on gh-pages:
-========================
-- check that the common release script from templar works for cutting releases.
+- add spell checking for the html files.
+	and make that a prepreq for building.
 - make check_all a target for build and not a target on the side.
-
-now:
-====
 - make the snipplets of code that I use be files on the file system.
 	then they can be included into the files.
 	This means that every piece of code will only be written once.
