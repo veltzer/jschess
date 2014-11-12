@@ -23,7 +23,7 @@ ${tdefs.jschess_getJsThirdParty}
 		<link href="../thirdparty/sh/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
 
 		<!-- You also need to add some content to highlight, but that is covered elsewhere. -->
-			 
+
 		<script type="text/javascript">
 			document.observe('dom:loaded', function() {
 				// Finally, to actually run the highlighter, you need to include this JS on your page
