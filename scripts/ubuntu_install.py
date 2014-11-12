@@ -14,7 +14,7 @@ packs=[
 
 	'yui-compressor',
 	'jsdoc-toolkit',
-	'closure-linter',
+	'closure-linter', # for gjslint(1)
 	'python-tweepy',
 	'python-tweepy-doc',
 	'python-twitter',
