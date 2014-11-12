@@ -1,124 +1,56 @@
 '''
-templating solution for this project
+project definitions for templar
 '''
 
-import datetime # for datetime
-import subprocess # for check_output, DEVNULL
-import cgi # for escape
-
-class Dep:
-	def __init__(self,name,version,website,downloadUrl,downloadUrlDebug,myFile,myFileDebug,documentation):
-		self.name=name
-		self.version=version
-		self.website=website
-		self.downloadUrl=downloadUrl
-		self.downloadUrlDebug=downloadUrlDebug
-		self.myFile=myFile
-		self.myFileDebug=myFileDebug
-		self.documentation=documentation
-
-deps=[];
-deps.append(Dep(
-	'prototype',
-	'1.7.1',
-	'http://prototypejs.org',
-	None,
-	'https://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js',
-	'thirdparty/prototype-1.7.1.min.js',
-	'thirdparty/prototype-1.7.1.js',
-	'http://prototypejs.org/learn',
-))
-deps.append(Dep(
-	'raphael',
-	'2.1.0',
-	'http://raphaeljs.com',
-	'http://github.com/DmitryBaranovskiy/raphael/raw/master/raphael-min.js',
-	'http://github.com/DmitryBaranovskiy/raphael/raw/master/raphael.js',
-	'thirdparty/raphael-2.1.0.min.js',
-	'thirdparty/raphael-2.1.0.js',
-	'http://raphaeljs.com/reference.html',
-))
-deps.append(Dep(
-	'chess.js',
-	'v0.1-47-gb7c9788',
-	'https://github.com/jhlywa/chess.js',
-	'https://github.com/jhlywa/chess.js/raw/master/chess.min.js',
-	'https://github.com/jhlywa/chess.js/raw/master/chess.js',
-	'thirdparty/chess.min.js',
-	'thirdparty/chess.js',
-	'https://github.com/jhlywa/chess.js/blob/master/README.md',
-))
-
-def getJsThirdParty():
-	l=[]
-	for dep in deps:
-		l.append('<script type="text/javascript" src="../'+dep.myFile+'"></script>')
-	return '\n'.join(l)
-
-def getJsThirdPartyDebug():
-	l=[]
-	for dep in deps:
-		l.append('<script type="text/javascript" src="../'+dep.myFileDebug+'"></script>')
-	return '\n'.join(l)
-
-def depslist():
-	l=[]
-	for dep in deps:
-		l.append(dep.myFile)
-	return ' '.join(l)
-
-def git_describe():
-	try:
-		ver=subprocess.check_output(['git', 'describe'],stderr=subprocess.DEVNULL).decode().rstrip()
-		return ver
-	except:
-		return 'test'
-
-def files_in_order():
-	return [
-		'src/BoardPiece.js',
-		'src/BoardPosition.js',
-		'src/Config.js',
-		'src/ConfigTmpl.js',
-		'src/Game.js',
-		'src/GameMove.js',
-		'src/PgnReader.js',
-		'src/PieceColor.js',
-		'src/PiecePosition.js',
-		'src/PieceType.js',
-		'src/SvgConfigTmpl.js',
-		'src/SvgBoard.js',
-		'src/Board.js',
-		'src/SvgControls.js',
-		'src/Controls.js',
-		'src/SvgCreator.js',
-		'src/SvgPathAndAttributes.js',
-		'src/SvgPieceData.js',
-		'src/SvgPiece.js',
-		'src/SvgPixelPosition.js',
-		'src/Utils.js',
-		'src/WRaphael.js',
-	];
-
-def sources():
-	return ' '.join(files_in_order())
-
-def jsFiles():
-	files=files_in_order();
-	l=[]
-	l.append('<!-- placed by jsFiles() macro -->')
-	for f in files:
-		l.append('<script type="text/javascript" src="../'+f+'"></script>')
-	l.append('<!-- end of jsFiles() macro -->')
-	return '\n'.join(l)
-
 def populate(d):
-	# ours
-	d.jschess_depslist=depslist()
-	d.jschess_deps=deps
-	d.jschess_sources=sources()
-	d.jschess_getJsThirdParty=getJsThirdParty()
-	d.jschess_jsFiles=jsFiles()
+	d.project_github_username='veltzer'
+	d.project_name='jschess'
+	d.project_website='https://{project_github_username}.github.io/{project_name}'.format(**d)
+	d.project_website_source='https://github.com/{project_github_username}/{project_name}'.format(**d)
+	d.project_website_git='git://github.com/{project_github_username}/{project_name}.git'.format(**d)
+	d.project_paypal_donate_button_id='XKSSBRVJM7HHA'
+	d.project_google_analytics_tracking_id='UA-56436979-1'
+	d.project_long_description='jschess is a JavaScript based chess board'
+	d.project_keywords=[
+		'JavaScript',
+		'chess',
+		'board',
+		'chessboard',
+	]
+	d.project_year_started='2012'
+	d.project_description='''jschess is a JavaScript chess board written in pure JavaScript.
+It allows yo to create a chess board, have it show games in PGN
+notation from a server, moves pieces around, set up positions
+and more.
+
+Technologies used
+-----------------
+* Prototype javascript library (http://prototypejs.org).
+* Raphael javascript library (http://raphaeljs.com).
+* chess.java javascript library (https://github.com/jhlywa/chess.js).
+
+Demo
+----
+Is at github pages at ({project_website}).
+
+What makes jschess different?
+-----------------------------
+* Pure javascript.
+* No images - totally scalable graphics.
+* You can have your board at any size you want (because of scalable graphics).
+* As a result of being pure javascript totally controllable programatically.
+* Looks best.
+* Sits on top of good infrastructure (prototype.js,raphael.js,chess.js).
+
+Monetary contribution
+---------------------
+If you'd like to see a feature added to jschess or would just like to show
+your appreciation you are welcome to contribute to it's development at
+({project_website}).
+I am ready to work with any chess organization wishing to incorporate jschess
+into their infrastructre and am already working with two such organizations...'''.format(**d)
 
 def getdeps():
-	return [__file__]
+	return [
+		__file__, # myself
+	]

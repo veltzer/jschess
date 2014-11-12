@@ -5,7 +5,7 @@
 		<title>${tdefs.project_name}</title>
 		<link rel="shortcut icon" href="../static/favicon.ico"/>
 		<meta name="Description" content="${tdefs.project_long_description}"/>
-		<meta name="Keywords" content="${tdefs.personal_fullname}, ${tdefs.personal_slug}, ${tdefs.project_name}, ${tdefs.project_keywords}"/>
+		<meta name="Keywords" content="${tdefs.personal_fullname}, ${tdefs.personal_slug}, ${tdefs.project_name}, ${', '.join(tdefs.project_keywords)}"/>
 		${tdefs.project_google_analytics_snipplet}
 
 		<!-- third parties -->
@@ -29,7 +29,7 @@ ${tdefs.jschess_jsFiles}
 		<link href="../thirdparty/sh/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
 
 		<!-- You also need to add some content to highlight, but that is covered elsewhere. -->
-			 
+
 		<script type="text/javascript">
 			document.observe('dom:loaded', function() {
 				var board=new Board();
