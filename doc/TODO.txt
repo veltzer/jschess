@@ -1,3 +1,4 @@
+- add checking of the html files via tidy or htmlhint.
 - add spell checking for the html files.
 	and make that a prepreq for building.
 - make check_all a target for build and not a target on the side.
