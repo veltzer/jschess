@@ -14,3 +14,10 @@ similar or related projects:
 	https://github.com/bmarini/jchess
 	https://github.com/jhlywa/chess.js
 	http://chessboardjs.com
+javascript canvas libraries:
+	Kinetic
+	Fabric
+	Paper
+	Easel
+	pixijs
+	D3
