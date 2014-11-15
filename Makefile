@@ -3,14 +3,9 @@
 ############
 include /usr/share/templar/make/Makefile
 
-ALL:=$(TEMPLAR_ALL)
-ALL_DEP:=$(TEMPLAR_ALL_DEP)
-
 ##############
 # parameters #
 ##############
-# should we show commands executed ?
-DO_MKDBG:=0
 # should we do documentation ?
 DO_DOCS:=1
 # do you want to validate html?
@@ -58,11 +53,6 @@ endif # DO_CHECKHTML
 ###########
 # targets #
 ###########
-.DEFAULT_GOAL=all
-.PHONY: all
-all: $(ALL) $(ALL_DEP)
-	$(info doing [$@])
-
 $(JSZIP): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)zip -qr $@ $(tdefs.jschess_sources)
@@ -125,13 +115,8 @@ check_all: check_hardcoded_names check_grep
 jsdoc: jsdoc/index.html $(ALL_DEP)
 	$(info doing [$@])
 
-.PHONY: clean
-clean:
-	$(info doing [$@])
-	$(Q)git clean -xdf > /dev/null
-
-.PHONY: debug
-debug: $(ALL_DEP)
+.PHONY: debug_me
+debug_me: $(ALL_DEP)
 	$(info ALL is $(ALL))
 	$(info ALL_DEP is $(ALL_DEP))
 	$(info JSFULL is $(JSFULL))
