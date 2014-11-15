@@ -1,6 +1,7 @@
 ############
 # includes #
 ############
+TEMPLAR_NEED_TDEFS_INCLUDE:=1
 include /usr/share/templar/make/Makefile
 
 ##############
@@ -38,9 +39,11 @@ Q=@
 endif # DO_MKDBG
 
 ALL+=$(JSPACK) $(JSZIP)
+all: $(ALL)
 
 ifeq ($(DO_DOCS),1)
 ALL+=jsdoc/index.html
+all: $(ALL)
 endif # DO_DOCS
 
 SOURCES_HTML_MAKO:=$(shell find templartmpl/web \( -type f -or -type l \) -and -name "*.mako" 2> /dev/null)
@@ -48,6 +51,7 @@ SOURCES_HTML:=$(shell make_helper rmfdas $(SOURCES_HTML_MAKO))
 HTMLCHECK:=html.stamp
 ifeq ($(DO_CHECKHTML),1)
 ALL+=$(HTMLCHECK)
+all: $(ALL)
 endif # DO_CHECKHTML
 
 ###########
@@ -143,5 +147,6 @@ sloccount: $(ALL_DEP)
 $(HTMLCHECK): $(SOURCES_HTML) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)tidy -errors -q -utf8 $(SOURCES_HTML)
+	$(Q)htmlhint $(SOURCES_HTML) > /dev/null
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(HTMLCHECK)

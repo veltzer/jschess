@@ -131,15 +131,15 @@ ${tdefs.jschess_getJsThirdParty}
 		Currently the board does not support verficiation of moves, although that is
 		in the TODO list.
 		</p>
-		<div id='myid'></div>
+		<div id="myid"></div>
 		<form action="javascript:void(0);">
-			fromX: <input id='fromX'/>
-			fromY: <input id='fromY'/>
-			toX: <input id='toX'/>
-			toY: <input id='toY'/>
+			fromX: <input id="fromX"/>
+			fromY: <input id="fromY"/>
+			toX: <input id="toX"/>
+			toY: <input id="toY"/>
 		</form>
 		<br/>
-		<button id='move'>move</button>
+		<button id="move">move</button>
 		<br/>
 		<p>
 			errors:
