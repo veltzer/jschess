@@ -134,10 +134,10 @@ debug_me: $(ALL_DEP)
 .PHONY: install
 install: all $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)-for folder in $(COPY_FOLDERS); do rm -rf $(WEB_DIR)/$$folder; done
+	$(Q)rm -rf $(WEB_DIR)/*
 	$(Q)for folder in $(COPY_FOLDERS); do cp -r $$folder $(WEB_DIR); done
 	$(Q)cp support/redirector.html $(WEB_DIR)/index.html
-	#$(Q)cd $(WEB_DIR); git commit -a -m "new version"; git push
+	$(Q)cd $(WEB_DIR); git commit -a -m "new version"; git push
 
 .PHONY: sloccount
 sloccount: $(ALL_DEP)
