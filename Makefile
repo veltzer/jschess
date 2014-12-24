@@ -28,7 +28,7 @@ COPY_FOLDERS:=static out jsdoc thirdparty pgn tests web src
 
 ALL_FILES:=$(shell git ls-files)
 FILES_NOT_GENERATED:=$(filter-out $(TEMPLAR_ALL_MAKO_TGT), $(ALL_FILES))
-FILES_WITHOUT_HARDCODING:=$(filter-out project.ini, $(FILES_NOT_GENERATED))
+FILES_WITHOUT_HARDCODING:=$(filter-out templardefs/project.py README.md, $(FILES_NOT_GENERATED))
 
 ifeq ($(DO_MKDBG),1)
 Q=
@@ -88,7 +88,7 @@ $(JSPACK): $(JSMIN) $(ALL_DEP)
 
 jsdoc/index.html: $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)-rm -rf jsdoc
+	$(Q)rm -rf jsdoc
 	$(Q)mkdir -p $(dir $@)
 	$(Q)~/install/jsdoc/jsdoc -d jsdoc src 1> /dev/null
 

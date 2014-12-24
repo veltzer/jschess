@@ -17,7 +17,7 @@ class Dep:
 		self.myFileDebug=myFileDebug
 		self.documentation=documentation
 
-deps=[];
+deps=[]
 deps.append(Dep(
 	'prototype',
 	'1.7.1',
@@ -98,13 +98,13 @@ def files_in_order():
 		'src/SvgPixelPosition.js',
 		'src/Utils.js',
 		'src/WRaphael.js',
-	];
+	]
 
 def sources():
 	return ' '.join(files_in_order())
 
 def jsFiles():
-	files=files_in_order();
+	files=files_in_order()
 	l=[]
 	l.append('<!-- placed by jsFiles() macro -->')
 	for f in files:
