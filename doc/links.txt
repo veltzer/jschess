@@ -14,6 +14,7 @@ similar or related projects:
 	https://github.com/bmarini/jchess
 	https://github.com/jhlywa/chess.js
 	http://chessboardjs.com
+	https://github.com/oakmac/chessboardjs/
 javascript canvas libraries:
 	Kinetic
 	Fabric
@@ -21,3 +22,4 @@ javascript canvas libraries:
 	Easel
 	pixijs
 	D3
+http://www.bluefever.net/Chess/
