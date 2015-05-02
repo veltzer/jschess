@@ -84,7 +84,7 @@ $(JSMIN): $(JSFULL) $(ALL_DEP)
 $(JSPACK): $(JSMIN) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)cat $(tdefs.depslist) $(JSMIN) > $(JSPACK)
+	$(Q)cat $(tdefs.jschess_depslist) $(JSMIN) > $(JSPACK)
 
 jsdoc/index.html: $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
