@@ -15,6 +15,7 @@ similar or related projects:
 	https://github.com/jhlywa/chess.js
 	http://chessboardjs.com
 	https://github.com/oakmac/chessboardjs/
+	http://www.apronus.com/chess/wbeditor.php
 javascript canvas libraries:
 	Kinetic
 	Fabric
