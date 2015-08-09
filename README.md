@@ -14,7 +14,7 @@ Technologies used
 -----------------
 * Prototype javascript library (http://prototypejs.org).
 * Raphael javascript library (http://raphaeljs.com).
-* chess.java javascript library (https://github.com/jhlywa/chess.js).
+* chess.js javascript library (https://github.com/jhlywa/chess.js).
 
 Demo
 ----
