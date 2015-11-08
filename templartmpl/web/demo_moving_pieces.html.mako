@@ -144,7 +144,7 @@ ${tdefs.jschess_getJsThirdParty}
 		<p>
 			errors:
 		</p>
-		<div id='errors'></div>
+		<div id="errors"></div>
 		<p>
 			Mark Veltzer, Copyright ${tdefs.project_copyright_years}
 			<a href="mailto:${tdefs.personal_email}">${tdefs.personal_email}</a>

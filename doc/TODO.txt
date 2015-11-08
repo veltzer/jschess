@@ -1,5 +1,7 @@
-- add checking of the html files via htmlhint in addition to tidy.
-	make a wrapper for running htmlhint in templar and use it.
+- make a wrapper for running htmlhint since by itself
+	it is noisy.
+	That's why we run it > /dev/null at the moment hiding
+	errors as well as informational messages.
 - add spell checking for the html files.
 	and make that a prepreq for building.
 - make check_all a target for build and not a target on the side.
