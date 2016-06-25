@@ -126,7 +126,7 @@ var SvgBoard = Class.create(/** @lends {SvgBoard} */{
         this.getValue('size'),
         this.getValue('size'));
     */
-    this.elem = jQuery(this.getValue('id'));
+    this.elem = $(this.getValue('id'));
     var offset = this.elem.cumulativeOffset();
     this.startX = offset.left;
     this.startY = offset.top;
