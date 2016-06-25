@@ -1,3 +1,7 @@
+- make running the closure compiler work with all warnings turned into errors
+	(look at the makefile, it already has the stricter line commented out).
+- stop storing the third parties in my git. "make download" should download
+	them.
 - make a wrapper for running htmlhint since by itself
 	it is noisy.
 	That's why we run it > /dev/null at the moment hiding
