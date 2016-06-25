@@ -6,9 +6,10 @@
   a data field that could be used for private data attached to the piece.
   @author ${tdefs.personal_jsdoc_author}
 */
-var BoardPiece = Class.create(/** @lends BoardPiece# */{
+var BoardPiece = Class.create(/** @lends {BoardPiece} */{
   /**
     constructs a new object.
+    @this {BoardPiece}
     @param {string} color color of this piece (black/white).
     @param {string} type type of this piece
     (rook/knight/bishop/queen/king/pawn).
@@ -22,6 +23,7 @@ var BoardPiece = Class.create(/** @lends BoardPiece# */{
   },
   /**
     toString method that allows you to get a nice printout for this type
+    @this {BoardPiece}
     @return {string} string representation of this object.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -30,6 +32,7 @@ var BoardPiece = Class.create(/** @lends BoardPiece# */{
   },
   /**
     Method to set secret data for this piece
+    @this {BoardPiece}
     @param {anything} data the extra data to hold for this piece.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -38,6 +41,7 @@ var BoardPiece = Class.create(/** @lends BoardPiece# */{
   },
   /**
     Method to get secret data for this piece
+    @this {BoardPiece}
     @return {anything} the secret data associated with this piece.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -46,6 +50,7 @@ var BoardPiece = Class.create(/** @lends BoardPiece# */{
   },
   /**
     Method to unset secret data for this piece
+    @this {BoardPiece}
     @author ${tdefs.personal_jsdoc_author}
   */
   unsetData: function() {

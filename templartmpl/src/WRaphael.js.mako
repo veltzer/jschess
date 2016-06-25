@@ -5,10 +5,11 @@
   @class Wrapper for Raphael.js set
   @author ${tdefs.personal_jsdoc_author}
 */
-var WSet = Class.create(/** @lends WSet# */{
+var WSet = Class.create(/** @lends {WSet} */{
   /**
-    @param {set} the raphael set that this wraps.
-    @param {wrapper} the raphael wrapper (with paper and all).
+    @this {WSet}
+    @param {set} set the raphael set that this wraps.
+    @param {wrapper} wrapper the raphael wrapper (with paper and all).
     @return {WSet} a new instance of this class.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -17,8 +18,9 @@ var WSet = Class.create(/** @lends WSet# */{
     this.wrapper = wrapper;
   },
   /**
-    wrapper for the Raphael.js method of the same name
-    @param {anything} anything you pass to Raphael.js method of the same name.
+    wrapper for the Raphael.js method of the same name.
+    Pass anything you want to raphael.
+    @this {WSet}
     @return {anything} anything that Raphael.js returns from this method.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -28,8 +30,9 @@ var WSet = Class.create(/** @lends WSet# */{
     return r;
   },
   /**
-    wrapper for the Raphael.js method of the same name
-    @param {anything} anything you pass to Raphael.js method of the same name.
+    wrapper for the Raphael.js method of the same name.
+    Pass anything you want to raphael.
+    @this {WSet}
     @return {anything} anything that Raphael.js returns from this method.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -39,8 +42,9 @@ var WSet = Class.create(/** @lends WSet# */{
     return r;
   },
   /**
-    wrapper for the Raphael.js method of the same name
-    @param {anything} anything you pass to Raphael.js method of the same name.
+    wrapper for the Raphael.js method of the same name.
+    Pass anything you want to raphael.
+    @this {WSet}
     @return {anything} anything that Raphael.js returns from this method.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -51,6 +55,7 @@ var WSet = Class.create(/** @lends WSet# */{
   },
   /**
     make a set glow
+    @this {WSet}
     @param {object} glow_obj parameters to pass to the Raphael.js glow method.
     @return {set} the set of glow objects.
     @author ${tdefs.personal_jsdoc_author}
@@ -64,7 +69,9 @@ var WSet = Class.create(/** @lends WSet# */{
   },
   /**
     setup events for this set
-    @param {function} f callback. Callback should receive the type of the event.
+    @this {WSet}
+    @param {function()} f callback. Callback should receive the type of the
+      event.
     @param {object} names of events to register.
     supported are: click, mouseover, mouseout, mousemove, mouseup,
     mousedown.
@@ -118,10 +125,11 @@ var WSet = Class.create(/** @lends WSet# */{
   @class Wrapper for Raphael.js
   @author ${tdefs.personal_jsdoc_author}
 */
-var WRaphael = Class.create(/** @lends WRaphael# */{
+var WRaphael = Class.create(/** @lends {WRaphael} */{
   /**
-    creates a new instance
-    @param {anything} anything you pass to Raphael for initialization.
+    creates a new instance.
+    Pass anything you want to raphael.
+    @this {WRaphael}
     @return {WRaphael} a new instance of this class.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -129,8 +137,9 @@ var WRaphael = Class.create(/** @lends WRaphael# */{
     this.r = Raphael.apply(undefined, arguments);
   },
   /**
-    create a rectangle on the paper
-    @param {anything} anything you pass to Raphael for this method.
+    create a rectangle on the paper.
+    Pass anything you want to raphael.
+    @this {WRaphael}
     @return {rect} whatever Raphael returns.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -140,8 +149,9 @@ var WRaphael = Class.create(/** @lends WRaphael# */{
     return r;
   },
   /**
-    create a set on the paper
-    @param {anything} anything you pass to Raphael for this method.
+    create a set on the paper.
+    Pass anything you want to raphael.
+    @this {WRaphael}
     @return {set} our wrapper for Raphael sets.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -151,8 +161,9 @@ var WRaphael = Class.create(/** @lends WRaphael# */{
     return new WSet(r, this);
   },
   /**
-    create path on the paper
-    @param {anything} anything you pass to Raphael for this method.
+    create path on the paper.
+    Pass anything you want to raphael.
+    @this {WRaphael}
     @return {path} whatever Raphael returns.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -162,8 +173,9 @@ var WRaphael = Class.create(/** @lends WRaphael# */{
     return r;
   },
   /**
-    create text on the paper
-    @param {anything} anything you pass to Raphael for this method.
+    create text on the paper.
+    Pass anything you want to raphael.
+    @this {WRaphael}
     @return {text} whatever Raphael returns.
     @author ${tdefs.personal_jsdoc_author}
   */

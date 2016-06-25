@@ -7,9 +7,10 @@
   and array of paths and attributes to draw the path
   @author ${tdefs.personal_jsdoc_author}
 */
-var SvgPiece = Class.create(/** @lends SvgPiece# */{
+var SvgPiece = Class.create(/** @lends {SvgPiece} */{
   /**
     creates a new instance
+    @this {SvgPiece}
     @param {number} size of the square of the piece.
     @return {SvgPiece} a new object of this type.
     @author ${tdefs.personal_jsdoc_author}
@@ -20,6 +21,7 @@ var SvgPiece = Class.create(/** @lends SvgPiece# */{
   },
   /**
     Adds a new path section to a piece description
+    @this {SvgPiece}
     @param {PathAndAttributes} paa object to be added.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -28,6 +30,7 @@ var SvgPiece = Class.create(/** @lends SvgPiece# */{
   },
   /**
     Create a Raphael.js set from this object
+    @this {SvgPiece}
     @param {paper} paper Raphael.js paper to work on.
     @param {transform} transform Raphael.js transformating for this object.
     @return {set} the set after the transformation.

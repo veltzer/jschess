@@ -9,9 +9,10 @@
   @class represents a full position of the board
   @author ${tdefs.personal_jsdoc_author}
 */
-var BoardPosition = Class.create(/** @lends BoardPosition# */{
+var BoardPosition = Class.create(/** @lends {BoardPosition} */{
   /**
     constructs a new object
+    @this {BoardPosition}
     @return {BoardPosition} a new object of this type.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -20,6 +21,7 @@ var BoardPosition = Class.create(/** @lends BoardPosition# */{
   },
   /**
     toString method that allows you to get a nice printout for this type
+    @this {BoardPosition}
     @return {string} a string representation of this object.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -28,6 +30,7 @@ var BoardPosition = Class.create(/** @lends BoardPosition# */{
   },
   /**
     Add a piece to the position
+    @this {BoardPosition}
     @param {string} color the color of the piece (black/white).
     @param {string} type the type of the piece
     (rook/knight/bishop/queen/king/pawn).
@@ -42,7 +45,8 @@ var BoardPosition = Class.create(/** @lends BoardPosition# */{
   },
   /**
     Run a function for each piece in this position
-    @param {function} f function to run getting each piece in turn.
+    @this {BoardPosition}
+    @param {function()} f function to run getting each piece in turn.
     @author ${tdefs.personal_jsdoc_author}
   */
   forEachPiece: function(f) {

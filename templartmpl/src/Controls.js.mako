@@ -7,9 +7,11 @@
   goto_end
   @author ${tdefs.personal_jsdoc_author}
 */
-var Controls = Class.create(/** @lends Controls# */{
+var Controls = Class.create(/** @lends {Controls} */{
   /**
     creates a new instance of this class.
+    @this {Controls}
+    @param {object} dict A hash with initial values.
     @return {Controls} new instance of this class.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -21,15 +23,16 @@ var Controls = Class.create(/** @lends Controls# */{
     this.b_next_play = new Element('button').update('next_play');
     this.b_next_move = new Element('button').update('next_move');
     this.b_goto_end = new Element('button').update('goto_end');
-    $(this.id).appendChild(this.b_goto_start);
-    $(this.id).appendChild(this.b_prev_move);
-    $(this.id).appendChild(this.b_prev_play);
-    $(this.id).appendChild(this.b_next_play);
-    $(this.id).appendChild(this.b_next_move);
-    $(this.id).appendChild(this.b_goto_end);
+    jQuery(this.id).appendChild(this.b_goto_start);
+    jQuery(this.id).appendChild(this.b_prev_move);
+    jQuery(this.id).appendChild(this.b_prev_play);
+    jQuery(this.id).appendChild(this.b_next_play);
+    jQuery(this.id).appendChild(this.b_next_move);
+    jQuery(this.id).appendChild(this.b_goto_end);
   },
   /**
     toString method that allows you to get a nice printout for this type
+    @this {Controls}
     @return {string} string representation of this instance.
     @author ${tdefs.personal_jsdoc_author}
   */

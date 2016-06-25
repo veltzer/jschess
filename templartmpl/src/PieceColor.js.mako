@@ -5,9 +5,10 @@
   @class represents a piece color (white,black)
   @author ${tdefs.personal_jsdoc_author}
 */
-var PieceColor = Class.create(/** @lends PieceColor# */{
+var PieceColor = Class.create(/** @lends {PieceColor} */{
   /**
     creates a new instance
+    @this {PieceColor}
     @param {string} color string which represents
     the color of the piece. Must be one of 'white' or 'black'.
     @return {PieceColor} new instance of this class.
@@ -21,6 +22,7 @@ var PieceColor = Class.create(/** @lends PieceColor# */{
   },
   /**
     toString method that allows you to get a nice printout for this type
+    @this {PieceColor}
     @return {string} string representation of this instance.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -29,6 +31,7 @@ var PieceColor = Class.create(/** @lends PieceColor# */{
   },
   /**
     Return whether the piece is white
+    @this {PieceColor}
     @return {boolean} boolean indicating whether the piece is white.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -37,6 +40,7 @@ var PieceColor = Class.create(/** @lends PieceColor# */{
   },
   /**
     Return whether the piece is black
+    @this {PieceColor}
     @return {boolean} boolean indicating whether the piece is black.
     @author ${tdefs.personal_jsdoc_author}
   */

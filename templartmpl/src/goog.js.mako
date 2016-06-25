@@ -1,0 +1,12 @@
+/*
+goog.provide('Ajax');
+goog.provide('Chess');
+goog.provide('Class');
+goog.provide('Raphael');
+goog.provide('jQuery');
+goog.require('Ajax');
+goog.require('Chess');
+goog.require('Class');
+goog.require('Raphael');
+goog.require('jQuery');
+*/

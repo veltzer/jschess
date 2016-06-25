@@ -5,9 +5,10 @@
   @class represents a piece type (rook,knight,bishop,queen,king,pawn)
   @author ${tdefs.personal_jsdoc_author}
 */
-var PieceType = Class.create(/** @lends PieceType# */{
+var PieceType = Class.create(/** @lends {PieceType} */{
   /**
     creates a new instance
+    @this {PieceType}
     @param {string} type the type of the piece.
     @return {PieceType} the new instance.
     @author ${tdefs.personal_jsdoc_author}
@@ -20,6 +21,7 @@ var PieceType = Class.create(/** @lends PieceType# */{
   },
   /**
     toString method that allows you to get a nice printout for this type
+    @this {PieceType}
     @return {string} string representation of this instance.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -28,6 +30,7 @@ var PieceType = Class.create(/** @lends PieceType# */{
   },
   /**
     Return whether the piece is a rook
+    @this {PieceType}
     @return {boolean} is this piece a rook.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -36,6 +39,7 @@ var PieceType = Class.create(/** @lends PieceType# */{
   },
   /**
     Return whether the piece is a knight
+    @this {PieceType}
     @return {boolean} is this piece a knight.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -44,6 +48,7 @@ var PieceType = Class.create(/** @lends PieceType# */{
   },
   /**
     Return whether the piece is a bishop
+    @this {PieceType}
     @return {boolean} is this piece a bishop.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -52,6 +57,7 @@ var PieceType = Class.create(/** @lends PieceType# */{
   },
   /**
     Return whether the piece is a queen
+    @this {PieceType}
     @return {boolean} is this piece a queen.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -60,6 +66,7 @@ var PieceType = Class.create(/** @lends PieceType# */{
   },
   /**
     Return whether the piece is a king
+    @this {PieceType}
     @return {boolean} is this piece a king.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -68,6 +75,7 @@ var PieceType = Class.create(/** @lends PieceType# */{
   },
   /**
     Return whether the piece is a pawn
+    @this {PieceType}
     @return {boolean} is this piece a pawn.
     @author ${tdefs.personal_jsdoc_author}
   */
