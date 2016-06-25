@@ -5,9 +5,10 @@
   @class represents a position + graphics
   @author ${tdefs.personal_jsdoc_author}
 */
-var SvgPieceData = Class.create(/** @lends SvgPieceData# */{
+var SvgPieceData = Class.create(/** @lends {SvgPieceData} */{
   /**
     creates a new instance
+    @this {SvgPieceData}
     @param {set} set raphael set for the piece.
     @param {SvgPixelPosition} pixelPos position for the pieces origin.
     This is important to be able to move it to other places
@@ -22,6 +23,7 @@ var SvgPieceData = Class.create(/** @lends SvgPieceData# */{
   },
   /**
     toString method that allows you to get a nice printout for this type
+    @this {SvgPieceData}
     @return {string} a string representation of this instance.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -30,7 +32,8 @@ var SvgPieceData = Class.create(/** @lends SvgPieceData# */{
   },
   /**
     ForEach method on all presentation elements
-    @param {function} f function to activate on each element.
+    @this {SvgPieceData}
+    @param {function()} f function to activate on each element.
     @author ${tdefs.personal_jsdoc_author}
   */
   forEach: function(f) {

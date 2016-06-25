@@ -8,7 +8,7 @@
   @class static class to have just static methods for creating pieces
   @author ${tdefs.personal_jsdoc_author}
 */
-var SvgCreator = Class.create(/** @lends SvgCreator# */{
+var SvgCreator = Class.create(/** @lends {SvgCreator} */{
   /**
     creates a new instance
     @return {SvgCreator} the new instance.

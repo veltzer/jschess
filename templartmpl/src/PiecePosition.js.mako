@@ -6,9 +6,10 @@
   @class represents a position on the board
   @author ${tdefs.personal_jsdoc_author}
 */
-var PiecePosition = Class.create(/** @lends PiecePosition# */{
+var PiecePosition = Class.create(/** @lends {PiecePosition} */{
   /**
     creates a new instance
+    @this {PiecePosition}
     @param {number} x x co-ordinate.
     @param {number} y y co-ordinate.
     @return {PiecePosition} the new instance of this class.
@@ -30,6 +31,7 @@ var PiecePosition = Class.create(/** @lends PiecePosition# */{
   /**
     toString method so that you can get a nice printout of
     instances of this type
+    @this {PiecePosition}
     @return {string} the string representation of this instance.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -38,6 +40,8 @@ var PiecePosition = Class.create(/** @lends PiecePosition# */{
   },
   /**
     compare one position to another
+    @this {PiecePosition}
+    @param {PiecePosition} otherPos the position to compare to
     @return {boolean} is this position to some other position.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -49,6 +53,8 @@ var PiecePosition = Class.create(/** @lends PiecePosition# */{
   },
   /**
     compare one position to another
+    @this {PiecePosition}
+    @param {PiecePosition} otherPos the position to compare to
     @return {boolean} is this position to some other position.
     @author ${tdefs.personal_jsdoc_author}
   */

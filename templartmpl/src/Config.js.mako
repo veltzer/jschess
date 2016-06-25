@@ -24,9 +24,10 @@
   two boards on the page and have each configured differently.
   @author ${tdefs.personal_jsdoc_author}
 */
-var Config = Class.create(/** @lends Config# */{
+var Config = Class.create(/** @lends {Config} */{
   /**
     creates a new instance.
+    @this {Config}
     @param {object} tmpl template to use.
     @return {Config} new instance.
     @author ${tdefs.personal_jsdoc_author}
@@ -37,6 +38,13 @@ var Config = Class.create(/** @lends Config# */{
     // the template to be used
     this.tmpl = tmpl;
   },
+  /**
+    get a value for a key.
+    @this {Config}
+    @param {anything} key key to store in the config.
+    @return {anything} the value associated with the key.
+    @author ${tdefs.personal_jsdoc_author}
+  */
   getValue: function(key) {
     if (this.tmpl.hasKey(key)) {
       if (key in this.d) {
@@ -50,6 +58,7 @@ var Config = Class.create(/** @lends Config# */{
   },
   /**
     set a key to a certain value in the current configuration
+    @this {Config}
     @param {anything} key key to store in the config.
     @param {anything} value value to store in the config.
     @author ${tdefs.personal_jsdoc_author}
@@ -61,6 +70,7 @@ var Config = Class.create(/** @lends Config# */{
   },
   /**
     set many values at once
+    @this {Config}
     @param {object} d dictionary of values.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -72,6 +82,7 @@ var Config = Class.create(/** @lends Config# */{
   /**
     check that the config is good to go
     for instance: check that all required arguments are set
+    @this {Config}
     @author ${tdefs.personal_jsdoc_author}
   */
   check: function() {

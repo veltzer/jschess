@@ -14,9 +14,10 @@
   @class a whole board to play with
   @author ${tdefs.personal_jsdoc_author}
 */
-var SvgBoard = Class.create(/** @lends SvgBoard# */{
+var SvgBoard = Class.create(/** @lends {SvgBoard} */{
   /**
     creates a new instance
+    @this {SvgBoard}
     @param {Board} board instance to use as the abstract board.
     @param {object} dict overridables to the configuration for this object.
     @return {SvgBoard} the new instance.
@@ -82,6 +83,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     get the logical board [Board] associated with this SvgBoard
+    @this {SvgBoard}
     @return {Board} the logical board associated with this SvgBoard.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -90,6 +92,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     get the config value for a key
+    @this {SvgBoard}
     @param {string} key the key to get the config for.
     @return {anything} the value of the configuration option.
     @author ${tdefs.personal_jsdoc_author}
@@ -99,6 +102,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Prepare the raphael paper so we could do graphics
+    @this {SvgBoard}
     @author ${tdefs.personal_jsdoc_author}
   */
   raphaelPrep: function() {
@@ -122,7 +126,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
         this.getValue('size'),
         this.getValue('size'));
     */
-    this.elem = $(this.getValue('id'));
+    this.elem = jQuery(this.getValue('id'));
     var offset = this.elem.cumulativeOffset();
     this.startX = offset.left;
     this.startY = offset.top;
@@ -133,6 +137,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     It currently doesn't because the board looks the same in terms
     of white/black square when you totally flip it. If we ever support
     90% flips then this method must be modified.
+    @this {SvgBoard}
     @param {rect} rec Raphael.js rectangle object to fill.
     @param {boolean} anim do you want animation (slow transition).
     @author ${tdefs.personal_jsdoc_author}
@@ -173,6 +178,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Draw the border
+    @this {SvgBoard}
     @author ${tdefs.personal_jsdoc_author}
   */
   drawBorder: function() {
@@ -207,6 +213,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     Translate a position from a rectangle position
     to a logical position according to board rotation.
+    @this {SvgBoard}
     @param {PiecePosition} pos the position to translate.
     @return {PiecePosition} the logical position.
     @author ${tdefs.personal_jsdoc_author}
@@ -228,6 +235,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Draw the board (white and black squares)
+    @this {SvgBoard}
     @author ${tdefs.personal_jsdoc_author}
   */
   drawBoard: function() {
@@ -294,6 +302,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Create an overlay rectange for the entire board
+    @this {SvgBoard}
     @author ${tdefs.personal_jsdoc_author}
   */
   overlay: function() {
@@ -336,6 +345,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     Callback method that is called whenever a piece is added to the board
     This method is to be used to do something after a piece is added,
     removed etc.
+    @this {SvgBoard}
     @author ${tdefs.personal_jsdoc_author}
   */
   postGraphics: function() {
@@ -346,6 +356,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     Callback method that is called after the logical board adds a piece.
     This is where we add the SVG representation of the piece in real graphics.
+    @this {SvgBoard}
     @param {BoardPiece} boardPiece the piece that was added.
     @param {PiecePosition} piecePosition the position where the piece was added.
     @author ${tdefs.personal_jsdoc_author}
@@ -389,6 +400,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     Translates position (0..7,0..7) to pixels
     This method must take board rotation into consideration
+    @this {SvgBoard}
     @param {PiecePosition} piecePosition logical (0..7,0..7) to translate.
     @return {SvgPixelPosition} position in pixels.
     @author ${tdefs.personal_jsdoc_author}
@@ -423,6 +435,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     Translates pixel position (x,y) to board position (0..7,0..7)
     This method must take board rotation into consideration
+    @this {SvgBoard}
     @param {SvgPixelPosition} svgPixelPosition object to translate.
     @return {PiecePosition} logical position.
     @author ${tdefs.personal_jsdoc_author}
@@ -444,6 +457,13 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     }
     throw 'boardview is bad';
   },
+  /**
+    Forgiving version of the previous function.
+    @this {SvgBoard}
+    @param {SvgPixelPosition} svgPixelPosition object to translate.
+    @return {PiecePosition} logical position.
+    @author ${tdefs.personal_jsdoc_author}
+  */
   pixelsToPosForgiving: function(svgPixelPosition) {
     var x = Math.floor((svgPixelPosition.x) / this.square);
     var y = Math.floor((svgPixelPosition.y) / this.square);
@@ -466,6 +486,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Resize the board
+    @this {SvgBoard}
     @param {set} set Raphael set to resize.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -481,6 +502,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Shows or hides a given piece according to parameter
+    @this {SvgBoard}
     @param {BoardPiece} boardPiece piece to show or hide.
     @param {boolean} hide show or hide the piece.
     @author ${tdefs.personal_jsdoc_author}
@@ -497,6 +519,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Quick method to show a piece
+    @this {SvgBoard}
     @param {BoardPiece} boardPiece the piece to show.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -505,6 +528,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Quick method to hide a piece
+    @this {SvgBoard}
     @param {BoardPiece} boardPiece the piece to hide.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -513,6 +537,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Callback called when the logical board moves a piece
+    @this {SvgBoard}
     @param {BoardPiece} boardPiece the piece to move.
     @param {PiecePosition} fromPiecePosition position from which to move.
     @param {PiecePosition} toPiecePosition position to which to move.
@@ -523,6 +548,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Move a piece on the board (including animation if so configured)
+    @this {SvgBoard}
     @param {BoardPiece} boardPiece the piece to move.
     @param {PiecePosition} fromPiecePosition position from which to move.
     @param {PiecePosition} toPiecePosition position to which to move.
@@ -544,6 +570,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     Flips the board (see it from the other side)
     If the board is 90 deg left it be will 90 deg right.
     Black view will turn to white and white to black.
+    @this {SvgBoard}
     @author ${tdefs.personal_jsdoc_author}
   */
   flip: function() {
@@ -569,11 +596,12 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Rotate the board to the right 90 degrees
+    @this {SvgBoard}
     @author ${tdefs.personal_jsdoc_author}
   */
   rotateright: function() {
     var oldview = this.boardview;
-    if (!this.boardview in SvgBoard.ObjRotateRight) {
+    if (!(this.boardview in SvgBoard.ObjRotateRight)) {
       throw 'boardview is bad';
     }
     this.boardview = SvgBoard.ObjRotateRight[this.boardview];
@@ -582,11 +610,12 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Rotate the board to the left 90 degrees
+    @this {SvgBoard}
     @author ${tdefs.personal_jsdoc_author}
   */
   rotateleft: function() {
     var oldview = this.boardview;
-    if (!this.boardview in SvgBoard.ObjRotateLeft) {
+    if (!(this.boardview in SvgBoard.ObjRotateLeft)) {
       throw 'boardview is bad';
     }
     this.boardview = SvgBoard.ObjRotateLeft[this.boardview];
@@ -596,6 +625,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     toString function
     This method is not yet implemented and will throw an exception.
+    @this {SvgBoard}
     @return {string} a string representation of this object.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -604,6 +634,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Make a piece glow
+    @this {SvgBoard}
     @param {BoardPiece} boardPiece the piece to make glow.
     @param {object} glow properties to pass to the glow function as per
     Raphael.js.
@@ -620,6 +651,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   },
   /**
     Redraw the entire board
+    @this {SvgBoard}
     @param {viewType} oldview the old view of the board.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -640,6 +672,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     Event handler for events happening on the pieces.
     Types of events: click, mouseover and more...
+    @this {SvgBoard}
     @param {BoardPiece} boardPiece instance the event happened on.
     @param {string} type the type of event that happened.
     @author ${tdefs.personal_jsdoc_author}
@@ -662,6 +695,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     Events for position. Positions are logical and do
     not depend on the flipping of the board.
     Types of events: mouseover, mouseout, click and more.
+    @this {SvgBoard}
     @param {PiecePosition} piecePosition the position of the event.
     @param {rect} rec the Raphael.js rectangle where the event happened.
     @param {string} type which is the name of the event that happened.
@@ -707,6 +741,17 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
       }
     }
   },
+  /**
+    Events for position. Positions are logical and do
+    not depend on the flipping of the board.
+    Types of events: mouseover, mouseout, click and more.
+    @this {SvgBoard}
+    @param {string} eventtype which event happened.
+    @param {int} x x position of event.
+    @param {int} y y position of event.
+    @param {string} type which event happened.
+    @author ${tdefs.personal_jsdoc_author}
+  */
   eventGlobal: function(eventtype, x, y, type) {
     Utils.fakeUse(eventtype);
     if (this.getValue('do_select_global')) {
@@ -751,6 +796,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
     No parameters are passed because This method uses:
     this.selectedPiece, this.selectedRec, this.lastPos, this.currentPos
     to do it's work.
+    @this {SvgBoard}
     @author ${tdefs.personal_jsdoc_author}
   */
   newPosition: function() {
@@ -805,6 +851,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard# */{
   /**
     Return the square at a position.
     This method must take into consideraton board rotation
+    @this {SvgBoard}
     @param {PiecePosition} piecePosition the logical position for which to
     return the square.
     @return {rec} the Raphael.js rec in question.

@@ -14,9 +14,10 @@
   - description of the option
   @author ${tdefs.personal_jsdoc_author}
 */
-var ConfigTmpl = Class.create(/** @lends ConfigTmpl# */{
+var ConfigTmpl = Class.create(/** @lends {ConfigTmpl} */{
   /**
     create a new instance of this class.
+    @this {ConfigTmpl}
     @return {ConfigTmpl} a new instance of this class.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -27,6 +28,7 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl# */{
   },
   /**
     add another option to this template
+    @this {ConfigTmpl}
     @param {object} s config option with all needed properties.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -44,6 +46,7 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl# */{
   /**
     check that a key,value combo is ok
     This method will throw an exception if it finds anything wrong.
+    @this {ConfigTmpl}
     @param {string} key key to check.
     @param {anything} value value to check.
     @author ${tdefs.personal_jsdoc_author}
@@ -60,6 +63,7 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl# */{
   },
   /**
     return whether the template has a key
+    @this {ConfigTmpl}
     @param {string} key the key to check.
     @return {boolean} is the key part of this config template.
     @author ${tdefs.personal_jsdoc_author}
@@ -69,6 +73,7 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl# */{
   },
   /**
     return the default value for a key
+    @this {ConfigTmpl}
     @param {string} key the key to fetch the value for.
     @return {anything} the default value for the given key.
     @author ${tdefs.personal_jsdoc_author}
@@ -78,6 +83,7 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl# */{
   },
   /**
     show HTML that lists all config options for the current template
+    @this {ConfigTmpl}
     @return {string} HTML representation of this config template.
     @author ${tdefs.personal_jsdoc_author}
   */

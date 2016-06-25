@@ -5,9 +5,10 @@
   @class represents a position on the screen (in pixels)
   @author ${tdefs.personal_jsdoc_author}
 */
-var SvgPixelPosition = Class.create(/** @lends SvgPixelPosition# */{
+var SvgPixelPosition = Class.create(/** @lends {SvgPixelPosition} */{
   /**
     creates a new instance
+    @this {SvgPixelPosition}
     @param {number} x x co-ordinate.
     @param {number} y y co-ordinate.
     @return {SvgPixelPosition} the new instance.
@@ -28,6 +29,7 @@ var SvgPixelPosition = Class.create(/** @lends SvgPixelPosition# */{
   /**
     toString method so that you can get a nice printout of instances
     of this type
+    @this {SvgPixelPosition}
     @return {string} string representation of this object.
     @author ${tdefs.personal_jsdoc_author}
   */

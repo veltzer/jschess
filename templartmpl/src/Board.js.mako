@@ -12,9 +12,10 @@
   2. Do something with all pieces.
   @author ${tdefs.personal_jsdoc_author}
 */
-var Board = Class.create(/** @lends Board# */{
+var Board = Class.create(/** @lends {Board} */{
   /**
     creates a new instance
+    @this {Board}
     @return {Board} the new object created.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -39,6 +40,7 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     toString method that allows you to get a nice printout for this type
+    @this {Board}
     @return {string} string representation of this object.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -55,6 +57,7 @@ var Board = Class.create(/** @lends Board# */{
   /**
     Check that no piece is at a certain position.
     Will throw an exception if that is not the case.
+    @this {Board}
     @param {PiecePosition} piecePosition position to check that no piece is at.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -66,6 +69,7 @@ var Board = Class.create(/** @lends Board# */{
   /**
     Check that piece is at a certain position.
     Will throw an exception if that is not the case.
+    @this {Board}
     @param {PiecePosition} piecePosition position to check that a piece is at.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -77,6 +81,7 @@ var Board = Class.create(/** @lends Board# */{
   /**
     Check that a certain piece is at a certain position.
     Will throw an exception if that is not the case.
+    @this {Board}
     @param {BoardPiece} boardPiece the piece in question.
     @param {PiecePosition} piecePosition position to check that a piece is at.
     @author ${tdefs.personal_jsdoc_author}
@@ -88,6 +93,7 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Add a piece to the position
+    @this {Board}
     @param {BoardPiece} boardPiece piece to add.
     @param {PiecePosition} piecePosition where to add the piece.
     @author ${tdefs.personal_jsdoc_author}
@@ -104,6 +110,7 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Remove a piece
+    @this {Board}
     @param {BoardPiece} boardPiece piece to remove.
     @param {PiecePosition} piecePosition the position to remove it from.
     @author ${tdefs.personal_jsdoc_author}
@@ -120,6 +127,7 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Move a piece
+    @this {Board}
     @param {BoardPiece} boardPiece piece to move.
     @param {PiecePosition} fromPiecePosition from where to move the piece.
     @param {PiecePosition} toPiecePosition to where to move the piece.
@@ -139,6 +147,7 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Clear the board
+    @this {Board}
     @author ${tdefs.personal_jsdoc_author}
   */
   clearPieces: function() {
@@ -148,6 +157,7 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Add a piece to the position (seperate pieces of data).
+    @this {Board}
     @param {string} color color of the piece (black/white).
     @param {string} type type of the piece (rook/knight/bishop/queen/king/pawn).
     @param {number} x x location of the piece [0..8).
@@ -162,7 +172,8 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Run a function for each piece in this position
-    @param {function} f function to be called back for each piece.
+    @this {Board}
+    @param {function()} f function to be called back for each piece.
     This function should receive the piece to work on.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -177,7 +188,8 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Get a piece at a specific position
-    @param {PiecePosition} piecePositon position to get the piece at.
+    @this {Board}
+    @param {PiecePosition} piecePosition position to get the piece at.
     @return {BoardPiece} the piece at the specified position.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -187,6 +199,7 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Get a piece at a specific position (in parts)
+    @this {Board}
     @param {number} x x position to get piece at [0..8).
     @param {number} y y position to get piece at [0..8).
     @return {BoardPiece} the piece at the specified position.
@@ -197,6 +210,7 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Do we have a piece in a specific position?
+    @this {Board}
     @param {PiecePosition} piecePosition position to check for a piece at.
     @return {boolean} whether there is a piece at the position.
     @author ${tdefs.personal_jsdoc_author}
@@ -206,6 +220,7 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Do we have a piece in a specific position?
+    @this {Board}
     @param {number} x x position to check for piece at [0..8).
     @param {number} y y position to check for piece at [0..8).
     @return {boolean} is there a piece at position.
@@ -216,7 +231,8 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Add a callback for adding a piece
-    @param {function} f callback function.
+    @this {Board}
+    @param {function()} f callback function.
     @author ${tdefs.personal_jsdoc_author}
   */
   addPiecePostAddCallback: function(f) {
@@ -224,7 +240,8 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Add a callback for removing a piece
-    @param {function} f callback function.
+    @this {Board}
+    @param {function()} f callback function.
     @author ${tdefs.personal_jsdoc_author}
   */
   addPiecePostRemoveCallback: function(f) {
@@ -232,7 +249,8 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Add a callback for moving a piece
-    @param {function} f callback function.
+    @this {Board}
+    @param {function()} f callback function.
     @author ${tdefs.personal_jsdoc_author}
   */
   addPiecePostMoveCallback: function(f) {
@@ -240,6 +258,7 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Clear the board and add a position to the current board
+    @this {Board}
     @param {BoardPosition} boardPosition position to set.
     @author ${tdefs.personal_jsdoc_author}
   */
@@ -251,6 +270,7 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Put the board in starting position of standard chess.
+    @this {Board}
     @author ${tdefs.personal_jsdoc_author}
   */
   startPosition: function() {
@@ -258,6 +278,7 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Move a piece according to positions.
+    @this {Board}
     @param {PiecePosition} fromPiecePosition from where to move.
     @param {PiecePosition} toPiecePosition to where to move.
     @author ${tdefs.personal_jsdoc_author}
@@ -268,6 +289,7 @@ var Board = Class.create(/** @lends Board# */{
   },
   /**
     Get the position of a piece
+    @this {Board}
     @param {BoardPiece} boardPiece piece to get the position for.
     @return {PiecePosition} the position of the piece in question.
     @author ${tdefs.personal_jsdoc_author}

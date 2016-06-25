@@ -80,6 +80,7 @@ $(JSMIN): $(JSFULL) $(ALL_DEP)
 	$(Q)yui-compressor $< -o $(JSMIN_YUI)
 	$(Q)~/install/closure/compiler.jar $< --js_output_file $(JSMIN_CLOSURE)
 	$(Q)cp $(JSMIN_YUI) $(JSMIN)
+#$(Q)~/install/closure/compiler.jar --jscomp_error '*' $< --js_output_file $(JSMIN_CLOSURE)
 
 $(JSPACK): $(JSMIN) $(ALL_DEP)
 	$(info doing [$@])

@@ -76,6 +76,7 @@ def git_describe():
 
 def files_in_order():
 	return [
+		'src/goog.js',
 		'src/BoardPiece.js',
 		'src/BoardPosition.js',
 		'src/Config.js',

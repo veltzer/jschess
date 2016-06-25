@@ -6,9 +6,10 @@
   @class Singleton configuration for jschess
   @author ${tdefs.personal_jsdoc_author}
 */
-var SvgConfigTmpl = Class.create(ConfigTmpl,/** @lends SvgConfigTmpl# */ {
+var SvgConfigTmpl = Class.create(ConfigTmpl,/** @lends {SvgConfigTmpl} */ {
   /**
     creates a new instance
+    @this {SvgConfigTmpl}
     @param {parent} $super prototype.js parent to enable to call the
     parent constructur.
     @return {SvgConfigTmpl} the new instance.
