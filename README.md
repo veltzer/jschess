@@ -1,7 +1,7 @@
 jschess
 =======
 
-version: 191
+version: 192
 
 jschess is a JavaScript based chess board
 
@@ -14,7 +14,7 @@ Technologies used
 -----------------
 * Prototype javascript library (http://prototypejs.org).
 * Raphael javascript library (http://raphaeljs.com).
-* chess.js javascript library (https://github.com/jhlywa/chess.js).
+* chess.java javascript library (https://github.com/jhlywa/chess.js).
 
 Demo
 ----
@@ -37,4 +37,4 @@ your appreciation you are welcome to contribute to it's development at
 I am ready to work with any chess organization wishing to incorporate jschess
 into their infrastructre and am already working with two such organizations...
 
-	Mark Veltzer <mark@veltzer.net>, 2012-2014
+	Mark Veltzer <mark@veltzer.net>, 2012-2016
