@@ -22,8 +22,8 @@ deps.append(Dep(
 	'http://prototypejs.org',
 	None,
 	'https://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js',
-	'thirdparty/prototype-1.7.1.min.js',
-	'thirdparty/prototype-1.7.1.js',
+	'thirdparty/prototype.min.js',
+	'thirdparty/prototype.js',
 	'http://prototypejs.org/learn',
 ))
 deps.append(Dep(
@@ -32,8 +32,8 @@ deps.append(Dep(
 	'http://raphaeljs.com',
 	'http://github.com/DmitryBaranovskiy/raphael/raw/master/raphael-min.js',
 	'http://github.com/DmitryBaranovskiy/raphael/raw/master/raphael.js',
-	'thirdparty/raphael-2.1.0.min.js',
-	'thirdparty/raphael-2.1.0.js',
+	'thirdparty/raphael.min.js',
+	'thirdparty/raphael.js',
 	'http://raphaeljs.com/reference.html',
 ))
 deps.append(Dep(

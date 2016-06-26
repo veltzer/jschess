@@ -54,6 +54,10 @@ ALL+=$(HTMLCHECK)
 all: $(ALL)
 endif # DO_CHECKHTML
 
+# this line guarantees that if a receipe fails then the target file
+# will be deleted.
+.DELETE_ON_ERROR:
+
 ###########
 # targets #
 ###########
