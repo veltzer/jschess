@@ -16,4 +16,7 @@ __pycache__
 /.tdefs.config
 
 # nodejs downloaded code
-node_modules
+/node_modules
+
+# third parties
+/thirdparty

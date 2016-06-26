@@ -1,13 +1,11 @@
 - make running the closure compiler work with all warnings turned into errors
 	(look at the makefile, it already has the stricter line commented out).
-- move to highlight.js instead of syntaxhighlighter. Easier to use and easier
-	to fetch.
-- stop storing the third parties in my git. "make download" should download
-	them.
-	- I need to add qunit and syntaxhighlighter to the list of dependencies
-	at 'templardefs/jschess.py' b4 I can start dreaming of this.
-- make scripts for installing the necessary tools too:
-	closure compiler, jshint, html checker and the rest.
+- I have duplicate lists of deps. in two places:
+	- templardefs/jschess.py
+	- scripts/download_tp.sh
+	make them both rely on the python.
+- make scripts for installing the necessary tools for this project:
+	closure compiler, jshint, jsl, htmlhint, jsmin and the rest.
 
 - make a wrapper for running htmlhint since by itself
 	it is noisy.
