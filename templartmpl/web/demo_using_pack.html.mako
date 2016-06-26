@@ -10,7 +10,7 @@
 		<!-- highlight.js stuff -->
 		<script type="text/javascript" src="../thirdparty/highlist.min.js"></script>
 		<link href="../thirdparty/highlight.min.css" rel="stylesheet" type="text/css" />
-		<script>hljs.initHighlightingOnLoad();</script>
+		<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
 
 		<script type="text/javascript">
 			document.observe('dom:loaded', function() {
