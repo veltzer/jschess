@@ -2,6 +2,9 @@
 	(look at the makefile, it already has the stricter line commented out).
 - stop storing the third parties in my git. "make download" should download
 	them.
+- make scripts for installing the necessary tools too:
+	closure compiler, jshint, html checker and the rest.
+
 - make a wrapper for running htmlhint since by itself
 	it is noisy.
 	That's why we run it > /dev/null at the moment hiding
