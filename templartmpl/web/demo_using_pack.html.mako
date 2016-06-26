@@ -8,7 +8,7 @@
 		<script type="text/javascript" src="../out/jschess.pack.js"></script>
 
 		<!-- highlight.js stuff -->
-		<script type="text/javascript" src="../thirdparty/highlist.min.js"></script>
+		<script type="text/javascript" src="../thirdparty/highlight.min.js"></script>
 		<link href="../thirdparty/highlight.min.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
 
