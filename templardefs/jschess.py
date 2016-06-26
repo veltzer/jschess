@@ -2,9 +2,7 @@
 templating solution for this project
 '''
 
-import datetime # for datetime
 import subprocess # for check_output, DEVNULL
-import cgi # for escape
 
 class Dep:
 	def __init__(self,name,version,website,downloadUrl,downloadUrlDebug,myFile,myFileDebug,documentation):

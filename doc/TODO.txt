@@ -2,6 +2,8 @@
 	(look at the makefile, it already has the stricter line commented out).
 - stop storing the third parties in my git. "make download" should download
 	them.
+	- I need to add qunit and syntaxhighlighter to the list of dependencies
+	at 'templardefs/jschess.py' b4 I can start dreaming of this.
 - make scripts for installing the necessary tools too:
 	closure compiler, jshint, html checker and the rest.
 
