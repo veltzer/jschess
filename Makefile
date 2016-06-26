@@ -91,7 +91,7 @@ jsdoc/index.html: $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)rm -rf jsdoc
 	$(Q)mkdir -p $(dir $@)
-	$(Q)~/install/jsdoc/jsdoc -d jsdoc src 1> /dev/null
+	$(Q)nodejs ~/install/node_modules/jsdoc/jsdoc.js -d jsdoc src 1> /dev/null
 
 .PHONY: check_js
 check_js: $(JSCHECK) $(ALL_DEP)

@@ -14,3 +14,6 @@ __pycache__
 
 # templar generated
 /.tdefs.config
+
+# nodejs downloaded code
+node_modules
