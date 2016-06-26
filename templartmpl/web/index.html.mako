@@ -15,20 +15,11 @@ ${tdefs.jschess_getJsThirdParty}
 		<!--script src="../out/jschess.min.js"></script-->
 		<!--script src="../out/jschess.js"></script-->
 ${tdefs.jschess_jsFiles}
-		<!-- syntax highlighter stuff -->
-		<!-- Include required JS files -->
-		<script type="text/javascript" src="../thirdparty/sh/scripts/shCore.js"></script>
-		<!--
-			At least one brush, here we choose JS. You need to include a brush for every
-			language you want to highlight
-		-->
-		<script type="text/javascript" src="../thirdparty/sh/scripts/shBrushJScript.js"></script>
-		<script type="text/javascript" src="../thirdparty/sh/scripts/shBrushXml.js"></script>
-		<!-- Include *at least* the core style and default theme -->
-		<link href="../thirdparty/sh/styles/shCore.css" rel="stylesheet" type="text/css" />
-		<link href="../thirdparty/sh/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
 
-		<!-- You also need to add some content to highlight, but that is covered elsewhere. -->
+		<!-- highlight.js stuff -->
+		<script type="text/javascript" src="../thirdparty/highlist.min.js"></script>
+		<link href="../thirdparty/highlight.min.css" rel="stylesheet" type="text/css" />
+		<script>hljs.initHighlightingOnLoad();</script>
 
 		<script type="text/javascript">
 			document.observe('dom:loaded', function() {
