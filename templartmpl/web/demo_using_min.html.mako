@@ -73,11 +73,8 @@ ${tdefs.jschess_getJsThirdParty}></%block></code></pre>
 		<div id="myid"></div></%block></code></pre>
 		Then you can create a board from your javascript code by calling the constructor of SvgBoard. The board will be empty so we call startpos to get initial game position:
 		<pre><code class="js"><%block filter="h, trim">
-			var board=new Board()
-			var svgBoard=new SvgBoard(board,{
-				id:'myid'
-			})
-			board.startPosition()</%block></code></pre>
+			var board=new Board(); var svgBoard=new SvgBoard(board,{ id:'myid' }) board.startPosition()</%block>
+		</code></pre>
 		<p>
 		Here is the result:
 		</p>
