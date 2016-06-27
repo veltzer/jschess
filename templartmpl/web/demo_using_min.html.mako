@@ -35,9 +35,11 @@ ${tdefs.jschess_getJsThirdParty}
 			<tr>
 				<td>name</td>
 				<td>version</td>
-				<td>web</td>
+				<td>minified from web</td>
+				<td>debug from web</td>
 				<td>documentation</td>
-				<td>from me</td>
+				<td>debug from me</td>
+				<td>minified from me</td>
 			</tr>
 			% for dep in tdefs.jschess_runtimedeps:
 			<tr>
@@ -48,7 +50,13 @@ ${tdefs.jschess_getJsThirdParty}
 				% else:
 				<td>Not available for download</td>
 				% endif
+				% if dep.downloadUrlDebug is not None:
+				<td><a href="${dep.downloadUrlDebug}">download</a></td>
+				% else:
+				<td>Not available for download</td>
+				% endif
 				<td><a href="${dep.documentation}">link</a></td>
+				<td><a href="../${dep.myFileDebug}">my download</a></td>
 				<td><a href="../${dep.myFile}">my download</a></td>
 			</tr>
 			% endfor
