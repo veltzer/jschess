@@ -56,23 +56,23 @@ ${tdefs.jschess_getJsThirdParty}
 		<p>
 		Import them so:
 		</p>
-		<pre><code class="xml"><%block filter="h">
+		<pre><code class="xml"><%block filter="h, trim">
 ${tdefs.jschess_getJsThirdParty}></%block></code></pre>
 		<p>
 		Then download the minified <b>jschess</b> file from <a title="jschess compressed download" href="../out/jschess.min.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
 		</p>
-		<pre><code class="xml"><%block filter="h">
+		<pre><code class="xml"><%block filter="h, trim">
 		<script type="text/javascript" src="jschess.min.js"></script></%block></code></pre>
 		If you want to help me debug <b>jschess</b> or are experiencing problems you can download the uncompressed file
 		from <a title="jschess uncompressed download" href="../out/jschess.js">here</a> and use it like this:
-		<pre><code class="xml"><%block filter="h">
+		<pre><code class="xml"><%block filter="h, trim">
 		<script type="text/javascript" src="jschess.js"></script></%block></code></pre>
 		You need a place for your board, so place something like this somewhere in your html:
-		<pre><code class="xml"><%block filter="h">
+		<pre><code class="xml"><%block filter="h, trim">
 		<div id="myid"></div></%block></code></pre>
 		Then you can create a board from your javascript code by calling the constructor of SvgBoard. The board will be empty so we call startpos to get initial game position:
-		<pre><code class="js"><%block filter="h">
+		<pre><code class="js"><%block filter="h, trim">
 			var board=new Board()
 			var svgBoard=new SvgBoard(board,{
 				id:'myid'
