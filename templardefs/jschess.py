@@ -38,7 +38,7 @@ deps.append(Dep(
 ))
 deps.append(Dep(
 	'chess.js',
-	'v0.1-47-gb7c9788',
+	'0.10.2',
 	'https://github.com/jhlywa/chess.js',
 	'https://github.com/jhlywa/chess.js/raw/master/chess.min.js',
 	'https://github.com/jhlywa/chess.js/raw/master/chess.js',
