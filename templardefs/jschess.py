@@ -119,6 +119,13 @@ def depslist():
 			l.append(dep.myFile)
 	return ' '.join(l)
 
+def get_rt_deps():
+	l=[]
+	for dep in deps:
+		if dep.runtime:
+			l.append(dep)
+	return l
+
 def git_describe():
 	try:
 		ver=subprocess.check_output(['git', 'describe'],stderr=subprocess.DEVNULL).decode().rstrip()
@@ -172,6 +179,7 @@ def populate(d):
 	d.jschess_sources=sources()
 	d.jschess_getJsThirdParty=getJsThirdParty()
 	d.jschess_jsFiles=jsFiles()
+	d.jschess_runtimedeps=get_rt_deps()
 
 def getdeps():
 	return [__file__]

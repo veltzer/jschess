@@ -39,7 +39,7 @@ ${tdefs.jschess_getJsThirdParty}
 				<td>documentation</td>
 				<td>from me</td>
 			</tr>
-			% for dep in tdefs.jschess_deps:
+			% for dep in tdefs.jschess_runtimedeps:
 			<tr>
 				<td>${dep.name}</td>
 				<td>${dep.version}</td>
