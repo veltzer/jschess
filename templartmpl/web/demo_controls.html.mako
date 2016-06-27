@@ -29,13 +29,15 @@ ${tdefs.jschess_getJsThirdParty}
 		It provides with 6 buttons to control the game.
 		You need a place for your controls, so place something like this somewhere in your html:
 		</p>
-		<pre><code class="xml"><%block filter="h">
-		<div id="myid"></div></%block></code></pre>
+		<pre><code class="html"><%block filter="h, trim">
+		<div id="myid"></div>
+		</%block></code></pre>
 		Then you can create a Controls object from your javascript code by calling the constructor of Controls.
-		<pre><code class="js"><%block filter="h">
-			var controls=new Controls({
-				id:'myid'
-			})</%block></code></pre>
+		<pre><code class="js"><%block filter="h, trim">
+var controls=new Controls({
+	id:'myid'
+})
+		</%block></code></pre>
 		<p>
 		Here is the result:
 		</p>

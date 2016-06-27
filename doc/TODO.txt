@@ -2,7 +2,7 @@
 	(look at the makefile, it already has the stricter line commented out).
 - I have duplicate lists of deps. in two places:
 	- templardefs/jschess.py
-	- scripts/download_tp.sh
+	- scripts/download_tp.sh (the real urls we use are here!)
 	make them both rely on the python.
 - make scripts for installing the necessary tools for this project:
 	closure compiler, jshint, jsl, htmlhint, jsmin and the rest.

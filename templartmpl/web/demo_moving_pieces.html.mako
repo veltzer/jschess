@@ -102,11 +102,12 @@ ${tdefs.jschess_getJsThirdParty}
 			In order to move pieces first create a board (see other guides). Then, once
 			you have a board call:
 		</p>
-		<pre><code class="js">
-			board.movePieceByPos(
-				new PiecePosition(fromX,fromY),
-				new PiecePosition(toX,toY)
-			);</code></pre>
+		<pre><code class="js"><%block filter="h, trim">
+board.movePieceByPos(
+	new PiecePosition(fromX,fromY),
+	new PiecePosition(toX,toY)
+);
+		</%block></code></pre>
 		<p>
 		When you build the PiecePosition objects above <b>you</b> must make sure that
 		the <b>fromX, fromY, toX, toY</b> values passed to the method are valid numbers

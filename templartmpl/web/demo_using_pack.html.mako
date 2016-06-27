@@ -33,11 +33,11 @@
 		When using the .pack.js file download it from <a title="jschess package download" href="../out/jschess.pack.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
 		</p>
-		<pre><code class="xml"><%block filter="h"><script src="jschess.pack.js"></script></%block></code></pre>
+		<pre><code class="html"><%block filter="h, trim"><script src="jschess.pack.js"></script></%block></code></pre>
 		<p>
 		You need a place for your board, so place something like this somewhere in your html:
 		</p>
-		<pre><code class="xml"><%block filter="h"><div id="myid"></div></%block></code></pre>
+		<pre><code class="html"><%block filter="h, trim"><div id="myid"></div></%block></code></pre>
 		<p>
 		In order to get a board with initial position we must:
 		</p>
