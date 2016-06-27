@@ -5,7 +5,8 @@ templating solution for this project
 import subprocess # for check_output, DEVNULL
 
 class Dep:
-	def __init__(self,name,version,website,downloadUrl,downloadUrlDebug,myFile,myFileDebug,documentation):
+	def __init__(self,name,version,website,downloadUrl,downloadUrlDebug,
+		myFile,myFileDebug,documentation,runtime,downloadCss,css,closure,jsmin):
 		self.name=name
 		self.version=version
 		self.website=website
@@ -14,6 +15,11 @@ class Dep:
 		self.myFile=myFile
 		self.myFileDebug=myFileDebug
 		self.documentation=documentation
+		self.runtime=runtime
+		self.downloadCss=downloadCss
+		self.css=css
+		self.closure=closure
+		self.jsmin=jsmin
 
 deps=[]
 deps.append(Dep(
@@ -25,44 +31,92 @@ deps.append(Dep(
 	'thirdparty/prototype.min.js',
 	'thirdparty/prototype.js',
 	'http://prototypejs.org/learn',
+	True,
+	None,
+	None,
+	True,
+	False,
 ))
 deps.append(Dep(
 	'raphael',
 	'2.2.0',
 	'http://raphaeljs.com',
-	'http://github.com/DmitryBaranovskiy/raphael/raw/master/raphael-min.js',
-	'http://github.com/DmitryBaranovskiy/raphael/raw/master/raphael.js',
+	'https://raw.githubusercontent.com/DmitryBaranovskiy/raphael/master/raphael.min.js',
+	'https://raw.githubusercontent.com/DmitryBaranovskiy/raphael/master/raphael.js',
 	'thirdparty/raphael.min.js',
 	'thirdparty/raphael.js',
 	'http://raphaeljs.com/reference.html',
+	True,
+	None,
+	None,
+	False,
+	False,
 ))
 deps.append(Dep(
 	'chess.js',
 	'0.10.2',
 	'https://github.com/jhlywa/chess.js',
-	'https://github.com/jhlywa/chess.js/raw/master/chess.min.js',
-	'https://github.com/jhlywa/chess.js/raw/master/chess.js',
+	None,
+	'https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js',
 	'thirdparty/chess.min.js',
 	'thirdparty/chess.js',
 	'https://github.com/jhlywa/chess.js/blob/master/README.md',
+	True,
+	None,
+	None,
+	False,
+	True,
+))
+deps.append(Dep(
+	'qunit',
+	'2.0.0',
+	'https://qunitjs.com',
+	None,
+	'https://code.jquery.com/qunit/qunit-2.0.0.js',
+	'thirdparty/qunit.min.js',
+	'thirdparty/qunit.js',
+	'https://qunitjs.com',
+	False,
+	'https://code.jquery.com/qunit/qunit-2.0.0.css',
+	'thirdparty/qunit.css',
+	False,
+	False,
+))
+deps.append(Dep(
+	'highlight.js',
+	'9.4.0',
+	'https://highlightjs.org/',
+	None,
+	'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js',
+	None,
+	'thirdparty/highlight.min.js',
+	'https://highlightjs.org/usage',
+	False,
+	'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css',
+	'thirdparty/highlight.min.css',
+	False,
+	False,
 ))
 
 def getJsThirdParty():
 	l=[]
 	for dep in deps:
-		l.append('<script type="text/javascript" src="../'+dep.myFile+'"></script>')
+		if dep.runtime:
+			l.append('<script type="text/javascript" src="../'+dep.myFile+'"></script>')
 	return '\n'.join(l)
 
 def getJsThirdPartyDebug():
 	l=[]
 	for dep in deps:
-		l.append('<script type="text/javascript" src="../'+dep.myFileDebug+'"></script>')
+		if dep.runtime:
+			l.append('<script type="text/javascript" src="../'+dep.myFileDebug+'"></script>')
 	return '\n'.join(l)
 
 def depslist():
 	l=[]
 	for dep in deps:
-		l.append(dep.myFile)
+		if dep.runtime:
+			l.append(dep.myFile)
 	return ' '.join(l)
 
 def git_describe():
