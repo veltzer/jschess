@@ -51,10 +51,10 @@
 		So we will also call the startPosition method to setup a classic chess start position.
 		</p>
 		<pre><code class="js">var board=new Board()
-			var svgBoard=new SvgBoard(board,{
-				id:'myid'
-			})
-			board.startPosition()</code></pre>
+var svgBoard=new SvgBoard(board,{
+	id:'myid'
+})
+board.startPosition()</code></pre>
 		<p>
 		Here is the result:
 		</p>
