@@ -18,17 +18,17 @@ class Dep:
 deps=[]
 deps.append(Dep(
 	'prototype',
-	'1.7.1',
+	'1.7.3',
 	'http://prototypejs.org',
 	None,
-	'https://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js',
+	'https://ajax.googleapis.com/ajax/libs/prototype/1.7.3.0/prototype.js',
 	'thirdparty/prototype.min.js',
 	'thirdparty/prototype.js',
 	'http://prototypejs.org/learn',
 ))
 deps.append(Dep(
 	'raphael',
-	'2.1.0',
+	'2.2.0',
 	'http://raphaeljs.com',
 	'http://github.com/DmitryBaranovskiy/raphael/raw/master/raphael-min.js',
 	'http://github.com/DmitryBaranovskiy/raphael/raw/master/raphael.js',
