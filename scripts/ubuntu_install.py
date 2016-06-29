@@ -12,13 +12,10 @@ packs=[
 	'nodejs',
 	'npm',
 
-	'yui-compressor',
-	'jsdoc-toolkit',
+	'yui-compressor', # for yui-compressor(1)
+	'jsdoc-toolkit', # for jsdoc(1)
 	'closure-linter', # for gjslint(1)
-	'python-tweepy',
-	'python-tweepy-doc',
-	'python-twitter',
-	'python-twitter-doc',
+	'tidy', # for tidy(1)
 
 	# my own
 	'templar',

@@ -1,5 +1,8 @@
 - make scripts for installing the necessary tools for this project:
-	closure compiler, jshint, jsl, htmlhint, jsmin and the rest.
+	tools that do not have packages:
+		closure compiler, jsmin, jsl, htmlhint, jsdoc
+	tools that do have packages:
+		yui-compressor (yui-compressor), tidy (tidy), jsdoc (jsdoc-toolkit), gjslint (closure-linter)
 - make running the closure compiler work with all warnings turned into errors
 	(look at the makefile, it already has the stricter line commented out).
 
