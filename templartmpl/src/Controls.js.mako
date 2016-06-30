@@ -16,7 +16,7 @@ var Controls = Class.create(/** @lends {Controls} */{
     @author ${tdefs.personal_jsdoc_author}
   */
   initialize: function(dict) {
-    this.id = dict['id'];
+    this.id = dict.id;
     this.b_goto_start = new Element('button').update('goto_start');
     this.b_prev_move = new Element('button').update('prev_move');
     this.b_prev_play = new Element('button').update('prev_play');

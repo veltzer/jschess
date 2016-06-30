@@ -247,7 +247,7 @@ SvgConfigTmpl.instance = undefined;
   @author ${tdefs.personal_jsdoc_author}
 */
 SvgConfigTmpl.getInstance = function() {
-  if (SvgConfigTmpl.instance == undefined) {
+  if (SvgConfigTmpl.instance === undefined) {
     SvgConfigTmpl.instance = new SvgConfigTmpl();
   }
   return SvgConfigTmpl.instance;

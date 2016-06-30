@@ -44,9 +44,9 @@ SvgCreator.createPiece = function(config, pieceColor, pieceType) {
     // this is not the right way to make it hidden
     //'opacity':0,
     if (config.getValue('gradients')) {
-      stdatt['fill'] = '0-#fff:0-#fff:50-#999:100';
+      stdatt.fill = '0-#fff:0-#fff:50-#999:100';
     } else {
-      stdatt['fill'] = config.getValue('white_color');
+      stdatt.fill = config.getValue('white_color');
     }
     if (pieceType.isRook()) {
       svgPiece = new SvgPiece(45);
@@ -195,10 +195,10 @@ SvgCreator.createPiece = function(config, pieceColor, pieceType) {
   }
   if (pieceColor.isBlack()) {
     if (config.getValue('gradients')) {
-      //stdatt['fill']='0-#000:0-#222:50-#555:100';
-      stdatt['fill'] = '0-#555:0-#222:50-#000:100';
+      //stdatt.fill = '0-#000:0-#222:50-#555:100';
+      stdatt.fill = '0-#555:0-#222:50-#000:100';
     } else {
-      stdatt['fill'] = config.getValue('black_color');
+      stdatt.fill = config.getValue('black_color');
     }
     if (pieceType.isRook()) {
       svgPiece = new SvgPiece(45);
@@ -216,7 +216,7 @@ SvgCreator.createPiece = function(config, pieceColor, pieceType) {
           'M 11,14 L 11,9 L 15,9 L 15,11 L 20,11 L 20,9 L 25,9 L 25,11 L ' +
           '30,11 L 30,9 L 34,9 L 34,14 L 11,14 z', stdatt));
       stdatt = Utils.clone(stdatt);
-      stdatt['stroke'] = '#fff';
+      stdatt.stroke = '#fff';
       svgPiece.add(new SvgPathAndAttributes(
           'M 12,35.5 L 33,35.5', stdatt));
       svgPiece.add(new SvgPathAndAttributes(
@@ -242,8 +242,8 @@ SvgCreator.createPiece = function(config, pieceColor, pieceType) {
           '16.5,10 L 18.5,10 C 18.5,10 19.28,8.008 21,7 C 22,7 22,10 22,10',
           stdatt));
       stdatt = Utils.clone(stdatt);
-      stdatt['fill'] = '#fff';
-      stdatt['stroke'] = '#fff';
+      stdatt.fill = '#fff';
+      stdatt.stroke = '#fff';
       svgPiece.add(new SvgPathAndAttributes(
           'M 9.5 25.5 A 0.5 0.5 0 1 1 8.5,25.5 A 0.5 0.5 0 1 1 9.5 25.5 z',
           stdatt));
@@ -251,8 +251,8 @@ SvgCreator.createPiece = function(config, pieceColor, pieceType) {
           'M 15 15.5 A 0.5 1.5 0 1 1 14,15.5 A 0.5 1.5 0 1 1 15 15.5 z',
           stdatt));
       stdatt = Utils.clone(stdatt);
-      stdatt['fill'] = '#fff';
-      stdatt['stroke'] = 'none';
+      stdatt.fill = '#fff';
+      stdatt.stroke = 'none';
       svgPiece.add(new SvgPathAndAttributes(
           'M 24.55,10.4 L 24.1,11.85 L 24.6,12 C 27.75,13 30.25,14.49 32.5,' +
           '18.75 C 34.75,23.01 35.75,29.06 35.25,39 L 35.2,39.5 L 37.45,39.5 ' +
@@ -276,7 +276,7 @@ SvgCreator.createPiece = function(config, pieceColor, pieceType) {
       svgPiece.add(new SvgPathAndAttributes(
           'M 25 8 A 2.5 2.5 0 1 1 20,8 A 2.5 2.5 0 1 1 25 8 z', stdatt));
       stdatt = Utils.clone(stdatt);
-      stdatt['stroke'] = '#fff';
+      stdatt.stroke = '#fff';
       svgPiece.add(new SvgPathAndAttributes(
           'M 17.5,26 L 27.5,26 M 15,30 L 30,30 M 22.5,15.5 L 22.5,20.5 M ' +
           '20,18 L 25,18', stdatt));
@@ -333,7 +333,7 @@ SvgCreator.createPiece = function(config, pieceColor, pieceType) {
       svgPiece.add(new SvgPathAndAttributes(
           'M 11,38.5 A 35,35 1 0 0 34,38.5', stdatt));
       stdatt = Utils.clone(stdatt);
-      stdatt['stroke'] = '#fff';
+      stdatt.stroke = '#fff';
       svgPiece.add(new SvgPathAndAttributes(
           'M 11,29 A 35,35 1 0 1 34,29', stdatt));
       svgPiece.add(new SvgPathAndAttributes(
@@ -359,7 +359,7 @@ SvgCreator.createPiece = function(config, pieceColor, pieceType) {
           '11.5,29.5 L 11.5,37 z', stdatt));
       svgPiece.add(new SvgPathAndAttributes('M 20,8 L 25,8', stdatt));
       stdatt = Utils.clone(stdatt);
-      stdatt['stroke'] = '#fff';
+      stdatt.stroke = '#fff';
       svgPiece.add(new SvgPathAndAttributes(
           'M 32,29.5 C 32,29.5 40.5,25.5 38.03,19.85 C 34.15,14 ' +
           '25,18 22.5,24.5 L 22.51,26.6 L 22.5,24.5 C 20,18 9.906,14 ' +

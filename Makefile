@@ -69,6 +69,7 @@ $(JSCHECK): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)~/install/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(tdefs.jschess_sources)
 	$(Q)make_helper wrapper-silent gjslint --flagfile support/gjslint.cfg $(tdefs.jschess_sources)
+	$(Q)./node_modules/jshint/bin/jshint $(tdefs.jschess_sources)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 

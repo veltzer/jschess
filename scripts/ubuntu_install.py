@@ -23,3 +23,14 @@ packs=[
 args=['sudo','apt-get','install','--assume-yes']
 args.extend(packs)
 subprocess.check_call(args)
+
+node_packs=[
+	'jshint',
+]
+
+for node_pack in node_packs:
+	subprocess.check_call([
+		'npm',
+		'install',
+		node_pack,
+	])

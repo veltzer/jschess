@@ -239,6 +239,12 @@ var SvgBoard = Class.create(/** @lends {SvgBoard} */{
     @author ${tdefs.personal_jsdoc_author}
   */
   drawBoard: function() {
+    var f = function(tpos, trec, type) {
+      return function() {
+        var ttpos = that.translatePos(tpos);
+        that.eventPosition(ttpos, trec, type);
+      };
+    };
     var that = this;
     this.recs = [];
     for (var x = 0; x < 8; x++) {
@@ -257,44 +263,12 @@ var SvgBoard = Class.create(/** @lends {SvgBoard} */{
         var piecePosition = new PiecePosition(x, 7 - y);
         rec.data('pos', piecePosition);
         this.rectFill(rec, false);
-        rec.click(function(tpos, trec, type) {
-          return function() {
-            var ttpos = that.translatePos(tpos);
-            that.eventPosition(ttpos, trec, type);
-          };
-        }(piecePosition, rec, 'click'));
-        rec.mousedown(function(tpos, trec, type) {
-          return function() {
-            var ttpos = that.translatePos(tpos);
-            that.eventPosition(ttpos, trec, type);
-          };
-        }(piecePosition, rec, 'mousedown'));
-        /*
-        rec.mousemove(function(tpos, trec, type) {
-          return function() {
-            var ttpos=that.translatePos(tpos);
-            that.eventPosition(ttpos,trec,type);
-          };
-        }(piecePosition,rec,'mousemove'));
-        */
-        rec.mouseout(function(tpos, trec, type) {
-          return function() {
-            var ttpos = that.translatePos(tpos);
-            that.eventPosition(ttpos, trec, type);
-          };
-        }(piecePosition, rec, 'mouseout'));
-        rec.mouseover(function(tpos, trec, type) {
-          return function() {
-            var ttpos = that.translatePos(tpos);
-            that.eventPosition(ttpos, trec, type);
-          };
-        }(piecePosition, rec, 'mouseover'));
-        rec.mouseup(function(tpos, trec, type) {
-          return function() {
-            var ttpos = that.translatePos(tpos);
-            that.eventPosition(ttpos, trec, type);
-          };
-        }(piecePosition, rec, 'mouseup'));
+        rec.click(f(piecePosition, rec, 'click'));
+        rec.mousedown(f(piecePosition, rec, 'mousedown'));
+        /* rec.mousemove(f(piecePosition, rec, 'mousemove')); */
+        rec.mouseout(f(piecePosition, rec, 'mouseout'));
+        rec.mouseover(f(piecePosition, rec, 'mouseover'));
+        rec.mouseup(f(piecePosition, rec, 'mouseup'));
       }
       rec_line.reverse();
       this.recs.push(rec_line);
@@ -682,7 +656,7 @@ var SvgBoard = Class.create(/** @lends {SvgBoard} */{
     if (this.getValue('do_select_piecerec')) {
       if (type == 'mouseover') {
         var piecePosition = this.board.getPiecePosition(boardPiece);
-        if (this.currentPos == undefined ||
+        if (this.currentPos === undefined ||
             piecePosition.notEqual(this.currentPos)) {
           this.lastPos = this.currentPos;
           this.currentPos = piecePosition;
@@ -758,8 +732,8 @@ var SvgBoard = Class.create(/** @lends {SvgBoard} */{
       if (type == 'mouseover' || type == 'mousemove') {
         var piecePosition =
             this.pixelsToPosForgiving(new SvgPixelPosition(x, y));
-        if (piecePosition != undefined) {
-          if (this.currentPos == undefined) {
+        if (piecePosition !== undefined) {
+          if (this.currentPos === undefined) {
             this.lastPos = undefined;
             this.currentPos = piecePosition;
             this.newPosition();
@@ -800,14 +774,14 @@ var SvgBoard = Class.create(/** @lends {SvgBoard} */{
     @author ${tdefs.personal_jsdoc_author}
   */
   newPosition: function() {
-    if (this.currentPos == undefined) {
-      if (this.selectedPiece != undefined) {
+    if (this.currentPos === undefined) {
+      if (this.selectedPiece !== undefined) {
         if (this.getValue('do_select_piece')) {
           this.glow(this.selectedPiece, false);
           this.selectedPiece = undefined;
         }
       }
-      if (this.selectedRec != undefined) {
+      if (this.selectedRec !== undefined) {
         if (this.getValue('do_select_square')) {
           this.rectFill(this.selectedRec, false);
           this.selectedRec = undefined;
@@ -818,7 +792,7 @@ var SvgBoard = Class.create(/** @lends {SvgBoard} */{
         var boardPiece = this.board.getPieceAtPosition(this.currentPos);
         //this.eventPiece(boardPiece,'square'+type);
         if (this.getValue('do_select_piece')) {
-          if (this.selectedPiece == undefined) {
+          if (this.selectedPiece === undefined) {
             this.selectedPiece = boardPiece;
             this.glow(this.selectedPiece, true);
           } else {
@@ -828,7 +802,7 @@ var SvgBoard = Class.create(/** @lends {SvgBoard} */{
           }
         }
       } else {
-        if (this.selectedPiece != undefined) {
+        if (this.selectedPiece !== undefined) {
           if (this.getValue('do_select_piece')) {
             this.glow(this.selectedPiece, false);
             this.selectedPiece = undefined;
@@ -837,7 +811,7 @@ var SvgBoard = Class.create(/** @lends {SvgBoard} */{
       }
       if (this.getValue('do_select_square')) {
         var rec = this.getRec(this.currentPos);
-        if (this.selectedRec == undefined) {
+        if (this.selectedRec === undefined) {
           this.selectedRec = rec;
           this.selectedRec.attr('fill', this.getValue('over_color'));
         } else {
