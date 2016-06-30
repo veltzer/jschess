@@ -14,7 +14,7 @@
   - description of the option
   @author ${tdefs.personal_jsdoc_author}
 */
-var ConfigTmpl = Class.create(/** @lends {ConfigTmpl} */{
+var ConfigTmpl = Class.create(/** @lends ConfigTmpl */{
   /**
     create a new instance of this class.
     @this {ConfigTmpl}

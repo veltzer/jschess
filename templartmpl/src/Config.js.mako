@@ -24,7 +24,7 @@
   two boards on the page and have each configured differently.
   @author ${tdefs.personal_jsdoc_author}
 */
-var Config = Class.create(/** @lends {Config} */{
+var Config = Class.create(/** @lends Config */{
   /**
     creates a new instance.
     @this {Config}

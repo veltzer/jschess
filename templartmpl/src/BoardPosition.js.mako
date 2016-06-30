@@ -9,7 +9,7 @@
   @class represents a full position of the board
   @author ${tdefs.personal_jsdoc_author}
 */
-var BoardPosition = Class.create(/** @lends {BoardPosition} */{
+var BoardPosition = Class.create(/** @lends BoardPosition */{
   /**
     constructs a new object
     @this {BoardPosition}

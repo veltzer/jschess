@@ -5,7 +5,7 @@
   @class represents a position + graphics
   @author ${tdefs.personal_jsdoc_author}
 */
-var SvgPieceData = Class.create(/** @lends {SvgPieceData} */{
+var SvgPieceData = Class.create(/** @lends SvgPieceData */{
   /**
     creates a new instance
     @this {SvgPieceData}

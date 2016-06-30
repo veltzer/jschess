@@ -7,7 +7,7 @@
   goto_end
   @author ${tdefs.personal_jsdoc_author}
 */
-var Controls = Class.create(/** @lends {Controls} */{
+var Controls = Class.create(/** @lends Controls */{
   /**
     creates a new instance of this class.
     @this {Controls}

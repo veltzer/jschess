@@ -6,7 +6,7 @@
   @class represents a position on the board
   @author ${tdefs.personal_jsdoc_author}
 */
-var PiecePosition = Class.create(/** @lends {PiecePosition} */{
+var PiecePosition = Class.create(/** @lends PiecePosition */{
   /**
     creates a new instance
     @this {PiecePosition}

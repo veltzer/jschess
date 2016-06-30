@@ -17,7 +17,7 @@
   into some other piece like in the case of coronation).
   @author ${tdefs.personal_jsdoc_author}
 */
-var GameMove = Class.create(/** @lends {GameMove} */{
+var GameMove = Class.create(/** @lends GameMove */{
   /**
     creates a new instance
     @author ${tdefs.personal_jsdoc_author}

@@ -7,7 +7,7 @@
   instructions to a board.
   @author ${tdefs.personal_jsdoc_author}
 */
-var PgnReader = Class.create(/** @lends {PgnReader} */{
+var PgnReader = Class.create(/** @lends PgnReader */{
   /**
     creates a new instance
     @return {PgnReader} the new instance.
