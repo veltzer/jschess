@@ -6,7 +6,7 @@
   including a full set of moves of type GameMove.
   @author ${tdefs.personal_jsdoc_author}
 */
-var Game = Class.create(/** @lends Game */{
+var Game = Class.create(/** @lends Game.prototype */{
   /**
     creates a new instance of this class.
     @return {Game} new instance of this class.

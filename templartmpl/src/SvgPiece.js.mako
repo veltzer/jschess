@@ -7,7 +7,7 @@
   and array of paths and attributes to draw the path
   @author ${tdefs.personal_jsdoc_author}
 */
-var SvgPiece = Class.create(/** @lends SvgPiece */{
+var SvgPiece = Class.create(/** @lends SvgPiece.prototype */{
   /**
     creates a new instance
     @this {SvgPiece}

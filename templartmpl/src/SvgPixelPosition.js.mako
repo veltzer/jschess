@@ -5,7 +5,7 @@
   @class represents a position on the screen (in pixels)
   @author ${tdefs.personal_jsdoc_author}
 */
-var SvgPixelPosition = Class.create(/** @lends SvgPixelPosition */{
+var SvgPixelPosition = Class.create(/** @lends SvgPixelPosition.prototype */{
   /**
     creates a new instance
     @this {SvgPixelPosition}

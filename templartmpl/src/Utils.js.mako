@@ -5,7 +5,7 @@
   @class a class to have static utility functions
   @author ${tdefs.personal_jsdoc_author}
 */
-var Utils = Class.create(/** @lends Utils */{
+var Utils = Class.create(/** @lends Utils.prototype */{
   /**
     creates a new instance
     @return {Utils} the new instance.

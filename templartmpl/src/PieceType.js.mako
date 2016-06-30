@@ -5,7 +5,7 @@
   @class represents a piece type (rook,knight,bishop,queen,king,pawn)
   @author ${tdefs.personal_jsdoc_author}
 */
-var PieceType = Class.create(/** @lends PieceType */{
+var PieceType = Class.create(/** @lends PieceType.prototype */{
   /**
     creates a new instance
     @this {PieceType}

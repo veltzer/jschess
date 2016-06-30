@@ -14,7 +14,7 @@
   @class a whole board to play with
   @author ${tdefs.personal_jsdoc_author}
 */
-var SvgBoard = Class.create(/** @lends SvgBoard */{
+var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
   /**
     creates a new instance
     @this {SvgBoard}

@@ -5,7 +5,7 @@
   @class a path + attributes two tuple object
   @author ${tdefs.personal_jsdoc_author}
 */
-var SvgPathAndAttributes = Class.create(/** @lends SvgPathAndAttributes */{
+var SvgPathAndAttributes = Class.create(/** @lends SvgPathAndAttributes.prototype */{
   /**
     creates a new instance
     @this {SvgPathAndAttributes}

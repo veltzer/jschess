@@ -5,7 +5,7 @@
   @class represents a piece color (white,black)
   @author ${tdefs.personal_jsdoc_author}
 */
-var PieceColor = Class.create(/** @lends PieceColor */{
+var PieceColor = Class.create(/** @lends PieceColor.prototype */{
   /**
     creates a new instance
     @this {PieceColor}

@@ -6,7 +6,7 @@
   @class Singleton configuration for jschess
   @author ${tdefs.personal_jsdoc_author}
 */
-var SvgConfigTmpl = Class.create(ConfigTmpl,/** @lends SvgConfigTmpl */ {
+var SvgConfigTmpl = Class.create(ConfigTmpl,/** @lends SvgConfigTmpl.prototype */ {
   /**
     creates a new instance
     @this {SvgConfigTmpl}

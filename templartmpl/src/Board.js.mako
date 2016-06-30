@@ -12,7 +12,7 @@
   2. Do something with all pieces.
   @author ${tdefs.personal_jsdoc_author}
 */
-var Board = Class.create(/** @lends Board */{
+var Board = Class.create(/** @lends Board.prototype */{
   /**
     creates a new instance
     @this {Board}

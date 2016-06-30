@@ -6,7 +6,7 @@
   a data field that could be used for private data attached to the piece.
   @author ${tdefs.personal_jsdoc_author}
 */
-var BoardPiece = Class.create(/** @lends BoardPiece */{
+var BoardPiece = Class.create(/** @lends BoardPiece.prototype */{
   /**
     constructs a new object.
     @this {BoardPiece}

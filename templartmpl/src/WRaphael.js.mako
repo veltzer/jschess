@@ -5,7 +5,7 @@
   @class Wrapper for Raphael.js set
   @author ${tdefs.personal_jsdoc_author}
 */
-var WSet = Class.create(/** @lends WSet */{
+var WSet = Class.create(/** @lends WSet.prototype */{
   /**
     @this {WSet}
     @param {set} set the raphael set that this wraps.
@@ -125,7 +125,7 @@ var WSet = Class.create(/** @lends WSet */{
   @class Wrapper for Raphael.js
   @author ${tdefs.personal_jsdoc_author}
 */
-var WRaphael = Class.create(/** @lends WRaphael */{
+var WRaphael = Class.create(/** @lends WRaphael.prototype */{
   /**
     creates a new instance.
     Pass anything you want to raphael.
