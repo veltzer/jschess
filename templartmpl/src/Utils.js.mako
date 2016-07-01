@@ -122,7 +122,7 @@ Utils.checkType = function(v, t) {
 Utils.checkContains = function(s1, s2) {
   var x;
   for (x in s1) {
-    if (!(x.hasOwnProperty(s2))) {
+    if (!(s2.hasOwnProperty(x))) {
       throw 'key ' + x + ' is bad';
     }
   }
