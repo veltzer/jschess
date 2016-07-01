@@ -98,6 +98,17 @@ Utils.arrClone = function(a) {
 
 
 /**
+  Return the type of a variable
+  @param {anything} v the variable
+  @return {string} the type.
+  @author ${tdefs.personal_jsdoc_author}
+*/
+Utils.getType = function(v) {
+  return typeof v;
+};
+
+
+/**
   Check the type of a javascript variable
   This method will throw an exception if the check fails.
   @param {anything} v the variable to check.
@@ -106,7 +117,7 @@ Utils.arrClone = function(a) {
   @author ${tdefs.personal_jsdoc_author}
 */
 Utils.checkType = function(v, t) {
-  if (typeof v !== t) {
+  if (Utils.getType(v) !== t) {
     throw 'type is wrong';
   }
 };

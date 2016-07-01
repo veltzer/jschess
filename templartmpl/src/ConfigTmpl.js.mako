@@ -35,10 +35,10 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl.prototype */{
   */
   add: function(s) {
     Utils.checkEquals(s, ConfigTmpl.fullSet);
-    if (!(s.type in ConfigTmpl.types)) {
+    if (!(ConfigTmpl.types.hasOwnProperty(s.type))) {
       throw 'bad type [' + s.type + ']';
     }
-    if (s.name in this.tuples) {
+    if (this.tuples.hasOwnProperty(s.name)) {
       throw 'repeat of key [' + s.name + ']';
     }
     this.tuples[s.name] = s;
@@ -53,14 +53,12 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   check: function(key, value) {
-    if (!(key in this.tuples)) {
+    if (!(this.tuples.hasOwnProprety(key))) {
       throw 'wrong key [' + key + ']';
     }
     var type_to_check = this.tuples[key].type;
     var our_type = ConfigTmpl.types[type_to_check];
-    if (typeof(value) != our_type) {
-      throw 'wrong type for key [' + key + '] and value [' + value + ']';
-    }
+    Utils.checkType(value, our_type);
   },
   /**
     return whether the template has a key
@@ -70,7 +68,7 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   hasKey: function(key) {
-    return key in this.tuples;
+    return this.tuples.hasOwnProperty(key);
   },
   /**
     return the default value for a key

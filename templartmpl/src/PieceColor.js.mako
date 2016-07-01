@@ -37,7 +37,7 @@ var PieceColor = Class.create(/** @lends PieceColor.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   isWhite: function() {
-    return this.color == 'white';
+    return this.color === 'white';
   },
   /**
     Return whether the piece is black
@@ -46,7 +46,7 @@ var PieceColor = Class.create(/** @lends PieceColor.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   isBlack: function() {
-    return this.color == 'black';
+    return this.color === 'black';
   }
 });
 

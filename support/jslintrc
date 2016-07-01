@@ -1,0 +1,9 @@
+{
+    "globals"       : { "window" : null, "goog": null },
+    "strict"        : false,
+    "indent"        : 2,
+    "forin"         : false,
+    "immed"    : false,
+    "nonbsp"        : false,
+    "evil"	: false
+}

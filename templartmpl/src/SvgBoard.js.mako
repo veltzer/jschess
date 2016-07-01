@@ -146,13 +146,13 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
   rectFill: function(rec, anim) {
     var piecePosition = rec.data('pos');
     var mod;
-    if (this.boardview == 'white' || this.boardview == 'black') {
+    if (this.boardview === 'white' || this.boardview === 'black') {
       mod = 1;
     } else {
       mod = 0;
     }
     var val;
-    if ((piecePosition.x + piecePosition.y) % 2 == mod) {
+    if ((piecePosition.x + piecePosition.y) % 2 === mod) {
       if (this.getValue('gradients')) {
         val = this.getValue('white_square_gradient');
       } else {
@@ -183,29 +183,29 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   drawBorder: function() {
-    var x, y;
+    var x, y, txt1, txt2, txt3, txt4;
     var part = 0.5;
     var partial = this.getValue('partial');
     this.texts = [];
     for (y = 0; y < 8; y++) {
-      var txt1 = this.paper.text(
+      txt1 = this.paper.text(
           this.square * (partial / 2) * part,
           (y + 0.5) * this.square + this.offY,
           8 - y);
       this.texts.push(txt1);
-      var txt2 = this.paper.text(
+      txt2 = this.paper.text(
           this.offX + this.square * 8.0 + this.square * (partial / 2) * part,
           (y + 0.5) * this.square + this.offY,
           8 - y);
       this.texts.push(txt2);
     }
     for (x = 0; x < 8; x++) {
-      var txt3 = this.paper.text(
+      txt3 = this.paper.text(
           (x + 0.5) * this.square + this.offX,
           this.square * (partial / 2) * part,
           String.fromCharCode(x + 'A'.charCodeAt(0)));
       this.texts.push(txt3);
-      var txt4 = this.paper.text(
+      txt4 = this.paper.text(
           (x + 0.5) * this.square + this.offX,
           this.offY + this.square * 8.0 + this.square * (partial / 2) * part,
           String.fromCharCode(x + 'A'.charCodeAt(0)));
@@ -221,16 +221,16 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   translatePos: function(pos) {
-    if (this.boardview == 'white') {
+    if (this.boardview === 'white') {
       return new PiecePosition(pos.x, pos.y);
     }
-    if (this.boardview == 'black') {
+    if (this.boardview === 'black') {
       return new PiecePosition(7 - pos.x, 7 - pos.y);
     }
-    if (this.boardview == 'left') {
+    if (this.boardview === 'left') {
       return new PiecePosition(pos.y, pos.x);
     }
-    if (this.boardview == 'right') {
+    if (this.boardview === 'right') {
       return new PiecePosition(7 - pos.y, 7 - pos.x);
     }
     throw 'boardview is not correct';
@@ -241,7 +241,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   drawBoard: function() {
-    var x, y;
+    var x, y, rec_line, rec, piecePosition;
     var that = this;
     var f = function(tpos, trec, type) {
       return function() {
@@ -251,9 +251,9 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     };
     this.recs = [];
     for (x = 0; x < 8; x++) {
-      var rec_line = [];
+      rec_line = [];
       for (y = 0; y < 8; y++) {
-        var rec = this.paper.rect(
+        rec = this.paper.rect(
             x * this.square + this.offX,
             y * this.square + this.offY,
             this.square,
@@ -263,7 +263,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
           'stroke-width': this.getValue('rec_stroke_width')
         });
         rec_line.push(rec);
-        var piecePosition = new PiecePosition(x, 7 - y);
+        piecePosition = new PiecePosition(x, 7 - y);
         rec.data('pos', piecePosition);
         this.rectFill(rec, false);
         rec.click(f(piecePosition, rec, 'click'));
@@ -350,11 +350,11 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     var transform = m.toTransformString();
     // now put it on the paper
     var set = svgPiece.toSet(this.paper, transform);
-    set.eventRegister(function(iboardPiece) {
+    set.eventRegister((function(iboardPiece) {
       return function(eventName) {
         that.eventPiece(iboardPiece, eventName);
       };
-    }(boardPiece), ['click', 'mouseover', 'mouseout']);
+    }(boardPiece)), ['click', 'mouseover', 'mouseout']);
     //}(boardPiece),['click','mouseover','mouseout','mousemove','mouseup','mousedown']);
     // lets put our own data with the piece
     var svgPieceData = new SvgPieceData(set, pixelPos);
@@ -383,25 +383,25 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   posToPixels: function(piecePosition) {
-    if (this.boardview == 'white') {
+    if (this.boardview === 'white') {
       return new SvgPixelPosition(
           piecePosition.x * this.square,
           (7 - piecePosition.y) * this.square
       );
     }
-    if (this.boardview == 'black') {
+    if (this.boardview === 'black') {
       return new SvgPixelPosition(
           (7 - piecePosition.x) * this.square,
           piecePosition.y * this.square
       );
     }
-    if (this.boardview == 'left') {
+    if (this.boardview === 'left') {
       return new SvgPixelPosition(
           piecePosition.y * this.square,
           (7 - piecePosition.x) * this.square
       );
     }
-    if (this.boardview == 'right') {
+    if (this.boardview === 'right') {
       return new SvgPixelPosition(
           (7 - piecePosition.y) * this.square,
           piecePosition.x * this.square
@@ -420,16 +420,16 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
   pixelsToPos: function(svgPixelPosition) {
     var x = Math.floor((svgPixelPosition.x) / this.square);
     var y = Math.floor((svgPixelPosition.y) / this.square);
-    if (this.boardview == 'white') {
+    if (this.boardview === 'white') {
       return new PiecePosition(x, 7 - y);
     }
-    if (this.boardview == 'black') {
+    if (this.boardview === 'black') {
       return new PiecePosition(7 - x, y);
     }
-    if (this.boardview == 'left') {
+    if (this.boardview === 'left') {
       return new PiecePosition(y, 7 - x);
     }
-    if (this.boardview == 'right') {
+    if (this.boardview === 'right') {
       return new PiecePosition(7 - y, x);
     }
     throw 'boardview is bad';
@@ -447,16 +447,16 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     if (x > 7 || x < 0 || y > 7 || y < 0) {
       return undefined;
     }
-    if (this.boardview == 'white') {
+    if (this.boardview === 'white') {
       return new PiecePosition(x, 7 - y);
     }
-    if (this.boardview == 'black') {
+    if (this.boardview === 'black') {
       return new PiecePosition(7 - x, y);
     }
-    if (this.boardview == 'left') {
+    if (this.boardview === 'left') {
       return new PiecePosition(y, 7 - x);
     }
-    if (this.boardview == 'right') {
+    if (this.boardview === 'right') {
       return new PiecePosition(7 - y, x);
     }
     throw 'boardview is bad';
@@ -578,7 +578,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
   */
   rotateright: function() {
     var oldview = this.boardview;
-    if (!(this.boardview in SvgBoard.ObjRotateRight)) {
+    if (!(SvgBoard.ObjRotateRight.hasOwnProperty(oldview))) {
       throw 'boardview is bad';
     }
     this.boardview = SvgBoard.ObjRotateRight[this.boardview];
@@ -592,7 +592,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
   */
   rotateleft: function() {
     var oldview = this.boardview;
-    if (!(this.boardview in SvgBoard.ObjRotateLeft)) {
+    if (!(SvgBoard.ObjRotateLeft.hasOwnProperty(oldview))) {
       throw 'boardview is bad';
     }
     this.boardview = SvgBoard.ObjRotateLeft[this.boardview];
@@ -658,7 +658,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
   eventPiece: function(boardPiece, type) {
     //Utils.fakeUse(boardPiece,type);
     if (this.getValue('do_select_piecerec')) {
-      if (type == 'mouseover') {
+      if (type === 'mouseover') {
         var piecePosition = this.board.getPiecePosition(boardPiece);
         if (this.currentPos === undefined ||
             piecePosition.notEqual(this.currentPos)) {
@@ -681,7 +681,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
   */
   eventPosition: function(piecePosition, rec, type) {
     if (this.getValue('do_select_piecerec')) {
-      if (type == 'mouseover') {
+      if (type === 'mouseover') {
         this.lastPos = this.currentPos;
         this.currentPos = piecePosition;
         this.newPosition();
@@ -702,9 +702,9 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
       */
     }
     if (this.getValue('do_select_click')) {
-      if (type == 'click') {
+      if (type === 'click') {
         if (this.selected) {
-          if (this.selected == rec) {
+          if (this.selected === rec) {
             this.rectFill(this.selected, false);
             this.selected = undefined;
           } else {
@@ -733,7 +733,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
   eventGlobal: function(eventtype, x, y, type) {
     Utils.fakeUse(eventtype);
     if (this.getValue('do_select_global')) {
-      if (type == 'mouseover' || type == 'mousemove') {
+      if (type === 'mouseover' || type === 'mousemove') {
         var piecePosition =
             this.pixelsToPosForgiving(new SvgPixelPosition(x, y));
         if (piecePosition !== undefined) {
@@ -753,14 +753,14 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
           Utils.pass();
         }
       }
-      if (type == 'mouseout') {
+      if (type === 'mouseout') {
         this.lastPos = this.currentPos;
         this.currentPos = undefined;
         this.newPosition();
       }
     }
     if (this.getValue('do_select_piecerec')) {
-      if (type == 'mouseout') {
+      if (type === 'mouseout') {
         this.lastPos = this.currentPos;
         this.currentPos = undefined;
         this.newPosition();
@@ -836,16 +836,16 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   getRec: function(piecePosition) {
-    if (this.boardview == 'white') {
+    if (this.boardview === 'white') {
       return this.recs[piecePosition.x][piecePosition.y];
     }
-    if (this.boardview == 'black') {
+    if (this.boardview === 'black') {
       return this.recs[7 - piecePosition.x][7 - piecePosition.y];
     }
-    if (this.boardview == 'left') {
+    if (this.boardview === 'left') {
       return this.recs[piecePosition.y][piecePosition.x];
     }
-    if (this.boardview == 'right') {
+    if (this.boardview === 'right') {
       return this.recs[7 - piecePosition.y][7 - piecePosition.x];
     }
     throw 'boardview is bad';

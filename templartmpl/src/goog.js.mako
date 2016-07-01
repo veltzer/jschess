@@ -1,3 +1,4 @@
+/*global goog*/
 goog.provide('$');
 goog.provide('Ajax');
 goog.provide('Chess');
