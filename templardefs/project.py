@@ -9,7 +9,7 @@ def populate(d):
 	d.project_website_source='https://github.com/{project_github_username}/{project_name}'.format(**d)
 	d.project_website_git='git://github.com/{project_github_username}/{project_name}.git'.format(**d)
 	d.project_paypal_donate_button_id='XKSSBRVJM7HHA'
-	d.project_google_analytics_tracking_id='UA-56436979-1'
+	d.project_google_analytics_tracking_id='UA-80188541-1'
 	d.project_long_description='jschess is a JavaScript based chess board'
 	d.project_keywords=[
 		'JavaScript',

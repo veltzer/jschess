@@ -6,9 +6,12 @@
 	it is noisy.
 	That's why we run it > /dev/null at the moment hiding
 	errors as well as informational messages.
+
 - add spell checking for the html files.
 	and make that a prepreq for building.
+
 - make check_all a target for build and not a target on the side.
+
 - make the snipplets of code that I use be files on the file system.
 	then they can be included into the files.
 	This means that every piece of code will only be written once.
