@@ -32,6 +32,8 @@ packs=[
 	'jsdoc-toolkit', # for jsdoc(1)
 	'closure-linter', # for gjslint(1)
 	'tidy', # for tidy(1)
+	'zip', # for zip(1)
+	'sloccount', # for sloccount(1)
 
 	# my own
 	'templar',

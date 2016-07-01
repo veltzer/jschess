@@ -10,7 +10,7 @@ __pycache__
 *.pyc
 
 # stamps for various purposes
-*.stamp
+/*.stamp
 
 # templar generated
 /.tdefs.config

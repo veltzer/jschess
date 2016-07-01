@@ -46,6 +46,7 @@ ALL+=jsdoc/index.html
 all: $(ALL)
 endif # DO_DOCS
 
+TOOLS:=tools.stamp
 SOURCES_HTML_MAKO:=$(shell find templartmpl/web \( -type f -or -type l \) -and -name "*.mako" 2> /dev/null)
 SOURCES_HTML:=$(shell make_helper rmfdas $(SOURCES_HTML_MAKO))
 HTMLCHECK:=html.stamp
@@ -61,24 +62,28 @@ endif # DO_CHECKHTML
 ###########
 # targets #
 ###########
+$(TOOLS): scripts/tools.py $(ALL_DEP)
+	$(Q)./scripts/tools.py
+	$(Q)touch $@
+
 $(JSZIP): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)zip -qr $@ $(tdefs.jschess_sources)
 
-$(JSCHECK): $(tdefs.jschess_sources) $(ALL_DEP)
+$(JSCHECK): $(tdefs.jschess_sources) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)~/install/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(tdefs.jschess_sources)
 	$(Q)make_helper wrapper-silent gjslint --flagfile support/gjslint.cfg $(tdefs.jschess_sources)
 	$(Q)./node_modules/jshint/bin/jshint $(tdefs.jschess_sources)
 	$(Q)mkdir -p $(dir $@)
-	$(Q)touch $(JSCHECK)
+	$(Q)touch $@
 
 $(JSFULL): $(tdefs.jschess_sources) $(JSCHECK) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
 	$(Q)cat $(tdefs.jschess_sources) > $@
 
-$(JSMIN): $(JSFULL) $(ALL_DEP)
+$(JSMIN): $(JSFULL) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
 	$(Q)~/install/jsmin/jsmin < $< > $(JSMIN_JSMIN)
@@ -92,7 +97,7 @@ $(JSPACK): $(JSMIN) $(ALL_DEP)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)cat $(tdefs.jschess_depslist) $(JSMIN) > $(JSPACK)
 
-jsdoc/index.html: $(tdefs.jschess_sources) $(ALL_DEP)
+jsdoc/index.html: $(tdefs.jschess_sources) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)rm -rf jsdoc
 	$(Q)mkdir -p $(dir $@)
