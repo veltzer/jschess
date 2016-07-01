@@ -77,7 +77,7 @@ $(JSCHECK): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(Q)~/install/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(tdefs.jschess_sources)
 	$(Q)make_helper wrapper-silent gjslint --flagfile support/gjslint.cfg $(tdefs.jschess_sources)
 	$(Q)./node_modules/jshint/bin/jshint $(tdefs.jschess_sources)
-	$(Q)./node_modules/jslint/bin/jslint.js --verbose --browser --terse --todo --plusplus --forin --vars --sloppy --white --config support/jslintrc $(tdefs.jschess_sources)
+	$(Q)./node_modules/jslint/bin/jslint.js --browser --terse --todo --plusplus --forin --vars --sloppy --white --config support/jslintrc $(tdefs.jschess_sources) 2> /dev/null
 	$(Q)make_helper touch-mkdir $@
 
 $(JSFULL): $(tdefs.jschess_sources) $(JSCHECK) $(ALL_DEP)
