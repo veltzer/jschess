@@ -55,6 +55,8 @@ ALL+=$(HTMLCHECK)
 all: $(ALL)
 endif # DO_CHECKHTML
 
+ALL_DEP+=$(TOOLS)
+
 # this line guarantees that if a receipe fails then the target file
 # will be deleted.
 .DELETE_ON_ERROR:
@@ -62,7 +64,7 @@ endif # DO_CHECKHTML
 ###########
 # targets #
 ###########
-$(TOOLS): scripts/tools.py $(ALL_DEP)
+$(TOOLS): scripts/tools.py
 	$(Q)./scripts/tools.py
 	$(Q)touch $@
 
@@ -70,7 +72,7 @@ $(JSZIP): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)zip -qr $@ $(tdefs.jschess_sources)
 
-$(JSCHECK): $(tdefs.jschess_sources) $(TOOLS) $(ALL_DEP)
+$(JSCHECK): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)~/install/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(tdefs.jschess_sources)
 	$(Q)make_helper wrapper-silent gjslint --flagfile support/gjslint.cfg $(tdefs.jschess_sources)
@@ -83,7 +85,7 @@ $(JSFULL): $(tdefs.jschess_sources) $(JSCHECK) $(ALL_DEP)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)cat $(tdefs.jschess_sources) > $@
 
-$(JSMIN): $(JSFULL) $(TOOLS) $(ALL_DEP)
+$(JSMIN): $(JSFULL) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
 	$(Q)~/install/jsmin/jsmin < $< > $(JSMIN_JSMIN)
@@ -97,7 +99,7 @@ $(JSPACK): $(JSMIN) $(ALL_DEP)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)cat $(tdefs.jschess_depslist) $(JSMIN) > $(JSPACK)
 
-jsdoc/index.html: $(tdefs.jschess_sources) $(TOOLS) $(ALL_DEP)
+jsdoc/index.html: $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)rm -rf jsdoc
 	$(Q)mkdir -p $(dir $@)

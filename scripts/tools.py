@@ -49,16 +49,24 @@ node_packs=[
 ########
 # code #
 ########
-args=['sudo','apt-get','install','--assume-yes']
-args.extend(packs)
-subprocess.check_call(args)
+for pack in packs:
+	print('getting [{0}]'.format(pack))
+	subprocess.check_call([
+		'sudo',
+		'apt-get',
+		'install',
+		'--assume-yes',
+		pack
+	], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 for node_pack in node_packs:
+	print('getting [{0}]'.format(node_pack))
 	subprocess.check_call([
 		'npm',
+		'--silent',
 		'install',
 		node_pack,
-	])
+	], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 if os.path.isdir(tp):
 	shutil.rmtree(tp)
