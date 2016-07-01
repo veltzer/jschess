@@ -1,6 +1,6 @@
 - make scripts for installing the necessary tools for this project:
 	tools that do not have packages:
-		closure compiler, jsmin, jsl
+		jsmin, jsl
 
 - make a wrapper for running htmlhint since by itself
 	it is noisy.

@@ -49,7 +49,7 @@ endif # DO_DOCS
 TOOLS:=tools.stamp
 SOURCES_HTML_MAKO:=$(shell find templartmpl/web \( -type f -or -type l \) -and -name "*.mako" 2> /dev/null)
 SOURCES_HTML:=$(shell make_helper rmfdas $(SOURCES_HTML_MAKO))
-HTMLCHECK:=html.stamp
+HTMLCHECK:=out/html.stamp
 ifeq ($(DO_CHECKHTML),1)
 ALL+=$(HTMLCHECK)
 all: $(ALL)
@@ -90,7 +90,7 @@ $(JSMIN): $(JSFULL) $(ALL_DEP)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)~/install/jsmin/jsmin < $< > $(JSMIN_JSMIN)
 	$(Q)yui-compressor $< -o $(JSMIN_YUI)
-	$(Q)~/install/closure/compiler.jar --jscomp_error '*' --jscomp_off checkTypes $< --js_output_file $(JSMIN_CLOSURE)
+	$(Q)./tools/compiler.jar --jscomp_error '*' --jscomp_off checkTypes $< --js_output_file $(JSMIN_CLOSURE)
 	$(Q)cp $(JSMIN_CLOSURE) $@
 
 $(JSPACK): $(JSMIN) $(ALL_DEP)

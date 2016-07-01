@@ -22,6 +22,7 @@ import templardefs.jschess
 # parameters #
 ##############
 tp='thirdparty'
+tools='tools'
 debug=False
 packs=[
 	# nodejs and npm for installing javascript packages
@@ -34,6 +35,7 @@ packs=[
 	'tidy', # for tidy(1)
 	'zip', # for zip(1)
 	'sloccount', # for sloccount(1)
+	'bsdtar', # for bsdtar(1)
 
 	# my own
 	'templar',
@@ -76,7 +78,7 @@ if os.path.isdir(tp):
 os.mkdir(tp)
 
 for dep in templardefs.jschess.deps:
-	print('getting [{0}]'.format(dep.name))
+	print('getting javascript library [{0}]'.format(dep.name))
 	if dep.downloadUrl:
 		if debug:
 			print(dep.downloadUrl, dep.myFile)
@@ -117,3 +119,12 @@ for f in os.listdir(tp):
 		if debug:
 			print('chmodding [{0}]'.format(full))
 		os.chmod(full, 0o0444)
+
+if os.path.isdir(tools):
+	shutil.rmtree(tools)
+os.mkdir(tools)
+
+# install closure
+print('install tool [{0}]'.format('closure'))
+os.system('wget -qO- https://dl.google.com/closure-compiler/compiler-latest.zip | (cd tools; bsdtar -xf- compiler.jar )');
+os.chmod('tools/compiler.jar', 0o0775)
