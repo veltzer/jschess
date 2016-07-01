@@ -5,8 +5,24 @@ this script will install all the required packages that you need on
 ubuntu to compile and work with this package.
 '''
 
-import subprocess # for check_call
+###########
+# imports #
+###########
+import subprocess # for check_call, DEVNULL
+import os.path # for isfile
+import sys # for path
+import os # for cwd mkdir, chmod, listdir
+import shutil # for rmtree
+import urllib.request # for urlretrieve
 
+sys.path.append(os.getcwd())
+import templardefs.jschess
+
+##############
+# parameters #
+##############
+tp='thirdparty'
+debug=False
 packs=[
 	# nodejs and npm for installing javascript packages
 	'nodejs',
@@ -20,13 +36,20 @@ packs=[
 	# my own
 	'templar',
 ]
+node_packs=[
+	'jshint',
+	'chess',
+	'prototype',
+	'qunit',
+	'raphael',
+]
+
+########
+# code #
+########
 args=['sudo','apt-get','install','--assume-yes']
 args.extend(packs)
 subprocess.check_call(args)
-
-node_packs=[
-	'jshint',
-]
 
 for node_pack in node_packs:
 	subprocess.check_call([
@@ -34,3 +57,50 @@ for node_pack in node_packs:
 		'install',
 		node_pack,
 	])
+
+if os.path.isdir(tp):
+	shutil.rmtree(tp)
+os.mkdir(tp)
+
+for dep in templardefs.jschess.deps:
+	print('getting [{0}]'.format(dep.name))
+	if dep.downloadUrl:
+		if debug:
+			print(dep.downloadUrl, dep.myFile)
+		urllib.request.urlretrieve(dep.downloadUrl, filename=dep.myFile)
+	if dep.downloadUrlDebug:
+		if debug:
+			print(dep.downloadUrlDebug, dep.myFileDebug)
+		urllib.request.urlretrieve(dep.downloadUrlDebug, filename=dep.myFileDebug)
+	if dep.downloadCss:
+		if debug:
+			print(dep.downloadCss, dep.css)
+		urllib.request.urlretrieve(dep.downloadCss, filename=dep.css)
+	if dep.closure:
+		if debug:
+			print('doing closure')
+		subprocess.check_call([
+			'/home/mark/install/closure/closure.jar',
+			dep.myFileDebug,
+			'--js_output_file',
+			dep.myFile,
+		], stderr=subprocess.DEVNULL)
+	if dep.jsmin:
+		if debug:
+			print('doing jsmin')
+		subprocess.check_call([
+			'/home/mark/install/jsmin/jsmin',
+			],
+			stdout=open(dep.myFile, 'w'),
+			stdin=open(dep.myFileDebug),
+		)
+
+# chmod all files
+for f in os.listdir(tp):
+	if debug:
+		print('considering [{0}]'.format(f))
+	full=os.path.join(tp, f)
+	if os.path.isfile(full):
+		if debug:
+			print('chmodding [{0}]'.format(full))
+		os.chmod(full, 0o0444)
