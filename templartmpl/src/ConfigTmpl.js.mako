@@ -53,7 +53,7 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   check: function(key, value) {
-    if (!(this.tuples.hasOwnProprety(key))) {
+    if (!(this.tuples.hasOwnProperty(key))) {
       throw 'wrong key [' + key + ']';
     }
     var type_to_check = this.tuples[key].type;
