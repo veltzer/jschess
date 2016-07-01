@@ -66,7 +66,7 @@ ALL_DEP+=$(TOOLS)
 ###########
 $(TOOLS): scripts/tools.py
 	$(Q)./scripts/tools.py
-	$(Q)touch $@
+	$(Q)make_helper touch-mkdir $@
 
 $(JSZIP): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
@@ -78,7 +78,8 @@ $(JSCHECK): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(Q)make_helper wrapper-silent gjslint --flagfile support/gjslint.cfg $(tdefs.jschess_sources)
 	$(Q)./node_modules/jshint/bin/jshint $(tdefs.jschess_sources)
 	$(Q)mkdir -p $(dir $@)
-	$(Q)touch $@
+	$(Q)make_helper touch-mkdir $@
+#$(Q)./node_modules/jslint/bin/jslint.js --config support/jshintrc $(tdefs.jschess_sources)
 
 $(JSFULL): $(tdefs.jschess_sources) $(JSCHECK) $(ALL_DEP)
 	$(info doing [$@])
@@ -103,7 +104,7 @@ jsdoc/index.html: $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)rm -rf jsdoc
 	$(Q)mkdir -p $(dir $@)
-	$(Q)nodejs ~/install/node_modules/jsdoc/jsdoc.js -d jsdoc src 1> /dev/null
+	$(Q)nodejs node_modules/jsdoc/jsdoc.js -d jsdoc src 1> /dev/null
 
 .PHONY: check_js
 check_js: $(JSCHECK) $(ALL_DEP)
@@ -160,5 +161,5 @@ sloccount: $(ALL_DEP)
 $(HTMLCHECK): $(SOURCES_HTML) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)tidy -errors -q -utf8 $(SOURCES_HTML)
-	$(Q)htmlhint $(SOURCES_HTML) > /dev/null
+	$(Q)./node_modules/htmlhint/bin/htmlhint $(SOURCES_HTML) > /dev/null
 	$(Q)make_helper touch-mkdir $@

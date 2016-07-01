@@ -1,5 +1,6 @@
 /* vim:set filetype=javascript:*/
 /*jsl:import Utils.js*/
+/*global Class, Utils */
 
 
 /**
@@ -20,10 +21,10 @@ var PiecePosition = Class.create(/** @lends PiecePosition.prototype */{
     Utils.checkType(x, 'number');
     Utils.checkType(y, 'number');
     if (x < 0 || x > 7) {
-      throw 'bad value for x ' + x + ',' + typeof(x);
+      throw 'bad value for x ' + x + ',' + typeof x;
     }
     if (y < 0 || y > 7) {
-      throw 'bad value for y ' + y + ',' + typeof(y);
+      throw 'bad value for y ' + y + ',' + typeof y;
     }
     this.x = x;
     this.y = y;
@@ -49,7 +50,7 @@ var PiecePosition = Class.create(/** @lends PiecePosition.prototype */{
     if (!(otherPos instanceof PiecePosition)) {
       throw 'bad type passed';
     }
-    return otherPos.x != this.x || otherPos.y != this.y;
+    return otherPos.x !== this.x || otherPos.y !== this.y;
   },
   /**
     compare one position to another
@@ -62,6 +63,6 @@ var PiecePosition = Class.create(/** @lends PiecePosition.prototype */{
     if (!(otherPos instanceof PiecePosition)) {
       throw 'bad type passed';
     }
-    return otherPos.x == this.x && otherPos.y == this.y;
+    return otherPos.x === this.x && otherPos.y === this.y;
   }
 });

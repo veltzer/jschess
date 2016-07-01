@@ -1,4 +1,5 @@
 /* vim:set filetype=javascript:*/
+/*global Class*/
 
 
 /**
@@ -12,6 +13,7 @@ var Utils = Class.create(/** @lends Utils.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   initialize: function() {
+    return;
   }
 });
 
@@ -26,10 +28,11 @@ var Utils = Class.create(/** @lends Utils.prototype */{
 */
 Utils.unite = function(o1, o2) {
   var ret = {};
-  for (var x in o1) {
+  var x, y;
+  for (x in o1) {
     ret[x] = o1[x];
   }
-  for (var y in o2) {
+  for (y in o2) {
     ret[y] = o2[y];
   }
   return ret;
@@ -44,7 +47,8 @@ Utils.unite = function(o1, o2) {
 */
 Utils.clone = function(o) {
   var ret = {};
-  for (var x in o) {
+  var x;
+  for (x in o) {
     ret[x] = o[x];
   }
   return ret;
@@ -71,6 +75,7 @@ Utils.fakeUse = function() {
   @author ${tdefs.personal_jsdoc_author}
 */
 Utils.pass = function() {
+  return;
 };
 
 
@@ -101,7 +106,7 @@ Utils.arrClone = function(a) {
   @author ${tdefs.personal_jsdoc_author}
 */
 Utils.checkType = function(v, t) {
-  if (typeof(v) != t) {
+  if (typeof v !== t) {
     throw 'type is wrong';
   }
 };
@@ -115,8 +120,9 @@ Utils.checkType = function(v, t) {
   @author ${tdefs.personal_jsdoc_author}
 */
 Utils.checkContains = function(s1, s2) {
-  for (var x in s1) {
-    if (!(x in s2)) {
+  var x;
+  for (x in s1) {
+    if (!(x.hasOwnProperty(s2))) {
       throw 'key ' + x + ' is bad';
     }
   }

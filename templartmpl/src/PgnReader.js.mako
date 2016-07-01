@@ -1,5 +1,6 @@
 /* vim:set filetype=javascript:*/
 /*jsl:import Utils.js*/
+/*global Ajax, Class, Chess, Utils */
 
 
 /**
@@ -14,6 +15,7 @@ var PgnReader = Class.create(/** @lends PgnReader.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   initialize: function() {
+    return;
   },
   /**
     toString method so that you can get a nice printout of instances of

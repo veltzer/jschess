@@ -1,5 +1,6 @@
 /* vim:set filetype=javascript:*/
 /*jsl:import ConfigTmpl.js*/
+/*global ConfigTmpl, Class */
 
 
 /**

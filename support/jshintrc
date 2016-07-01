@@ -1,0 +1,8 @@
+{
+	// https://raw.githubusercontent.com/jshint/jshint/4c2d091b7e50ce2681ee48a104578bb969c189ae/examples/.jshintrc
+    "globals"       : {window}        // additional predefined global variables
+    "strict"        : false,     // true: Requires all functions run in ES5 Strict Mode
+    "indent"        : 2,        // {int} Number of spaces to use for indentation
+    "forin"         : false,     // true: Require filtering for..in loops with obj.hasOwnProperty()
+    "nonbsp"        : false,     // true: Prohibit "non-breaking whitespace" characters.
+}

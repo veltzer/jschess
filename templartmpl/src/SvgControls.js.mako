@@ -1,5 +1,6 @@
 /* vim:set filetype=javascript:*/
 /*jsl:import Utils.js*/
+/*global Class, Utils*/
 
 
 /**

@@ -3,6 +3,7 @@
 /*jsl:import PieceColor.js*/
 /*jsl:import PieceType.js*/
 /*jsl:import PiecePosition.js*/
+/*global Class, BoardPiece, PieceColor, PieceType, PiecePosition */
 
 
 /**
@@ -124,6 +125,7 @@ BoardPosition.startPos = function() {
   (what do I do with that ?!?).
 */
 BoardPosition.setupFEN = function(fen) {
+  var irank, iletter, rank, letter;
   var blocks = fen.split(' ');
   if (blocks.length != 6) {
     throw 'parse error - number of blocks is not 6';
@@ -133,10 +135,10 @@ BoardPosition.setupFEN = function(fen) {
     throw 'parse error - number of ranks is not 8';
   }
   var newPos = new BoardPosition();
-  for (var irank = 7; irank >= 0; irank--) {
-    var rank = ranks[7 - irank];
-    for (var iletter = 0; iletter < rank.length; iletter++) {
-      var letter = rank[iletter];
+  for (irank = 7; irank >= 0; irank--) {
+    rank = ranks[7 - irank];
+    for (iletter = 0; iletter < rank.length; iletter++) {
+      letter = rank[iletter];
       switch (letter) {
         case 'r':
           newPos.addPiece('black', 'rook', iletter, irank);

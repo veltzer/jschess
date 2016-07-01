@@ -2,6 +2,7 @@
 /*jsl:import Utils.js*/
 /*jsl:import SvgPathAndAttributes.js*/
 /*jsl:import SvgPiece.js*/
+/*global SvgPathAndAttributes, SvgPiece, Utils, Class */
 
 
 /**
@@ -15,6 +16,7 @@ var SvgCreator = Class.create(/** @lends SvgCreator.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   initialize: function() {
+    return;
   }
 });
 

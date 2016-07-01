@@ -8,6 +8,7 @@
 /*jsl:import Utils.js*/
 /*jsl:import Config.js*/
 /*jsl:import SvgConfigTmpl.js*/
+/*global Class, Config, SvgConfigTmpl, $, WRaphael, Utils, Raphael, PiecePosition, SvgPieceData, SvgCreator, SvgPixelPosition */
 
 
 /**
@@ -182,10 +183,11 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   drawBorder: function() {
-    this.texts = [];
+    var x, y;
     var part = 0.5;
     var partial = this.getValue('partial');
-    for (var y = 0; y < 8; y++) {
+    this.texts = [];
+    for (y = 0; y < 8; y++) {
       var txt1 = this.paper.text(
           this.square * (partial / 2) * part,
           (y + 0.5) * this.square + this.offY,
@@ -197,7 +199,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
           8 - y);
       this.texts.push(txt2);
     }
-    for (var x = 0; x < 8; x++) {
+    for (x = 0; x < 8; x++) {
       var txt3 = this.paper.text(
           (x + 0.5) * this.square + this.offX,
           this.square * (partial / 2) * part,
@@ -239,17 +241,18 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   drawBoard: function() {
+    var x, y;
+    var that = this;
     var f = function(tpos, trec, type) {
       return function() {
         var ttpos = that.translatePos(tpos);
         that.eventPosition(ttpos, trec, type);
       };
     };
-    var that = this;
     this.recs = [];
-    for (var x = 0; x < 8; x++) {
+    for (x = 0; x < 8; x++) {
       var rec_line = [];
-      for (var y = 0; y < 8; y++) {
+      for (y = 0; y < 8; y++) {
         var rec = this.paper.rect(
             x * this.square + this.offX,
             y * this.square + this.offY,
@@ -630,6 +633,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   redraw: function(oldview) {
+    var x, y;
     Utils.fakeUse(oldview);
     // redraw the pieces
     var that = this;
@@ -637,8 +641,8 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
       that.timeMovePiece(boardPiece, position, position);
     });
     // redraw the squares
-    for (var x = 0; x < 8; x++) {
-      for (var y = 0; y < 8; y++) {
+    for (x = 0; x < 8; x++) {
+      for (y = 0; y < 8; y++) {
         this.rectFill(this.getRec(new PiecePosition(x, y)), true);
       }
     }

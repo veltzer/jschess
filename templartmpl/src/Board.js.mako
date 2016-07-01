@@ -4,6 +4,7 @@
 /*jsl:import PieceColor.js*/
 /*jsl:import PieceType.js*/
 /*jsl:import PiecePosition.js*/
+/*global Class, BoardPiece, PieceColor, PieceType, PiecePosition, BoardPosition */
 
 
 /**
@@ -20,11 +21,12 @@ var Board = Class.create(/** @lends Board.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   initialize: function() {
+    var i, j, ar;
     // create 8x8 undefined squares
     this.bd = [];
-    for (var i = 0; i < 8; i++) {
-      var ar = [];
-      for (var j = 0; j < 8; j++) {
+    for (i = 0; i < 8; i++) {
+      ar = [];
+      for (j = 0; j < 8; j++) {
         ar.push(undefined);
       }
       this.bd.push(ar);
@@ -45,9 +47,10 @@ var Board = Class.create(/** @lends Board.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   toString: function() {
+    var i, j;
     var str = '';
-    for (var i = 0; i < 8; i++) {
-      for (var j = 0; j < 8; j++) {
+    for (i = 0; i < 8; i++) {
+      for (j = 0; j < 8; j++) {
         str += this.bd[i][j];
       }
       str += '\n';
@@ -178,8 +181,9 @@ var Board = Class.create(/** @lends Board.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   forEachPiece: function(f) {
-    for (var i = 0; i < 8; i++) {
-      for (var j = 0; j < 8; j++) {
+    var i, j;
+    for (i = 0; i < 8; i++) {
+      for (j = 0; j < 8; j++) {
         if (this.bd[i][j] !== undefined) {
           f(this.bd[i][j], new PiecePosition(i, j));
         }
@@ -295,9 +299,10 @@ var Board = Class.create(/** @lends Board.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   getPiecePosition: function(boardPiece) {
-    for (var i = 0; i < 8; i++) {
-      for (var j = 0; j < 8; j++) {
-        if (this.bd[i][j] == boardPiece) {
+    var i, j;
+    for (i = 0; i < 8; i++) {
+      for (j = 0; j < 8; j++) {
+        if (this.bd[i][j] === boardPiece) {
           return new PiecePosition(i, j);
         }
       }

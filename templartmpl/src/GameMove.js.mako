@@ -1,4 +1,5 @@
 /* vim:set filetype=javascript:*/
+/*global Class */
 
 
 /**
@@ -23,6 +24,7 @@ var GameMove = Class.create(/** @lends GameMove.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   initialize: function() {
+    return;
   },
   /**
     Debug method that allows you to get a nice printout for this type

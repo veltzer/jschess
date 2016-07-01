@@ -1,4 +1,5 @@
 /* vim:set filetype=javascript:*/
+/*global Class*/
 
 
 /**
@@ -14,7 +15,7 @@ var PieceType = Class.create(/** @lends PieceType.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   initialize: function(type) {
-    if (!(type in PieceType.types)) {
+    if (!(PieceType.types.hasOwnProperty(type))) {
       throw 'illegal piecetype ' + type;
     }
     this.type = type;
@@ -35,7 +36,7 @@ var PieceType = Class.create(/** @lends PieceType.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   isRook: function() {
-    return this.type == 'rook';
+    return this.type === 'rook';
   },
   /**
     Return whether the piece is a knight
@@ -44,7 +45,7 @@ var PieceType = Class.create(/** @lends PieceType.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   isKnight: function() {
-    return this.type == 'knight';
+    return this.type === 'knight';
   },
   /**
     Return whether the piece is a bishop
@@ -53,7 +54,7 @@ var PieceType = Class.create(/** @lends PieceType.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   isBishop: function() {
-    return this.type == 'bishop';
+    return this.type === 'bishop';
   },
   /**
     Return whether the piece is a queen
@@ -62,7 +63,7 @@ var PieceType = Class.create(/** @lends PieceType.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   isQueen: function() {
-    return this.type == 'queen';
+    return this.type === 'queen';
   },
   /**
     Return whether the piece is a king
@@ -71,7 +72,7 @@ var PieceType = Class.create(/** @lends PieceType.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   isKing: function() {
-    return this.type == 'king';
+    return this.type === 'king';
   },
   /**
     Return whether the piece is a pawn
@@ -80,7 +81,7 @@ var PieceType = Class.create(/** @lends PieceType.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   isPawn: function() {
-    return this.type == 'pawn';
+    return this.type === 'pawn';
   }
 });
 

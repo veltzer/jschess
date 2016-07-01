@@ -44,13 +44,16 @@ node_packs=[
 	'prototype',
 	'qunit',
 	'raphael',
+	'htmlhint',
+	'jsdoc',
+	'jslint',
 ]
 
 ########
 # code #
 ########
 for pack in packs:
-	print('getting [{0}]'.format(pack))
+	print('getting ubuntu package for [{0}]'.format(pack))
 	subprocess.check_call([
 		'sudo',
 		'apt-get',
@@ -60,7 +63,7 @@ for pack in packs:
 	], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 for node_pack in node_packs:
-	print('getting [{0}]'.format(node_pack))
+	print('getting npm for [{0}]'.format(node_pack))
 	subprocess.check_call([
 		'npm',
 		'--silent',

@@ -1,4 +1,5 @@
 /* vim:set filetype=javascript:*/
+/*global Class */
 
 
 /**
@@ -15,7 +16,7 @@ var PieceColor = Class.create(/** @lends PieceColor.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   initialize: function(color) {
-    if (!(color in PieceColor.colors)) {
+    if (!(PieceColor.colors.hasOwnProperty(color))) {
       throw 'illegal piecetype ' + color;
     }
     this.color = color;

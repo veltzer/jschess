@@ -1,5 +1,6 @@
 /* vim:set filetype=javascript:*/
 /*jsl:import Utils.js*/
+/*global Class */
 
 
 /**
@@ -47,14 +48,12 @@ var Config = Class.create(/** @lends Config.prototype */{
   */
   getValue: function(key) {
     if (this.tmpl.hasKey(key)) {
-      if (key in this.d) {
+      if (this.d[key] !== undefined) {
         return this.d[key];
-      } else {
-        return this.tmpl.getDefaultValue(key);
       }
-    } else {
-      throw 'request for bad key [' + key + ']';
+      return this.tmpl.getDefaultValue(key);
     }
+    throw 'request for bad key [' + key + ']';
   },
   /**
     set a key to a certain value in the current configuration
@@ -75,7 +74,8 @@ var Config = Class.create(/** @lends Config.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   override: function(d) {
-    for (var x in d) {
+    var x;
+    for (x in d) {
       this.setValue(x, d[x]);
     }
   },
@@ -87,5 +87,6 @@ var Config = Class.create(/** @lends Config.prototype */{
   */
   check: function() {
     // TODO
+    return;
   }
 });

@@ -1,4 +1,5 @@
 /* vim:set filetype=javascript:*/
+/*global Class */
 
 
 /**
@@ -13,6 +14,7 @@ var Game = Class.create(/** @lends Game.prototype */{
     @author ${tdefs.personal_jsdoc_author}
   */
   initialize: function() {
+    return;
   },
   /**
     toString method that allows you to get a nice printout for this type

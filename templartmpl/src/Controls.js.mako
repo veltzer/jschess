@@ -1,4 +1,5 @@
 /* vim:set filetype=javascript:*/
+/*global Element, Class, $ */
 
 
 /**
