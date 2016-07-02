@@ -1,7 +1,3 @@
-- make scripts for installing the necessary tools for this project:
-	tools that do not have packages:
-		jsmin, jsl
-
 - make a wrapper for running htmlhint since by itself
 	it is noisy.
 	That's why we run it > /dev/null at the moment hiding

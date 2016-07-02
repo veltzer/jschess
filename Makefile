@@ -74,7 +74,7 @@ $(JSZIP): $(tdefs.jschess_sources) $(ALL_DEP)
 
 $(JSCHECK): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)~/install/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(tdefs.jschess_sources)
+	$(Q)./tools/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(tdefs.jschess_sources)
 	$(Q)make_helper wrapper-silent gjslint --flagfile support/gjslint.cfg $(tdefs.jschess_sources)
 	$(Q)./node_modules/jshint/bin/jshint $(tdefs.jschess_sources)
 	$(Q)./node_modules/jslint/bin/jslint.js --browser --terse --todo --plusplus --forin --vars --sloppy --white --config support/jslintrc $(tdefs.jschess_sources) 2> /dev/null
@@ -88,7 +88,7 @@ $(JSFULL): $(tdefs.jschess_sources) $(JSCHECK) $(ALL_DEP)
 $(JSMIN): $(JSFULL) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)~/install/jsmin/jsmin < $< > $(JSMIN_JSMIN)
+	$(Q)./tools/jsmin < $< > $(JSMIN_JSMIN)
 	$(Q)yui-compressor $< -o $(JSMIN_YUI)
 	$(Q)./tools/compiler.jar --jscomp_error '*' --jscomp_off checkTypes $< --js_output_file $(JSMIN_CLOSURE)
 	$(Q)cp $(JSMIN_CLOSURE) $@

@@ -124,7 +124,15 @@ if os.path.isdir(tools):
 	shutil.rmtree(tools)
 os.mkdir(tools)
 
-# install closure
-print('install tool [{0}]'.format('closure'))
-os.system('wget -qO- https://dl.google.com/closure-compiler/compiler-latest.zip | (cd tools; bsdtar -xf- compiler.jar )');
+print('installing tool [{0}]'.format('closure'))
+os.system('wget -qO- https://dl.google.com/closure-compiler/compiler-latest.zip | (cd tools; bsdtar -xf- compiler.jar )')
 os.chmod('tools/compiler.jar', 0o0775)
+
+print('installing tool [{0}]'.format('jsmin'))
+os.system('wget -qO- https://raw.githubusercontent.com/douglascrockford/JSMin/master/jsmin.c | (cd tools; gcc -x c -O2 - -o jsmin)')
+
+print('installing tool [{0}]'.format('jsl'))
+#os.system('wget -qO- http://www.javascriptlint.com/download/jsl-0.3.0-src.tar.gz | (cd tools; tar zxf -)')
+#os.system('cd tools; python setup.py build')
+os.system('cd tools; svn -q co https://javascriptlint.svn.sourceforge.net/svnroot/javascriptlint/trunk jsl')
+os.system('cd tools/jsl; python setup.py build > /dev/null')
