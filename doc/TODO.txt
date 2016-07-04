@@ -1,6 +1,10 @@
-- create a page for debugging jschess which gets the non
-	compressed version of the code and make
-	the launching script launch that.
+- the jschess.pack.js file doesn't work - fix that.
+- make jschess.pack.min.js and jschess.pack.js.
+- fix all errors in the browser when using jschess.
+
+- make all pages in the standard website get the compressed version of the source.
+
+- as part of making templarpages, compress the html.
 
 - make a wrapper for running htmlhint since by itself
 	it is noisy.

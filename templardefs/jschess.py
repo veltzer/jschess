@@ -172,6 +172,12 @@ def jsFiles():
 	l.append('<!-- end of jsFiles() macro -->')
 	return '\n'.join(l)
 
+def jschess_js_section():
+	return '<script type="text/javascript" src="../out/jschess.pack.min.js"></script>'
+
+def jschess_js_section_debug():
+	return '<script type="text/javascript" src="../out/jschess.pack.js"></script>'
+
 def populate(d):
 	# ours
 	d.jschess_depslist=depslist()
@@ -180,6 +186,8 @@ def populate(d):
 	d.jschess_getJsThirdParty=getJsThirdParty()
 	d.jschess_jsFiles=jsFiles()
 	d.jschess_runtimedeps=get_rt_deps()
+	d.jschess_js_section=jschess_js_section()
+	d.jschess_js_section_debug=jschess_js_section_debug()
 
 def getdeps():
 	return [__file__]

@@ -2,10 +2,13 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>SVG path calculator</title>
+		<title>${tdefs.project_name} - SVG path calculator</title>
 		<link rel="shortcut icon" href="../static/favicon.ico"/>
-		<!-- third parties -->
-${tdefs.jschess_getJsThirdParty}
+
+		${tdefs.project_google_analytics_snipplet}
+
+		${tdefs.jschess_js_section}
+
 		<script type="text/javascript">
 			document.observe('dom:loaded', function() {
 				$('calc').observe('click',function() {

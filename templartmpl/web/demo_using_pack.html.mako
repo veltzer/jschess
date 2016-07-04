@@ -2,12 +2,14 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Using the pack.js file</title>
+		<title>${tdefs.project_name} - Using the pack.js file</title>
 		<link rel="shortcut icon" href="../static/favicon.ico"/>
-		<!-- third parties -->
-		<script type="text/javascript" src="../out/jschess.pack.js"></script>
 
-		<!-- highlight.js stuff -->
+		${tdefs.project_google_analytics_snipplet}
+
+		${tdefs.jschess_js_section}
+
+		<!-- highlight.js -->
 		<script type="text/javascript" src="../thirdparty/highlight.min.js"></script>
 		<link href="../thirdparty/highlight.min.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript">hljs.initHighlightingOnLoad();</script>

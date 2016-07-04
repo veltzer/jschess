@@ -2,14 +2,15 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>JsChess QUnit testing page</title>
+		<title>${tdefs.project_name} - QUnit testing page</title>
 		<link rel="shortcut icon" href="../static/favicon.ico"/>
+
+		<!-- qunit -->
 		<link type="text/css" rel="stylesheet" href="../thirdparty/qunit.css"/>
-${tdefs.jschess_getJsThirdParty}
-		<!--script src="../out/jschess.pack.js"></script-->
-		<!--script src="../out/jschess.min.js"></script-->
-		<!--script src="../out/jschess.js"></script-->
-${tdefs.jschess_jsFiles}
+
+		${tdefs.project_google_analytics_snipplet}
+
+		${tdefs.jschess_js_section}
 	</head>
 	<body>
 		<div id="qunit"></div>

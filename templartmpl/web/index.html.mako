@@ -2,21 +2,15 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>${tdefs.project_name}</title>
+		<title>${tdefs.project_name} - main page</title>
 		<link rel="shortcut icon" href="../static/favicon.ico"/>
 		<meta name="Description" content="${tdefs.project_long_description}"/>
 		<meta name="Keywords" content="${tdefs.personal_fullname}, ${tdefs.personal_slug}, ${tdefs.project_name}, ${', '.join(tdefs.project_keywords)}"/>
 		${tdefs.project_google_analytics_snipplet}
 
-		<!-- third parties -->
-${tdefs.jschess_getJsThirdParty}
-		<!-- our code, options: full pack, minified, regular or file by file -->
-		<!--script src="../out/jschess.pack.js"></script-->
-		<!--script src="../out/jschess.min.js"></script-->
-		<!--script src="../out/jschess.js"></script-->
-${tdefs.jschess_jsFiles}
+		${tdefs.jschess_js_section}
 
-		<!-- highlight.js stuff -->
+		<!-- highlight.js -->
 		<script type="text/javascript" src="../thirdparty/highlight.min.js"></script>
 		<link href="../thirdparty/highlight.min.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
