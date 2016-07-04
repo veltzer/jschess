@@ -1,3 +1,7 @@
+- create a page for debugging jschess which gets the non
+	compressed version of the code and make
+	the launching script launch that.
+
 - make a wrapper for running htmlhint since by itself
 	it is noisy.
 	That's why we run it > /dev/null at the moment hiding

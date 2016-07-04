@@ -16,5 +16,9 @@ ${tdefs.jschess_jsFiles}
 		<!-- this MUST be the position at which to import qunit.js -->
 		<script type="text/javascript" src="../thirdparty/qunit.js"></script>
 		<script type="text/javascript" src="../tests/Tests.js"></script>
+		<p>
+			Copyright ${tdefs.personal_fullname}, ${tdefs.project_copyright_years}
+			<a href="${tdefs.personal_email}">${tdefs.personal_email}</a>
+		</p>
 	</body>
 </html>

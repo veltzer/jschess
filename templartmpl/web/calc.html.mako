@@ -41,8 +41,8 @@ ${tdefs.jschess_getJsThirdParty}
 		y: 6<br/>
 		</p>
 		<p>
-			Mark Veltzer, Copyright ${tdefs.project_copyright_years}
-			<a href="mailto:${tdefs.personal_email}">${tdefs.personal_email}</a>
+			Copyright ${tdefs.personal_fullname}, ${tdefs.project_copyright_years}
+			<a href="${tdefs.personal_email}">${tdefs.personal_email}</a>
 		</p>
 	</body>
 </html>

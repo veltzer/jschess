@@ -686,6 +686,11 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
         this.currentPos = piecePosition;
         this.newPosition();
       }
+      if (type === 'mouseout') {
+        this.lastPos = this.currentPos;
+        this.currentPos = undefined;
+        this.newPosition();
+      }
       /*
       if(type=='mouseout') {
         // this is done with a timeout just for getting out of the board...

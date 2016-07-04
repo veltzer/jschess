@@ -183,7 +183,7 @@ ${tdefs.jschess_jsFiles}
 		</p>
 		${tdefs.project_paypal_donate_button_snipplet}
 		<p>
-			Copyright ${tdefs.personal_fullname}, Copyright ${tdefs.project_copyright_years}
+			Copyright ${tdefs.personal_fullname}, ${tdefs.project_copyright_years}
 			<a href="${tdefs.personal_email}">${tdefs.personal_email}</a>
 		</p>
 	</body>
