@@ -1,3 +1,5 @@
+- bring non minimized versions of the libraries.
+	(if I don't have any - use the minified version).
 - the jschess.pack.js file doesn't work - fix that.
 - make jschess.pack.min.js and jschess.pack.js.
 - fix all errors in the browser when using jschess.
