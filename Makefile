@@ -47,7 +47,7 @@ all: $(ALL)
 endif # DO_DOCS
 
 TOOLS:=tools.stamp
-SOURCES_HTML_MAKO:=$(shell find templartmpl/web \( -type f -or -type l \) -and -name "*.mako" 2> /dev/null)
+SOURCES_HTML_MAKO:=$(shell find templartmpl/out/web \( -type f -or -type l \) -and -name "*.mako" 2> /dev/null)
 SOURCES_HTML:=$(shell make_helper rmfdas $(SOURCES_HTML_MAKO))
 HTMLCHECK:=out/html.stamp
 ifeq ($(DO_CHECKHTML),1)
