@@ -25,13 +25,13 @@ and more.
 
 Technologies used
 -----------------
-* Prototype javascript library (http://prototypejs.org).
-* Raphael javascript library (http://raphaeljs.com).
-* chess.java javascript library (https://github.com/jhlywa/chess.js).
+* Prototype javascript library at http://prototypejs.org.
+* Raphael javascript library at http://raphaeljs.com.
+* chess.java javascript library at https://github.com/jhlywa/chess.js.
 
 Demo
 ----
-Is at github pages at ({project_website}).
+Is at github pages at {project_website}.
 
 What makes jschess different?
 -----------------------------
