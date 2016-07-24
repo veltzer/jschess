@@ -125,8 +125,10 @@ if os.path.isdir(tools):
 os.mkdir(tools)
 
 print('installing tool [{0}]'.format('closure'))
-os.system('wget -qO- https://dl.google.com/closure-compiler/compiler-latest.zip | (cd tools; bsdtar -xf- compiler.jar )')
-os.chmod('tools/compiler.jar', 0o0775)
+#jar_name='compiler.jar'
+jar_name='closure-compiler-v20160713'
+os.system('wget -qO- https://dl.google.com/closure-compiler/compiler-latest.zip | (cd tools; bsdtar -xf- {jar_name}.jar)'.format(jar_name=jar_name))
+os.chmod('tools/{jar_name}.jar'.format(jar_name=jar_name), 0o0775)
 
 print('installing tool [{0}]'.format('jsmin'))
 os.system('wget -qO- https://raw.githubusercontent.com/douglascrockford/JSMin/master/jsmin.c | (cd tools; gcc -x c -O2 - -o jsmin)')

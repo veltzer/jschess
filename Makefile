@@ -11,6 +11,9 @@ include /usr/share/templar/make/Makefile
 DO_DOCS:=1
 # do you want to validate html?
 DO_CHECKHTML:=1
+# name of the closure jar
+#CLOSURE=compiler
+CLOSURE:=closure-compiler-v20160713
 
 ########
 # code #
@@ -23,8 +26,7 @@ JSMIN_YUI:=out/$(tdefs.project_name).min.yui.js
 JSMIN_CLOSURE:=out/$(tdefs.project_name).min.closure.js
 JSPACK:=out/$(tdefs.project_name).pack.js
 JSZIP:=out/$(tdefs.project_name).zip
-WEB_DIR:=../$(tdefs.project_name)-gh-pages
-COPY_FOLDERS:=static out jsdoc thirdparty pgn tests web src
+COPY_FOLDERS:=out jsdoc thirdparty pgn tests web src
 
 ALL_FILES:=$(shell git ls-files)
 FILES_NOT_GENERATED:=$(filter-out $(TEMPLAR_ALL_MAKO_TGT), $(ALL_FILES))
@@ -39,23 +41,20 @@ Q=@
 endif # DO_MKDBG
 
 ALL+=$(JSPACK) $(JSZIP)
-all: $(ALL)
 
 ifeq ($(DO_DOCS),1)
 ALL+=jsdoc/index.html
-all: $(ALL)
 endif # DO_DOCS
 
-TOOLS:=tools.stamp
+TOOLS:=out/tools.stamp
+ALL_DEP+=$(TOOLS)
+
 SOURCES_HTML_MAKO:=$(shell find templartmpl/out/web \( -type f -or -type l \) -and -name "*.mako" 2> /dev/null)
 SOURCES_HTML:=$(shell make_helper rmfdas $(SOURCES_HTML_MAKO))
 HTMLCHECK:=out/html.stamp
 ifeq ($(DO_CHECKHTML),1)
 ALL+=$(HTMLCHECK)
-all: $(ALL)
 endif # DO_CHECKHTML
-
-ALL_DEP+=$(TOOLS)
 
 # this line guarantees that if a receipe fails then the target file
 # will be deleted.
@@ -64,8 +63,10 @@ ALL_DEP+=$(TOOLS)
 ###########
 # targets #
 ###########
+# do not touch this rule
+all: $(ALL)
 $(TOOLS): scripts/tools.py
-	$(Q)./scripts/tools.py
+	$(Q)scripts/tools.py
 	$(Q)make_helper touch-mkdir $@
 
 $(JSZIP): $(tdefs.jschess_sources) $(ALL_DEP)
@@ -74,10 +75,10 @@ $(JSZIP): $(tdefs.jschess_sources) $(ALL_DEP)
 
 $(JSCHECK): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)./tools/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(tdefs.jschess_sources)
+	$(Q)tools/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(tdefs.jschess_sources)
 	$(Q)make_helper wrapper-silent gjslint --flagfile support/gjslint.cfg $(tdefs.jschess_sources)
-	$(Q)./node_modules/jshint/bin/jshint $(tdefs.jschess_sources)
-	$(Q)./node_modules/jslint/bin/jslint.js --browser --terse --todo --plusplus --forin --vars --sloppy --white --config support/jslintrc $(tdefs.jschess_sources) 2> /dev/null
+	$(Q)node_modules/jshint/bin/jshint $(tdefs.jschess_sources)
+	$(Q)node_modules/jslint/bin/jslint.js --browser --terse --todo --plusplus --forin --vars --sloppy --white --config support/jslintrc $(tdefs.jschess_sources) 2> /dev/null
 	$(Q)make_helper touch-mkdir $@
 
 $(JSFULL): $(tdefs.jschess_sources) $(JSCHECK) $(ALL_DEP)
@@ -88,9 +89,9 @@ $(JSFULL): $(tdefs.jschess_sources) $(JSCHECK) $(ALL_DEP)
 $(JSMIN): $(JSFULL) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)./tools/jsmin < $< > $(JSMIN_JSMIN)
+	$(Q)tools/jsmin < $< > $(JSMIN_JSMIN)
 	$(Q)yui-compressor $< -o $(JSMIN_YUI)
-	$(Q)./tools/compiler.jar --jscomp_error '*' --jscomp_off checkTypes $< --js_output_file $(JSMIN_CLOSURE)
+	$(Q)tools/$(CLOSURE).jar --jscomp_error '*' --jscomp_off checkTypes $< --js_output_file $(JSMIN_CLOSURE)
 	$(Q)cp $(JSMIN_CLOSURE) $@
 
 $(JSPACK): $(JSMIN) $(ALL_DEP)
@@ -137,7 +138,6 @@ debug_me: $(ALL_DEP)
 	$(info ALL_DEP is $(ALL_DEP))
 	$(info JSFULL is $(JSFULL))
 	$(info JSMIN is $(JSMIN))
-	$(info WEB_DIR is $(WEB_DIR))
 	$(info COPY_FOLDERS is $(COPY_FOLDERS))
 	$(info SOURCES_HTML is $(SOURCES_HTML))
 	$(info FILES_NOT_GENERATED is $(FILES_NOT_GENERATED))
@@ -159,5 +159,5 @@ sloccount: $(ALL_DEP)
 $(HTMLCHECK): $(SOURCES_HTML) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)tidy -errors -q -utf8 $(SOURCES_HTML)
-	$(Q)./node_modules/htmlhint/bin/htmlhint $(SOURCES_HTML) > /dev/null
+	$(Q)node_modules/htmlhint/bin/htmlhint $(SOURCES_HTML) > /dev/null
 	$(Q)make_helper touch-mkdir $@

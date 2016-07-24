@@ -11,8 +11,6 @@ __pycache__
 # templar generated
 /.tdefs.config
 
-# tools
-/tools.stamp
 # nodejs downloaded code
 /node_modules
 # third parties
