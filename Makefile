@@ -24,7 +24,8 @@ JSMIN:=out/web/$(tdefs.project_name).min.js
 JSMIN_JSMIN:=out/$(tdefs.project_name).min.jsmin.js
 JSMIN_YUI:=out/$(tdefs.project_name).min.yui.js
 JSMIN_CLOSURE:=out/$(tdefs.project_name).min.closure.js
-JSPACK:=out/web/$(tdefs.project_name).pack.js
+JSPACKFULL:=out/web/$(tdefs.project_name).pack.js
+JSPACKMIN:=out/web/$(tdefs.project_name).pack.min.js
 JSZIP:=out/$(tdefs.project_name).zip
 
 ALL_FILES:=$(shell git ls-files)
@@ -39,7 +40,7 @@ Q=@
 #.SILENT:
 endif # DO_MKDBG
 
-ALL+=$(JSPACK) $(JSZIP)
+ALL+=$(JSPACKFULL) $(JSPACKMIN) $(JSZIP)
 
 JSDOC_FOLDER=out/web/jsdoc
 JSDOC_FILE=out/web/jsdoc/index.html
@@ -95,10 +96,15 @@ $(JSMIN): $(JSFULL) $(ALL_DEP)
 	$(Q)tools/$(CLOSURE).jar --jscomp_error '*' --jscomp_off checkTypes $< --js_output_file $(JSMIN_CLOSURE)
 	$(Q)cp $(JSMIN_CLOSURE) $@
 
-$(JSPACK): $(JSMIN) $(ALL_DEP)
+$(JSPACKFULL): $(JSFULL) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)cat $(tdefs.jschess_depslist) $(JSMIN) > $(JSPACK)
+	$(Q)cat $(tdefs.jschess_depslist) $(JSFULL) > $@
+
+$(JSPACKMIN): $(JSMIN) $(ALL_DEP)
+	$(info doing [$@])
+	$(Q)mkdir -p $(dir $@)
+	$(Q)cat $(tdefs.jschess_depslist) $(JSMIN) > $@
 
 $(JSDOC_FILE): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
