@@ -49,6 +49,7 @@ node_packs=[
 	'htmlhint',
 	'jsdoc',
 	'jslint',
+	'gh-pages', # for gh-pages(1)
 ]
 
 ########
