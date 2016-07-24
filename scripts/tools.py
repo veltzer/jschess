@@ -21,7 +21,7 @@ import templardefs.jschess
 ##############
 # parameters #
 ##############
-tp='thirdparty'
+tp='out/web/thirdparty'
 tools='tools'
 debug=False
 packs=[

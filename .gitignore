@@ -12,7 +12,5 @@ __pycache__
 
 # nodejs downloaded code
 /node_modules
-# third parties
-/thirdparty
 # script installed tools
 /tools
