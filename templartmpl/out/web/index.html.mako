@@ -76,7 +76,7 @@
 		</script>
 	</head>
 	<body>
-		<h1>Welcome to the <b>${tdefs.project_name}</b> project</h1>
+		<h1>Welcome to the <i>${tdefs.project_name}</i> web site</h1>
 		<p>
 			<b>${tdefs.project_name}</b> is a pure JavaScript library that enables:
 		</p>
