@@ -26,7 +26,6 @@ JSMIN_YUI:=out/$(tdefs.project_name).min.yui.js
 JSMIN_CLOSURE:=out/$(tdefs.project_name).min.closure.js
 JSPACK:=out/$(tdefs.project_name).pack.js
 JSZIP:=out/$(tdefs.project_name).zip
-COPY_FOLDERS:=out jsdoc thirdparty pgn tests web src
 
 ALL_FILES:=$(shell git ls-files)
 FILES_NOT_GENERATED:=$(filter-out $(TEMPLAR_ALL_MAKO_TGT), $(ALL_FILES))
@@ -42,8 +41,10 @@ endif # DO_MKDBG
 
 ALL+=$(JSPACK) $(JSZIP)
 
+JSDOC_FOLDER=out/web/jsdoc
+JSDOC_FILE=out/web/jsdoc/index.html
 ifeq ($(DO_DOCS),1)
-ALL+=jsdoc/index.html
+ALL+=$(JSDOC_FILE)
 endif # DO_DOCS
 
 TOOLS:=out/tools.stamp
@@ -64,7 +65,7 @@ endif # DO_CHECKHTML
 # targets #
 ###########
 # do not touch this rule
-all: $(ALL)
+all: $(ALL) $(ALL_DEP)
 $(TOOLS): scripts/tools.py
 	$(Q)scripts/tools.py
 	$(Q)make_helper touch-mkdir $@
@@ -99,11 +100,11 @@ $(JSPACK): $(JSMIN) $(ALL_DEP)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)cat $(tdefs.jschess_depslist) $(JSMIN) > $(JSPACK)
 
-jsdoc/index.html: $(tdefs.jschess_sources) $(ALL_DEP)
+$(JSDOC_FILE): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)rm -rf jsdoc
 	$(Q)mkdir -p $(dir $@)
-	$(Q)nodejs node_modules/jsdoc/jsdoc.js -d jsdoc src 1> /dev/null
+	$(Q)nodejs node_modules/jsdoc/jsdoc.js -d $(JSDOC_FOLDER) src 1> /dev/null
 
 .PHONY: check_js
 check_js: $(JSCHECK) $(ALL_DEP)
@@ -129,7 +130,7 @@ check_grep: $(ALL_DEP)
 check_all: check_hardcoded_names check_grep
 
 .PHONY: jsdoc
-jsdoc: jsdoc/index.html $(ALL_DEP)
+jsdoc: $(JSDOC_FILE) $(ALL_DEP)
 	$(info doing [$@])
 
 .PHONY: debug_me
@@ -138,18 +139,14 @@ debug_me: $(ALL_DEP)
 	$(info ALL_DEP is $(ALL_DEP))
 	$(info JSFULL is $(JSFULL))
 	$(info JSMIN is $(JSMIN))
-	$(info COPY_FOLDERS is $(COPY_FOLDERS))
 	$(info SOURCES_HTML is $(SOURCES_HTML))
 	$(info FILES_NOT_GENERATED is $(FILES_NOT_GENERATED))
 	$(info FILES_WITHOUT_HARDCODING is $(FILES_WITHOUT_HARDCODING))
 
-.PHONY: install
-install: all $(ALL_DEP)
+.PHONY: gh-pages
+gh-pages: $(ALL) $(ALL_DEPS)
 	$(info doing [$@])
-	$(Q)rm -rf $(WEB_DIR)/*
-	$(Q)for folder in $(COPY_FOLDERS); do cp -r $$folder $(WEB_DIR); done
-	$(Q)cp support/redirector.html $(WEB_DIR)/index.html
-	$(Q)cd $(WEB_DIR); git commit -a -m "new version"; git push
+	$(Q)node_modules/gh-pages/bin/gh-pages --dist out/web
 
 .PHONY: sloccount
 sloccount: $(ALL_DEP)

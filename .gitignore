@@ -1,7 +1,6 @@
 # our output folders
 /src
 /out
-/jsdoc
 
 # python cache in any folder
 __pycache__

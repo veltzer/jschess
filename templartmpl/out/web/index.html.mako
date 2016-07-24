@@ -129,7 +129,7 @@
 			Some links:
 		</p>
 		<ul>
-			<li><b>${tdefs.project_name}</b> API is <a href="../jsdoc">here</a></li>
+			<li><b>${tdefs.project_name}</b> API is <a href="jsdoc/index.html">here</a></li>
 			<li><b>${tdefs.project_name}</b> github clone link is <a href="${tdefs.project_website_git}">here</a></li>
 			<li><b>${tdefs.project_name}</b> github development is at <a href="${tdefs.project_website_source}">here</a></li>
 			<li><b>${tdefs.project_name}</b> website is at <a href="${tdefs.project_website}">here</a></li>

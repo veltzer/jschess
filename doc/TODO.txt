@@ -1,3 +1,5 @@
+- stop using .tdefs in my makefile.
+
 - bring non minimized versions of the libraries.
 	(if I don't have any - use the minified version).
 - the jschess.pack.js file doesn't work - fix that.
