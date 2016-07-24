@@ -1,5 +1,4 @@
-# our output folders
-/src
+# our output folder
 /out
 
 # python cache in any folder
