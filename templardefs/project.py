@@ -46,7 +46,7 @@ Monetary contribution
 ---------------------
 If you'd like to see a feature added to jschess or would just like to show
 your appreciation you are welcome to contribute to it's development at
-({project_website}).
+{project_website}.
 I am ready to work with any chess organization wishing to incorporate jschess
 into their infrastructre and am already working with two such organizations...'''.format(**d)
 
