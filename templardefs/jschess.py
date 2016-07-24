@@ -135,7 +135,7 @@ def git_describe():
 
 def files_in_order():
 	return [
-		'out/src/goog.js',
+#		'out/src/goog.js',
 		'out/src/BoardPiece.js',
 		'out/src/BoardPosition.js',
 		'out/src/Config.js',
@@ -173,7 +173,8 @@ def jsFiles():
 	return '\n'.join(l)
 
 def jschess_js_section():
-	return '<script type="text/javascript" src="jschess.pack.min.js"></script>'
+	#return '<script type="text/javascript" src="jschess.pack.min.js"></script>'
+	return '<script type="text/javascript" src="jschess.pack.js"></script>'
 
 def jschess_js_section_debug():
 	return '<script type="text/javascript" src="jschess.pack.js"></script>'
