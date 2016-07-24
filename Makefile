@@ -19,12 +19,12 @@ CLOSURE:=closure-compiler-v20160713
 # code #
 ########
 JSCHECK:=out/$(tdefs.project_name).stamp
-JSFULL:=out/$(tdefs.project_name).js
-JSMIN:=out/$(tdefs.project_name).min.js
+JSFULL:=out/web/$(tdefs.project_name).js
+JSMIN:=out/web/$(tdefs.project_name).min.js
 JSMIN_JSMIN:=out/$(tdefs.project_name).min.jsmin.js
 JSMIN_YUI:=out/$(tdefs.project_name).min.yui.js
 JSMIN_CLOSURE:=out/$(tdefs.project_name).min.closure.js
-JSPACK:=out/$(tdefs.project_name).pack.js
+JSPACK:=out/web/$(tdefs.project_name).pack.js
 JSZIP:=out/$(tdefs.project_name).zip
 
 ALL_FILES:=$(shell git ls-files)
