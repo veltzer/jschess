@@ -9,10 +9,7 @@
 
 		${tdefs.jschess_js_section}
 
-		<!-- highlight.js -->
-		<script type="text/javascript" src="../thirdparty/highlight.min.js"></script>
-		<link href="../thirdparty/highlight.min.css" rel="stylesheet" type="text/css" />
-		<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+		${tdefs.jschess_js_section_highlight}
 
 	</head>
 	<body>

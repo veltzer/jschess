@@ -102,14 +102,14 @@ def getJsThirdParty():
 	l=[]
 	for dep in deps:
 		if dep.runtime:
-			l.append('<script type="text/javascript" src="../'+dep.myFile+'"></script>')
+			l.append('<script type="text/javascript" src="'+dep.myFile+'"></script>')
 	return '\n'.join(l)
 
 def getJsThirdPartyDebug():
 	l=[]
 	for dep in deps:
 		if dep.runtime:
-			l.append('<script type="text/javascript" src="../'+dep.myFileDebug+'"></script>')
+			l.append('<script type="text/javascript" src="'+dep.myFileDebug+'"></script>')
 	return '\n'.join(l)
 
 def depslist():
@@ -168,15 +168,23 @@ def jsFiles():
 	l=[]
 	l.append('<!-- placed by jsFiles() macro -->')
 	for f in files:
-		l.append('<script type="text/javascript" src="../'+f+'"></script>')
+		l.append('<script type="text/javascript" src="'+f+'"></script>')
 	l.append('<!-- end of jsFiles() macro -->')
 	return '\n'.join(l)
 
 def jschess_js_section():
-	return '<script type="text/javascript" src="../out/jschess.pack.min.js"></script>'
+	return '<script type="text/javascript" src="jschess.pack.min.js"></script>'
 
 def jschess_js_section_debug():
-	return '<script type="text/javascript" src="../out/jschess.pack.js"></script>'
+	return '<script type="text/javascript" src="jschess.pack.js"></script>'
+
+def jschess_js_section_highlight():
+	return '''
+		<!-- highlight.js -->
+		<script type="text/javascript" src="thirdparty/highlight.min.js"></script>
+		<link href="thirdparty/highlight.min.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+	'''
 
 def populate(d):
 	# ours
@@ -188,6 +196,7 @@ def populate(d):
 	d.jschess_runtimedeps=get_rt_deps()
 	d.jschess_js_section=jschess_js_section()
 	d.jschess_js_section_debug=jschess_js_section_debug()
+	d.jschess_js_section_highlight=jschess_js_section_highlight()
 
 def getdeps():
 	return [__file__]
