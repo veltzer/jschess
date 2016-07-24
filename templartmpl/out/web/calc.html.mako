@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>${tdefs.project_name} - SVG path calculator</title>
-		<link rel="shortcut icon" href="../static/favicon.ico"/>
+		<link rel="shortcut icon" href="favicon.ico"/>
 
 		${tdefs.project_google_analytics_snipplet}
 

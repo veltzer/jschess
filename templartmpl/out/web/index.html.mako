@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>${tdefs.project_name} - main page</title>
-		<link rel="shortcut icon" href="../static/favicon.ico"/>
+		<link rel="shortcut icon" href="favicon.ico"/>
 		<meta name="Description" content="${tdefs.project_long_description}"/>
 		<meta name="Keywords" content="${tdefs.personal_fullname}, ${tdefs.personal_slug}, ${tdefs.project_name}, ${', '.join(tdefs.project_keywords)}"/>
 		${tdefs.project_google_analytics_snipplet}

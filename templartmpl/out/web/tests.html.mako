@@ -3,10 +3,10 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>${tdefs.project_name} - QUnit testing page</title>
-		<link rel="shortcut icon" href="../static/favicon.ico"/>
+		<link rel="shortcut icon" href="favicon.ico"/>
 
 		<!-- qunit -->
-		<link type="text/css" rel="stylesheet" href="../thirdparty/qunit.css"/>
+		<link type="text/css" rel="stylesheet" href="thirdparty/qunit.css"/>
 
 		${tdefs.project_google_analytics_snipplet}
 
