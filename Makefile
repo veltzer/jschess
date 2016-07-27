@@ -149,11 +149,6 @@ debug_me: $(ALL_DEP)
 	$(info FILES_NOT_GENERATED is $(FILES_NOT_GENERATED))
 	$(info FILES_WITHOUT_HARDCODING is $(FILES_WITHOUT_HARDCODING))
 
-.PHONY: gh-pages
-gh-pages: $(ALL) $(ALL_DEPS)
-	$(info doing [$@])
-	$(Q)node_modules/gh-pages/bin/gh-pages --dist out/web
-
 .PHONY: sloccount
 sloccount: $(ALL_DEP)
 	$(info doing [$@])
