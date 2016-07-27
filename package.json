@@ -1,0 +1,39 @@
+{
+  "name": "jschess",
+  "version": "1.0.0",
+  "description": "jschess is a javascript chessboard",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "dependencies": {
+    "chess": "^0.2.7",
+    "prototype": "^0.0.5",
+    "qunit": "^0.9.1",
+    "raphael": "^2.2.1"
+  },
+  "devDependencies": {
+    "gh-pages": "^0.11.0",
+    "htmlhint": "^0.9.13",
+    "jsdoc": "^3.4.0",
+    "jshint": "^2.9.2",
+    "jslint": "^0.10.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/veltzer/jschess.git"
+  },
+  "keywords": [
+    "Chess",
+    "JavaScript"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/veltzer/jschess/issues"
+  },
+  "homepage": "https://github.com/veltzer/jschess#readme"
+}

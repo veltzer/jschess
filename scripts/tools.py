@@ -40,17 +40,6 @@ packs=[
 	# my own
 	'templar',
 ]
-node_packs=[
-	'jshint',
-	'chess',
-	'prototype',
-	'qunit',
-	'raphael',
-	'htmlhint',
-	'jsdoc',
-	'jslint',
-	'gh-pages', # for gh-pages(1)
-]
 
 ########
 # code #
@@ -65,14 +54,11 @@ for pack in packs:
 		pack
 	], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-for node_pack in node_packs:
-	print('getting npm for [{0}]'.format(node_pack))
-	subprocess.check_call([
-		'npm',
-		'--silent',
-		'install',
-		node_pack,
-	], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+print('installing node packages...')
+subprocess.check_call([
+	'npm',
+	'install',
+], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 if os.path.isdir(tp):
 	shutil.rmtree(tp)
