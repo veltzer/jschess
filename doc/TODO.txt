@@ -1,3 +1,6 @@
+- move to es6 object oriented instead of Prototype.
+- move to gulp as the build system (it knows how to minify and a lot more).
+
 - stop using .tdefs in my makefile.
 - bring non minimized versions of the libraries.
 	(if I don't have any - use the minified version).
