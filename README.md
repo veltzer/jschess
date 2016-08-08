@@ -1,7 +1,7 @@
 jschess
 =======
 
-version: 193
+version: 192
 
 jschess is a JavaScript based chess board
 
