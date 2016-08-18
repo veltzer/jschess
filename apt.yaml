@@ -1,0 +1,22 @@
+---
+packages:
+        - name: nodejs
+          reason: for installing javascript packages
+        - name: npm
+          reason: for installing javascript packages
+        - name: yui-compressor
+          reason: for yui-compressor(1)
+        - name: jsdoc-toolkit
+          reason: for jsdoc(1)
+        - name: closure-linter
+          reason: for gjslint(1)
+        - name: tidy
+          reason: for tidy(1)
+        - name: zip
+          reason: for zip(1)
+        - name: sloccount
+          reason: for sloccount(1)
+        - name: bsdtar
+          reason: for bsdtar(1)
+        - name: templar
+          reason: for templating
