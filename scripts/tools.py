@@ -15,6 +15,7 @@ import os # for system, cwd, mkdir, chmod, listdir
 import sys # for path
 import shutil # for rmtree
 import urllib.request # for urlretrieve
+import json # for load
 
 ##############
 # parameters #
@@ -52,6 +53,18 @@ do_debug=False
 def debug(s):
     if do_debug:
         print(s)
+
+hide=True
+def check_call_print(args):
+    if hide:
+        p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        res_out, res_err = p.communicate()
+        if p.returncode:
+            print(res_out.decode(), file=sys.stderr)
+            print(res_err.decode(), file=sys.stderr)
+            sys.exit(p.returncode)
+    else:
+        p = subprocess.check_call(args)
 
 # the lines we are interested in look like this:
 # pub   4096R/EFE21092 2012-05-11
@@ -97,7 +110,7 @@ def install_apt():
         '--assume-yes'
     ]
     args.extend(packs)
-    subprocess.check_call(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    check_call_print(args)
 
 NODE_FILE='package.json'
 def install_node():
@@ -105,10 +118,10 @@ def install_node():
     if not os.path.isfile(NODE_FILE):
         return
     msg('installing from [{0}]...'.format(NODE_FILE))
-    subprocess.check_call([
+    check_call_print([
         'npm',
         'install',
-    ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    ])
 
 def do_start():
     keys_read()
@@ -130,13 +143,13 @@ def do_ppas():
                             print('already there in [{0}]...'.format(filename))
                     continue
             altered_apt_configuration=True
-            subprocess.check_call([
+            check_call_print([
                     'sudo',
                     'add-apt-repository',
                     #'--enable-source', # source code too
                     '--yes', # dont ask questions
                     ppa
-            ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            ])
 
 def download_keys():
     for dl, key_id in opt_keys_download:
@@ -164,7 +177,7 @@ def receive_keys():
         altered_apt_configuration=True
         if opt_progress:
             print('receiving key...')
-        subprocess.check_call([
+        check_call_print([
             'sudo',
             'apt-key',
             'adv',
@@ -172,7 +185,7 @@ def receive_keys():
             srvr,
             '--recv-keys',
             key_id,
-        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        ])
         keys_read()
         assert keys_have(key_id)
 
@@ -180,14 +193,11 @@ def update_apt():
     if altered_apt_configuration and opt_update:
         if opt_progress:
             print('updating apt states...')
-        subprocess.check_call([
+        check_call_print([
             'sudo',
             'apt-get',
             'update',
-        ],
-            #stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
+        ])
         # remove unneeded .save apt files
         os.system('sudo rm -f /etc/apt/sources.list.d/*.save /etc/apt/sources.list.save')
 
@@ -202,11 +212,7 @@ def install_packs():
     ]
     args.extend(opt_packs)
     try:
-        subprocess.check_call(
-            args,
-            #stdout=subprocess.DEVNULL,
-            #stderr=subprocess.DEVNULL,
-        )
+        check_call_print(args)
     except:
         print('error in apt')
 
@@ -219,11 +225,7 @@ def install_ubuntu():
         debug(packs)
         args=['sudo','apt-get','install','--assume-yes']
         args.extend(packs)
-        subprocess.check_call(
-            args,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
+        check_call_print(args)
 
 def install_closure():
 	print('installing tool [{0}]'.format('closure'))
@@ -255,6 +257,8 @@ def rm_tools():
 
 tp='out/web/thirdparty'
 def install_tp():
+    if not os.path.isfile('templardefs/jschess.py'):
+        return
     sys.path.append(os.getcwd())
     import templardefs.jschess
     if os.path.isdir(tp):
@@ -274,12 +278,12 @@ def install_tp():
                     urllib.request.urlretrieve(dep.downloadCss, filename=dep.css)
             if dep.closure:
                     debug('doing closure')
-                    subprocess.check_call([
+                    check_call_print([
                             'tools/closure-compiler-v20160713.jar',
                             dep.myFileDebug,
                             '--js_output_file',
                             dep.myFile,
-                    ], stderr=subprocess.DEVNULL)
+                    ])
             if dep.jsmin:
                     debug('doing jsmin')
                     subprocess.check_call([

@@ -34,8 +34,8 @@ deps.append(Dep(
 	True,
 	None,
 	None,
-	True,
 	False,
+	True,
 ))
 deps.append(Dep(
 	'raphael',

@@ -14,6 +14,8 @@ DO_CHECKHTML:=1
 # name of the closure jar
 #CLOSURE=compiler
 CLOSURE:=closure-compiler-v20160713
+# do you want to debug the makefile?
+DO_MKDBG?=0
 
 ########
 # code #
