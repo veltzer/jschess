@@ -264,13 +264,13 @@ def install_tp():
     for dep in templardefs.jschess.deps:
             print('getting javascript library [{0}]'.format(dep.name))
             if dep.downloadUrl:
-                    debug(dep.downloadUrl, dep.myFile)
+                    debug(dep.downloadUrl+','+dep.myFile)
                     urllib.request.urlretrieve(dep.downloadUrl, filename=dep.myFile)
             if dep.downloadUrlDebug:
-                    debug(dep.downloadUrlDebug, dep.myFileDebug)
+                    debug(dep.downloadUrlDebug+','+dep.myFileDebug)
                     urllib.request.urlretrieve(dep.downloadUrlDebug, filename=dep.myFileDebug)
             if dep.downloadCss:
-                    debug(dep.downloadCss, dep.css)
+                    debug(dep.downloadCss+','+dep.css)
                     urllib.request.urlretrieve(dep.downloadCss, filename=dep.css)
             if dep.closure:
                     debug('doing closure')
