@@ -69,8 +69,8 @@ endif # DO_CHECKHTML
 ###########
 # do not touch this rule
 all: $(ALL) $(ALL_DEP)
-$(TOOLS): scripts/tools.py
-	$(Q)scripts/tools.py
+$(TOOLS):
+	$(Q)templar_cmd install_deps
 	$(Q)make_helper touch-mkdir $@
 
 $(JSZIP): $(tdefs.jschess_sources) $(ALL_DEP)
