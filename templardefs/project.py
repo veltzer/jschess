@@ -3,22 +3,22 @@ project definitions for templar
 '''
 
 def populate(d):
-	d.project_github_username='veltzer'
-	d.project_name='jschess'
-	d.project_website='https://{project_github_username}.github.io/{project_name}'.format(**d)
-	d.project_website_source='https://github.com/{project_github_username}/{project_name}'.format(**d)
-	d.project_website_git='git://github.com/{project_github_username}/{project_name}.git'.format(**d)
-	d.project_paypal_donate_button_id='XKSSBRVJM7HHA'
-	d.project_google_analytics_tracking_id='UA-80188541-1'
-	d.project_long_description='jschess is a JavaScript based chess board'
-	d.project_keywords=[
-		'JavaScript',
-		'chess',
-		'board',
-		'chessboard',
-	]
-	d.project_year_started='2012'
-	d.project_description='''jschess is a JavaScript chess board written in pure JavaScript.
+    d.project_github_username='veltzer'
+    d.project_name='jschess'
+    d.project_website='https://{project_github_username}.github.io/{project_name}'.format(**d)
+    d.project_website_source='https://github.com/{project_github_username}/{project_name}'.format(**d)
+    d.project_website_git='git://github.com/{project_github_username}/{project_name}.git'.format(**d)
+    d.project_paypal_donate_button_id='XKSSBRVJM7HHA'
+    d.project_google_analytics_tracking_id='UA-80188541-1'
+    d.project_long_description='jschess is a JavaScript based chess board'
+    d.project_keywords=[
+        'JavaScript',
+        'chess',
+        'board',
+        'chessboard',
+    ]
+    d.project_year_started='2012'
+    d.project_description='''jschess is a JavaScript chess board written in pure JavaScript.
 It allows yo to create a chess board, have it show games in PGN
 notation from a server, moves pieces around, set up positions
 and more.
@@ -51,6 +51,6 @@ I am ready to work with any chess organization wishing to incorporate jschess
 into their infrastructre and am already working with two such organizations...'''.format(**d)
 
 def getdeps():
-	return [
-		__file__, # myself
-	]
+    return [
+        __file__, # myself
+    ]
