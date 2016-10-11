@@ -92,8 +92,9 @@ $(JSMIN): $(JSFULL) $(ALL_DEP)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)tools/jsmin < $< > $(JSMIN_JSMIN)
 	$(Q)yui-compressor $< -o $(JSMIN_YUI)
-	$(Q)tools/closure.jar --jscomp_error '*' --externs templartmpl/out/src/externs.js.mako --jscomp_off checkTypes $< --js_output_file $(JSMIN_CLOSURE)
-	$(Q)cp $(JSMIN_CLOSURE) $@
+	$(Q)cp $(JSMIN_YUI) $@
+#	$(Q)cp $(JSMIN_CLOSURE) $@
+#	$(Q)tools/closure.jar --jscomp_error '*' --externs templartmpl/out/src/externs.js.mako --jscomp_off checkTypes $< --js_output_file $(JSMIN_CLOSURE)
 
 $(JSPACKFULL): $(JSFULL) $(ALL_DEP)
 	$(info doing [$@])
