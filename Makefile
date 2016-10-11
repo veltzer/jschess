@@ -11,10 +11,6 @@ include /usr/share/templar/make/Makefile
 DO_DOCS:=1
 # do you want to validate html?
 DO_CHECKHTML:=1
-# name of the closure jar
-#CLOSURE=compiler
-#CLOSURE:=closure-compiler-v20160713
-CLOSURE:=closure-compiler-v20160822
 # do you want to debug the makefile?
 DO_MKDBG?=0
 
@@ -96,7 +92,7 @@ $(JSMIN): $(JSFULL) $(ALL_DEP)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)tools/jsmin < $< > $(JSMIN_JSMIN)
 	$(Q)yui-compressor $< -o $(JSMIN_YUI)
-	$(Q)tools/$(CLOSURE).jar --jscomp_error '*' --externs templartmpl/out/src/externs.js.mako --jscomp_off checkTypes $< --js_output_file $(JSMIN_CLOSURE)
+	$(Q)tools/closure.jar --jscomp_error '*' --externs templartmpl/out/src/externs.js.mako --jscomp_off checkTypes $< --js_output_file $(JSMIN_CLOSURE)
 	$(Q)cp $(JSMIN_CLOSURE) $@
 
 $(JSPACKFULL): $(JSFULL) $(ALL_DEP)
