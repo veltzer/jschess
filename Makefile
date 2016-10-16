@@ -13,6 +13,8 @@ DO_DOCS:=1
 DO_CHECKHTML:=1
 # do you want to debug the makefile?
 DO_MKDBG?=0
+# should we do tools?
+DO_TOOLS:=1
 
 ########
 # code #
@@ -47,8 +49,10 @@ ifeq ($(DO_DOCS),1)
 ALL+=$(JSDOC_FILE)
 endif # DO_DOCS
 
+ifeq ($(DO_TOOLS),1)
 TOOLS:=out/tools.stamp
 ALL_DEP+=$(TOOLS)
+endif # DO_TOOLS
 
 SOURCES_HTML_MAKO:=$(shell find templartmpl/out/web \( -type f -or -type l \) -and -name "*.mako" 2> /dev/null)
 SOURCES_HTML:=$(shell make_helper rmfdas $(SOURCES_HTML_MAKO))
@@ -66,7 +70,8 @@ endif # DO_CHECKHTML
 ###########
 # do not touch this rule
 all: $(ALL) $(ALL_DEP)
-$(TOOLS):
+$(TOOLS): package.json apt.yaml templardefs/deps.py
+	$(info doing [$@])
 	$(Q)templar_cmd install_deps
 	$(Q)make_helper touch-mkdir $@
 
