@@ -28,7 +28,7 @@
 			elsewhere) or you will need to download the minified version (.min.js) which is discussed here.
 			This is the list of third party libraries used by <b>jschess</b> and their download location...
 		</p>
-		<table border="1" summary="no summary for this table">
+		<table border="1">
 			<tr>
 				<td>name</td>
 				<td>version</td>
