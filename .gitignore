@@ -13,3 +13,4 @@ __pycache__
 /node_modules
 # script installed tools
 /tools
+/tools.stamp

@@ -70,7 +70,7 @@ endif # DO_CHECKHTML
 ###########
 # do not touch this rule
 all: $(ALL) $(ALL_DEP)
-$(TOOLS): package.json apt.yaml templardefs/deps.py
+$(TOOLS): templardefs/deps.py
 	$(info doing [$@])
 	$(Q)templar_cmd install_deps
 	$(Q)make_helper touch-mkdir $@
