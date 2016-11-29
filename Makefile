@@ -55,7 +55,7 @@ ALL_DEP+=$(TOOLS)
 endif # DO_TOOLS
 
 SOURCES_HTML_MAKO:=$(shell find templartmpl/out/web \( -type f -or -type l \) -and -name "*.mako" 2> /dev/null)
-SOURCES_HTML:=$(shell make_helper rmfdas $(SOURCES_HTML_MAKO))
+SOURCES_HTML:=$(shell make_helper remove-folders $(SOURCES_HTML_MAKO))
 HTMLCHECK:=out/html.stamp
 ifeq ($(DO_CHECKHTML),1)
 ALL+=$(HTMLCHECK)
@@ -72,7 +72,7 @@ endif # DO_CHECKHTML
 all: $(ALL) $(ALL_DEP)
 $(TOOLS): templardefs/deps.py
 	$(info doing [$@])
-	$(Q)templar_cmd install_deps
+	$(Q)templar install_deps
 	$(Q)make_helper touch-mkdir $@
 
 $(JSZIP): $(tdefs.jschess_sources) $(ALL_DEP)
