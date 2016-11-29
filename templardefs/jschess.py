@@ -198,5 +198,5 @@ def populate(d):
     d.jschess_js_section_debug=jschess_js_section_debug()
     d.jschess_js_section_highlight=jschess_js_section_highlight()
 
-def getdeps():
+def get_deps():
     return [__file__]

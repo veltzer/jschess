@@ -50,7 +50,7 @@ your appreciation you are welcome to contribute to it's development at
 I am ready to work with any chess organization wishing to incorporate jschess
 into their infrastructre and am already working with two such organizations...'''.format(**d)
 
-def getdeps():
+def get_deps():
     return [
         __file__, # myself
     ]
