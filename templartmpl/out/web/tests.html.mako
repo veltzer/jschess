@@ -6,7 +6,7 @@
 		<link rel="shortcut icon" href="favicon.ico"/>
 
 		<!-- qunit -->
-		<link type="text/css" rel="stylesheet" href="thirdparty/qunit.css"/>
+		<link type="text/css" rel="stylesheet" href="third_party/qunit.css"/>
 
 		${tdefs.project_google_analytics_snipplet}
 
@@ -15,7 +15,7 @@
 	<body>
 		<div id="qunit"></div>
 		<!-- this MUST be the position at which to import qunit.js -->
-		<script type="text/javascript" src="thirdparty/qunit.js"></script>
+		<script type="text/javascript" src="third_party/qunit.js"></script>
 		<script type="text/javascript" src="tests/Tests.js"></script>
 		<p>
 			Copyright ${tdefs.personal_fullname}, ${tdefs.project_copyright_years}

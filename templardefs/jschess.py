@@ -28,8 +28,8 @@ deps.append(Dep(
     'http://prototypejs.org',
     None,
     'https://ajax.googleapis.com/ajax/libs/prototype/1.7.3.0/prototype.js',
-    'out/web/thirdparty/prototype.min.js',
-    'out/web/thirdparty/prototype.js',
+    'out/web/third_party/prototype.min.js',
+    'out/web/third_party/prototype.js',
     'http://prototypejs.org/learn',
     True,
     None,
@@ -43,8 +43,8 @@ deps.append(Dep(
     'http://raphaeljs.com',
     'https://raw.githubusercontent.com/DmitryBaranovskiy/raphael/master/raphael.min.js',
     'https://raw.githubusercontent.com/DmitryBaranovskiy/raphael/master/raphael.js',
-    'out/web/thirdparty/raphael.min.js',
-    'out/web/thirdparty/raphael.js',
+    'out/web/third_party/raphael.min.js',
+    'out/web/third_party/raphael.js',
     'http://raphaeljs.com/reference.html',
     True,
     None,
@@ -58,8 +58,8 @@ deps.append(Dep(
     'https://github.com/jhlywa/chess.js',
     None,
     'https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js',
-    'out/web/thirdparty/chess.min.js',
-    'out/web/thirdparty/chess.js',
+    'out/web/third_party/chess.min.js',
+    'out/web/third_party/chess.js',
     'https://github.com/jhlywa/chess.js/blob/master/README.md',
     True,
     None,
@@ -73,12 +73,12 @@ deps.append(Dep(
     'https://qunitjs.com',
     None,
     'https://code.jquery.com/qunit/qunit-2.0.0.js',
-    'out/web/thirdparty/qunit.min.js',
-    'out/web/thirdparty/qunit.js',
+    'out/web/third_party/qunit.min.js',
+    'out/web/third_party/qunit.js',
     'https://qunitjs.com',
     False,
     'https://code.jquery.com/qunit/qunit-2.0.0.css',
-    'out/web/thirdparty/qunit.css',
+    'out/web/third_party/qunit.css',
     False,
     False,
 ))
@@ -89,11 +89,11 @@ deps.append(Dep(
     None,
     'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js',
     None,
-    'out/web/thirdparty/highlight.min.js',
+    'out/web/third_party/highlight.min.js',
     'https://highlightjs.org/usage',
     False,
     'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css',
-    'out/web/thirdparty/highlight.min.css',
+    'out/web/third_party/highlight.min.css',
     False,
     False,
 ))
@@ -181,8 +181,8 @@ def jschess_js_section_debug():
 def jschess_js_section_highlight():
     return '''
         <!-- highlight.js -->
-        <script type="text/javascript" src="thirdparty/highlight.min.js"></script>
-        <link href="thirdparty/highlight.min.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="third_party/highlight.min.js"></script>
+        <link href="third_party/highlight.min.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
     '''
 
