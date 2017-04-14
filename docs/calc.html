@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>jschess - SVG path calculator</title>
+		<link rel="shortcut icon" href="favicon.ico"/>
+
+		<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-80188541-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+		<script type="text/javascript" src="jschess.pack.min.js"></script>
+
+		<script type="text/javascript">
+			document.observe('dom:loaded', function() {
+				$('calc').observe('click',function() {
+					var path=$('path').value
+					var x=$('x').value
+					var y=$('y').value
+					var m=Raphael.matrix()
+					m.translate(x,y)
+					var transform=m.toTransformString()
+					var transformPath=Raphael.transformPath(path,transform)
+					$('result').update(transformPath)
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<h1>SVG path calculator</h1>
+		<p>
+		This is an svg calculator. Put in an SVG path and a transform x and y and get the resulting
+		path.
+		</p>
+		<form action="javascript:void(0);">
+			Enter the path <input style="width:100%" id="path"/><br/>
+			Enter x <input id="x"/><br/>
+			Enter y <input id="y"/><br/>
+			<button id="calc">calc</button><br/>
+			Result <div id="result"></div>
+		</form>
+		<p>
+		Example can be:<br/>
+		path: M 34,14 L 31,17 L 14,17 L 11,14<br/>
+		x: 5<br/>
+		y: 6<br/>
+		</p>
+		<p>
+			Copyright Mark Veltzer, 2012-2017
+			<a href="mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
+		</p>
+	</body>
+</html>

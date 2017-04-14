@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Config.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Config.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* vim:set filetype=javascript:*/
+/*jsl:import Utils.js*/
+/*global Class */
+
+
+/**
+  @class Type safe config class
+  The config class is basically a fancy dictionary. The difference
+  between it and a dictionary is that it consults a template object
+  when setting and getting a value.
+  - When setting a value it makes sure that you are giving a name
+  of a parameter that exists in the template and that the value
+  that you gave to the parameter is correctly converted to the
+  type expected.
+  - When getting a value it makes sure you use the right name for
+  the key.
+  The idea is that the user will not be able to accidently put config
+  options which are not used and will only be able to supply the right
+  types.
+  In addition, some config options will &lt;b>have&lt;/b> to be supplied by the user
+  (div id where to create some HTML elements is an example of this).
+  Config will also supply a method by which config options by the user
+  will override anything in the default config.
+  This class &lt;b>should not&lt;/b> be a singleton since the user may want to put
+  two boards on the page and have each configured differently.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var Config = Class.create(/** @lends Config.prototype */{
+  /**
+    creates a new instance.
+    @this {Config}
+    @param {object} tmpl template to use.
+    @return {Config} new instance.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function(tmpl) {
+    // the dictionary holding the current config
+    this.d = {};
+    // the template to be used
+    this.tmpl = tmpl;
+  },
+  /**
+    get a value for a key.
+    @this {Config}
+    @param {anything} key key to store in the config.
+    @return {anything} the value associated with the key.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  getValue: function(key) {
+    if (this.tmpl.hasKey(key)) {
+      if (this.d[key] !== undefined) {
+        return this.d[key];
+      }
+      return this.tmpl.getDefaultValue(key);
+    }
+    throw 'request for bad key [' + key + ']';
+  },
+  /**
+    set a key to a certain value in the current configuration
+    @this {Config}
+    @param {anything} key key to store in the config.
+    @param {anything} value value to store in the config.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  setValue: function(key, value) {
+    // check that the key and value are ok.
+    this.tmpl.check(key, value);
+    this.d[key] = value;
+  },
+  /**
+    set many values at once
+    @this {Config}
+    @param {object} d dictionary of values.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  override: function(d) {
+    var x;
+    for (x in d) {
+      this.setValue(x, d[x]);
+    }
+  },
+  /**
+    check that the config is good to go
+    for instance: check that all required arguments are set
+    @this {Config}
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  check: function() {
+    // TODO
+    return;
+  }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Board.html">Board</a></li><li><a href="BoardPiece.html">BoardPiece</a></li><li><a href="BoardPosition.html">BoardPosition</a></li><li><a href="Config.html">Config</a></li><li><a href="ConfigTmpl.html">ConfigTmpl</a></li><li><a href="Controls.html">Controls</a></li><li><a href="Game.html">Game</a></li><li><a href="GameMove.html">GameMove</a></li><li><a href="PgnReader.html">PgnReader</a></li><li><a href="PieceColor.html">PieceColor</a></li><li><a href="PiecePosition.html">PiecePosition</a></li><li><a href="PieceType.html">PieceType</a></li><li><a href="SvgBoard.html">SvgBoard</a></li><li><a href="SvgConfigTmpl.html">SvgConfigTmpl</a></li><li><a href="SvgControls.html">SvgControls</a></li><li><a href="SvgCreator.html">SvgCreator</a></li><li><a href="SvgPathAndAttributes.html">SvgPathAndAttributes</a></li><li><a href="SvgPiece.html">SvgPiece</a></li><li><a href="SvgPieceData.html">SvgPieceData</a></li><li><a href="SvgPixelPosition.html">SvgPixelPosition</a></li><li><a href="Utils.html">Utils</a></li><li><a href="WRaphael.html">WRaphael</a></li><li><a href="WSet.html">WSet</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Apr 14 2017 07:57:59 GMT+0300 (IDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

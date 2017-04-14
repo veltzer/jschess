@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Board.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Board.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* vim:set filetype=javascript:*/
+/*jsl:import BoardPiece.js*/
+/*jsl:import BoardPosition.js*/
+/*jsl:import PieceColor.js*/
+/*jsl:import PieceType.js*/
+/*jsl:import PiecePosition.js*/
+/*global Class, BoardPiece, PieceColor, PieceType, PiecePosition, BoardPosition */
+
+
+/**
+  @class Represents a full board This is the main class to interact with.
+  Using this class you can: 1. Use pieces: put, remove and move them.
+  2. Do something with all pieces.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var Board = Class.create(/** @lends Board.prototype */{
+  /**
+    creates a new instance
+    @this {Board}
+    @return {Board} the new object created.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function() {
+    var i, j, ar;
+    // create 8x8 undefined squares
+    this.bd = [];
+    for (i = 0; i &lt; 8; i++) {
+      ar = [];
+      for (j = 0; j &lt; 8; j++) {
+        ar.push(undefined);
+      }
+      this.bd.push(ar);
+    }
+    this.pieces = [];
+    // callbacks
+    this.preAddCB = [];
+    this.postAddCB = [];
+    this.preRemoveCB = [];
+    this.postRemoveCB = [];
+    this.preMoveCB = [];
+    this.postMoveCB = [];
+  },
+  /**
+    toString method that allows you to get a nice printout for this type
+    @this {Board}
+    @return {string} string representation of this object.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  toString: function() {
+    var i, j;
+    var str = '';
+    for (i = 0; i &lt; 8; i++) {
+      for (j = 0; j &lt; 8; j++) {
+        str += this.bd[i][j];
+      }
+      str += '\n';
+    }
+    return str;
+  },
+  /**
+    Check that no piece is at a certain position.
+    Will throw an exception if that is not the case.
+    @this {Board}
+    @param {PiecePosition} piecePosition position to check that no piece is at.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  checkNoPieceAt: function(piecePosition) {
+    if (this.bd[piecePosition.x][piecePosition.y] !== undefined) {
+      throw 'already have piece at position ' + piecePosition.toString();
+    }
+  },
+  /**
+    Check that piece is at a certain position.
+    Will throw an exception if that is not the case.
+    @this {Board}
+    @param {PiecePosition} piecePosition position to check that a piece is at.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  checkPieceAt: function(piecePosition) {
+    if (this.bd[piecePosition.x][piecePosition.y] === undefined) {
+      throw 'dont have piece at position ' + piecePosition.toString();
+    }
+  },
+  /**
+    Check that a certain piece is at a certain position.
+    Will throw an exception if that is not the case.
+    @this {Board}
+    @param {BoardPiece} boardPiece the piece in question.
+    @param {PiecePosition} piecePosition position to check that a piece is at.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  checkBoardPieceAt: function(boardPiece, piecePosition) {
+    if (this.bd[piecePosition.x][piecePosition.y] !== boardPiece) {
+      throw 'wrong piece at position ' + piecePosition.toString();
+    }
+  },
+  /**
+    Add a piece to the position
+    @this {Board}
+    @param {BoardPiece} boardPiece piece to add.
+    @param {PiecePosition} piecePosition where to add the piece.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  addPiece: function(boardPiece, piecePosition) {
+    this.preAddCB.forEach(function(f) {
+      f(boardPiece, piecePosition);
+    });
+    this.checkNoPieceAt(piecePosition);
+    this.bd[piecePosition.x][piecePosition.y] = boardPiece;
+    this.postAddCB.forEach(function(f) {
+      f(boardPiece, piecePosition);
+    });
+  },
+  /**
+    Remove a piece
+    @this {Board}
+    @param {BoardPiece} boardPiece piece to remove.
+    @param {PiecePosition} piecePosition the position to remove it from.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  removePiece: function(boardPiece, piecePosition) {
+    this.checkBoardPieceAt(boardPiece, piecePosition);
+    this.preRemoveCB.forEach(function(f) {
+      f(boardPiece, piecePosition);
+    });
+    this.bd[piecePosition.x][piecePosition.y] = undefined;
+    this.postRemoveCB.forEach(function(f) {
+      f(boardPiece, piecePosition);
+    });
+  },
+  /**
+    Move a piece
+    @this {Board}
+    @param {BoardPiece} boardPiece piece to move.
+    @param {PiecePosition} fromPiecePosition from where to move the piece.
+    @param {PiecePosition} toPiecePosition to where to move the piece.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  movePiece: function(boardPiece, fromPiecePosition, toPiecePosition) {
+    this.checkPieceAt(fromPiecePosition);
+    this.checkNoPieceAt(toPiecePosition);
+    this.preMoveCB.forEach(function(f) {
+      f(boardPiece, fromPiecePosition, toPiecePosition);
+    });
+    this.bd[fromPiecePosition.x][fromPiecePosition.y] = undefined;
+    this.bd[toPiecePosition.x][toPiecePosition.y] = boardPiece;
+    this.postMoveCB.forEach(function(f) {
+      f(boardPiece, fromPiecePosition, toPiecePosition);
+    });
+  },
+  /**
+    Clear the board
+    @this {Board}
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  clearPieces: function() {
+    var that = this;
+    this.forEachPiece(function(boardPiece, piecePosition) {
+      that.removePiece(boardPiece, piecePosition); });
+  },
+  /**
+    Add a piece to the position (seperate pieces of data).
+    @this {Board}
+    @param {string} color color of the piece (black/white).
+    @param {string} type type of the piece (rook/knight/bishop/queen/king/pawn).
+    @param {number} x x location of the piece [0..8).
+    @param {number} y y location of the piece [0..8).
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  addPieceVals: function(color, type , x, y) {
+    var boardPiece = new BoardPiece(
+        new PieceColor(color),
+        new PieceType(type));
+    this.addPiece(boardPiece, new PiecePosition(x, y));
+  },
+  /**
+    Run a function for each piece in this position
+    @this {Board}
+    @param {function()} f function to be called back for each piece.
+    This function should receive the piece to work on.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  forEachPiece: function(f) {
+    var i, j;
+    for (i = 0; i &lt; 8; i++) {
+      for (j = 0; j &lt; 8; j++) {
+        if (this.bd[i][j] !== undefined) {
+          f(this.bd[i][j], new PiecePosition(i, j));
+        }
+      }
+    }
+  },
+  /**
+    Get a piece at a specific position
+    @this {Board}
+    @param {PiecePosition} piecePosition position to get the piece at.
+    @return {BoardPiece} the piece at the specified position.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  getPieceAtPosition: function(piecePosition) {
+    this.checkPieceAt(piecePosition);
+    return this.bd[piecePosition.x][piecePosition.y];
+  },
+  /**
+    Get a piece at a specific position (in parts)
+    @this {Board}
+    @param {number} x x position to get piece at [0..8).
+    @param {number} y y position to get piece at [0..8).
+    @return {BoardPiece} the piece at the specified position.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  getPieceAtPositionVals: function(x, y) {
+    return this.getPieceAtPosition(new PiecePosition(x, y));
+  },
+  /**
+    Do we have a piece in a specific position?
+    @this {Board}
+    @param {PiecePosition} piecePosition position to check for a piece at.
+    @return {boolean} whether there is a piece at the position.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  hasPieceAtPosition: function(piecePosition) {
+    return this.bd[piecePosition.x][piecePosition.y] !== undefined;
+  },
+  /**
+    Do we have a piece in a specific position?
+    @this {Board}
+    @param {number} x x position to check for piece at [0..8).
+    @param {number} y y position to check for piece at [0..8).
+    @return {boolean} is there a piece at position.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  hasPieceAtPositionVals: function(x, y) {
+    return this.hasPieceAtPosition(new PiecePosition(x, y));
+  },
+  /**
+    Add a callback for adding a piece
+    @this {Board}
+    @param {function()} f callback function.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  addPiecePostAddCallback: function(f) {
+    this.postAddCB.push(f);
+  },
+  /**
+    Add a callback for removing a piece
+    @this {Board}
+    @param {function()} f callback function.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  addPiecePostRemoveCallback: function(f) {
+    this.postRemoveCB.push(f);
+  },
+  /**
+    Add a callback for moving a piece
+    @this {Board}
+    @param {function()} f callback function.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  addPiecePostMoveCallback: function(f) {
+    this.postMoveCB.push(f);
+  },
+  /**
+    Clear the board and add a position to the current board
+    @this {Board}
+    @param {BoardPosition} boardPosition position to set.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  setPosition: function(boardPosition) {
+    this.clearPieces();
+    var that = this;
+    boardPosition.forEachPiece(function(boardPiece, piecePosition) {
+      that.addPiece(boardPiece, piecePosition); });
+  },
+  /**
+    Put the board in starting position of standard chess.
+    @this {Board}
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  startPosition: function() {
+    this.setPosition(BoardPosition.startPos());
+  },
+  /**
+    Move a piece according to positions.
+    @this {Board}
+    @param {PiecePosition} fromPiecePosition from where to move.
+    @param {PiecePosition} toPiecePosition to where to move.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  movePieceByPos: function(fromPiecePosition, toPiecePosition) {
+    var boardPiece = this.getPieceAtPosition(fromPiecePosition);
+    this.movePiece(boardPiece, fromPiecePosition, toPiecePosition);
+  },
+  /**
+    Get the position of a piece
+    @this {Board}
+    @param {BoardPiece} boardPiece piece to get the position for.
+    @return {PiecePosition} the position of the piece in question.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  getPiecePosition: function(boardPiece) {
+    var i, j;
+    for (i = 0; i &lt; 8; i++) {
+      for (j = 0; j &lt; 8; j++) {
+        if (this.bd[i][j] === boardPiece) {
+          return new PiecePosition(i, j);
+        }
+      }
+    }
+    throw 'piece not on board ' + boardPiece;
+  }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Board.html">Board</a></li><li><a href="BoardPiece.html">BoardPiece</a></li><li><a href="BoardPosition.html">BoardPosition</a></li><li><a href="Config.html">Config</a></li><li><a href="ConfigTmpl.html">ConfigTmpl</a></li><li><a href="Controls.html">Controls</a></li><li><a href="Game.html">Game</a></li><li><a href="GameMove.html">GameMove</a></li><li><a href="PgnReader.html">PgnReader</a></li><li><a href="PieceColor.html">PieceColor</a></li><li><a href="PiecePosition.html">PiecePosition</a></li><li><a href="PieceType.html">PieceType</a></li><li><a href="SvgBoard.html">SvgBoard</a></li><li><a href="SvgConfigTmpl.html">SvgConfigTmpl</a></li><li><a href="SvgControls.html">SvgControls</a></li><li><a href="SvgCreator.html">SvgCreator</a></li><li><a href="SvgPathAndAttributes.html">SvgPathAndAttributes</a></li><li><a href="SvgPiece.html">SvgPiece</a></li><li><a href="SvgPieceData.html">SvgPieceData</a></li><li><a href="SvgPixelPosition.html">SvgPixelPosition</a></li><li><a href="Utils.html">Utils</a></li><li><a href="WRaphael.html">WRaphael</a></li><li><a href="WSet.html">WSet</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Apr 14 2017 07:57:59 GMT+0300 (IDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

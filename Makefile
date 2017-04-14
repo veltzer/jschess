@@ -15,18 +15,20 @@ DO_CHECKHTML:=1
 DO_MKDBG?=0
 # should we do tools?
 DO_TOOLS:=1
+# where is the web folder?
+DOCS:=docs
 
 ########
 # code #
 ########
 JSCHECK:=out/$(tdefs.project_name).stamp
-JSFULL:=out/web/$(tdefs.project_name).js
-JSMIN:=out/web/$(tdefs.project_name).min.js
+JSFULL:=$(DOCS)/$(tdefs.project_name).js
+JSMIN:=$(DOCS)/$(tdefs.project_name).min.js
 JSMIN_JSMIN:=out/$(tdefs.project_name).min.jsmin.js
 JSMIN_YUI:=out/$(tdefs.project_name).min.yui.js
 JSMIN_CLOSURE:=out/$(tdefs.project_name).min.closure.js
-JSPACKFULL:=out/web/$(tdefs.project_name).pack.js
-JSPACKMIN:=out/web/$(tdefs.project_name).pack.min.js
+JSPACKFULL:=$(DOCS)/$(tdefs.project_name).pack.js
+JSPACKMIN:=$(DOCS)/$(tdefs.project_name).pack.min.js
 JSZIP:=out/$(tdefs.project_name).zip
 
 ALL_FILES:=$(shell git ls-files)
@@ -43,8 +45,8 @@ endif # DO_MKDBG
 
 ALL+=$(JSPACKFULL) $(JSPACKMIN) $(JSZIP)
 
-JSDOC_FOLDER=out/web/jsdoc
-JSDOC_FILE=out/web/jsdoc/index.html
+JSDOC_FOLDER=$(DOCS)/jsdoc
+JSDOC_FILE=$(DOCS)/jsdoc/index.html
 ifeq ($(DO_DOCS),1)
 ALL+=$(JSDOC_FILE)
 endif # DO_DOCS
@@ -54,7 +56,7 @@ TOOLS:=out/tools.stamp
 ALL_DEP+=$(TOOLS)
 endif # DO_TOOLS
 
-SOURCES_HTML_MAKO:=$(shell find templartmpl/out/web \( -type f -or -type l \) -and -name "*.mako" 2> /dev/null)
+SOURCES_HTML_MAKO:=$(shell find templartmpl/docs \( -type f -or -type l \) -and -name "*.mako" 2> /dev/null)
 SOURCES_HTML:=$(shell make_helper remove-folders $(SOURCES_HTML_MAKO))
 HTMLCHECK:=out/html.stamp
 ifeq ($(DO_CHECKHTML),1)

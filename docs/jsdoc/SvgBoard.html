@@ -1,0 +1,4878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: SvgBoard</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: SvgBoard</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>SvgBoard</h2>
+        
+            <div class="class-description">a whole board to play with</div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="SvgBoard"><span class="type-signature"></span>new SvgBoard<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line18">line 18</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id=".ObjRotateLeft"><span class="type-signature">(static) </span>ObjRotateLeft<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Which sides go to which when rotating left.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line877">line 877</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".ObjRotateRight"><span class="type-signature">(static) </span>ObjRotateRight<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Which sides go to which when rotating right.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line865">line 865</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="drawBoard"><span class="type-signature"></span>drawBoard<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Draw the board (white and black squares)
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line243">line 243</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="drawBorder"><span class="type-signature"></span>drawBorder<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Draw the border
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line185">line 185</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="eventGlobal"><span class="type-signature"></span>eventGlobal<span class="signature">(eventtype, x, y, type)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Events for position. Positions are logical and do
+    not depend on the flipping of the board.
+    Types of events: mouseover, mouseout, click and more.
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>eventtype</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">which event happened.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">x position of event.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">y position of event.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">which event happened.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line738">line 738</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="eventPiece"><span class="type-signature"></span>eventPiece<span class="signature">(boardPiece, type)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Event handler for events happening on the pieces.
+    Types of events: click, mouseover and more...
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>boardPiece</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BoardPiece.html">BoardPiece</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">instance the event happened on.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the type of event that happened.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line658">line 658</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="eventPosition"><span class="type-signature"></span>eventPosition<span class="signature">(piecePosition, rec, type)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Events for position. Positions are logical and do
+    not depend on the flipping of the board.
+    Types of events: mouseover, mouseout, click and more.
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>piecePosition</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PiecePosition.html">PiecePosition</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the position of the event.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rec</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">rect</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the Raphael.js rectangle where the event happened.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">which is the name of the event that happened.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line682">line 682</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="flip"><span class="type-signature"></span>flip<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Flips the board (see it from the other side)
+    If the board is 90 deg left it be will 90 deg right.
+    Black view will turn to white and white to black.
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line553">line 553</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getBoard"><span class="type-signature"></span>getBoard<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="Board.html">Board</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    get the logical board [Board] associated with this SvgBoard
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line91">line 91</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the logical board associated with this SvgBoard.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Board.html">Board</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getRec"><span class="type-signature"></span>getRec<span class="signature">(piecePosition)</span><span class="type-signature"> &rarr; {rec}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Return the square at a position.
+    This method must take into consideraton board rotation
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>piecePosition</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PiecePosition.html">PiecePosition</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the logical position for which to
+    return the square.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line843">line 843</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the Raphael.js rec in question.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">rec</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getValue"><span class="type-signature"></span>getValue<span class="signature">(key)</span><span class="type-signature"> &rarr; {anything}</span></h4>
+
+    
+
+
+
+<div class="description">
+    get the config value for a key
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the key to get the config for.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line101">line 101</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the value of the configuration option.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">anything</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="glow"><span class="type-signature"></span>glow<span class="signature">(boardPiece, glow)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Make a piece glow
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>boardPiece</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BoardPiece.html">BoardPiece</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the piece to make glow.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>glow</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">properties to pass to the glow function as per
+    Raphael.js.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line620">line 620</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="hidePiece"><span class="type-signature"></span>hidePiece<span class="signature">(boardPiece)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Quick method to hide a piece
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>boardPiece</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BoardPiece.html">BoardPiece</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the piece to hide.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line512">line 512</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="initialize"><span class="type-signature"></span>initialize<span class="signature">(board, dict)</span><span class="type-signature"> &rarr; {<a href="SvgBoard.html">SvgBoard</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    creates a new instance
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>board</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Board.html">Board</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">instance to use as the abstract board.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dict</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">overridables to the configuration for this object.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line27">line 27</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the new instance.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="SvgBoard.html">SvgBoard</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="newPosition"><span class="type-signature"></span>newPosition<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Internal method. This method is called whenever
+    the cursor changes position over the board and ONLY when
+    it changes position.
+    No parameters are passed because This method uses:
+    this.selectedPiece, this.selectedRec, this.lastPos, this.currentPos
+    to do it's work.
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line785">line 785</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="overlay"><span class="type-signature"></span>overlay<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Create an overlay rectange for the entire board
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line285">line 285</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="pixelsToPos"><span class="type-signature"></span>pixelsToPos<span class="signature">(svgPixelPosition)</span><span class="type-signature"> &rarr; {<a href="PiecePosition.html">PiecePosition</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Translates pixel position (x,y) to board position (0..7,0..7)
+    This method must take board rotation into consideration
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>svgPixelPosition</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="SvgPixelPosition.html">SvgPixelPosition</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">object to translate.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line420">line 420</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    logical position.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="PiecePosition.html">PiecePosition</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="pixelsToPosForgiving"><span class="type-signature"></span>pixelsToPosForgiving<span class="signature">(svgPixelPosition)</span><span class="type-signature"> &rarr; {<a href="PiecePosition.html">PiecePosition</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Forgiving version of the previous function.
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>svgPixelPosition</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="SvgPixelPosition.html">SvgPixelPosition</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">object to translate.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line444">line 444</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    logical position.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="PiecePosition.html">PiecePosition</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="postAddPiece"><span class="type-signature"></span>postAddPiece<span class="signature">(boardPiece, piecePosition)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Callback method that is called after the logical board adds a piece.
+    This is where we add the SVG representation of the piece in real graphics.
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>boardPiece</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BoardPiece.html">BoardPiece</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the piece that was added.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>piecePosition</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PiecePosition.html">PiecePosition</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the position where the piece was added.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line341">line 341</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="postGraphics"><span class="type-signature"></span>postGraphics<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Callback method that is called whenever a piece is added to the board
+    This method is to be used to do something after a piece is added,
+    removed etc.
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line328">line 328</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="postMovePiece"><span class="type-signature"></span>postMovePiece<span class="signature">(boardPiece, fromPiecePosition, toPiecePosition)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Callback called when the logical board moves a piece
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>boardPiece</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BoardPiece.html">BoardPiece</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the piece to move.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fromPiecePosition</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PiecePosition.html">PiecePosition</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">position from which to move.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>toPiecePosition</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PiecePosition.html">PiecePosition</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">position to which to move.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line523">line 523</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="posToPixels"><span class="type-signature"></span>posToPixels<span class="signature">(piecePosition)</span><span class="type-signature"> &rarr; {<a href="SvgPixelPosition.html">SvgPixelPosition</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Translates position (0..7,0..7) to pixels
+    This method must take board rotation into consideration
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>piecePosition</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PiecePosition.html">PiecePosition</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">logical (0..7,0..7) to translate.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line385">line 385</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    position in pixels.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="SvgPixelPosition.html">SvgPixelPosition</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="postRemovePiece"><span class="type-signature"></span>postRemovePiece<span class="signature">(boardPiece, piecePosition)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Callback method that is called after the logical board removes a piece.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>boardPiece</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BoardPiece.html">BoardPiece</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the piece to add.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>piecePosition</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PiecePosition.html">PiecePosition</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the position where the piece was
+    removed.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line371">line 371</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="raphaelPrep"><span class="type-signature"></span>raphaelPrep<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Prepare the raphael paper so we could do graphics
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line109">line 109</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="rectFill"><span class="type-signature"></span>rectFill<span class="signature">(rec, anim)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Fill a rectangle using the default color
+    This method must take board rotation into consideration
+    It currently doesn't because the board looks the same in terms
+    of white/black square when you totally flip it. If we ever support
+    90% flips then this method must be modified.
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>rec</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">rect</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Raphael.js rectangle object to fill.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>anim</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">do you want animation (slow transition).</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line146">line 146</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="redraw"><span class="type-signature"></span>redraw<span class="signature">(oldview)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Redraw the entire board
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>oldview</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">viewType</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the old view of the board.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line635">line 635</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="resize"><span class="type-signature"></span>resize<span class="signature">(set)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Resize the board
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>set</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">set</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Raphael set to resize.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line470">line 470</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="rotateleft"><span class="type-signature"></span>rotateleft<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Rotate the board to the left 90 degrees
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line593">line 593</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="rotateright"><span class="type-signature"></span>rotateright<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Rotate the board to the right 90 degrees
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line579">line 579</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="showHidePiece"><span class="type-signature"></span>showHidePiece<span class="signature">(boardPiece, hide)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Shows or hides a given piece according to parameter
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>boardPiece</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BoardPiece.html">BoardPiece</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">piece to show or hide.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>hide</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">show or hide the piece.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line487">line 487</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="showPiece"><span class="type-signature"></span>showPiece<span class="signature">(boardPiece)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Quick method to show a piece
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>boardPiece</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BoardPiece.html">BoardPiece</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the piece to show.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line503">line 503</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="timeMovePiece"><span class="type-signature"></span>timeMovePiece<span class="signature">(boardPiece, fromPiecePosition, toPiecePosition)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Move a piece on the board (including animation if so configured)
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>boardPiece</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BoardPiece.html">BoardPiece</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the piece to move.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fromPiecePosition</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PiecePosition.html">PiecePosition</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">position from which to move.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>toPiecePosition</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PiecePosition.html">PiecePosition</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">position to which to move.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line534">line 534</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="toString"><span class="type-signature"></span>toString<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+<div class="description">
+    toString function
+    This method is not yet implemented and will throw an exception.
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line609">line 609</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    a string representation of this object.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="translatePos"><span class="type-signature"></span>translatePos<span class="signature">(pos)</span><span class="type-signature"> &rarr; {<a href="PiecePosition.html">PiecePosition</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Translate a position from a rectangle position
+    to a logical position according to board rotation.
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li>{<a href="SvgBoard.html">SvgBoard</a>}</li></ul>
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pos</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PiecePosition.html">PiecePosition</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the position to translate.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SvgBoard.js.html">SvgBoard.js</a>, <a href="SvgBoard.js.html#line223">line 223</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the logical position.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="PiecePosition.html">PiecePosition</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Board.html">Board</a></li><li><a href="BoardPiece.html">BoardPiece</a></li><li><a href="BoardPosition.html">BoardPosition</a></li><li><a href="Config.html">Config</a></li><li><a href="ConfigTmpl.html">ConfigTmpl</a></li><li><a href="Controls.html">Controls</a></li><li><a href="Game.html">Game</a></li><li><a href="GameMove.html">GameMove</a></li><li><a href="PgnReader.html">PgnReader</a></li><li><a href="PieceColor.html">PieceColor</a></li><li><a href="PiecePosition.html">PiecePosition</a></li><li><a href="PieceType.html">PieceType</a></li><li><a href="SvgBoard.html">SvgBoard</a></li><li><a href="SvgConfigTmpl.html">SvgConfigTmpl</a></li><li><a href="SvgControls.html">SvgControls</a></li><li><a href="SvgCreator.html">SvgCreator</a></li><li><a href="SvgPathAndAttributes.html">SvgPathAndAttributes</a></li><li><a href="SvgPiece.html">SvgPiece</a></li><li><a href="SvgPieceData.html">SvgPieceData</a></li><li><a href="SvgPixelPosition.html">SvgPixelPosition</a></li><li><a href="Utils.html">Utils</a></li><li><a href="WRaphael.html">WRaphael</a></li><li><a href="WSet.html">WSet</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Apr 14 2017 07:57:59 GMT+0300 (IDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
