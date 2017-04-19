@@ -117,7 +117,7 @@ $(JSDOC_FILE): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)rm -rf jsdoc
 	$(Q)mkdir -p $(dir $@)
-	$(Q)nodejs node_modules/jsdoc/jsdoc.js -d $(JSDOC_FOLDER) out/src 1> /dev/null
+	$(Q)nodejs node_modules/jsdoc/jsdoc.js -d $(JSDOC_FOLDER) -c support/jsdoc.json out/src 1> /dev/null
 
 .PHONY: check_js
 check_js: $(JSCHECK) $(ALL_DEP)
@@ -145,6 +145,11 @@ check_all: check_hardcoded_names check_grep
 .PHONY: jsdoc
 jsdoc: $(JSDOC_FILE) $(ALL_DEP)
 	$(info doing [$@])
+
+.PHONY: jsdoc_rm
+jsdoc_rm:
+	$(info doing [$@])
+	$(Q)rm -rf $(JSDOC_FOLDER)
 
 .PHONY: debug_me
 debug_me: $(ALL_DEP)
