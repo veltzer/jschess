@@ -2,7 +2,6 @@
 # includes #
 ############
 TEMPLAR_NEED_TDEFS_INCLUDE:=1
-include /usr/share/templar/make/Makefile
 
 ##############
 # parameters #

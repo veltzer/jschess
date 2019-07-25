@@ -37,4 +37,4 @@ https://veltzer.github.io/jschess.
 I am ready to work with any chess organization wishing to incorporate jschess
 into their infrastructre and am already working with two such organizations...
 
-	Mark Veltzer <mark.veltzer@gmail.com>, 2012-2017
+	Mark Veltzer <mark.veltzer@gmail.com>, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019

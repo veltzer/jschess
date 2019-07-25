@@ -1,22 +1,18 @@
-<!DOCTYPE html>
+<%!
+	import config.project
+	import config.personal
+	import config.git
+	import config.jschess
+%><!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>jschess - SVG path calculator</title>
+		<title>${config.project.project_name} - SVG path calculator</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 
-		<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		${config.project.project_google_analytics_snipplet}
 
-ga('create', 'UA-80188541-1', 'auto');
-ga('send', 'pageview');
-
-</script>
-
-		<script type="text/javascript" src="jschess.pack.min.js"></script>
+		${config.jschess.jschess_js_section}
 
 		<script type="text/javascript">
 			document.observe('dom:loaded', function() {
@@ -53,8 +49,8 @@ ga('send', 'pageview');
 		y: 6<br/>
 		</p>
 		<p>
-			Copyright Mark Veltzer, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019
-			<a href="mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
+			Copyright ${config.personal.personal_fullname}, ${config.project.project_copyright_years}
+			<a href="${config.personal.personal_email}">${config.personal.personal_email}</a>
 		</p>
 	</body>
 </html>
