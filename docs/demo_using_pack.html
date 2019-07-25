@@ -1,20 +1,29 @@
-<%!
-	import config.project
-	import config.personal
-	import config.git
-	import config.jschess
-%><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>${config.project.project_name} - Using the pack.js file</title>
+		<title>jschess - Using the pack.js file</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 
-		${config.project.project_google_analytics_snipplet}
+		<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-		${config.jschess.jschess_js_section}
+ga('create', 'UA-80188541-1', 'auto');
+ga('send', 'pageview');
 
-		${config.jschess.jschess_js_section_highlight}
+</script>
+
+		<script type="text/javascript" src="jschess.pack.min.js"></script>
+
+		
+        <!-- highlight.js -->
+        <script type="text/javascript" src="third_party/highlight.min.js"></script>
+        <link href="third_party/highlight.min.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+    
 
 		<script type="text/javascript">
 			document.observe('dom:loaded', function() {
@@ -37,11 +46,11 @@
 		When using the .pack.js file download it from <a title="jschess package download" href="../out/jschess.pack.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
 		</p>
-		<pre><code class="html"><%block filter="h, trim"><script src="jschess.pack.js"></script></%block></code></pre>
+		<pre><code class="html">&lt;script src=&#34;jschess.pack.js&#34;&gt;&lt;/script&gt;</code></pre>
 		<p>
 		You need a place for your board, so place something like this somewhere in your html:
 		</p>
-		<pre><code class="html"><%block filter="h, trim"><div id="myid"></div></%block></code></pre>
+		<pre><code class="html">&lt;div id=&#34;myid&#34;&gt;&lt;/div&gt;</code></pre>
 		<p>
 		In order to get a board with initial position we must:
 		</p>
@@ -65,8 +74,8 @@ board.startPosition()</code></pre>
 		<div id="myid">
 		</div>
 		<p>
-			Copyright ${config.personal.personal_fullname}, ${config.project.project_copyright_years}
-			<a href="${config.personal.personal_email}">${config.personal.personal_email}</a>
+			Copyright Mark Veltzer, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019
+			<a href="mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
 		</p>
 	</body>
 </html>

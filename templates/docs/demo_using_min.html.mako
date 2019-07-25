@@ -1,15 +1,20 @@
-<!DOCTYPE html>
+<%!
+	import config.project
+	import config.personal
+	import config.git
+	import config.jschess
+%><!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>${config.project.project_name} - Using the min.js file</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 
-		${tdefs.project_google_analytics_snipplet}
+		${config.project.project_google_analytics_snipplet}
 
-		${config.js_chess.jschess_js_section}
+		${config.jschess.jschess_js_section}
 
-		${config.js_chess.jschess_js_section_highlight}
+		${config.jschess.jschess_js_section_highlight}
 
 		<script type="text/javascript">
 			document.observe('dom:loaded', function() {
@@ -38,7 +43,7 @@
 				<td>debug from me</td>
 				<td>minified from me</td>
 			</tr>
-			% for dep in tdefs.jschess_runtimedeps:
+			% for dep in config.jschess.jschess_runtimedeps:
 			<tr>
 				<td>${dep.name}</td>
 				<td>${dep.version}</td>
@@ -62,7 +67,7 @@
 		Import them so:
 		</p>
 		<pre><code class="html"><%block filter="h, trim">
-${tdefs.jschess_getJsThirdParty}></%block></code></pre>
+${config.jschess.jschess_getJsThirdParty}></%block></code></pre>
 		<p>
 		Then download the minified <b>jschess</b> file from <a title="jschess compressed download" href="../out/jschess.min.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
@@ -87,8 +92,8 @@ board.startPosition()
 		</p>
 		<div id="myid"></div>
 		<p>
-			Copyright ${config.personal.personal_fullname}, ${tdefs.project_copyright_years}
-			<a href="${tdefs.personal_email}">${tdefs.personal_email}</a>
+			Copyright ${config.personal.personal_fullname}, ${config.project.project_copyright_years}
+			<a href="${config.personal.personal_email}">${config.personal.personal_email}</a>
 		</p>
 	</body>
 </html>

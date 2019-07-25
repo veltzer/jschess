@@ -113,7 +113,7 @@ BoardPosition.startPos = function() {
 
 /**
   Setup a position according to FEN notation.
-  See Forsyth–Edwards Notation in wikipedia for more details.
+  See Forsyth-Edwards Notation in wikipedia for more details.
   Example of start position is:
   'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
   @param {string} fen a string describing a chess board position in FEN

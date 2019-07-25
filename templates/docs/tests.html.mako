@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<%!
+	import config.project
+	import config.personal
+	import config.git
+	import config.jschess
+%><!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -8,9 +13,9 @@
 		<!-- qunit -->
 		<link type="text/css" rel="stylesheet" href="third_party/qunit.css"/>
 
-		${tdefs.project_google_analytics_snipplet}
+		${config.project.project_google_analytics_snipplet}
 
-		${config.js_chess.jschess_js_section}
+		${config.jschess.jschess_js_section}
 	</head>
 	<body>
 		<div id="qunit"></div>
@@ -18,8 +23,8 @@
 		<script type="text/javascript" src="third_party/qunit.js"></script>
 		<script type="text/javascript" src="tests/Tests.js"></script>
 		<p>
-			Copyright ${config.personal.personal_fullname}, ${tdefs.project_copyright_years}
-			<a href="${tdefs.personal_email}">${tdefs.personal_email}</a>
+			Copyright ${config.personal.personal_fullname}, ${config.project.project_copyright_years}
+			<a href="${config.personal.personal_email}">${config.personal.personal_email}</a>
 		</p>
 	</body>
 </html>
