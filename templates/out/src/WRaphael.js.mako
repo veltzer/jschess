@@ -1,12 +1,12 @@
 <%!
-	import config.personal
+	import user.personal
 %>/* vim:set filetype=javascript:*/
 /*global Class, Raphael*/
 
 
 /**
   @class Wrapper for Raphael.js set
-  @author ${config.personal.personal_jsdoc_author}
+  @author ${user.personal.personal_jsdoc_author}
 */
 var WSet = Class.create(/** @lends WSet.prototype */{
   /**
@@ -14,7 +14,7 @@ var WSet = Class.create(/** @lends WSet.prototype */{
     @param {set} set the raphael set that this wraps.
     @param {wrapper} wrapper the raphael wrapper (with paper and all).
     @return {WSet} a new instance of this class.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   initialize: function(set, wrapper) {
     this.set = set;
@@ -25,7 +25,7 @@ var WSet = Class.create(/** @lends WSet.prototype */{
     Pass anything you want to raphael.
     @this {WSet}
     @return {anything} anything that Raphael.js returns from this method.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   push: function() {
     var m = this.set.push;
@@ -37,7 +37,7 @@ var WSet = Class.create(/** @lends WSet.prototype */{
     Pass anything you want to raphael.
     @this {WSet}
     @return {anything} anything that Raphael.js returns from this method.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   remove: function() {
     var m = this.set.remove;
@@ -49,7 +49,7 @@ var WSet = Class.create(/** @lends WSet.prototype */{
     Pass anything you want to raphael.
     @this {WSet}
     @return {anything} anything that Raphael.js returns from this method.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   forEach: function() {
     var m = this.set.forEach;
@@ -61,7 +61,7 @@ var WSet = Class.create(/** @lends WSet.prototype */{
     @this {WSet}
     @param {object} glow_obj parameters to pass to the Raphael.js glow method.
     @return {set} the set of glow objects.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   glow: function(glow_obj) {
     var nset = this.wrapper.set();
@@ -78,7 +78,7 @@ var WSet = Class.create(/** @lends WSet.prototype */{
     @param {object} names of events to register.
     supported are: click, mouseover, mouseout, mousemove, mouseup,
     mousedown.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   eventRegister: function(f, names) {
     var that = this;
@@ -126,7 +126,7 @@ var WSet = Class.create(/** @lends WSet.prototype */{
 
 /**
   @class Wrapper for Raphael.js
-  @author ${config.personal.personal_jsdoc_author}
+  @author ${user.personal.personal_jsdoc_author}
 */
 var WRaphael = Class.create(/** @lends WRaphael.prototype */{
   /**
@@ -134,7 +134,7 @@ var WRaphael = Class.create(/** @lends WRaphael.prototype */{
     Pass anything you want to raphael.
     @this {WRaphael}
     @return {WRaphael} a new instance of this class.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   initialize: function() {
     this.r = Raphael.apply(undefined, arguments);
@@ -144,7 +144,7 @@ var WRaphael = Class.create(/** @lends WRaphael.prototype */{
     Pass anything you want to raphael.
     @this {WRaphael}
     @return {rect} whatever Raphael returns.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   rect: function() {
     var m = this.r.rect;
@@ -156,7 +156,7 @@ var WRaphael = Class.create(/** @lends WRaphael.prototype */{
     Pass anything you want to raphael.
     @this {WRaphael}
     @return {set} our wrapper for Raphael sets.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   set: function() {
     var m = this.r.set;
@@ -168,7 +168,7 @@ var WRaphael = Class.create(/** @lends WRaphael.prototype */{
     Pass anything you want to raphael.
     @this {WRaphael}
     @return {path} whatever Raphael returns.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   path: function() {
     var m = this.r.path;
@@ -180,7 +180,7 @@ var WRaphael = Class.create(/** @lends WRaphael.prototype */{
     Pass anything you want to raphael.
     @this {WRaphael}
     @return {text} whatever Raphael returns.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   text: function() {
     var m = this.r.text;

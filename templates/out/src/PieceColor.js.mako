@@ -1,12 +1,12 @@
 <%!
-	import config.personal
+	import user.personal
 %>/* vim:set filetype=javascript:*/
 /*global Class */
 
 
 /**
   @class represents a piece color (white,black)
-  @author ${config.personal.personal_jsdoc_author}
+  @author ${user.personal.personal_jsdoc_author}
 */
 var PieceColor = Class.create(/** @lends PieceColor.prototype */{
   /**
@@ -15,7 +15,7 @@ var PieceColor = Class.create(/** @lends PieceColor.prototype */{
     @param {string} color string which represents
     the color of the piece. Must be one of 'white' or 'black'.
     @return {PieceColor} new instance of this class.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   initialize: function(color) {
     if (!(PieceColor.colors.hasOwnProperty(color))) {
@@ -27,7 +27,7 @@ var PieceColor = Class.create(/** @lends PieceColor.prototype */{
     toString method that allows you to get a nice printout for this type
     @this {PieceColor}
     @return {string} string representation of this instance.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   toString: function() {
     return this.color;
@@ -36,7 +36,7 @@ var PieceColor = Class.create(/** @lends PieceColor.prototype */{
     Return whether the piece is white
     @this {PieceColor}
     @return {boolean} boolean indicating whether the piece is white.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   isWhite: function() {
     return this.color === 'white';
@@ -45,7 +45,7 @@ var PieceColor = Class.create(/** @lends PieceColor.prototype */{
     Return whether the piece is black
     @this {PieceColor}
     @return {boolean} boolean indicating whether the piece is black.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   isBlack: function() {
     return this.color === 'black';
@@ -55,7 +55,7 @@ var PieceColor = Class.create(/** @lends PieceColor.prototype */{
 
 /**
   Array of piece colors
-  @author ${config.personal.personal_jsdoc_author}
+  @author ${user.personal.personal_jsdoc_author}
 */
 PieceColor.colors = {
   white: undefined,

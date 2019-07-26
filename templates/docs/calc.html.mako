@@ -1,6 +1,6 @@
 <%!
 	import config.project
-	import config.personal
+	import user.personal
 	import config.git
 	import config.jschess
 %><!DOCTYPE html>
@@ -49,8 +49,8 @@
 		y: 6<br/>
 		</p>
 		<p>
-			Copyright ${config.personal.personal_fullname}, ${config.project.project_copyright_years}
-			<a href="${config.personal.personal_email}">${config.personal.personal_email}</a>
+			Copyright ${user.personal.personal_fullname}, ${config.project.project_copyright_years}
+			<a href="${user.personal.personal_email}">${user.personal.personal_email}</a>
 		</p>
 	</body>
 </html>

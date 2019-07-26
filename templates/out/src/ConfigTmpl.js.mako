@@ -1,5 +1,5 @@
 <%!
-	import config.personal
+	import user.personal
 %>/* vim:set filetype=javascript:*/
 /*jsl:import Utils.js*/
 /*global Utils, Class */
@@ -15,14 +15,14 @@
   - an optional validation function.
   - is this option required
   - description of the option
-  @author ${config.personal.personal_jsdoc_author}
+  @author ${user.personal.personal_jsdoc_author}
 */
 var ConfigTmpl = Class.create(/** @lends ConfigTmpl.prototype */{
   /**
     create a new instance of this class.
     @this {ConfigTmpl}
     @return {ConfigTmpl} a new instance of this class.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   initialize: function() {
     // the dictionary holding the current config
@@ -33,7 +33,7 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl.prototype */{
     add another option to this template
     @this {ConfigTmpl}
     @param {object} s config option with all needed properties.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   add: function(s) {
     Utils.checkEquals(s, ConfigTmpl.fullSet);
@@ -52,7 +52,7 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl.prototype */{
     @this {ConfigTmpl}
     @param {string} key key to check.
     @param {anything} value value to check.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   check: function(key, value) {
     if (!(this.tuples.hasOwnProperty(key))) {
@@ -67,7 +67,7 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl.prototype */{
     @this {ConfigTmpl}
     @param {string} key the key to check.
     @return {boolean} is the key part of this config template.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   hasKey: function(key) {
     return this.tuples.hasOwnProperty(key);
@@ -77,7 +77,7 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl.prototype */{
     @this {ConfigTmpl}
     @param {string} key the key to fetch the value for.
     @return {anything} the default value for the given key.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   getDefaultValue: function(key) {
     return this.tuples[key].defaultValue;
@@ -86,7 +86,7 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl.prototype */{
     show HTML that lists all config options for the current template
     @this {ConfigTmpl}
     @return {string} HTML representation of this config template.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   getHTML: function() {
     var shtml = '';
@@ -115,7 +115,7 @@ var ConfigTmpl = Class.create(/** @lends ConfigTmpl.prototype */{
 
 /**
   All needed properties for each config option.
-  @author ${config.personal.personal_jsdoc_author}
+  @author ${user.personal.personal_jsdoc_author}
 */
 ConfigTmpl.fullSet = {
   name: undefined,
@@ -128,7 +128,7 @@ ConfigTmpl.fullSet = {
 
 /**
   All allowed types for config options.
-  @author ${config.personal.personal_jsdoc_author}
+  @author ${user.personal.personal_jsdoc_author}
 */
 ConfigTmpl.types = {
   t_string: 'string',

@@ -1,5 +1,5 @@
 <%!
-	import config.personal
+	import user.personal
 %>/* vim:set filetype=javascript:*/
 /*jsl:import Utils.js*/
 /*jsl:import SvgPathAndAttributes.js*/
@@ -9,13 +9,13 @@
 
 /**
   @class static class to have just static methods for creating pieces
-  @author ${config.personal.personal_jsdoc_author}
+  @author ${user.personal.personal_jsdoc_author}
 */
 var SvgCreator = Class.create(/** @lends SvgCreator.prototype */{
   /**
     creates a new instance
     @return {SvgCreator} the new instance.
-    @author ${config.personal.personal_jsdoc_author}
+    @author ${user.personal.personal_jsdoc_author}
   */
   initialize: function() {
     return;
@@ -29,7 +29,7 @@ var SvgCreator = Class.create(/** @lends SvgCreator.prototype */{
   @param {PieceColor} pieceColor the color of the piece.
   @param {PieceType} pieceType the type of the piece.
   @return {SvgPiece} the newly created piece.
-  @author ${config.personal.personal_jsdoc_author}
+  @author ${user.personal.personal_jsdoc_author}
 */
 SvgCreator.createPiece = function(config, pieceColor, pieceType) {
   // the 240.0 was found found empirically...

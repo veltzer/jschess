@@ -13,3 +13,6 @@ __pycache__
 /tools.stamp
 
 /.pydmt
+
+/.myenv
+/.venv

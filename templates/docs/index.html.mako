@@ -1,6 +1,6 @@
 <%!
 	import config.project
-	import config.personal
+	import user.personal
 	import config.git
 	import config.jschess
 %><!DOCTYPE html>
@@ -10,7 +10,7 @@
 		<title>${config.project.project_name} - main page</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<meta name="Description" content="${config.project.project_long_description}"/>
-		<meta name="Keywords" content="${config.personal.personal_fullname}, ${config.personal.personal_slug}, ${config.project.project_name}, ${', '.join(config.project.project_keywords)}"/>
+		<meta name="Keywords" content="${user.personal.personal_fullname}, ${user.personal.personal_slug}, ${config.project.project_name}, ${', '.join(config.project.project_keywords)}"/>
 		${config.project.project_google_analytics_snipplet}
 
 		${config.jschess.jschess_js_section}
@@ -179,8 +179,8 @@
 		</p>
 		${config.project.project_paypal_donate_button_snipplet}
 		<p>
-			Copyright ${config.personal.personal_fullname}, ${config.project.project_copyright_years}
-			<a href="${config.personal.personal_email}">${config.personal.personal_email}</a>
+			Copyright ${user.personal.personal_fullname}, ${config.project.project_copyright_years}
+			<a href="${user.personal.personal_email}">${user.personal.personal_email}</a>
 		</p>
 	</body>
 </html>
