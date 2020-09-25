@@ -7,7 +7,7 @@
     "doc": "doc"
   },
   "dependencies": {
-    "chess": "^0.2.7",
+    "chess": "^0.4.3",
     "prototype": "^0.0.5",
     "qunit": "^0.9.1",
     "raphael": "^2.2.1"
