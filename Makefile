@@ -74,7 +74,7 @@ all: $(ALL) $(ALL_DEP)
 $(TOOLS): templardefs/deps.py
 	$(info doing [$@])
 	$(Q)templar install_deps
-	$(Q)make_helper touch-mkdir $@
+	$(Q)pymakehelper touch_mkdir $@
 
 $(JSZIP): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
@@ -86,7 +86,7 @@ $(JSCHECK): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(Q)make_helper wrapper-silent gjslint --flagfile support/gjslint.cfg $(tdefs.jschess_sources)
 	$(Q)node_modules/jshint/bin/jshint $(tdefs.jschess_sources)
 	$(Q)node_modules/jslint/bin/jslint.js --browser --terse --todo --plusplus --forin --vars --sloppy --white --config support/jslintrc $(tdefs.jschess_sources) 2> /dev/null
-	$(Q)make_helper touch-mkdir $@
+	$(Q)pymakehelper touch_mkdir $@
 
 $(JSFULL): $(tdefs.jschess_sources) $(JSCHECK) $(ALL_DEP)
 	$(info doing [$@])
@@ -169,4 +169,4 @@ $(HTMLCHECK): $(SOURCES_HTML) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)tidy -errors -q -utf8 $(SOURCES_HTML)
 	$(Q)node_modules/htmlhint/bin/htmlhint $(SOURCES_HTML) > /dev/null
-	$(Q)make_helper touch-mkdir $@
+	$(Q)pymakehelper touch_mkdir $@
