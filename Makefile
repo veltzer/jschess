@@ -56,7 +56,7 @@ ALL_DEP+=$(TOOLS)
 endif # DO_TOOLS
 
 SOURCES_HTML_MAKO:=$(shell find templartmpl/docs \( -type f -or -type l \) -and -name "*.mako" 2> /dev/null)
-SOURCES_HTML:=$(shell make_helper remove-folders $(SOURCES_HTML_MAKO))
+SOURCES_HTML:=$(shell pymakehelper remove_folders $(SOURCES_HTML_MAKO))
 HTMLCHECK:=out/html.stamp
 ifeq ($(DO_CHECKHTML),1)
 ALL+=$(HTMLCHECK)
@@ -83,7 +83,7 @@ $(JSZIP): $(tdefs.jschess_sources) $(ALL_DEP)
 $(JSCHECK): $(tdefs.jschess_sources) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)tools/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(tdefs.jschess_sources)
-	$(Q)make_helper wrapper-silent gjslint --flagfile support/gjslint.cfg $(tdefs.jschess_sources)
+	$(Q)pymakehelper only_print_on_error gjslint --flagfile support/gjslint.cfg $(tdefs.jschess_sources)
 	$(Q)node_modules/jshint/bin/jshint $(tdefs.jschess_sources)
 	$(Q)node_modules/jslint/bin/jslint.js --browser --terse --todo --plusplus --forin --vars --sloppy --white --config support/jslintrc $(tdefs.jschess_sources) 2> /dev/null
 	$(Q)pymakehelper touch_mkdir $@
@@ -129,14 +129,14 @@ check_html: $(HTMLCHECK)
 .PHONY: check_hardcoded_names
 check_hardcoded_names:
 	$(info doing [$@])
-	$(Q)make_helper wrapper-ok git grep $(tdefs.personal_slug) -- $(FILES_WITHOUT_HARDCODING)
+	$(Q)pymakehelper only_print_on_error git grep $(tdefs.personal_slug) -- $(FILES_WITHOUT_HARDCODING)
 
 .PHONY: check_grep
 check_grep: $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)make_helper wrapper-noerr git grep "\"" src/
-	$(Q)make_helper wrapper-noerr git grep " $$" src/
-	$(Q)make_helper wrapper-noerr git grep "eval" src/
+	$(Q)pymakehelper only_print_on_error git grep "\"" src/
+	$(Q)pymakehelper only_print_on_error git grep " $$" src/
+	$(Q)pymakehelper only_print_on_error git grep "eval" src/
 
 .PHONY: check_all
 check_all: check_hardcoded_names check_grep
