@@ -32,7 +32,7 @@ JSZIP:=out/$(tdefs.project_name).zip
 
 ALL_FILES:=$(shell git ls-files)
 FILES_NOT_GENERATED:=$(filter-out $(TEMPLAR_ALL_MAKO_TGT), $(ALL_FILES))
-FILES_WITHOUT_HARDCODING:=$(filter-out templardefs/project.py README.md, $(FILES_NOT_GENERATED))
+FILES_WITHOUT_HARDCODING:=$(filter-out config/project.py README.md, $(FILES_NOT_GENERATED))
 
 ifeq ($(DO_MKDBG),1)
 Q=
@@ -55,7 +55,7 @@ TOOLS:=out/tools.stamp
 ALL_DEP+=$(TOOLS)
 endif # DO_TOOLS
 
-SOURCES_HTML_MAKO:=$(shell find templartmpl/docs \( -type f -or -type l \) -and -name "*.mako" 2> /dev/null)
+SOURCES_HTML_MAKO:=$(shell find config/docs \( -type f -or -type l \) -and -name "*.mako" 2> /dev/null)
 SOURCES_HTML:=$(shell pymakehelper remove_folders $(SOURCES_HTML_MAKO))
 HTMLCHECK:=out/html.stamp
 ifeq ($(DO_CHECKHTML),1)
@@ -71,9 +71,8 @@ endif # DO_CHECKHTML
 ###########
 # do not touch this rule
 all: $(ALL) $(ALL_DEP)
-$(TOOLS): templardefs/deps.py
+$(TOOLS): config/deps.py
 	$(info doing [$@])
-	$(Q)templar install_deps
 	$(Q)pymakehelper touch_mkdir $@
 
 $(JSZIP): $(tdefs.jschess_sources) $(ALL_DEP)
@@ -100,7 +99,7 @@ $(JSMIN): $(JSFULL) $(ALL_DEP)
 	$(Q)yui-compressor $< -o $(JSMIN_YUI)
 	$(Q)cp $(JSMIN_YUI) $@
 #	$(Q)cp $(JSMIN_CLOSURE) $@
-#	$(Q)tools/closure.jar --jscomp_error '*' --externs templartmpl/out/src/externs.js.mako --jscomp_off checkTypes $< --js_output_file $(JSMIN_CLOSURE)
+#	$(Q)tools/closure.jar --jscomp_error '*' --externs templates/out/src/externs.js.mako --jscomp_off checkTypes $< --js_output_file $(JSMIN_CLOSURE)
 
 $(JSPACKFULL): $(JSFULL) $(ALL_DEP)
 	$(info doing [$@])
