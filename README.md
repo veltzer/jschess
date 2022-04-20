@@ -31,10 +31,10 @@ What makes jschess different?
 
 Monetary contribution
 ---------------------
-If you'd like to see a feature added to jschess or would just like to show
-your appreciation you are welcome to contribute to it's development at
+If you"d like to see a feature added to jschess or would just like to show
+your appreciation you are welcome to contribute to it"s development at
 https://veltzer.github.io/jschess.
 I am ready to work with any chess organization wishing to incorporate jschess
 into their infrastructre and am already working with two such organizations...
 
-	Mark Veltzer <mark.veltzer@gmail.com>, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020
+	Mark Veltzer <mark.veltzer@gmail.com>, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022
