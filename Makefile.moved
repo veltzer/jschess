@@ -17,15 +17,16 @@ DO_ALLDEP:=1
 ########
 # code #
 ########
-JSCHECK:=out/$(tdefs.project_name).stamp
-JSFULL:=$(DOCS)/$(tdefs.project_name).js
-JSMIN:=$(DOCS)/$(tdefs.project_name).min.js
-JSMIN_JSMIN:=out/$(tdefs.project_name).min.jsmin.js
-JSMIN_YUI:=out/$(tdefs.project_name).min.yui.js
-JSMIN_CLOSURE:=out/$(tdefs.project_name).min.closure.js
-JSPACKFULL:=$(DOCS)/$(tdefs.project_name).pack.js
-JSPACKMIN:=$(DOCS)/$(tdefs.project_name).pack.min.js
-JSZIP:=out/$(tdefs.project_name).zip
+PROJECT_NAME=jschess
+JSCHECK:=out/$(PROJECT_NAME).stamp
+JSFULL:=$(DOCS)/$(PROJECT_NAME).js
+JSMIN:=$(DOCS)/$(PROJECT_NAME).min.js
+JSMIN_JSMIN:=out/$(PROJECT_NAME).min.jsmin.js
+JSMIN_YUI:=out/$(PROJECT_NAME).min.yui.js
+JSMIN_CLOSURE:=out/$(PROJECT_NAME).min.closure.js
+JSPACKFULL:=$(DOCS)/$(PROJECT_NAME).pack.js
+JSPACKMIN:=$(DOCS)/$(PROJECT_NAME).pack.min.js
+JSZIP:=out/$(PROJECT_NAME).zip
 TOOLS:=out/tools.stamp
 
 ALL_FILES:=$(shell git ls-files)
@@ -73,6 +74,7 @@ endif # DO_CHECKHTML
 ###########
 # do not touch this rule
 all: $(ALL)
+	@true
 $(TOOLS): config/deps.py
 	$(info doing [$@])
 	$(Q)pymakehelper touch_mkdir $@
@@ -151,8 +153,8 @@ jsdoc_rm:
 	$(info doing [$@])
 	$(Q)rm -rf $(JSDOC_FOLDER)
 
-.PHONY: debug_me
-debug_me:
+.PHONY: debug
+debug:
 	$(info ALL is $(ALL))
 	$(info JSFULL is $(JSFULL))
 	$(info JSMIN is $(JSMIN))
