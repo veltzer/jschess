@@ -1,10 +1,4 @@
-tools=[
-    'jsl',
-    'jsmin',
-    'closure',
-    'css-validator',
-]
-packs=[
+packages=[
     # for installing javascript packages
     'nodejs',
     # for installing javascript packages
@@ -25,4 +19,10 @@ packs=[
     'bsdtar',
     # for templating
     'templar',
+]
+tools=[
+    'jsl',
+    'jsmin',
+    'closure',
+    'css-validator',
 ]
