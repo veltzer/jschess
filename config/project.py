@@ -24,7 +24,7 @@ project_keywords=[
     "board",
     "chessboard",
 ]
-project_year_started="2012"
+project_year_started=2012
 project_copyright_years = ", ".join(
     map(str, range(int(project_year_started), datetime.datetime.now().year + 1)))
 project_description=f"""jschess is a JavaScript chess board written in pure JavaScript.
