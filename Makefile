@@ -7,8 +7,6 @@ DO_DOCS:=1
 DO_CHECKHTML:=1
 # do you want to debug the makefile?
 DO_MKDBG?=0
-# should we do tools?
-DO_TOOLS:=1
 # where is the web folder?
 DOCS:=docs
 # do you want dependency on the Makefile itself ?
@@ -27,7 +25,6 @@ JSMIN_CLOSURE:=out/$(PROJECT_NAME).min.closure.js
 JSPACKFULL:=$(DOCS)/$(PROJECT_NAME).pack.js
 JSPACKMIN:=$(DOCS)/$(PROJECT_NAME).pack.min.js
 JSZIP:=out/$(PROJECT_NAME).zip
-TOOLS:=out/tools.stamp
 
 ALL_FILES:=$(shell git ls-files)
 FILES_NOT_GENERATED:=$(filter-out $(TEMPLAR_ALL_MAKO_TGT), $(ALL_FILES))
@@ -48,10 +45,6 @@ JSDOC_FILE=$(DOCS)/jsdoc/index.html
 ifeq ($(DO_DOCS),1)
 ALL+=$(JSDOC_FILE)
 endif # DO_DOCS
-
-ifeq ($(DO_TOOLS),1)
-.EXTRA_PREREQS+=$(TOOLS)
-endif # DO_TOOLS
 
 # dependency on the makefile itself
 ifeq ($(DO_ALLDEP),1)
@@ -75,9 +68,6 @@ endif # DO_CHECKHTML
 # do not touch this rule
 all: $(ALL)
 	@true
-$(TOOLS): config/deps.py
-	$(info doing [$@])
-	$(Q)pymakehelper touch_mkdir $@
 
 $(JSZIP): $(tdefs.jschess_sources)
 	$(info doing [$@])
