@@ -8,9 +8,7 @@ __pycache__
 
 # nodejs downloaded code
 /node_modules
-# script installed tools
-/tools
-/tools.stamp
+*.stamp
 
 /.pydmt
 
