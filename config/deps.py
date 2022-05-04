@@ -8,7 +8,7 @@ packages=[
     # for jsdoc(1)
     'jsdoc-toolkit',
     # for gjslint(1)
-    'closure-linter',
+    #'closure-linter',
     # for tidy(1)
     'tidy',
     # for zip(1)
@@ -16,9 +16,7 @@ packages=[
     # for sloccount(1)
     'sloccount',
     # for bsdtar(1)
-    'bsdtar',
-    # for templating
-    'templar',
+    'libarchive-tools',
 ]
 tools=[
     'jsl',
