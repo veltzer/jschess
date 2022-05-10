@@ -1,5 +1,5 @@
 # our output folder
-/out
+/out/
 
 # python cache in any folder
 __pycache__
