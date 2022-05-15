@@ -1,10 +1,12 @@
 ##############
 # parameters #
 ##############
+# do the javascript stuff ?
+DO_JS:=0
 # should we do documentation ?
-DO_DOCS:=1
+DO_DOCS:=0
 # do you want to validate html?
-DO_CHECKHTML:=1
+DO_CHECKHTML:=0
 # do you want to debug the makefile?
 DO_MKDBG?=0
 # where is the web folder?
@@ -15,6 +17,7 @@ DO_ALLDEP:=1
 ########
 # code #
 ########
+ALL:=
 PROJECT_NAME=jschess
 JSCHECK:=out/$(PROJECT_NAME).stamp
 JSFULL:=$(DOCS)/$(PROJECT_NAME).js
@@ -38,7 +41,9 @@ Q=@
 #.SILENT:
 endif # DO_MKDBG
 
+ifeq ($(DO_JS),1)
 ALL+=$(JSPACKFULL) $(JSPACKMIN) $(JSZIP)
+endif # DO_JS
 
 JSDOC_FOLDER=$(DOCS)/jsdoc
 JSDOC_FILE=$(DOCS)/jsdoc/index.html
