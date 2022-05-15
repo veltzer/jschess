@@ -1,7 +1,7 @@
 <%!
 	import config.project
 	import user.personal
-	import config.git
+	import config.version
 	import config.jschess
 %><!DOCTYPE html>
 <html>
@@ -122,7 +122,7 @@
 			<li><a href="http://www.javascriptlint.com">JavaScript Lint</a> is used for checking the source code</li>
 			<li><a href="https://developers.google.com/closure/utilities/docs/linter_howto">Closure Linter</a> is used for checking the source code</li>
 		</ul>
-		<p>The current version of <b>${config.project.project_name}</b> is ${config.git.last_tag}
+		<p>The current version of <b>${config.project.project_name}</b> is ${config.version.version_str}
 		</p>
 		<p>
 			<b>This is alpha material at the moment, use at your own risk! API is subject to change!</b>

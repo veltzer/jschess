@@ -1,7 +1,6 @@
 <%!
 	import config.project
 	import user.personal
-	import config.git
 	import config.jschess
 %><!DOCTYPE html>
 <html>
