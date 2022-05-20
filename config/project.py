@@ -16,10 +16,6 @@ Technologies used
 * Raphael javascript library at http://raphaeljs.com.
 * chess.java javascript library at https://github.com/jhlywa/chess.js.
 
-Demo
-----
-Is at github pages at {website}.
-
 What makes jschess different?
 -----------------------------
 * Pure javascript.
@@ -31,8 +27,8 @@ What makes jschess different?
 
 Monetary contribution
 ---------------------
-If you"d like to see a feature added to jschess or would just like to show
-your appreciation you are welcome to contribute to it"s development at
-{website}.
+If you'd like to see a feature added to jschess or would just like to show
+your appreciation you are welcome to contribute to it's development on it's website.
+
 I am ready to work with any chess organization wishing to incorporate jschess
 into their infrastructre and am already working with two such organizations..."""

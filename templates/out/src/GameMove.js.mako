@@ -18,12 +18,12 @@
   needed for castling).
   - info about what the piece turns to (in case the piece turns
   into some other piece like in the case of coronation).
-  @author ${user.personal.personal_jsdoc_author}
+  @author ${user.personal.jsdoc_author}
 */
 var GameMove = Class.create(/** @lends GameMove.prototype */{
   /**
     creates a new instance
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   initialize: function() {
     return;
@@ -31,7 +31,7 @@ var GameMove = Class.create(/** @lends GameMove.prototype */{
   /**
     Debug method that allows you to get a nice printout for this type
     @return {string} the string representation
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   toString: function() {
     return 'no toString for type GameMove';

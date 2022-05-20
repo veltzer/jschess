@@ -7,7 +7,7 @@
 
 /**
   @class Singleton configuration for jschess
-  @author ${user.personal.personal_jsdoc_author}
+  @author ${user.personal.jsdoc_author}
 */
 var SvgConfigTmpl = Class.create(ConfigTmpl,/** @lends SvgConfigTmpl.prototype */ {
   /**
@@ -16,7 +16,7 @@ var SvgConfigTmpl = Class.create(ConfigTmpl,/** @lends SvgConfigTmpl.prototype *
     @param {parent} $super prototype.js parent to enable to call the
     parent constructur.
     @return {SvgConfigTmpl} the new instance.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   initialize: function($super) {
     $super();
@@ -238,7 +238,7 @@ var SvgConfigTmpl = Class.create(ConfigTmpl,/** @lends SvgConfigTmpl.prototype *
 /**
   The static singleton instance.
   This is part of the singleton pattern.
-  @author ${user.personal.personal_jsdoc_author}
+  @author ${user.personal.jsdoc_author}
 */
 SvgConfigTmpl.instance = undefined;
 
@@ -247,7 +247,7 @@ SvgConfigTmpl.instance = undefined;
   The static singleton instance.
   This is part of the singleton pattern.
   @return {SvgConfigTmpl} the singleton SvgConfigTmpl instance.
-  @author ${user.personal.personal_jsdoc_author}
+  @author ${user.personal.jsdoc_author}
 */
 SvgConfigTmpl.getInstance = function() {
   if (SvgConfigTmpl.instance === undefined) {

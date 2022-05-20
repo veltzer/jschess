@@ -25,7 +25,7 @@
   will override anything in the default config.
   This class <b>should not</b> be a singleton since the user may want to put
   two boards on the page and have each configured differently.
-  @author ${user.personal.personal_jsdoc_author}
+  @author ${user.personal.jsdoc_author}
 */
 var Config = Class.create(/** @lends Config.prototype */{
   /**
@@ -33,7 +33,7 @@ var Config = Class.create(/** @lends Config.prototype */{
     @this {Config}
     @param {object} tmpl template to use.
     @return {Config} new instance.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   initialize: function(tmpl) {
     // the dictionary holding the current config
@@ -46,7 +46,7 @@ var Config = Class.create(/** @lends Config.prototype */{
     @this {Config}
     @param {anything} key key to store in the config.
     @return {anything} the value associated with the key.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   getValue: function(key) {
     if (this.tmpl.hasKey(key)) {
@@ -62,7 +62,7 @@ var Config = Class.create(/** @lends Config.prototype */{
     @this {Config}
     @param {anything} key key to store in the config.
     @param {anything} value value to store in the config.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   setValue: function(key, value) {
     // check that the key and value are ok.
@@ -73,7 +73,7 @@ var Config = Class.create(/** @lends Config.prototype */{
     set many values at once
     @this {Config}
     @param {object} d dictionary of values.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   override: function(d) {
     var x;
@@ -85,7 +85,7 @@ var Config = Class.create(/** @lends Config.prototype */{
     check that the config is good to go
     for instance: check that all required arguments are set
     @this {Config}
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   check: function() {
     // TODO

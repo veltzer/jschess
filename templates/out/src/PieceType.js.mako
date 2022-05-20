@@ -6,7 +6,7 @@
 
 /**
   @class represents a piece type (rook,knight,bishop,queen,king,pawn)
-  @author ${user.personal.personal_jsdoc_author}
+  @author ${user.personal.jsdoc_author}
 */
 var PieceType = Class.create(/** @lends PieceType.prototype */{
   /**
@@ -14,7 +14,7 @@ var PieceType = Class.create(/** @lends PieceType.prototype */{
     @this {PieceType}
     @param {string} type the type of the piece.
     @return {PieceType} the new instance.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   initialize: function(type) {
     if (!(PieceType.types.hasOwnProperty(type))) {
@@ -26,7 +26,7 @@ var PieceType = Class.create(/** @lends PieceType.prototype */{
     toString method that allows you to get a nice printout for this type
     @this {PieceType}
     @return {string} string representation of this instance.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   toString: function() {
     return this.type;
@@ -35,7 +35,7 @@ var PieceType = Class.create(/** @lends PieceType.prototype */{
     Return whether the piece is a rook
     @this {PieceType}
     @return {boolean} is this piece a rook.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   isRook: function() {
     return this.type === 'rook';
@@ -44,7 +44,7 @@ var PieceType = Class.create(/** @lends PieceType.prototype */{
     Return whether the piece is a knight
     @this {PieceType}
     @return {boolean} is this piece a knight.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   isKnight: function() {
     return this.type === 'knight';
@@ -53,7 +53,7 @@ var PieceType = Class.create(/** @lends PieceType.prototype */{
     Return whether the piece is a bishop
     @this {PieceType}
     @return {boolean} is this piece a bishop.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   isBishop: function() {
     return this.type === 'bishop';
@@ -62,7 +62,7 @@ var PieceType = Class.create(/** @lends PieceType.prototype */{
     Return whether the piece is a queen
     @this {PieceType}
     @return {boolean} is this piece a queen.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   isQueen: function() {
     return this.type === 'queen';
@@ -71,7 +71,7 @@ var PieceType = Class.create(/** @lends PieceType.prototype */{
     Return whether the piece is a king
     @this {PieceType}
     @return {boolean} is this piece a king.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   isKing: function() {
     return this.type === 'king';
@@ -80,7 +80,7 @@ var PieceType = Class.create(/** @lends PieceType.prototype */{
     Return whether the piece is a pawn
     @this {PieceType}
     @return {boolean} is this piece a pawn.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   isPawn: function() {
     return this.type === 'pawn';
@@ -90,7 +90,7 @@ var PieceType = Class.create(/** @lends PieceType.prototype */{
 
 /**
   Array of piece types
-  @author ${user.personal.personal_jsdoc_author}
+  @author ${user.personal.jsdoc_author}
 */
 PieceType.types = {
   rook: undefined,

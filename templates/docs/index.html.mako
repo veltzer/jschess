@@ -1,17 +1,18 @@
 <%!
-	import config.project
-	import user.personal
-	import config.version
-	import config.jschess
+    import pydmt.helpers.project
+    import pydmt.helpers.signature
+    import pydmt.helpers.misc
+    import pydmt.helpers.urls
+    import user.personal
+    import config.jschess
 %><!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>${config.project.project_name} - main page</title>
+		<title>${pydmt.helpers.project.get_name()} - main page</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
-		<meta name="Description" content="${config.project.project_long_description}"/>
-		<meta name="Keywords" content="${user.personal.personal_fullname}, ${user.personal.personal_slug}, ${config.project.project_name}, ${', '.join(config.project.project_keywords)}"/>
-		${config.project.project_google_analytics_snipplet}
+		<meta name="Description" content="${config.project.description_long}"/>
+		<meta name="Keywords" content="${user.personal.fullname}, ${user.personal.slug}, ${pydmt.helpers.project.get_name()}, ${', '.join(config.project.keywords)}"/>
 
 		${config.jschess.jschess_js_section}
 
@@ -81,9 +82,9 @@
 		</script>
 	</head>
 	<body>
-		<h1>Welcome to the <i>${config.project.project_name}</i> web site</h1>
+		<h1>Welcome to the <i>${pydmt.helpers.project.get_name()}</i> web site</h1>
 		<p>
-			<b>${config.project.project_name}</b> is a pure JavaScript library that enables:
+			<b>${pydmt.helpers.project.get_name()}</b> is a pure JavaScript library that enables:
 		</p>
 		<ul>
 			<li>Showing chess games in <a href="http://en.wikipedia.org/wiki/Portable_Game_Notation">PGN</a> format (hardcoded or coming from a server)</li>
@@ -95,7 +96,7 @@
 			<li>Other things I did not think about</li>
 		</ul>
 		<p>
-			What makes <b>${config.project.project_name}</b> special:
+			What makes <b>${pydmt.helpers.project.get_name()}</b> special:
 		</p>
 		<ul>
 			<li>Pure object oriented javascript</li>
@@ -109,7 +110,7 @@
 			<li>Sits on top of <a href="https://github.com/jhlywa/chess.js">chess.js</a> to do game parsing and validation</li>
 		</ul>
 		<p>
-			Technologies used to develop <b>${config.project.project_name}</b>...
+			Technologies used to develop <b>${pydmt.helpers.project.get_name()}</b>...
 		</p>
 		<ul>
 			<li><a href="http://www.javascriptlint.com/download.htm">jsl</a> to make sure javascript code is standards complient</li>
@@ -122,7 +123,7 @@
 			<li><a href="http://www.javascriptlint.com">JavaScript Lint</a> is used for checking the source code</li>
 			<li><a href="https://developers.google.com/closure/utilities/docs/linter_howto">Closure Linter</a> is used for checking the source code</li>
 		</ul>
-		<p>The current version of <b>${config.project.project_name}</b> is ${config.version.version_str}
+		<p>The current version of <b>${pydmt.helpers.project.get_name()}</b> is ${pydmt.helpers.misc.get_version_str()}
 		</p>
 		<p>
 			<b>This is alpha material at the moment, use at your own risk! API is subject to change!</b>
@@ -131,17 +132,17 @@
 			Some links:
 		</p>
 		<ul>
-			<li><b>${config.project.project_name}</b> API is <a href="jsdoc/index.html">here</a></li>
-			<li><b>${config.project.project_name}</b> github clone link is <a href="${config.project.project_website_git}">here</a></li>
-			<li><b>${config.project.project_name}</b> github development is at <a href="${config.project.project_website_source}">here</a></li>
-			<li><b>${config.project.project_name}</b> website is at <a href="${config.project.project_website}">here</a></li>
-			<li>latest full build for <b>${config.project.project_name}</b> is <a href="${config.project.project_website}/out/jschess.js">jschess.js</a></li>
-			<li>latest minified output for <b>${config.project.project_name}</b> is <a href="${config.project.project_website}/out/jschess.min.js">jschess.min.js</a></li>
-			<li>latest package (with third parties) for <b>${config.project.project_name}</b> is <a href="${config.project.project_website}/out/jschess.pack.js">jschess.pack.js</a></li>
-			<li>latest sources for <b>${config.project.project_name}</b> is <a href="${config.project.project_website}/out/jschess.zip">jschess.zip</a></li>
+			<li><b>${pydmt.helpers.project.get_name()}</b> API is <a href="jsdoc/index.html">here</a></li>
+			<li><b>${pydmt.helpers.project.get_name()}</b> github clone link is <a href="${pydmt.helpers.urls.get_website_git()}">here</a></li>
+			<li><b>${pydmt.helpers.project.get_name()}</b> github development is at <a href="${pydmt.helpers.urls.get_website_source()}">here</a></li>
+			<li><b>${pydmt.helpers.project.get_name()}</b> website is at <a href="${pydmt.helpers.urls.get_website()}">here</a></li>
+			<li>latest full build for <b>${pydmt.helpers.project.get_name()}</b> is <a href="${pydmt.helpers.urls.get_website()}/out/jschess.js">jschess.js</a></li>
+			<li>latest minified output for <b>${pydmt.helpers.project.get_name()}</b> is <a href="${pydmt.helpers.urls.get_website()}/out/jschess.min.js">jschess.min.js</a></li>
+			<li>latest package (with third parties) for <b>${pydmt.helpers.project.get_name()}</b> is <a href="${pydmt.helpers.urls.get_website()}/out/jschess.pack.js">jschess.pack.js</a></li>
+			<li>latest sources for <b>${pydmt.helpers.project.get_name()}</b> is <a href="${pydmt.helpers.urls.get_website()}/out/jschess.zip">jschess.zip</a></li>
 		</ul>
 		<p>
-			Demos of <b>${config.project.project_name}</b>...
+			Demos of <b>${pydmt.helpers.project.get_name()}</b>...
 		</p>
 		<ul>
 			<li><a href="demo_using_pack.html">Using the pack.js file</a></li>
@@ -154,11 +155,11 @@
 			<li><a href="demo_wordpress.html">Using the Wordpress plugin</a></li>
 		</ul>
 		<p>
-			Misc pages that help develop <b>${config.project.project_name}</b> and possibly other things...
+			Misc pages that help develop <b>${pydmt.helpers.project.get_name()}</b> and possibly other things...
 		</p>
 		<ul>
 			<li><a href="calc.html">SVG path calculator (comes in handy when doing SVG graphics)</a></li>
-			<li><a href="tests.html">${config.project.project_name} QUnit tests</a></li>
+			<li><a href="tests.html">${pydmt.helpers.project.get_name()} QUnit tests</a></li>
 		</ul>
 		<p>
 			Here is a quick demo (go ahead and zoom it with Ctrl+[+/-] to see what SVG is all about...):
@@ -175,12 +176,8 @@
 		<button id="glow">glow</button>
 		<button id="clear">clear</button>
 		<p>
-			To donate to <b>${config.project.project_name}</b> please use the following button:
-		</p>
-		${config.project.project_paypal_donate_button_snipplet}
-		<p>
-			Copyright ${user.personal.personal_fullname}, ${config.project.project_copyright_years}
-			<a href="${user.personal.personal_email}">${user.personal.personal_email}</a>
+			Copyright ${user.personal.fullname} © ${pydmt.helpers.signature.get_copyright_years_long()}
+			<a href="${user.personal.email}">${user.personal.email}</a>
 		</p>
 	</body>
 </html>

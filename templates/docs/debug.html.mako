@@ -1,47 +1,47 @@
 <%!
-	import config.project
-	import user.personal
-	import config.jschess
+    import pydmt.helpers.project
+    import pydmt.helpers.signature
+    import user.personal
+    import config.jschess
 %><!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>${config.project.project_name} - debug page</title>
-		<link rel="shortcut icon" href="favicon.ico"/>
-		<meta name="Description" content="${config.project.project_long_description}"/>
-		<meta name="Keywords" content="${user.personal.personal_fullname}, ${user.personal.personal_slug}, ${config.project.project_name}, ${', '.join(config.project.project_keywords)}"/>
-		${config.project.project_google_analytics_snipplet}
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>${pydmt.helpers.project.get_name()} - debug page</title>
+	<link rel="shortcut icon" href="favicon.ico"/>
+	<meta name="Description" content="${config.project.description_long}"/>
+	<meta name="Keywords" content="${user.personal.fullname}, ${user.personal.slug}, ${pydmt.helpers.project.get_name()}, ${', '.join(config.project.keywords)}"/>
 
-		${config.jschess.jschess_js_section_debug}
+	${config.jschess.jschess_js_section_debug}
 
-		${config.jschess.jschess_js_section_highlight}
+	${config.jschess.jschess_js_section_highlight}
 
-		<script type="text/javascript">
-			document.observe('dom:loaded', function() {
-				var board=new Board();
-				var svgBoard=new SvgBoard(board,{
-					id:'myid',
-					do_select_piecerec:true,//default:false
-					do_select_click:true//default:false
-				})
-				board.startPosition();
-				$('startpos').observe('click',function() {
-					board.startPosition()
-				});
-				$('moverooks').observe('click',function() {
-					if(board.hasPieceAtPosition(new PiecePosition(0,4)) && board.hasPieceAtPosition(new PiecePosition(7,4))) {
-						board.movePieceByPos(new PiecePosition(0,4),new PiecePosition(0,0));
-						board.movePieceByPos(new PiecePosition(7,4),new PiecePosition(7,0));
-					} else {
-						if(board.hasPieceAtPosition(new PiecePosition(0,0)) && board.hasPieceAtPosition(new PiecePosition(7,0))) {
-							board.movePieceByPos(new PiecePosition(0,0),new PiecePosition(0,4));
-							board.movePieceByPos(new PiecePosition(7,0),new PiecePosition(7,4));
-						}
+	<script type="text/javascript">
+		document.observe('dom:loaded', function() {
+			var board=new Board();
+			var svgBoard=new SvgBoard(board,{
+				id:'myid',
+				do_select_piecerec:true,//default:false
+				do_select_click:true//default:false
+			})
+			board.startPosition();
+			$('startpos').observe('click',function() {
+				board.startPosition()
+			});
+			$('moverooks').observe('click',function() {
+				if(board.hasPieceAtPosition(new PiecePosition(0,4)) && board.hasPieceAtPosition(new PiecePosition(7,4))) {
+					board.movePieceByPos(new PiecePosition(0,4),new PiecePosition(0,0));
+					board.movePieceByPos(new PiecePosition(7,4),new PiecePosition(7,0));
+				} else {
+					if(board.hasPieceAtPosition(new PiecePosition(0,0)) && board.hasPieceAtPosition(new PiecePosition(7,0))) {
+						board.movePieceByPos(new PiecePosition(0,0),new PiecePosition(0,4));
+						board.movePieceByPos(new PiecePosition(7,0),new PiecePosition(7,4));
 					}
-				});
-				$('moveknights').observe('click',function() {
-					if(board.hasPieceAtPosition(new PiecePosition(1,0)) && board.hasPieceAtPosition(new PiecePosition(6,0))) {
-						board.movePieceByPos(new PiecePosition(1,0),new PiecePosition(2,2));
+				}
+			});
+			$('moveknights').observe('click',function() {
+				if(board.hasPieceAtPosition(new PiecePosition(1,0)) && board.hasPieceAtPosition(new PiecePosition(6,0))) {
+					board.movePieceByPos(new PiecePosition(1,0),new PiecePosition(2,2));
 						board.movePieceByPos(new PiecePosition(6,0),new PiecePosition(5,2));
 					} else {
 						if(board.hasPieceAtPosition(new PiecePosition(2,2)) && board.hasPieceAtPosition(new PiecePosition(5,2))) {
@@ -92,8 +92,8 @@
 		<button id="glow">glow</button>
 		<button id="clear">clear</button>
 		<p>
-			Copyright ${user.personal.personal_fullname}, ${config.project.project_copyright_years}
-			<a href="${user.personal.personal_email}">${user.personal.personal_email}</a>
+			Copyright ${user.personal.fullname} © ${pydmt.helpers.signature.get_copyright_years_long()}
+			<a href="${user.personal.email}">${user.personal.email}</a>
 		</p>
 	</body>
 </html>

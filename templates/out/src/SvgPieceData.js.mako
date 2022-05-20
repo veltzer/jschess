@@ -6,7 +6,7 @@
 
 /**
   @class represents a position + graphics
-  @author ${user.personal.personal_jsdoc_author}
+  @author ${user.personal.jsdoc_author}
 */
 var SvgPieceData = Class.create(/** @lends SvgPieceData.prototype */{
   /**
@@ -17,7 +17,7 @@ var SvgPieceData = Class.create(/** @lends SvgPieceData.prototype */{
     This is important to be able to move it to other places
     pixelPos is not the translation of pos to pixels!!!
     @return {SvgPieceData} the new instance.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   initialize: function(set, pixelPos) {
     this.set = set;
@@ -28,7 +28,7 @@ var SvgPieceData = Class.create(/** @lends SvgPieceData.prototype */{
     toString method that allows you to get a nice printout for this type
     @this {SvgPieceData}
     @return {string} a string representation of this instance.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   toString: function() {
     return [this.set, this.pixelPos, this.extra].join();
@@ -37,7 +37,7 @@ var SvgPieceData = Class.create(/** @lends SvgPieceData.prototype */{
     ForEach method on all presentation elements
     @this {SvgPieceData}
     @param {function()} f function to activate on each element.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   forEach: function(f) {
     //var that=this;

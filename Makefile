@@ -127,7 +127,7 @@ check_html: $(HTMLCHECK)
 .PHONY: check_hardcoded_names
 check_hardcoded_names:
 	$(info doing [$@])
-	$(Q)pymakehelper only_print_on_error git grep $(tdefs.personal_slug) -- $(FILES_WITHOUT_HARDCODING)
+	$(Q)pymakehelper only_print_on_error git grep $(user.personal.slug) -- $(FILES_WITHOUT_HARDCODING)
 
 .PHONY: check_grep
 check_grep:

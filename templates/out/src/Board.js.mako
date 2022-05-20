@@ -13,14 +13,14 @@
   @class Represents a full board This is the main class to interact with.
   Using this class you can: 1. Use pieces: put, remove and move them.
   2. Do something with all pieces.
-  @author ${user.personal.personal_jsdoc_author}
+  @author ${user.personal.jsdoc_author}
 */
 var Board = Class.create(/** @lends Board.prototype */{
   /**
     creates a new instance
     @this {Board}
     @return {Board} the new object created.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   initialize: function() {
     var i, j, ar;
@@ -46,7 +46,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     toString method that allows you to get a nice printout for this type
     @this {Board}
     @return {string} string representation of this object.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   toString: function() {
     var i, j;
@@ -64,7 +64,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     Will throw an exception if that is not the case.
     @this {Board}
     @param {PiecePosition} piecePosition position to check that no piece is at.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   checkNoPieceAt: function(piecePosition) {
     if (this.bd[piecePosition.x][piecePosition.y] !== undefined) {
@@ -76,7 +76,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     Will throw an exception if that is not the case.
     @this {Board}
     @param {PiecePosition} piecePosition position to check that a piece is at.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   checkPieceAt: function(piecePosition) {
     if (this.bd[piecePosition.x][piecePosition.y] === undefined) {
@@ -89,7 +89,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     @this {Board}
     @param {BoardPiece} boardPiece the piece in question.
     @param {PiecePosition} piecePosition position to check that a piece is at.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   checkBoardPieceAt: function(boardPiece, piecePosition) {
     if (this.bd[piecePosition.x][piecePosition.y] !== boardPiece) {
@@ -101,7 +101,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     @this {Board}
     @param {BoardPiece} boardPiece piece to add.
     @param {PiecePosition} piecePosition where to add the piece.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   addPiece: function(boardPiece, piecePosition) {
     this.preAddCB.forEach(function(f) {
@@ -118,7 +118,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     @this {Board}
     @param {BoardPiece} boardPiece piece to remove.
     @param {PiecePosition} piecePosition the position to remove it from.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   removePiece: function(boardPiece, piecePosition) {
     this.checkBoardPieceAt(boardPiece, piecePosition);
@@ -136,7 +136,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     @param {BoardPiece} boardPiece piece to move.
     @param {PiecePosition} fromPiecePosition from where to move the piece.
     @param {PiecePosition} toPiecePosition to where to move the piece.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   movePiece: function(boardPiece, fromPiecePosition, toPiecePosition) {
     this.checkPieceAt(fromPiecePosition);
@@ -153,7 +153,7 @@ var Board = Class.create(/** @lends Board.prototype */{
   /**
     Clear the board
     @this {Board}
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   clearPieces: function() {
     var that = this;
@@ -167,7 +167,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     @param {string} type type of the piece (rook/knight/bishop/queen/king/pawn).
     @param {number} x x location of the piece [0..8).
     @param {number} y y location of the piece [0..8).
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   addPieceVals: function(color, type , x, y) {
     var boardPiece = new BoardPiece(
@@ -180,7 +180,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     @this {Board}
     @param {function()} f function to be called back for each piece.
     This function should receive the piece to work on.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   forEachPiece: function(f) {
     var i, j;
@@ -197,7 +197,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     @this {Board}
     @param {PiecePosition} piecePosition position to get the piece at.
     @return {BoardPiece} the piece at the specified position.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   getPieceAtPosition: function(piecePosition) {
     this.checkPieceAt(piecePosition);
@@ -209,7 +209,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     @param {number} x x position to get piece at [0..8).
     @param {number} y y position to get piece at [0..8).
     @return {BoardPiece} the piece at the specified position.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   getPieceAtPositionVals: function(x, y) {
     return this.getPieceAtPosition(new PiecePosition(x, y));
@@ -219,7 +219,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     @this {Board}
     @param {PiecePosition} piecePosition position to check for a piece at.
     @return {boolean} whether there is a piece at the position.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   hasPieceAtPosition: function(piecePosition) {
     return this.bd[piecePosition.x][piecePosition.y] !== undefined;
@@ -230,7 +230,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     @param {number} x x position to check for piece at [0..8).
     @param {number} y y position to check for piece at [0..8).
     @return {boolean} is there a piece at position.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   hasPieceAtPositionVals: function(x, y) {
     return this.hasPieceAtPosition(new PiecePosition(x, y));
@@ -239,7 +239,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     Add a callback for adding a piece
     @this {Board}
     @param {function()} f callback function.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   addPiecePostAddCallback: function(f) {
     this.postAddCB.push(f);
@@ -248,7 +248,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     Add a callback for removing a piece
     @this {Board}
     @param {function()} f callback function.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   addPiecePostRemoveCallback: function(f) {
     this.postRemoveCB.push(f);
@@ -257,7 +257,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     Add a callback for moving a piece
     @this {Board}
     @param {function()} f callback function.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   addPiecePostMoveCallback: function(f) {
     this.postMoveCB.push(f);
@@ -266,7 +266,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     Clear the board and add a position to the current board
     @this {Board}
     @param {BoardPosition} boardPosition position to set.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   setPosition: function(boardPosition) {
     this.clearPieces();
@@ -277,7 +277,7 @@ var Board = Class.create(/** @lends Board.prototype */{
   /**
     Put the board in starting position of standard chess.
     @this {Board}
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   startPosition: function() {
     this.setPosition(BoardPosition.startPos());
@@ -287,7 +287,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     @this {Board}
     @param {PiecePosition} fromPiecePosition from where to move.
     @param {PiecePosition} toPiecePosition to where to move.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   movePieceByPos: function(fromPiecePosition, toPiecePosition) {
     var boardPiece = this.getPieceAtPosition(fromPiecePosition);
@@ -298,7 +298,7 @@ var Board = Class.create(/** @lends Board.prototype */{
     @this {Board}
     @param {BoardPiece} boardPiece piece to get the position for.
     @return {PiecePosition} the position of the piece in question.
-    @author ${user.personal.personal_jsdoc_author}
+    @author ${user.personal.jsdoc_author}
   */
   getPiecePosition: function(boardPiece) {
     var i, j;

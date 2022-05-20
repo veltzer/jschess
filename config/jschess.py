@@ -1,7 +1,3 @@
-'''
-templating solution for this project
-'''
-
 import subprocess # for check_output, DEVNULL
 
 class Dep:
