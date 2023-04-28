@@ -1,5 +1,5 @@
 <%!
-	import user.personal
+	import config.personal
 %>/* vim:set filetype=javascript:*/
 /*jsl:import SvgPieceData.js*/
 /*jsl:import SvgCreator.js*/
@@ -15,7 +15,7 @@
 
 /**
   @class a whole board to play with
-  @author ${user.personal.jsdoc_author}
+  @author ${config.personal.jsdoc_author}
 */
 var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
   /**
@@ -24,7 +24,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @param {Board} board instance to use as the abstract board.
     @param {object} dict overridables to the configuration for this object.
     @return {SvgBoard} the new instance.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   initialize: function(board, dict) {
     // lets create a config connected to our singleton template
@@ -88,7 +88,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     get the logical board [Board] associated with this SvgBoard
     @this {SvgBoard}
     @return {Board} the logical board associated with this SvgBoard.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   getBoard: function() {
     return this.board;
@@ -98,7 +98,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @this {SvgBoard}
     @param {string} key the key to get the config for.
     @return {anything} the value of the configuration option.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   getValue: function(key) {
     return this.config.getValue(key);
@@ -106,7 +106,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
   /**
     Prepare the raphael paper so we could do graphics
     @this {SvgBoard}
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   raphaelPrep: function() {
     // async way
@@ -143,7 +143,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @this {SvgBoard}
     @param {rect} rec Raphael.js rectangle object to fill.
     @param {boolean} anim do you want animation (slow transition).
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   rectFill: function(rec, anim) {
     var piecePosition = rec.data('pos');
@@ -182,7 +182,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
   /**
     Draw the border
     @this {SvgBoard}
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   drawBorder: function() {
     var x, y, txt1, txt2, txt3, txt4;
@@ -220,7 +220,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @this {SvgBoard}
     @param {PiecePosition} pos the position to translate.
     @return {PiecePosition} the logical position.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   translatePos: function(pos) {
     if (this.boardview === 'white') {
@@ -240,7 +240,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
   /**
     Draw the board (white and black squares)
     @this {SvgBoard}
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   drawBoard: function() {
     var x, y, rec_line, rec, piecePosition;
@@ -282,7 +282,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
   /**
     Create an overlay rectange for the entire board
     @this {SvgBoard}
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   overlay: function() {
     if (this.getValue('do_select_global')) {
@@ -325,7 +325,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     This method is to be used to do something after a piece is added,
     removed etc.
     @this {SvgBoard}
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   postGraphics: function() {
     if (this.getValue('do_select_global')) {
@@ -338,7 +338,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @this {SvgBoard}
     @param {BoardPiece} boardPiece the piece that was added.
     @param {PiecePosition} piecePosition the position where the piece was added.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   postAddPiece: function(boardPiece, piecePosition) {
     var that = this;
@@ -368,7 +368,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @param {BoardPiece} boardPiece the piece to add.
     @param {PiecePosition} piecePosition the position where the piece was
     removed.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   postRemovePiece: function(boardPiece, piecePosition) {
     Utils.fakeUse(piecePosition);
@@ -382,7 +382,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @this {SvgBoard}
     @param {PiecePosition} piecePosition logical (0..7,0..7) to translate.
     @return {SvgPixelPosition} position in pixels.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   posToPixels: function(piecePosition) {
     if (this.boardview === 'white') {
@@ -417,7 +417,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @this {SvgBoard}
     @param {SvgPixelPosition} svgPixelPosition object to translate.
     @return {PiecePosition} logical position.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   pixelsToPos: function(svgPixelPosition) {
     var x = Math.floor((svgPixelPosition.x) / this.square);
@@ -441,7 +441,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @this {SvgBoard}
     @param {SvgPixelPosition} svgPixelPosition object to translate.
     @return {PiecePosition} logical position.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   pixelsToPosForgiving: function(svgPixelPosition) {
     var x = Math.floor((svgPixelPosition.x) / this.square);
@@ -467,7 +467,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     Resize the board
     @this {SvgBoard}
     @param {set} set Raphael set to resize.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   resize: function(set) {
     var m = Raphael.matrix();
@@ -484,7 +484,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @this {SvgBoard}
     @param {BoardPiece} boardPiece piece to show or hide.
     @param {boolean} hide show or hide the piece.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   showHidePiece: function(boardPiece, hide) {
     var data = boardPiece.getData();
@@ -500,7 +500,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     Quick method to show a piece
     @this {SvgBoard}
     @param {BoardPiece} boardPiece the piece to show.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   showPiece: function(boardPiece) {
     this.showHidePiece(boardPiece, false);
@@ -509,7 +509,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     Quick method to hide a piece
     @this {SvgBoard}
     @param {BoardPiece} boardPiece the piece to hide.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   hidePiece: function(boardPiece) {
     this.showHidePiece(boardPiece, true);
@@ -520,7 +520,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @param {BoardPiece} boardPiece the piece to move.
     @param {PiecePosition} fromPiecePosition position from which to move.
     @param {PiecePosition} toPiecePosition position to which to move.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   postMovePiece: function(boardPiece, fromPiecePosition, toPiecePosition) {
     this.timeMovePiece(boardPiece, fromPiecePosition, toPiecePosition);
@@ -531,7 +531,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @param {BoardPiece} boardPiece the piece to move.
     @param {PiecePosition} fromPiecePosition position from which to move.
     @param {PiecePosition} toPiecePosition position to which to move.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   timeMovePiece: function(boardPiece, fromPiecePosition, toPiecePosition) {
     Utils.fakeUse(fromPiecePosition);
@@ -550,7 +550,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     If the board is 90 deg left it be will 90 deg right.
     Black view will turn to white and white to black.
     @this {SvgBoard}
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   flip: function() {
     var oldview = this.boardview;
@@ -576,7 +576,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
   /**
     Rotate the board to the right 90 degrees
     @this {SvgBoard}
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   rotateright: function() {
     var oldview = this.boardview;
@@ -590,7 +590,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
   /**
     Rotate the board to the left 90 degrees
     @this {SvgBoard}
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   rotateleft: function() {
     var oldview = this.boardview;
@@ -606,7 +606,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     This method is not yet implemented and will throw an exception.
     @this {SvgBoard}
     @return {string} a string representation of this object.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   toString: function() {
     throw 'not yet implemented';
@@ -617,7 +617,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @param {BoardPiece} boardPiece the piece to make glow.
     @param {object} glow properties to pass to the glow function as per
     Raphael.js.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   glow: function(boardPiece, glow) {
     var svgPieceData = boardPiece.getData();
@@ -632,7 +632,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     Redraw the entire board
     @this {SvgBoard}
     @param {viewType} oldview the old view of the board.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   redraw: function(oldview) {
     var x, y;
@@ -655,7 +655,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @this {SvgBoard}
     @param {BoardPiece} boardPiece instance the event happened on.
     @param {string} type the type of event that happened.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   eventPiece: function(boardPiece, type) {
     //Utils.fakeUse(boardPiece,type);
@@ -679,7 +679,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @param {PiecePosition} piecePosition the position of the event.
     @param {rect} rec the Raphael.js rectangle where the event happened.
     @param {string} type which is the name of the event that happened.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   eventPosition: function(piecePosition, rec, type) {
     if (this.getValue('do_select_piecerec')) {
@@ -735,7 +735,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @param {int} x x position of event.
     @param {int} y y position of event.
     @param {string} type which event happened.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   eventGlobal: function(eventtype, x, y, type) {
     Utils.fakeUse(eventtype);
@@ -782,7 +782,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     this.selectedPiece, this.selectedRec, this.lastPos, this.currentPos
     to do it's work.
     @this {SvgBoard}
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   newPosition: function() {
     if (this.currentPos === undefined) {
@@ -840,7 +840,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
     @param {PiecePosition} piecePosition the logical position for which to
     return the square.
     @return {rec} the Raphael.js rec in question.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   getRec: function(piecePosition) {
     if (this.boardview === 'white') {
@@ -862,7 +862,7 @@ var SvgBoard = Class.create(/** @lends SvgBoard.prototype */{
 
 /**
   Which sides go to which when rotating right.
-  @author ${user.personal.jsdoc_author}
+  @author ${config.personal.jsdoc_author}
 */
 SvgBoard.ObjRotateRight = {
   white: 'left',
@@ -874,7 +874,7 @@ SvgBoard.ObjRotateRight = {
 
 /**
   Which sides go to which when rotating left.
-  @author ${user.personal.jsdoc_author}
+  @author ${config.personal.jsdoc_author}
 */
 SvgBoard.ObjRotateLeft = {
   white: 'right',

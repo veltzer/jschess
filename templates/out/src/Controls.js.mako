@@ -1,5 +1,5 @@
 <%!
-	import user.personal
+	import config.personal
 %>/* vim:set filetype=javascript:*/
 /*global Element, Class, $ */
 
@@ -8,7 +8,7 @@
   @class A set of controls to control the game of chess.
   Includes 6 buttons: goto_start, prev_move, prev_play, next_play, next_move,
   goto_end
-  @author ${user.personal.jsdoc_author}
+  @author ${config.personal.jsdoc_author}
 */
 var Controls = Class.create(/** @lends Controls.prototype */{
   /**
@@ -16,7 +16,7 @@ var Controls = Class.create(/** @lends Controls.prototype */{
     @this {Controls}
     @param {object} dict A hash with initial values.
     @return {Controls} new instance of this class.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   initialize: function(dict) {
     this.id = dict.id;
@@ -37,7 +37,7 @@ var Controls = Class.create(/** @lends Controls.prototype */{
     toString method that allows you to get a nice printout for this type
     @this {Controls}
     @return {string} string representation of this instance.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   toString: function() {
     return 'no toString for type Controls';

@@ -1,12 +1,12 @@
 <%!
-	import user.personal
+	import config.personal
 %>/* vim:set filetype=javascript:*/
 /*global Class */
 
 
 /**
   @class represents a position on the screen (in pixels)
-  @author ${user.personal.jsdoc_author}
+  @author ${config.personal.jsdoc_author}
 */
 var SvgPixelPosition = Class.create(/** @lends SvgPixelPosition.prototype */{
   /**
@@ -15,7 +15,7 @@ var SvgPixelPosition = Class.create(/** @lends SvgPixelPosition.prototype */{
     @param {number} x x co-ordinate.
     @param {number} y y co-ordinate.
     @return {SvgPixelPosition} the new instance.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   initialize: function(x, y) {
     /*
@@ -34,7 +34,7 @@ var SvgPixelPosition = Class.create(/** @lends SvgPixelPosition.prototype */{
     of this type
     @this {SvgPixelPosition}
     @return {string} string representation of this object.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   toString: function() {
     return '(' + this.x + ',' + this.y + ')';

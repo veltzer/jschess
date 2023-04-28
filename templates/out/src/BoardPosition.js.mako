@@ -1,5 +1,5 @@
 <%!
-	import user.personal
+	import config.personal
 %>/* vim:set filetype=javascript:*/
 /*jsl:import BoardPiece.js*/
 /*jsl:import PieceColor.js*/
@@ -10,14 +10,14 @@
 
 /**
   @class represents a full position of the board
-  @author ${user.personal.jsdoc_author}
+  @author ${config.personal.jsdoc_author}
 */
 var BoardPosition = Class.create(/** @lends BoardPosition.prototype */{
   /**
     constructs a new object
     @this {BoardPosition}
     @return {BoardPosition} a new object of this type.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   initialize: function() {
     this.pieces = [];
@@ -26,7 +26,7 @@ var BoardPosition = Class.create(/** @lends BoardPosition.prototype */{
     toString method that allows you to get a nice printout for this type
     @this {BoardPosition}
     @return {string} a string representation of this object.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   toString: function() {
     return this.pieces.join();
@@ -39,7 +39,7 @@ var BoardPosition = Class.create(/** @lends BoardPosition.prototype */{
     (rook/knight/bishop/queen/king/pawn).
     @param {number} x the x position of the piece [0..8).
     @param {number} y the y position of the piece [0..8).
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   addPiece: function(color, type, x, y) {
     var boardPiece = new BoardPiece(new PieceColor(color), new PieceType(type));
@@ -50,7 +50,7 @@ var BoardPosition = Class.create(/** @lends BoardPosition.prototype */{
     Run a function for each piece in this position
     @this {BoardPosition}
     @param {function()} f function to run getting each piece in turn.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   forEachPiece: function(f) {
     this.pieces.forEach(function(pieceAndPos) {
@@ -65,7 +65,7 @@ var BoardPosition = Class.create(/** @lends BoardPosition.prototype */{
 /**
   Static method that returns a starting position in standard chess.
   @return {BoardPosition} A standard chess starting position.
-  @author ${user.personal.jsdoc_author}
+  @author ${config.personal.jsdoc_author}
 */
 BoardPosition.startPos = function() {
   /*
@@ -120,7 +120,7 @@ BoardPosition.startPos = function() {
   notation.
   @return {BoardPosition} A position object corresponding to the FEN
   notation given.
-  @author ${user.personal.jsdoc_author}
+  @author ${config.personal.jsdoc_author}
   TODO
   - add more sanity tests (regexp) for the whole input.
   - parse the 5 other blocks after the position itself

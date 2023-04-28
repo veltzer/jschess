@@ -1,7 +1,7 @@
 <%!
     import pydmt.helpers.project
     import pydmt.helpers.signature
-    import user.personal
+    import config.personal
     import config.jschess
 %><!DOCTYPE html>
 <html>
@@ -31,8 +31,8 @@
 		<div id="myid">
 		</div>
 		<p>
-			Copyright ${user.personal.fullname} © ${pydmt.helpers.signature.get_copyright_years_long()}
-			<a href="${user.personal.email}">${user.personal.email}</a>
+			Copyright ${config.personal.fullname} © ${pydmt.helpers.signature.get_copyright_years_long()}
+			<a href="${config.personal.email}">${config.personal.email}</a>
 		</p>
 	</body>
 </html>

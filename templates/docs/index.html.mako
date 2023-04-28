@@ -3,7 +3,7 @@
     import pydmt.helpers.signature
     import pydmt.helpers.misc
     import pydmt.helpers.urls
-    import user.personal
+    import config.personal
     import config.jschess
 %><!DOCTYPE html>
 <html>
@@ -12,7 +12,7 @@
 		<title>${pydmt.helpers.project.get_name()} - main page</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<meta name="Description" content="${config.project.description_long}"/>
-		<meta name="Keywords" content="${user.personal.fullname}, ${user.personal.slug}, ${pydmt.helpers.project.get_name()}, ${', '.join(config.project.keywords)}"/>
+		<meta name="Keywords" content="${config.personal.fullname}, ${config.personal.slug}, ${pydmt.helpers.project.get_name()}, ${', '.join(config.project.keywords)}"/>
 
 		${config.jschess.jschess_js_section}
 
@@ -176,8 +176,8 @@
 		<button id="glow">glow</button>
 		<button id="clear">clear</button>
 		<p>
-			Copyright ${user.personal.fullname} © ${pydmt.helpers.signature.get_copyright_years_long()}
-			<a href="${user.personal.email}">${user.personal.email}</a>
+			Copyright ${config.personal.fullname} © ${pydmt.helpers.signature.get_copyright_years_long()}
+			<a href="${config.personal.email}">${config.personal.email}</a>
 		</p>
 	</body>
 </html>

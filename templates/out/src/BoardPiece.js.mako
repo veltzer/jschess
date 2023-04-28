@@ -1,5 +1,5 @@
 <%!
-	import user.personal
+	import config.personal
 %>/* vim:set filetype=javascript:*/
 /*global Class */
 
@@ -7,7 +7,7 @@
 /**
   @class represents a piece on the board: color, type The instance also has
   a data field that could be used for private data attached to the piece.
-  @author ${user.personal.jsdoc_author}
+  @author ${config.personal.jsdoc_author}
 */
 var BoardPiece = Class.create(/** @lends BoardPiece.prototype */{
   /**
@@ -17,7 +17,7 @@ var BoardPiece = Class.create(/** @lends BoardPiece.prototype */{
     @param {string} type type of this piece
     (rook/knight/bishop/queen/king/pawn).
     @return {BoardPiece} the new object created.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   initialize: function(color, type) {
     this.color = color;
@@ -28,7 +28,7 @@ var BoardPiece = Class.create(/** @lends BoardPiece.prototype */{
     toString method that allows you to get a nice printout for this type
     @this {BoardPiece}
     @return {string} string representation of this object.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   toString: function() {
     return 'BoardPiece: ' + [this.color, this.type, this.data].join();
@@ -37,7 +37,7 @@ var BoardPiece = Class.create(/** @lends BoardPiece.prototype */{
     Method to set secret data for this piece
     @this {BoardPiece}
     @param {anything} data the extra data to hold for this piece.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   setData: function(data) {
     this.data = data;
@@ -46,7 +46,7 @@ var BoardPiece = Class.create(/** @lends BoardPiece.prototype */{
     Method to get secret data for this piece
     @this {BoardPiece}
     @return {anything} the secret data associated with this piece.
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   getData: function() {
     return this.data;
@@ -54,7 +54,7 @@ var BoardPiece = Class.create(/** @lends BoardPiece.prototype */{
   /**
     Method to unset secret data for this piece
     @this {BoardPiece}
-    @author ${user.personal.jsdoc_author}
+    @author ${config.personal.jsdoc_author}
   */
   unsetData: function() {
     this.data = undefined;
