@@ -1,3 +1,4 @@
+name = "jschess"
 description_short="jschess is a JavaScript based chess board"
 keywords=[
     "JavaScript",
