@@ -6,7 +6,7 @@ description: jschess is a JavaScript based chess board
 
 website: https://veltzer.github.io/jschess
 
-## build
+## Build
 
 ![build](https://github.com/veltzer/jschess/workflows/build/badge.svg)
 
@@ -38,7 +38,7 @@ your appreciation you are welcome to contribute to it's development on it's webs
 I am ready to work with any chess organization wishing to incorporate jschess
 into their infrastructre and am already working with two such organizations...
 
-## contact
+## Contact
 
 chat with me at [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/veltzer/mark.veltzer)
 
