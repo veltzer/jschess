@@ -56,8 +56,11 @@ ifeq ($(DO_ALLDEP),1)
 .EXTRA_PREREQS+=$(foreach mk, ${MAKEFILE_LIST},$(abspath ${mk}))
 endif
 
-SOURCES_HTML_MAKO:=$(shell find config/docs \( -type f -or -type l \) -and -name "*.mako" 2> /dev/null)
+SOURCES_HTML_MAKO:=$(shell find templates/docs \( -type f -or -type l \) -and -name "*.mako" 2> /dev/null)
 SOURCES_HTML:=$(shell pymakehelper remove_folders $(SOURCES_HTML_MAKO))
+ifndef SOURCES_HTML
+$(error SOURCES_HTML not set)
+endif
 HTMLCHECK:=out/html.stamp
 ifeq ($(DO_CHECKHTML),1)
 ALL+=$(HTMLCHECK)
