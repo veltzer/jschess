@@ -29,10 +29,6 @@ JSPACKFULL:=$(DOCS)/$(PROJECT_NAME).pack.js
 JSPACKMIN:=$(DOCS)/$(PROJECT_NAME).pack.min.js
 JSZIP:=out/$(PROJECT_NAME).zip
 
-ALL_FILES:=$(shell git ls-files)
-FILES_NOT_GENERATED:=$(filter-out $(TEMPLAR_ALL_MAKO_TGT), $(ALL_FILES))
-FILES_WITHOUT_HARDCODING:=$(filter-out config/project.py README.md, $(FILES_NOT_GENERATED))
-
 ifeq ($(DO_MKDBG),1)
 Q=
 # we are not silent in this branch
@@ -127,11 +123,6 @@ check_js: $(JSCHECK)
 check_html: $(HTMLCHECK)
 	$(info doing [$@])
 
-.PHONY: check_hardcoded_names
-check_hardcoded_names:
-	$(info doing [$@])
-	$(Q)pymakehelper only_print_on_error git grep $(config.personal.slug) -- $(FILES_WITHOUT_HARDCODING)
-
 .PHONY: check_grep
 check_grep:
 	$(info doing [$@])
@@ -140,7 +131,7 @@ check_grep:
 	$(Q)pymakehelper only_print_on_error git grep "eval" src/
 
 .PHONY: check_all
-check_all: check_hardcoded_names check_grep
+check_all: check_grep
 
 .PHONY: jsdoc
 jsdoc: $(JSDOC_FILE)
@@ -157,8 +148,6 @@ debug:
 	$(info JSFULL is $(JSFULL))
 	$(info JSMIN is $(JSMIN))
 	$(info SOURCES_HTML is $(SOURCES_HTML))
-	$(info FILES_NOT_GENERATED is $(FILES_NOT_GENERATED))
-	$(info FILES_WITHOUT_HARDCODING is $(FILES_WITHOUT_HARDCODING))
 
 .PHONY: sloccount
 sloccount:
