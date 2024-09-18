@@ -47,11 +47,6 @@ ifeq ($(DO_DOCS),1)
 ALL+=$(JSDOC_FILE)
 endif # DO_DOCS
 
-# dependency on the makefile itself
-ifeq ($(DO_ALLDEP),1)
-.EXTRA_PREREQS+=$(foreach mk, ${MAKEFILE_LIST},$(abspath ${mk}))
-endif
-
 SOURCES_HTML_MAKO:=$(shell find templates/docs \( -type f -or -type l \) -and -name "*.mako" 2> /dev/null)
 SOURCES_HTML:=$(shell pymakehelper remove_folders $(SOURCES_HTML_MAKO))
 ifndef SOURCES_HTML
@@ -159,3 +154,10 @@ $(HTMLCHECK): $(SOURCES_HTML)
 	$(Q)tidy -errors -q -utf8 $(SOURCES_HTML)
 	$(Q)node_modules/htmlhint/bin/htmlhint $(SOURCES_HTML) > /dev/null
 	$(Q)pymakehelper touch_mkdir $@
+
+##########
+# alldep #
+##########
+ifeq ($(DO_ALLDEP),1)
+.EXTRA_PREREQS+=$(foreach mk, ${MAKEFILE_LIST},$(abspath ${mk}))
+endif # DO_ALLDEP
