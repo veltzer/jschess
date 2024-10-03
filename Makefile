@@ -61,9 +61,9 @@ endif # DO_CHECKHTML
 # will be deleted.
 .DELETE_ON_ERROR:
 
-###########
-# targets #
-###########
+#########
+# rules #
+#########
 # do not touch this rule
 all: $(ALL)
 	@true
