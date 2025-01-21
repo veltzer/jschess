@@ -144,6 +144,11 @@ debug:
 	$(info JSMIN is $(JSMIN))
 	$(info SOURCES_HTML is $(SOURCES_HTML))
 
+.PHONY: clean_hard
+clean_hard:
+	$(info doing [$@])
+	$(Q)git clean -qffxd
+
 .PHONY: sloccount
 sloccount:
 	$(info doing [$@])
