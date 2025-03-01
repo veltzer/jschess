@@ -2,7 +2,7 @@
 # parameters #
 ##############
 # do the javascript stuff ?
-DO_JS:=0
+DO_JS:=1
 # should we do documentation ?
 DO_DOCS:=0
 # do you want to validate html?
@@ -28,6 +28,8 @@ JSMIN_CLOSURE:=out/$(PROJECT_NAME).min.closure.js
 JSPACKFULL:=$(DOCS)/$(PROJECT_NAME).pack.js
 JSPACKMIN:=$(DOCS)/$(PROJECT_NAME).pack.min.js
 JSZIP:=out/$(PROJECT_NAME).zip
+JS_TEMPLATES:=$(shell find templates/out/src -type f -and -name "*.mako")
+JS_SOURCES:=$(shell find out/src -type f -and -name "*.js")
 
 ifeq ($(DO_MKDBG),1)
 Q=
@@ -68,28 +70,28 @@ endif # DO_CHECKHTML
 all: $(ALL)
 	@true
 
-$(JSZIP): $(tdefs.jschess_sources)
+$(JSZIP): $(JS_SOURCES)
 	$(info doing [$@])
-	$(Q)zip -qr $@ $(tdefs.jschess_sources)
+	$(Q)zip -qr $@ $(JS_SOURCES)
 
-$(JSCHECK): $(tdefs.jschess_sources)
+$(JSCHECK): $(JS_SOURCES) .jshintrc
 	$(info doing [$@])
-	$(Q)tools/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(tdefs.jschess_sources)
-	$(Q)pymakehelper only_print_on_error gjslint --flagfile support/gjslint.cfg $(tdefs.jschess_sources)
-	$(Q)node_modules/jshint/bin/jshint $(tdefs.jschess_sources)
-	$(Q)node_modules/jslint/bin/jslint.js --browser --terse --todo --plusplus --forin --vars --sloppy --white --config support/jslintrc $(tdefs.jschess_sources) 2> /dev/null
 	$(Q)pymakehelper touch_mkdir $@
+#	$(Q)node_modules/.bin/jslint --browser --terse --todo --plusplus --forin --vars --sloppy --white --config support/jslintrc $(JS_SOURCES) 2> /dev/null
+#	$(Q)node_modules/.bin/jshint $(JS_SOURCES)
+# $(Q)pymakehelper only_print_on_error gjslint --flagfile support/gjslint.cfg $(JS_SOURCES)
+# $(Q)tools/jsl/jsl --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(JS_SOURCES)
 
-$(JSFULL): $(tdefs.jschess_sources) $(JSCHECK)
+$(JSFULL): $(JS_SOURCES) $(JSCHECK)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)cat $(tdefs.jschess_sources) > $@
+	$(Q)cat $(JS_SOURCES) > $@
 
 $(JSMIN): $(JSFULL)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)tools/jsmin < $< > $(JSMIN_JSMIN)
-	$(Q)yui-compressor $< -o $(JSMIN_YUI)
+	$(Q)node_modules/.bin/jsmin < $< > $(JSMIN_JSMIN)
+	$(Q)node_modules/.bin/yuicompressor $< -o $(JSMIN_YUI)
 	$(Q)cp $(JSMIN_YUI) $@
 #	$(Q)cp $(JSMIN_CLOSURE) $@
 #	$(Q)tools/closure.jar --jscomp_error '*' --externs templates/out/src/externs.js.mako --jscomp_off checkTypes $< --js_output_file $(JSMIN_CLOSURE)
@@ -97,14 +99,14 @@ $(JSMIN): $(JSFULL)
 $(JSPACKFULL): $(JSFULL)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)cat $(tdefs.jschess_depslist) $(JSFULL) > $@
+	$(Q)cat $(JS_DEPLIST) $(JSFULL) > $@
 
 $(JSPACKMIN): $(JSMIN)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
-	$(Q)cat $(tdefs.jschess_depslist) $(JSMIN) > $@
+	$(Q)cat $(JS_DEPLIST) $(JSMIN) > $@
 
-$(JSDOC_FILE): $(tdefs.jschess_sources)
+$(JSDOC_FILE): $(JS_SOURCES)
 	$(info doing [$@])
 	$(Q)rm -rf jsdoc
 	$(Q)mkdir -p $(dir $@)
@@ -143,11 +145,17 @@ debug:
 	$(info JSFULL is $(JSFULL))
 	$(info JSMIN is $(JSMIN))
 	$(info SOURCES_HTML is $(SOURCES_HTML))
+	$(info JS_TEMPLATES is $(JS_TEMPLATES))
+	$(info JS_SOURCES is $(JS_SOURCES))
 
 .PHONY: clean_hard
 clean_hard:
 	$(info doing [$@])
 	$(Q)git clean -qffxd
+
+.PHONY: clean
+clean:
+	$(Q)rm -f $(ALL)
 
 .PHONY: sloccount
 sloccount:

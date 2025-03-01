@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "jshint": "^2.13.6",
+    "jslint": "^0.12.1",
+    "jsmin": "^1.0.1",
+    "yuicompressor": "^2.4.8"
+  }
+}
