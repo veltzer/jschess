@@ -4,9 +4,9 @@
 # do the javascript stuff ?
 DO_JS:=1
 # should we do documentation ?
-DO_DOCS:=0
+DO_DOCS:=1
 # do you want to validate html?
-DO_CHECKHTML:=0
+DO_CHECKHTML:=1
 # do you want to debug the makefile?
 DO_MKDBG?=0
 # where is the web folder?
@@ -49,11 +49,9 @@ ifeq ($(DO_DOCS),1)
 ALL+=$(JSDOC_FILE)
 endif # DO_DOCS
 
-SOURCES_HTML_MAKO:=$(shell find templates/docs \( -type f -or -type l \) -and -name "*.mako" 2> /dev/null)
-SOURCES_HTML:=$(shell pymakehelper remove_folders $(SOURCES_HTML_MAKO))
-ifndef SOURCES_HTML
-$(error SOURCES_HTML not set)
-endif
+SOURCES_HTML_MAKO:=$(shell find templates/docs -type f -and -name "*.mako" 2> /dev/null)
+# SOURCES_HTML:=$(shell pymakehelper remove_folders $(SOURCES_HTML_MAKO))
+SOURCES_HTML:=$(shell find docs -type f -and -name "*.html")
 HTMLCHECK:=out/html.stamp
 ifeq ($(DO_CHECKHTML),1)
 ALL+=$(HTMLCHECK)
@@ -108,9 +106,9 @@ $(JSPACKMIN): $(JSMIN)
 
 $(JSDOC_FILE): $(JS_SOURCES)
 	$(info doing [$@])
-	$(Q)rm -rf jsdoc
+	$(Q)rm -rf $(JSDOC_FOLDER)
 	$(Q)mkdir -p $(dir $@)
-	$(Q)nodejs node_modules/jsdoc/jsdoc.js -d $(JSDOC_FOLDER) -c support/jsdoc.json out/src 1> /dev/null
+	$(Q)node_modules/.bin/jsdoc -d $(JSDOC_FOLDER) -c support/jsdoc.json out/src 1> /dev/null
 
 .PHONY: check_js
 check_js: $(JSCHECK)
@@ -162,11 +160,11 @@ sloccount:
 	$(info doing [$@])
 	$(Q)sloccount .
 
-$(HTMLCHECK): $(SOURCES_HTML)
+$(HTMLCHECK): $(SOURCES_HTML) .htmlhintrc
 	$(info doing [$@])
-	$(Q)tidy -errors -q -utf8 $(SOURCES_HTML)
 	$(Q)pymakehelper only_print_on_error node_modules/.bin/htmlhint $(SOURCES_HTML)
 	$(Q)pymakehelper touch_mkdir $@
+#	$(Q)tidy -errors -q -utf8 $(SOURCES_HTML)
 
 ##########
 # alldep #

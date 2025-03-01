@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2>BoardPosition</h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>BoardPosition<span class="signature">()</span><span class="type-signature"></span></h2>
         
             <div class="class-description">represents a full position of the board</div>
         
@@ -44,7 +44,9 @@
     <h2>Constructor</h2>
     
 
+    
     <h4 class="name" id="BoardPosition"><span class="type-signature"></span>new BoardPosition<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
     
 
@@ -124,6 +126,10 @@
 
 
 
+
+
+
+
     
     </div>
 
@@ -133,7 +139,9 @@
 
     
 
-     
+    
+
+    
 
     
 
@@ -147,287 +155,9 @@
 
     
 
-    <h4 class="name" id=".setupFEN"><span class="type-signature">(static) </span>setupFEN<span class="signature">(fen)</span><span class="type-signature"> &rarr; {<a href="BoardPosition.html">BoardPosition</a>}</span></h4>
-
     
-
-
-
-<div class="description">
-    Setup a position according to FEN notation.
-  See Forsyth–Edwards Notation in wikipedia for more details.
-  Example of start position is:
-  'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>fen</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">a string describing a chess board position in FEN
-  notation.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>mark.veltzer@gmail.com (Mark Veltzer)
-  TODO
-  - add more sanity tests (regexp) for the whole input.
-  - parse the 5 other blocks after the position itself
-  (what do I do with that ?!?).</li>
-        </ul>
-    </dd>
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="BoardPosition.js.html">BoardPosition.js</a>, <a href="BoardPosition.js.html#line127">line 127</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    A position object corresponding to the FEN
-  notation given.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="BoardPosition.html">BoardPosition</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".startPos"><span class="type-signature">(static) </span>startPos<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="BoardPosition.html">BoardPosition</a>}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Static method that returns a starting position in standard chess.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
-        </ul>
-    </dd>
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="BoardPosition.js.html">BoardPosition.js</a>, <a href="BoardPosition.js.html#line68">line 68</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    A standard chess starting position.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="BoardPosition.html">BoardPosition</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
     <h4 class="name" id="addPiece"><span class="type-signature"></span>addPiece<span class="signature">(color, type, x, y)</span><span class="type-signature"></span></h4>
+    
 
     
 
@@ -633,12 +363,18 @@
 
 
 
+
+
+
+
         
             
 
     
 
+    
     <h4 class="name" id="forEachPiece"><span class="type-signature"></span>forEachPiece<span class="signature">(f)</span><span class="type-signature"></span></h4>
+    
 
     
 
@@ -774,12 +510,18 @@
 
 
 
+
+
+
+
         
             
 
     
 
+    
     <h4 class="name" id="initialize"><span class="type-signature"></span>initialize<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="BoardPosition.html">BoardPosition</a>}</span></h4>
+    
 
     
 
@@ -863,6 +605,8 @@
 
 
 
+
+
 <h5>Returns:</h5>
 
         
@@ -888,12 +632,16 @@
 
 
 
+
+
         
             
 
     
 
+    
     <h4 class="name" id="toString"><span class="type-signature"></span>toString<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
 
     
 
@@ -977,6 +725,8 @@
 
 
 
+
+
 <h5>Returns:</h5>
 
         
@@ -1002,6 +752,300 @@
 
 
 
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".setupFEN"><span class="type-signature">(static) </span>setupFEN<span class="signature">(fen)</span><span class="type-signature"> &rarr; {<a href="BoardPosition.html">BoardPosition</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Setup a position according to FEN notation.
+  See Forsyth-Edwards Notation in wikipedia for more details.
+  Example of start position is:
+  'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fen</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">a string describing a chess board position in FEN
+  notation.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)
+  TODO
+  - add more sanity tests (regexp) for the whole input.
+  - parse the 5 other blocks after the position itself
+  (what do I do with that ?!?).</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="BoardPosition.js.html">BoardPosition.js</a>, <a href="BoardPosition.js.html#line127">line 127</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A position object corresponding to the FEN
+  notation given.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="BoardPosition.html">BoardPosition</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".startPos"><span class="type-signature">(static) </span>startPos<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="BoardPosition.html">BoardPosition</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Static method that returns a starting position in standard chess.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>mark.veltzer@gmail.com (Mark Veltzer)</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="BoardPosition.js.html">BoardPosition.js</a>, <a href="BoardPosition.js.html#line68">line 68</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A standard chess starting position.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="BoardPosition.html">BoardPosition</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
         
     
 
@@ -1024,7 +1068,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a>
 </footer>
 
 <script> prettyPrint(); </script>
