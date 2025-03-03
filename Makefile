@@ -31,6 +31,14 @@ JSZIP:=out/$(PROJECT_NAME).zip
 JS_TEMPLATES:=$(shell find templates/out/src -type f -and -name "*.mako")
 JS_SOURCES:=$(shell find out/src -type f -and -name "*.js")
 
+SOURCES_HTML_MAKO:=$(shell find templates/docs -type f -and -name "*.mako" 2> /dev/null)
+# SOURCES_HTML:=$(shell pymakehelper remove_folders $(SOURCES_HTML_MAKO))
+SOURCES_HTML:=$(shell find docs -type f -and -name "*.html")
+HTMLCHECK:=out/html.stamp
+
+JSDOC_FOLDER=$(DOCS)/jsdoc
+JSDOC_FILE=$(DOCS)/jsdoc/index.html
+
 ifeq ($(DO_MKDBG),1)
 Q=
 # we are not silent in this branch
@@ -43,16 +51,10 @@ ifeq ($(DO_JS),1)
 ALL+=$(JSPACKFULL) $(JSPACKMIN) $(JSZIP)
 endif # DO_JS
 
-JSDOC_FOLDER=$(DOCS)/jsdoc
-JSDOC_FILE=$(DOCS)/jsdoc/index.html
 ifeq ($(DO_DOCS),1)
 ALL+=$(JSDOC_FILE)
 endif # DO_DOCS
 
-SOURCES_HTML_MAKO:=$(shell find templates/docs -type f -and -name "*.mako" 2> /dev/null)
-# SOURCES_HTML:=$(shell pymakehelper remove_folders $(SOURCES_HTML_MAKO))
-SOURCES_HTML:=$(shell find docs -type f -and -name "*.html")
-HTMLCHECK:=out/html.stamp
 ifeq ($(DO_CHECKHTML),1)
 ALL+=$(HTMLCHECK)
 endif # DO_CHECKHTML
