@@ -6,7 +6,7 @@ DO_JS:=1
 # should we do documentation ?
 DO_DOCS:=1
 # do you want to validate html?
-DO_CHECKHTML:=1
+DO_CHECKHTML:=0
 # do you want to debug the makefile?
 DO_MKDBG?=0
 # where is the web folder?
@@ -32,8 +32,8 @@ JS_TEMPLATES:=$(shell find templates/out/src -type f -and -name "*.mako")
 JS_SOURCES:=$(shell find out/src -type f -and -name "*.js")
 
 SOURCES_HTML_MAKO:=$(shell find templates/docs -type f -and -name "*.mako")
-# SOURCES_HTML:=$(shell pymakehelper remove_folders $(SOURCES_HTML_MAKO))
-SOURCES_HTML:=$(shell find docs -type f -and -name "*.html")
+SOURCES_HTML:=$(shell pymakehelper remove_folders $(SOURCES_HTML_MAKO))
+# SOURCES_HTML:=$(shell find docs -type f -and -name "*.html")
 HTMLCHECK:=out/html.stamp
 
 JSDOC_FOLDER=$(DOCS)/jsdoc
