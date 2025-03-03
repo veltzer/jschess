@@ -31,7 +31,7 @@ JSZIP:=out/$(PROJECT_NAME).zip
 JS_TEMPLATES:=$(shell find templates/out/src -type f -and -name "*.mako")
 JS_SOURCES:=$(shell find out/src -type f -and -name "*.js")
 
-SOURCES_HTML_MAKO:=$(shell find templates/docs -type f -and -name "*.mako" 2> /dev/null)
+SOURCES_HTML_MAKO:=$(shell find templates/docs -type f -and -name "*.mako")
 # SOURCES_HTML:=$(shell pymakehelper remove_folders $(SOURCES_HTML_MAKO))
 SOURCES_HTML:=$(shell find docs -type f -and -name "*.html")
 HTMLCHECK:=out/html.stamp
@@ -110,7 +110,7 @@ $(JSDOC_FILE): $(JS_SOURCES)
 	$(info doing [$@])
 	$(Q)rm -rf $(JSDOC_FOLDER)
 	$(Q)mkdir -p $(dir $@)
-	$(Q)node_modules/.bin/jsdoc -d $(JSDOC_FOLDER) -c support/jsdoc.json out/src 1> /dev/null
+	$(Q)node_modules/.bin/jsdoc -d $(JSDOC_FOLDER) -c support/jsdoc.json out/src
 
 .PHONY: check_js
 check_js: $(JSCHECK)
