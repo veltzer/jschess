@@ -1,3 +1,7 @@
+"""
+os level dependencies for this project
+"""
+
 packages=[
     # for installing javascript packages
     "nodejs",
@@ -18,6 +22,7 @@ packages=[
     # for bsdtar(1)
     "libarchive-tools",
 ]
+
 tools=[
     "jsl",
     "jsmin",
