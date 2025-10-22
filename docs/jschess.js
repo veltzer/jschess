@@ -1,978 +1,4 @@
 /* vim:set filetype=javascript:*/
-/*jsl:import Utils.js*/
-/*global Utils, Class */
-
-
-/**
-  @class Type safe config class
-  This is a configuration template, it has, for each configuration key,
-  the following:
-  - the key itself (string).
-  - the type of the value for that key.
-  - the default value for the key (of the same type).
-  - an optional validation function.
-  - is this option required
-  - description of the option
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var ConfigTmpl = Class.create(/** @lends ConfigTmpl.prototype */{
-  /**
-    create a new instance of this class.
-    @this {ConfigTmpl}
-    @return {ConfigTmpl} a new instance of this class.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function() {
-    // the dictionary holding the current config
-    this.tuples = {};
-    this.tuplist = [];
-  },
-  /**
-    add another option to this template
-    @this {ConfigTmpl}
-    @param {object} s config option with all needed properties.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  add: function(s) {
-    Utils.checkEquals(s, ConfigTmpl.fullSet);
-    if (!(ConfigTmpl.types.hasOwnProperty(s.type))) {
-      throw 'bad type [' + s.type + ']';
-    }
-    if (this.tuples.hasOwnProperty(s.name)) {
-      throw 'repeat of key [' + s.name + ']';
-    }
-    this.tuples[s.name] = s;
-    this.tuplist.push(s);
-  },
-  /**
-    check that a key,value combo is ok
-    This method will throw an exception if it finds anything wrong.
-    @this {ConfigTmpl}
-    @param {string} key key to check.
-    @param {anything} value value to check.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  check: function(key, value) {
-    if (!(this.tuples.hasOwnProperty(key))) {
-      throw 'wrong key [' + key + ']';
-    }
-    var type_to_check = this.tuples[key].type;
-    var our_type = ConfigTmpl.types[type_to_check];
-    Utils.checkType(value, our_type);
-  },
-  /**
-    return whether the template has a key
-    @this {ConfigTmpl}
-    @param {string} key the key to check.
-    @return {boolean} is the key part of this config template.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  hasKey: function(key) {
-    return this.tuples.hasOwnProperty(key);
-  },
-  /**
-    return the default value for a key
-    @this {ConfigTmpl}
-    @param {string} key the key to fetch the value for.
-    @return {anything} the default value for the given key.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  getDefaultValue: function(key) {
-    return this.tuples[key].defaultValue;
-  },
-  /**
-    show HTML that lists all config options for the current template
-    @this {ConfigTmpl}
-    @return {string} HTML representation of this config template.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  getHTML: function() {
-    var shtml = '';
-    shtml += '<table border=\'1\'>';
-    shtml += '<tr>';
-    shtml += '<td>name</td>';
-    shtml += '<td>type</td>';
-    shtml += '<td>required</td>';
-    shtml += '<td>description</td>';
-    shtml += '<td>defaultValue</td>';
-    shtml += '</tr>';
-    this.tuplist.forEach(function(e) {
-      shtml += '<tr>';
-      shtml += '<td>' + e.name + '</td>';
-      shtml += '<td>' + e.type + '</td>';
-      shtml += '<td>' + e.required + '</td>';
-      shtml += '<td>' + e.description + '</td>';
-      shtml += '<td>' + e.defaultValue + '</td>';
-      shtml += '</tr>';
-    });
-    shtml += '</table>';
-    return shtml;
-  }
-});
-
-
-/**
-  All needed properties for each config option.
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-ConfigTmpl.fullSet = {
-  name: undefined,
-  type: undefined,
-  required: undefined,
-  description: undefined,
-  defaultValue: undefined
-};
-
-
-/**
-  All allowed types for config options.
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-ConfigTmpl.types = {
-  t_string: 'string',
-  t_number: 'number',
-  t_boolean: 'boolean'
-};
-/* vim:set filetype=javascript:*/
-/*global Class */
-
-
-/**
-  @class a path + attributes two tuple object
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var SvgPathAndAttributes = Class.create(/** @lends SvgPathAndAttributes.prototype */{
-  /**
-    creates a new instance
-    @this {SvgPathAndAttributes}
-    @param {string} path string representing SVG path.
-    @param {object} attr object with attributes for said path.
-    @return {SvgPathAndAttributes} the new instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function(path, attr) {
-    this.path = path;
-    this.attr = attr;
-  },
-  /**
-    toString method that allows you to get a nice printout for this type
-    @this {SvgPathAndAttributes}
-    @return {string} string representation of this instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  toString: function() {
-    return [this.path, this.attr].join();
-  }
-});
-/* vim:set filetype=javascript:*/
-/*global Class, Raphael */
-
-
-/**
-  @class A single piece description.
-  This includes: square size (assumes piece is 0,0,size,size)
-  and array of paths and attributes to draw the path
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var SvgPiece = Class.create(/** @lends SvgPiece.prototype */{
-  /**
-    creates a new instance
-    @this {SvgPiece}
-    @param {number} size of the square of the piece.
-    @return {SvgPiece} a new object of this type.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function(size) {
-    this.size = size;
-    this.paas = [];
-  },
-  /**
-    Adds a new path section to a piece description
-    @this {SvgPiece}
-    @param {PathAndAttributes} paa object to be added.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  add: function(paa) {
-    this.paas.push(paa);
-  },
-  /**
-    Create a Raphael.js set from this object
-    @this {SvgPiece}
-    @param {paper} paper Raphael.js paper to work on.
-    @param {transform} transform Raphael.js transformating for this object.
-    @return {set} the set after the transformation.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  toSet: function(paper, transform) {
-    var set = paper.set();
-    this.paas.forEach(function(paa) {
-      var orig_path = paa.path;
-      var new_path = Raphael.transformPath(orig_path, transform);
-      var el = paper.path(new_path);
-      el.attr(paa.attr);
-      //el.hide();
-      set.push(el);
-    });
-    return set;
-  }
-});
-/* vim:set filetype=javascript:*/
-/*global Class */
-
-
-/**
-  @class A full game of chess. Contains the starting position
-  including a full set of moves of type GameMove.
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var Game = Class.create(/** @lends Game.prototype */{
-  /**
-    creates a new instance of this class.
-    @return {Game} new instance of this class.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function() {
-    return;
-  },
-  /**
-    toString method that allows you to get a nice printout for this type
-    @return {string} string representation of this instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  toString: function() {
-    return 'no toString for type Game';
-  }
-});
-/* vim:set filetype=javascript:*/
-/*global Class */
-
-
-/**
-  @class represents a position on the screen (in pixels)
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var SvgPixelPosition = Class.create(/** @lends SvgPixelPosition.prototype */{
-  /**
-    creates a new instance
-    @this {SvgPixelPosition}
-    @param {number} x x co-ordinate.
-    @param {number} y y co-ordinate.
-    @return {SvgPixelPosition} the new instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function(x, y) {
-    /*
-    if(x<0) {
-      throw 'bad value for x '+x+','+typeof(x);
-    }
-    if(y<0) {
-      throw 'bad value for y '+y+','+typeof(y);
-    }
-    */
-    this.x = x;
-    this.y = y;
-  },
-  /**
-    toString method so that you can get a nice printout of instances
-    of this type
-    @this {SvgPixelPosition}
-    @return {string} string representation of this object.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  toString: function() {
-    return '(' + this.x + ',' + this.y + ')';
-  }
-});
-/* vim:set filetype=javascript:*/
-/*jsl:import BoardPiece.js*/
-/*jsl:import PieceColor.js*/
-/*jsl:import PieceType.js*/
-/*jsl:import PiecePosition.js*/
-/*global Class, BoardPiece, PieceColor, PieceType, PiecePosition */
-
-
-/**
-  @class represents a full position of the board
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var BoardPosition = Class.create(/** @lends BoardPosition.prototype */{
-  /**
-    constructs a new object
-    @this {BoardPosition}
-    @return {BoardPosition} a new object of this type.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function() {
-    this.pieces = [];
-  },
-  /**
-    toString method that allows you to get a nice printout for this type
-    @this {BoardPosition}
-    @return {string} a string representation of this object.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  toString: function() {
-    return this.pieces.join();
-  },
-  /**
-    Add a piece to the position
-    @this {BoardPosition}
-    @param {string} color the color of the piece (black/white).
-    @param {string} type the type of the piece
-    (rook/knight/bishop/queen/king/pawn).
-    @param {number} x the x position of the piece [0..8).
-    @param {number} y the y position of the piece [0..8).
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  addPiece: function(color, type, x, y) {
-    var boardPiece = new BoardPiece(new PieceColor(color), new PieceType(type));
-    var piecePosition = new PiecePosition(x, y);
-    this.pieces.push([boardPiece, piecePosition]);
-  },
-  /**
-    Run a function for each piece in this position
-    @this {BoardPosition}
-    @param {function()} f function to run getting each piece in turn.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  forEachPiece: function(f) {
-    this.pieces.forEach(function(pieceAndPos) {
-      var boardPiece = pieceAndPos[0];
-      var position = pieceAndPos[1];
-      f(boardPiece, position);
-    });
-  }
-});
-
-
-/**
-  Static method that returns a starting position in standard chess.
-  @return {BoardPosition} A standard chess starting position.
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-BoardPosition.startPos = function() {
-  /*
-  var newPos=new BoardPosition();
-  newPos.addPiece('white','rook',0,0);
-  newPos.addPiece('white','knight',1,0);
-  newPos.addPiece('white','bishop',2,0);
-  newPos.addPiece('white','queen',3,0);
-  newPos.addPiece('white','king',4,0);
-  newPos.addPiece('white','bishop',5,0);
-  newPos.addPiece('white','knight',6,0);
-  newPos.addPiece('white','rook',7,0);
-  newPos.addPiece('white','pawn',0,1);
-  newPos.addPiece('white','pawn',1,1);
-  newPos.addPiece('white','pawn',2,1);
-  newPos.addPiece('white','pawn',3,1);
-  newPos.addPiece('white','pawn',4,1);
-  newPos.addPiece('white','pawn',5,1);
-  newPos.addPiece('white','pawn',6,1);
-  newPos.addPiece('white','pawn',7,1);
-
-  newPos.addPiece('black','rook',0,7);
-  newPos.addPiece('black','knight',1,7);
-  newPos.addPiece('black','bishop',2,7);
-  newPos.addPiece('black','queen',3,7);
-  newPos.addPiece('black','king',4,7);
-  newPos.addPiece('black','bishop',5,7);
-  newPos.addPiece('black','knight',6,7);
-  newPos.addPiece('black','rook',7,7);
-  newPos.addPiece('black','pawn',0,6);
-  newPos.addPiece('black','pawn',1,6);
-  newPos.addPiece('black','pawn',2,6);
-  newPos.addPiece('black','pawn',3,6);
-  newPos.addPiece('black','pawn',4,6);
-  newPos.addPiece('black','pawn',5,6);
-  newPos.addPiece('black','pawn',6,6);
-  newPos.addPiece('black','pawn',7,6);
-  return newPos;
-  */
-  return BoardPosition.setupFEN(
-      'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
-  );
-};
-
-
-/**
-  Setup a position according to FEN notation.
-  See Forsyth-Edwards Notation in wikipedia for more details.
-  Example of start position is:
-  'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
-  @param {string} fen a string describing a chess board position in FEN
-  notation.
-  @return {BoardPosition} A position object corresponding to the FEN
-  notation given.
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-  TODO
-  - add more sanity tests (regexp) for the whole input.
-  - parse the 5 other blocks after the position itself
-  (what do I do with that ?!?).
-*/
-BoardPosition.setupFEN = function(fen) {
-  var irank, iletter, rank, letter;
-  var blocks = fen.split(' ');
-  if (blocks.length !== 6) {
-    throw 'parse error - number of blocks is not 6';
-  }
-  var ranks = blocks[0].split('/');
-  if (ranks.length !== 8) {
-    throw 'parse error - number of ranks is not 8';
-  }
-  var newPos = new BoardPosition();
-  for (irank = 7; irank >= 0; irank--) {
-    rank = ranks[7 - irank];
-    for (iletter = 0; iletter < rank.length; iletter++) {
-      letter = rank[iletter];
-      switch (letter) {
-        case 'r':
-          newPos.addPiece('black', 'rook', iletter, irank);
-          break;
-        case 'R':
-          newPos.addPiece('white', 'rook', iletter, irank);
-          break;
-        case 'n':
-          newPos.addPiece('black', 'knight', iletter, irank);
-          break;
-        case 'N':
-          newPos.addPiece('white', 'knight', iletter, irank);
-          break;
-        case 'b':
-          newPos.addPiece('black', 'bishop', iletter, irank);
-          break;
-        case 'B':
-          newPos.addPiece('white', 'bishop', iletter, irank);
-          break;
-        case 'q':
-          newPos.addPiece('black', 'queen', iletter, irank);
-          break;
-        case 'Q':
-          newPos.addPiece('white', 'queen', iletter, irank);
-          break;
-        case 'k':
-          newPos.addPiece('black', 'king', iletter, irank);
-          break;
-        case 'K':
-          newPos.addPiece('white', 'king', iletter, irank);
-          break;
-        case 'p':
-          newPos.addPiece('black', 'pawn', iletter, irank);
-          break;
-        case 'P':
-          newPos.addPiece('white', 'pawn', iletter, irank);
-          break;
-        default:
-          iletter += Number(letter) - 1;
-          break;
-      }
-    }
-  }
-  return newPos;
-};
-/* vim:set filetype=javascript:*/
-/*global Class */
-
-
-/**
-  @class represents a piece on the board: color, type The instance also has
-  a data field that could be used for private data attached to the piece.
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var BoardPiece = Class.create(/** @lends BoardPiece.prototype */{
-  /**
-    constructs a new object.
-    @this {BoardPiece}
-    @param {string} color color of this piece (black/white).
-    @param {string} type type of this piece
-    (rook/knight/bishop/queen/king/pawn).
-    @return {BoardPiece} the new object created.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function(color, type) {
-    this.color = color;
-    this.type = type;
-    this.data = undefined;
-  },
-  /**
-    toString method that allows you to get a nice printout for this type
-    @this {BoardPiece}
-    @return {string} string representation of this object.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  toString: function() {
-    return 'BoardPiece: ' + [this.color, this.type, this.data].join();
-  },
-  /**
-    Method to set secret data for this piece
-    @this {BoardPiece}
-    @param {anything} data the extra data to hold for this piece.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  setData: function(data) {
-    this.data = data;
-  },
-  /**
-    Method to get secret data for this piece
-    @this {BoardPiece}
-    @return {anything} the secret data associated with this piece.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  getData: function() {
-    return this.data;
-  },
-  /**
-    Method to unset secret data for this piece
-    @this {BoardPiece}
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  unsetData: function() {
-    this.data = undefined;
-  }
-});
-/* vim:set filetype=javascript:*/
-/*jsl:import Utils.js*/
-/*global Class, Utils*/
-
-
-/**
-  @class Forward/Backwards controls.
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var SvgControls = Class.create(/** @lends SvgControls.prototype */{
-  /**
-    creates a new instance
-    @param {Config} config configuration for this instance.
-    @return {SvgControls} the new instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function(config) {
-    Utils.pass(config);
-  }
-});
-/* vim:set filetype=javascript:*/
-/*global Class, Raphael*/
-
-
-/**
-  @class Wrapper for Raphael.js set
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var WSet = Class.create(/** @lends WSet.prototype */{
-  /**
-    @this {WSet}
-    @param {set} set the raphael set that this wraps.
-    @param {wrapper} wrapper the raphael wrapper (with paper and all).
-    @return {WSet} a new instance of this class.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function(set, wrapper) {
-    this.set = set;
-    this.wrapper = wrapper;
-  },
-  /**
-    wrapper for the Raphael.js method of the same name.
-    Pass anything you want to raphael.
-    @this {WSet}
-    @return {anything} anything that Raphael.js returns from this method.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  push: function() {
-    var m = this.set.push;
-    var r = m.apply(this.set, arguments);
-    return r;
-  },
-  /**
-    wrapper for the Raphael.js method of the same name.
-    Pass anything you want to raphael.
-    @this {WSet}
-    @return {anything} anything that Raphael.js returns from this method.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  remove: function() {
-    var m = this.set.remove;
-    var r = m.apply(this.set, arguments);
-    return r;
-  },
-  /**
-    wrapper for the Raphael.js method of the same name.
-    Pass anything you want to raphael.
-    @this {WSet}
-    @return {anything} anything that Raphael.js returns from this method.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  forEach: function() {
-    var m = this.set.forEach;
-    var r = m.apply(this.set, arguments);
-    return r;
-  },
-  /**
-    make a set glow
-    @this {WSet}
-    @param {object} glow_obj parameters to pass to the Raphael.js glow method.
-    @return {set} the set of glow objects.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  glow: function(glow_obj) {
-    var nset = this.wrapper.set();
-    this.forEach(function(e) {
-      nset.push(e.glow(glow_obj));
-    },undefined);
-    return nset;
-  },
-  /**
-    setup events for this set
-    @this {WSet}
-    @param {function()} f callback. Callback should receive the type of the
-      event.
-    @param {object} names of events to register.
-    supported are: click, mouseover, mouseout, mousemove, mouseup,
-    mousedown.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  eventRegister: function(f, names) {
-    var that = this;
-    names.forEach(function(eventName) {
-      that.forEach(function(e) {
-        switch (eventName) {
-          case 'click':
-            e.click(function() {
-              f(eventName);
-            });
-            break;
-          case 'mouseover':
-            e.mouseover(function() {
-              f(eventName);
-            });
-            break;
-          case 'mouseout':
-            e.mouseout(function() {
-              f(eventName);
-            });
-            break;
-          case 'mousemove':
-            e.mousemove(function() {
-              f(eventName);
-            });
-            break;
-          case 'mouseup':
-            e.mouseup(function() {
-              f(eventName);
-            });
-            break;
-          case 'mousedown':
-            e.mousedown(function() {
-              f(eventName);
-            });
-            break;
-          default:
-            throw 'unknown event name ' + eventName;
-        }
-      });
-    });
-  }
-});
-
-
-/**
-  @class Wrapper for Raphael.js
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var WRaphael = Class.create(/** @lends WRaphael.prototype */{
-  /**
-    creates a new instance.
-    Pass anything you want to raphael.
-    @this {WRaphael}
-    @return {WRaphael} a new instance of this class.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function() {
-    this.r = Raphael.apply(undefined, arguments);
-  },
-  /**
-    create a rectangle on the paper.
-    Pass anything you want to raphael.
-    @this {WRaphael}
-    @return {rect} whatever Raphael returns.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  rect: function() {
-    var m = this.r.rect;
-    var r = m.apply(this.r, arguments);
-    return r;
-  },
-  /**
-    create a set on the paper.
-    Pass anything you want to raphael.
-    @this {WRaphael}
-    @return {set} our wrapper for Raphael sets.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  set: function() {
-    var m = this.r.set;
-    var r = m.apply(this.r, arguments);
-    return new WSet(r, this);
-  },
-  /**
-    create path on the paper.
-    Pass anything you want to raphael.
-    @this {WRaphael}
-    @return {path} whatever Raphael returns.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  path: function() {
-    var m = this.r.path;
-    var r = m.apply(this.r, arguments);
-    return r;
-  },
-  /**
-    create text on the paper.
-    Pass anything you want to raphael.
-    @this {WRaphael}
-    @return {text} whatever Raphael returns.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  text: function() {
-    var m = this.r.text;
-    var r = m.apply(this.r, arguments);
-    return r;
-  }
-});
-/* vim:set filetype=javascript:*/
-/*global Class*/
-
-
-/**
-  @class represents a piece type (rook,knight,bishop,queen,king,pawn)
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var PieceType = Class.create(/** @lends PieceType.prototype */{
-  /**
-    creates a new instance
-    @this {PieceType}
-    @param {string} type the type of the piece.
-    @return {PieceType} the new instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function(type) {
-    if (!(PieceType.types.hasOwnProperty(type))) {
-      throw 'illegal piecetype ' + type;
-    }
-    this.type = type;
-  },
-  /**
-    toString method that allows you to get a nice printout for this type
-    @this {PieceType}
-    @return {string} string representation of this instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  toString: function() {
-    return this.type;
-  },
-  /**
-    Return whether the piece is a rook
-    @this {PieceType}
-    @return {boolean} is this piece a rook.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  isRook: function() {
-    return this.type === 'rook';
-  },
-  /**
-    Return whether the piece is a knight
-    @this {PieceType}
-    @return {boolean} is this piece a knight.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  isKnight: function() {
-    return this.type === 'knight';
-  },
-  /**
-    Return whether the piece is a bishop
-    @this {PieceType}
-    @return {boolean} is this piece a bishop.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  isBishop: function() {
-    return this.type === 'bishop';
-  },
-  /**
-    Return whether the piece is a queen
-    @this {PieceType}
-    @return {boolean} is this piece a queen.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  isQueen: function() {
-    return this.type === 'queen';
-  },
-  /**
-    Return whether the piece is a king
-    @this {PieceType}
-    @return {boolean} is this piece a king.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  isKing: function() {
-    return this.type === 'king';
-  },
-  /**
-    Return whether the piece is a pawn
-    @this {PieceType}
-    @return {boolean} is this piece a pawn.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  isPawn: function() {
-    return this.type === 'pawn';
-  }
-});
-
-
-/**
-  Array of piece types
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-PieceType.types = {
-  rook: undefined,
-  knight: undefined,
-  bishop: undefined,
-  queen: undefined,
-  king: undefined,
-  pawn: undefined
-};
-/* vim:set filetype=javascript:*/
-/*global Element, Class, $ */
-
-
-/**
-  @class A set of controls to control the game of chess.
-  Includes 6 buttons: goto_start, prev_move, prev_play, next_play, next_move,
-  goto_end
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var Controls = Class.create(/** @lends Controls.prototype */{
-  /**
-    creates a new instance of this class.
-    @this {Controls}
-    @param {object} dict A hash with initial values.
-    @return {Controls} new instance of this class.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function(dict) {
-    this.id = dict.id;
-    this.b_goto_start = new Element('button').update('goto_start');
-    this.b_prev_move = new Element('button').update('prev_move');
-    this.b_prev_play = new Element('button').update('prev_play');
-    this.b_next_play = new Element('button').update('next_play');
-    this.b_next_move = new Element('button').update('next_move');
-    this.b_goto_end = new Element('button').update('goto_end');
-    $(this.id).appendChild(this.b_goto_start);
-    $(this.id).appendChild(this.b_prev_move);
-    $(this.id).appendChild(this.b_prev_play);
-    $(this.id).appendChild(this.b_next_play);
-    $(this.id).appendChild(this.b_next_move);
-    $(this.id).appendChild(this.b_goto_end);
-  },
-  /**
-    toString method that allows you to get a nice printout for this type
-    @this {Controls}
-    @return {string} string representation of this instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  toString: function() {
-    return 'no toString for type Controls';
-  }
-});
-/* vim:set filetype=javascript:*/
-/*jsl:import Utils.js*/
-/*global Class */
-
-
-/**
-  @class Type safe config class
-  The config class is basically a fancy dictionary. The difference
-  between it and a dictionary is that it consults a template object
-  when setting and getting a value.
-  - When setting a value it makes sure that you are giving a name
-  of a parameter that exists in the template and that the value
-  that you gave to the parameter is correctly converted to the
-  type expected.
-  - When getting a value it makes sure you use the right name for
-  the key.
-  The idea is that the user will not be able to accidently put config
-  options which are not used and will only be able to supply the right
-  types.
-  In addition, some config options will <b>have</b> to be supplied by the user
-  (div id where to create some HTML elements is an example of this).
-  Config will also supply a method by which config options by the user
-  will override anything in the default config.
-  This class <b>should not</b> be a singleton since the user may want to put
-  two boards on the page and have each configured differently.
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var Config = Class.create(/** @lends Config.prototype */{
-  /**
-    creates a new instance.
-    @this {Config}
-    @param {object} tmpl template to use.
-    @return {Config} new instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function(tmpl) {
-    // the dictionary holding the current config
-    this.d = {};
-    // the template to be used
-    this.tmpl = tmpl;
-  },
-  /**
-    get a value for a key.
-    @this {Config}
-    @param {anything} key key to store in the config.
-    @return {anything} the value associated with the key.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  getValue: function(key) {
-    if (this.tmpl.hasKey(key)) {
-      if (this.d[key] !== undefined) {
-        return this.d[key];
-      }
-      return this.tmpl.getDefaultValue(key);
-    }
-    throw 'request for bad key [' + key + ']';
-  },
-  /**
-    set a key to a certain value in the current configuration
-    @this {Config}
-    @param {anything} key key to store in the config.
-    @param {anything} value value to store in the config.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  setValue: function(key, value) {
-    // check that the key and value are ok.
-    this.tmpl.check(key, value);
-    this.d[key] = value;
-  },
-  /**
-    set many values at once
-    @this {Config}
-    @param {object} d dictionary of values.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  override: function(d) {
-    var x;
-    for (x in d) {
-      this.setValue(x, d[x]);
-    }
-  },
-  /**
-    check that the config is good to go
-    for instance: check that all required arguments are set
-    @this {Config}
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  check: function() {
-    // TODO
-    return;
-  }
-});
-/* vim:set filetype=javascript:*/
 /*global Class*/
 
 
@@ -1126,260 +152,58 @@ Utils.checkEquals = function(s1, s2) {
   Utils.checkContains(s2, s1);
 };
 /* vim:set filetype=javascript:*/
-/*jsl:import ConfigTmpl.js*/
-/*global ConfigTmpl, Class */
+/*jsl:import Utils.js*/
+/*global Ajax, Class, Chess, Utils */
 
 
 /**
-  @class Singleton configuration for jschess
+  @class A PGN reader. A class that knows how to read a PGN file and give
+  instructions to a board.
   @author mark.veltzer@gmail.com (Mark Veltzer)
 */
-var SvgConfigTmpl = Class.create(ConfigTmpl,/** @lends SvgConfigTmpl.prototype */ {
+var PgnReader = Class.create(/** @lends PgnReader.prototype */{
   /**
     creates a new instance
-    @this {SvgConfigTmpl}
-    @param {parent} $super prototype.js parent to enable to call the
-    parent constructur.
-    @return {SvgConfigTmpl} the new instance.
+    @return {PgnReader} the new instance.
     @author mark.veltzer@gmail.com (Mark Veltzer)
   */
-  initialize: function($super) {
-    $super();
-    this.add({
-      name: 'id',
-      type: 't_string',
-      required: true,
-      description: 'id where to place the board',
-      defaultValue: undefined
+  initialize: function() {
+    return;
+  },
+  /**
+    toString method so that you can get a nice printout of instances of
+    this type
+    @return {string} string representation of this instance.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  toString: function() {
+    throw 'toString for PgnReader not implemented yet';
+  },
+  /**
+    A method to read a pgn file via ajax.
+    @param {string} url url to do the GET from (same server).
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  get: function(url) {
+    //Utils.fakeUse(url);
+    // we use prototype to do HTTP GET
+    var req = new Ajax.Request(url, {
+      method: 'get',
+      onSuccess: function(transport) {
+        var response = transport.responseText;
+        //console.log('got response ' + response);
+        var chess = new Chess();
+        chess.load_pgn(response);
+        console.log(chess.history({ verbose: true }));
+      },
+      onFailure: function(transport) {
+        console.log('error in transport for url ' + url);
+        console.dir(transport);
+      }
     });
-    this.add({
-      name: 'size',
-      type: 't_number',
-      required: false,
-      description: 'size of the board',
-      defaultValue: 500
-    });
-    this.add({
-      name: 'black_color',
-      type: 't_string',
-      required: false,
-      description: 'color of the black pieces',
-      defaultValue: '#000000'
-    });
-    this.add({
-      name: 'white_color',
-      type: 't_string',
-      required: false,
-      description: 'color of the white pieces',
-      defaultValue: '#ffffff'
-    });
-    this.add({
-      name: 'black_square_color',
-      type: 't_string',
-      required: false,
-      description: 'color of the black squares',
-      defaultValue: '#819faa'
-    });
-    this.add({
-      name: 'white_square_color',
-      type: 't_string',
-      required: false,
-      description: 'color of the white squares',
-      defaultValue: '#ffffff'
-    });
-    this.add({
-      name: 'black_square_gradient',
-      type: 't_string',
-      required: false,
-      description: 'gradient for black squares',
-      defaultValue: '0-#91afba:0-#819faa:50-#819faa:100'
-    });
-    this.add({
-      name: 'white_square_gradient',
-      type: 't_string',
-      required: false,
-      description: 'gradient for white squares',
-      defaultValue: '0-#eee:0-#fff:50-#fff:100'
-    });
-    // TODO: turn this to an enum: white, black, left, right
-    this.add({
-      name: 'boardview',
-      type: 't_string',
-      required: false,
-      description: 'what board view to use',
-      defaultValue: 'white'
-    });
-    this.add({
-      name: 'move_ms',
-      type: 't_number',
-      required: false,
-      description: 'ms for moving animation',
-      defaultValue: 350
-    });
-    this.add({
-      name: 'flip_ms',
-      type: 't_number',
-      required: false,
-      description: 'how fast should flip work in ms',
-      defaultValue: 350
-    });
-    this.add({
-      name: 'pencolor',
-      type: 't_string',
-      required: false,
-      description: 'pen color for drawing the shapes',
-      defaultValue: 'black'
-    });
-    this.add({
-      name: 'gradients',
-      type: 't_boolean',
-      required: false,
-      description: 'should we use gradients?',
-      defaultValue: true
-    });
-    this.add({
-      name: 'select_color',
-      type: 't_string',
-      required: false,
-      description: 'color of selected squares',
-      defaultValue: '#ffff00'
-    });
-    this.add({
-      name: 'over_color',
-      type: 't_string',
-      required: false,
-      description: 'color of selected squares',
-      defaultValue: '#00ff00'
-    });
-    this.add({
-      name: 'do_select_click',
-      type: 't_boolean',
-      required: false,
-      description: 'should we select clicks',
-      defaultValue: false
-    });
-    this.add({
-      name: 'do_select_square',
-      type: 't_boolean',
-      required: false,
-      description: 'should we select squares',
-      defaultValue: true
-    });
-    this.add({
-      name: 'do_select_piece',
-      type: 't_boolean',
-      required: false,
-      description: 'should we select pieces',
-      defaultValue: true
-    });
-    this.add({
-      name: 'do_select_global',
-      type: 't_boolean',
-      required: false,
-      description: 'should we select pieces via the global variables',
-      defaultValue: false
-    });
-    this.add({
-      name: 'do_select_piecerec',
-      type: 't_boolean',
-      required: false,
-      description: 'should we select pieces via the global variables',
-      defaultValue: false
-    });
-    this.add({
-      name: 'do_letters',
-      type: 't_boolean',
-      required: false,
-      description: 'draw letters around the board',
-      defaultValue: true
-    });
-    this.add({
-      name: 'rec_stroke_color',
-      type: 't_string',
-      required: false,
-      description: 'rectangles stroke color',
-      defaultValue: 'black'
-    });
-    this.add({
-      name: 'rec_stroke_width',
-      type: 't_number',
-      required: false,
-      description: 'rectangles stroke width',
-      defaultValue: 0.1
-    });
-    this.add({
-      name: 'glow_width',
-      type: 't_number',
-      required: false,
-      description: 'glow width',
-      defaultValue: 7
-    });
-    this.add({
-      name: 'glow_fill',
-      type: 't_boolean',
-      required: false,
-      description: 'glow fill',
-      defaultValue: false
-    });
-    this.add({
-      name: 'glow_opacity',
-      type: 't_number',
-      required: false,
-      description: 'glow opacity',
-      defaultValue: 0.5
-    });
-    this.add({
-      name: 'glow_offsetx',
-      type: 't_number',
-      required: false,
-      description: 'glow offsetx',
-      defaultValue: 0
-    });
-    this.add({
-      name: 'glow_offsety',
-      type: 't_number',
-      required: false,
-      description: 'glow offsety',
-      defaultValue: 0
-    });
-    this.add({
-      name: 'glow_color',
-      type: 't_string',
-      required: false,
-      description: 'glow color',
-      defaultValue: 'black'
-    });
-    this.add({
-      name: 'partial',
-      type: 't_number',
-      required: false,
-      description: 'how many squares for borders',
-      defaultValue: 0.6
-    });
+    Utils.fakeUse(req);
   }
 });
-
-
-/**
-  The static singleton instance.
-  This is part of the singleton pattern.
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-SvgConfigTmpl.instance = undefined;
-
-
-/**
-  The static singleton instance.
-  This is part of the singleton pattern.
-  @return {SvgConfigTmpl} the singleton SvgConfigTmpl instance.
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-SvgConfigTmpl.getInstance = function() {
-  if (SvgConfigTmpl.instance === undefined) {
-    SvgConfigTmpl.instance = new SvgConfigTmpl();
-  }
-  return SvgConfigTmpl.instance;
-};
 /* vim:set filetype=javascript:*/
 /*jsl:import BoardPiece.js*/
 /*jsl:import BoardPosition.js*/
@@ -2081,294 +905,6 @@ SvgCreator.createPiece = function(config, pieceColor, pieceType) {
   }
   throw 'unknown piece ' + pieceType;
 };
-/* vim:set filetype=javascript:*/
-/*jsl:import Utils.js*/
-/*global Ajax, Class, Chess, Utils */
-
-
-/**
-  @class A PGN reader. A class that knows how to read a PGN file and give
-  instructions to a board.
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var PgnReader = Class.create(/** @lends PgnReader.prototype */{
-  /**
-    creates a new instance
-    @return {PgnReader} the new instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function() {
-    return;
-  },
-  /**
-    toString method so that you can get a nice printout of instances of
-    this type
-    @return {string} string representation of this instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  toString: function() {
-    throw 'toString for PgnReader not implemented yet';
-  },
-  /**
-    A method to read a pgn file via ajax.
-    @param {string} url url to do the GET from (same server).
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  get: function(url) {
-    //Utils.fakeUse(url);
-    // we use prototype to do HTTP GET
-    var req = new Ajax.Request(url, {
-      method: 'get',
-      onSuccess: function(transport) {
-        var response = transport.responseText;
-        //console.log('got response ' + response);
-        var chess = new Chess();
-        chess.load_pgn(response);
-        console.log(chess.history({ verbose: true }));
-      },
-      onFailure: function(transport) {
-        console.log('error in transport for url ' + url);
-        console.dir(transport);
-      }
-    });
-    Utils.fakeUse(req);
-  }
-});
-/* vim:set filetype=javascript:*/
-/*jsl:import Utils.js*/
-/*global Class, Utils */
-
-
-/**
-  @class represents a position on the board
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var PiecePosition = Class.create(/** @lends PiecePosition.prototype */{
-  /**
-    creates a new instance
-    @this {PiecePosition}
-    @param {number} x x co-ordinate.
-    @param {number} y y co-ordinate.
-    @return {PiecePosition} the new instance of this class.
-    The method checks if the values given to it are in the 0..7 range.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function(x, y) {
-    Utils.checkType(x, 'number');
-    Utils.checkType(y, 'number');
-    if (x < 0 || x > 7) {
-      throw 'bad value for x ' + x + ',' + typeof x;
-    }
-    if (y < 0 || y > 7) {
-      throw 'bad value for y ' + y + ',' + typeof y;
-    }
-    this.x = x;
-    this.y = y;
-  },
-  /**
-    toString method so that you can get a nice printout of
-    instances of this type
-    @this {PiecePosition}
-    @return {string} the string representation of this instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  toString: function() {
-    return 'PiecePosition: (' + this.x + ',' + this.y + ')';
-  },
-  /**
-    compare one position to another
-    @this {PiecePosition}
-    @param {PiecePosition} otherPos the position to compare to
-    @return {boolean} is this position to some other position.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  notEqual: function(otherPos) {
-    if (!(otherPos instanceof PiecePosition)) {
-      throw 'bad type passed';
-    }
-    return otherPos.x !== this.x || otherPos.y !== this.y;
-  },
-  /**
-    compare one position to another
-    @this {PiecePosition}
-    @param {PiecePosition} otherPos the position to compare to
-    @return {boolean} is this position to some other position.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  equal: function(otherPos) {
-    if (!(otherPos instanceof PiecePosition)) {
-      throw 'bad type passed';
-    }
-    return otherPos.x === this.x && otherPos.y === this.y;
-  }
-});
-/*global goog*/
-goog.provide('$');
-goog.provide('Ajax');
-goog.provide('Chess');
-goog.provide('Class');
-goog.provide('Raphael');
-goog.require('$');
-goog.require('Ajax');
-goog.require('Chess');
-goog.require('Class');
-goog.require('Raphael');
-/* vim:set filetype=javascript:*/
-/*global Class */
-
-
-/**
-  @class represents a position + graphics
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var SvgPieceData = Class.create(/** @lends SvgPieceData.prototype */{
-  /**
-    creates a new instance
-    @this {SvgPieceData}
-    @param {set} set raphael set for the piece.
-    @param {SvgPixelPosition} pixelPos position for the pieces origin.
-    This is important to be able to move it to other places
-    pixelPos is not the translation of pos to pixels!!!
-    @return {SvgPieceData} the new instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function(set, pixelPos) {
-    this.set = set;
-    this.pixelPos = pixelPos;
-    this.extra = undefined;
-  },
-  /**
-    toString method that allows you to get a nice printout for this type
-    @this {SvgPieceData}
-    @return {string} a string representation of this instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  toString: function() {
-    return [this.set, this.pixelPos, this.extra].join();
-  },
-  /**
-    ForEach method on all presentation elements
-    @this {SvgPieceData}
-    @param {function()} f function to activate on each element.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  forEach: function(f) {
-    //var that=this;
-    this.set.forEach(function(el) {
-      f(el);
-    });
-    if (this.extra !== undefined) {
-      this.extra.forEach(function(el) {
-        f(el);
-      });
-    }
-  }
-});
-/* This file is a bunch of exten definitions to keep the google
-closure compiler happy */
-function Chess() {};
-function Ajax() {};
-function Raphael() {};
-function Class() {};
-function $() {};
-/* vim:set filetype=javascript:*/
-/*global Class */
-
-
-/**
-  @class represents a piece color (white,black)
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var PieceColor = Class.create(/** @lends PieceColor.prototype */{
-  /**
-    creates a new instance
-    @this {PieceColor}
-    @param {string} color string which represents
-    the color of the piece. Must be one of 'white' or 'black'.
-    @return {PieceColor} new instance of this class.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function(color) {
-    if (!(PieceColor.colors.hasOwnProperty(color))) {
-      throw 'illegal piecetype ' + color;
-    }
-    this.color = color;
-  },
-  /**
-    toString method that allows you to get a nice printout for this type
-    @this {PieceColor}
-    @return {string} string representation of this instance.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  toString: function() {
-    return this.color;
-  },
-  /**
-    Return whether the piece is white
-    @this {PieceColor}
-    @return {boolean} boolean indicating whether the piece is white.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  isWhite: function() {
-    return this.color === 'white';
-  },
-  /**
-    Return whether the piece is black
-    @this {PieceColor}
-    @return {boolean} boolean indicating whether the piece is black.
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  isBlack: function() {
-    return this.color === 'black';
-  }
-});
-
-
-/**
-  Array of piece colors
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-PieceColor.colors = {
-  white: undefined,
-  black: undefined
-};
-/* vim:set filetype=javascript:*/
-/*global Class */
-
-
-/**
-  @class A single move in a game
-  contains the position from which the move starts,
-  the position where it ends, the piecetype and color doing the
-  moving.
-  Also potentially more things:
-  - A piece which was removed as a result of this move and its
-  position before the capture (the position is needed since the piece
-  could be in a different position than the capturing position like
-  in en passant).
-  - info about whether this was a 0-0 or 0-0-0 (all other info
-  needed for castling).
-  - info about what the piece turns to (in case the piece turns
-  into some other piece like in the case of coronation).
-  @author mark.veltzer@gmail.com (Mark Veltzer)
-*/
-var GameMove = Class.create(/** @lends GameMove.prototype */{
-  /**
-    creates a new instance
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  initialize: function() {
-    return;
-  },
-  /**
-    Debug method that allows you to get a nice printout for this type
-    @return {string} the string representation
-    @author mark.veltzer@gmail.com (Mark Veltzer)
-  */
-  toString: function() {
-    return 'no toString for type GameMove';
-  }
-});
 /* vim:set filetype=javascript:*/
 /*jsl:import SvgPieceData.js*/
 /*jsl:import SvgCreator.js*/
@@ -3250,4 +1786,1468 @@ SvgBoard.ObjRotateLeft = {
   right: 'black',
   black: 'left',
   left: 'white'
+};
+/* vim:set filetype=javascript:*/
+/*global Class */
+
+
+/**
+  @class A single move in a game
+  contains the position from which the move starts,
+  the position where it ends, the piecetype and color doing the
+  moving.
+  Also potentially more things:
+  - A piece which was removed as a result of this move and its
+  position before the capture (the position is needed since the piece
+  could be in a different position than the capturing position like
+  in en passant).
+  - info about whether this was a 0-0 or 0-0-0 (all other info
+  needed for castling).
+  - info about what the piece turns to (in case the piece turns
+  into some other piece like in the case of coronation).
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var GameMove = Class.create(/** @lends GameMove.prototype */{
+  /**
+    creates a new instance
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function() {
+    return;
+  },
+  /**
+    Debug method that allows you to get a nice printout for this type
+    @return {string} the string representation
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  toString: function() {
+    return 'no toString for type GameMove';
+  }
+});
+/* vim:set filetype=javascript:*/
+/*global Class */
+
+
+/**
+  @class represents a position + graphics
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var SvgPieceData = Class.create(/** @lends SvgPieceData.prototype */{
+  /**
+    creates a new instance
+    @this {SvgPieceData}
+    @param {set} set raphael set for the piece.
+    @param {SvgPixelPosition} pixelPos position for the pieces origin.
+    This is important to be able to move it to other places
+    pixelPos is not the translation of pos to pixels!!!
+    @return {SvgPieceData} the new instance.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function(set, pixelPos) {
+    this.set = set;
+    this.pixelPos = pixelPos;
+    this.extra = undefined;
+  },
+  /**
+    toString method that allows you to get a nice printout for this type
+    @this {SvgPieceData}
+    @return {string} a string representation of this instance.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  toString: function() {
+    return [this.set, this.pixelPos, this.extra].join();
+  },
+  /**
+    ForEach method on all presentation elements
+    @this {SvgPieceData}
+    @param {function()} f function to activate on each element.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  forEach: function(f) {
+    //var that=this;
+    this.set.forEach(function(el) {
+      f(el);
+    });
+    if (this.extra !== undefined) {
+      this.extra.forEach(function(el) {
+        f(el);
+      });
+    }
+  }
+});
+/* vim:set filetype=javascript:*/
+/*global Class */
+
+
+/**
+  @class a path + attributes two tuple object
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var SvgPathAndAttributes = Class.create(/** @lends SvgPathAndAttributes.prototype */{
+  /**
+    creates a new instance
+    @this {SvgPathAndAttributes}
+    @param {string} path string representing SVG path.
+    @param {object} attr object with attributes for said path.
+    @return {SvgPathAndAttributes} the new instance.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function(path, attr) {
+    this.path = path;
+    this.attr = attr;
+  },
+  /**
+    toString method that allows you to get a nice printout for this type
+    @this {SvgPathAndAttributes}
+    @return {string} string representation of this instance.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  toString: function() {
+    return [this.path, this.attr].join();
+  }
+});
+/* vim:set filetype=javascript:*/
+/*global Class */
+
+
+/**
+  @class A full game of chess. Contains the starting position
+  including a full set of moves of type GameMove.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var Game = Class.create(/** @lends Game.prototype */{
+  /**
+    creates a new instance of this class.
+    @return {Game} new instance of this class.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function() {
+    return;
+  },
+  /**
+    toString method that allows you to get a nice printout for this type
+    @return {string} string representation of this instance.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  toString: function() {
+    return 'no toString for type Game';
+  }
+});
+/* vim:set filetype=javascript:*/
+/*jsl:import Utils.js*/
+/*global Class */
+
+
+/**
+  @class Type safe config class
+  The config class is basically a fancy dictionary. The difference
+  between it and a dictionary is that it consults a template object
+  when setting and getting a value.
+  - When setting a value it makes sure that you are giving a name
+  of a parameter that exists in the template and that the value
+  that you gave to the parameter is correctly converted to the
+  type expected.
+  - When getting a value it makes sure you use the right name for
+  the key.
+  The idea is that the user will not be able to accidently put config
+  options which are not used and will only be able to supply the right
+  types.
+  In addition, some config options will <b>have</b> to be supplied by the user
+  (div id where to create some HTML elements is an example of this).
+  Config will also supply a method by which config options by the user
+  will override anything in the default config.
+  This class <b>should not</b> be a singleton since the user may want to put
+  two boards on the page and have each configured differently.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var Config = Class.create(/** @lends Config.prototype */{
+  /**
+    creates a new instance.
+    @this {Config}
+    @param {object} tmpl template to use.
+    @return {Config} new instance.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function(tmpl) {
+    // the dictionary holding the current config
+    this.d = {};
+    // the template to be used
+    this.tmpl = tmpl;
+  },
+  /**
+    get a value for a key.
+    @this {Config}
+    @param {anything} key key to store in the config.
+    @return {anything} the value associated with the key.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  getValue: function(key) {
+    if (this.tmpl.hasKey(key)) {
+      if (this.d[key] !== undefined) {
+        return this.d[key];
+      }
+      return this.tmpl.getDefaultValue(key);
+    }
+    throw 'request for bad key [' + key + ']';
+  },
+  /**
+    set a key to a certain value in the current configuration
+    @this {Config}
+    @param {anything} key key to store in the config.
+    @param {anything} value value to store in the config.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  setValue: function(key, value) {
+    // check that the key and value are ok.
+    this.tmpl.check(key, value);
+    this.d[key] = value;
+  },
+  /**
+    set many values at once
+    @this {Config}
+    @param {object} d dictionary of values.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  override: function(d) {
+    var x;
+    for (x in d) {
+      this.setValue(x, d[x]);
+    }
+  },
+  /**
+    check that the config is good to go
+    for instance: check that all required arguments are set
+    @this {Config}
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  check: function() {
+    // TODO
+    return;
+  }
+});
+/* vim:set filetype=javascript:*/
+/*global Class, Raphael */
+
+
+/**
+  @class A single piece description.
+  This includes: square size (assumes piece is 0,0,size,size)
+  and array of paths and attributes to draw the path
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var SvgPiece = Class.create(/** @lends SvgPiece.prototype */{
+  /**
+    creates a new instance
+    @this {SvgPiece}
+    @param {number} size of the square of the piece.
+    @return {SvgPiece} a new object of this type.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function(size) {
+    this.size = size;
+    this.paas = [];
+  },
+  /**
+    Adds a new path section to a piece description
+    @this {SvgPiece}
+    @param {PathAndAttributes} paa object to be added.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  add: function(paa) {
+    this.paas.push(paa);
+  },
+  /**
+    Create a Raphael.js set from this object
+    @this {SvgPiece}
+    @param {paper} paper Raphael.js paper to work on.
+    @param {transform} transform Raphael.js transformating for this object.
+    @return {set} the set after the transformation.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  toSet: function(paper, transform) {
+    var set = paper.set();
+    this.paas.forEach(function(paa) {
+      var orig_path = paa.path;
+      var new_path = Raphael.transformPath(orig_path, transform);
+      var el = paper.path(new_path);
+      el.attr(paa.attr);
+      //el.hide();
+      set.push(el);
+    });
+    return set;
+  }
+});
+/* vim:set filetype=javascript:*/
+/*jsl:import Utils.js*/
+/*global Class, Utils */
+
+
+/**
+  @class represents a position on the board
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var PiecePosition = Class.create(/** @lends PiecePosition.prototype */{
+  /**
+    creates a new instance
+    @this {PiecePosition}
+    @param {number} x x co-ordinate.
+    @param {number} y y co-ordinate.
+    @return {PiecePosition} the new instance of this class.
+    The method checks if the values given to it are in the 0..7 range.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function(x, y) {
+    Utils.checkType(x, 'number');
+    Utils.checkType(y, 'number');
+    if (x < 0 || x > 7) {
+      throw 'bad value for x ' + x + ',' + typeof x;
+    }
+    if (y < 0 || y > 7) {
+      throw 'bad value for y ' + y + ',' + typeof y;
+    }
+    this.x = x;
+    this.y = y;
+  },
+  /**
+    toString method so that you can get a nice printout of
+    instances of this type
+    @this {PiecePosition}
+    @return {string} the string representation of this instance.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  toString: function() {
+    return 'PiecePosition: (' + this.x + ',' + this.y + ')';
+  },
+  /**
+    compare one position to another
+    @this {PiecePosition}
+    @param {PiecePosition} otherPos the position to compare to
+    @return {boolean} is this position to some other position.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  notEqual: function(otherPos) {
+    if (!(otherPos instanceof PiecePosition)) {
+      throw 'bad type passed';
+    }
+    return otherPos.x !== this.x || otherPos.y !== this.y;
+  },
+  /**
+    compare one position to another
+    @this {PiecePosition}
+    @param {PiecePosition} otherPos the position to compare to
+    @return {boolean} is this position to some other position.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  equal: function(otherPos) {
+    if (!(otherPos instanceof PiecePosition)) {
+      throw 'bad type passed';
+    }
+    return otherPos.x === this.x && otherPos.y === this.y;
+  }
+});
+/* vim:set filetype=javascript:*/
+/*global Class */
+
+
+/**
+  @class represents a position on the screen (in pixels)
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var SvgPixelPosition = Class.create(/** @lends SvgPixelPosition.prototype */{
+  /**
+    creates a new instance
+    @this {SvgPixelPosition}
+    @param {number} x x co-ordinate.
+    @param {number} y y co-ordinate.
+    @return {SvgPixelPosition} the new instance.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function(x, y) {
+    /*
+    if(x<0) {
+      throw 'bad value for x '+x+','+typeof(x);
+    }
+    if(y<0) {
+      throw 'bad value for y '+y+','+typeof(y);
+    }
+    */
+    this.x = x;
+    this.y = y;
+  },
+  /**
+    toString method so that you can get a nice printout of instances
+    of this type
+    @this {SvgPixelPosition}
+    @return {string} string representation of this object.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  toString: function() {
+    return '(' + this.x + ',' + this.y + ')';
+  }
+});
+/* vim:set filetype=javascript:*/
+/*jsl:import ConfigTmpl.js*/
+/*global ConfigTmpl, Class */
+
+
+/**
+  @class Singleton configuration for jschess
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var SvgConfigTmpl = Class.create(ConfigTmpl,/** @lends SvgConfigTmpl.prototype */ {
+  /**
+    creates a new instance
+    @this {SvgConfigTmpl}
+    @param {parent} $super prototype.js parent to enable to call the
+    parent constructur.
+    @return {SvgConfigTmpl} the new instance.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function($super) {
+    $super();
+    this.add({
+      name: 'id',
+      type: 't_string',
+      required: true,
+      description: 'id where to place the board',
+      defaultValue: undefined
+    });
+    this.add({
+      name: 'size',
+      type: 't_number',
+      required: false,
+      description: 'size of the board',
+      defaultValue: 500
+    });
+    this.add({
+      name: 'black_color',
+      type: 't_string',
+      required: false,
+      description: 'color of the black pieces',
+      defaultValue: '#000000'
+    });
+    this.add({
+      name: 'white_color',
+      type: 't_string',
+      required: false,
+      description: 'color of the white pieces',
+      defaultValue: '#ffffff'
+    });
+    this.add({
+      name: 'black_square_color',
+      type: 't_string',
+      required: false,
+      description: 'color of the black squares',
+      defaultValue: '#819faa'
+    });
+    this.add({
+      name: 'white_square_color',
+      type: 't_string',
+      required: false,
+      description: 'color of the white squares',
+      defaultValue: '#ffffff'
+    });
+    this.add({
+      name: 'black_square_gradient',
+      type: 't_string',
+      required: false,
+      description: 'gradient for black squares',
+      defaultValue: '0-#91afba:0-#819faa:50-#819faa:100'
+    });
+    this.add({
+      name: 'white_square_gradient',
+      type: 't_string',
+      required: false,
+      description: 'gradient for white squares',
+      defaultValue: '0-#eee:0-#fff:50-#fff:100'
+    });
+    // TODO: turn this to an enum: white, black, left, right
+    this.add({
+      name: 'boardview',
+      type: 't_string',
+      required: false,
+      description: 'what board view to use',
+      defaultValue: 'white'
+    });
+    this.add({
+      name: 'move_ms',
+      type: 't_number',
+      required: false,
+      description: 'ms for moving animation',
+      defaultValue: 350
+    });
+    this.add({
+      name: 'flip_ms',
+      type: 't_number',
+      required: false,
+      description: 'how fast should flip work in ms',
+      defaultValue: 350
+    });
+    this.add({
+      name: 'pencolor',
+      type: 't_string',
+      required: false,
+      description: 'pen color for drawing the shapes',
+      defaultValue: 'black'
+    });
+    this.add({
+      name: 'gradients',
+      type: 't_boolean',
+      required: false,
+      description: 'should we use gradients?',
+      defaultValue: true
+    });
+    this.add({
+      name: 'select_color',
+      type: 't_string',
+      required: false,
+      description: 'color of selected squares',
+      defaultValue: '#ffff00'
+    });
+    this.add({
+      name: 'over_color',
+      type: 't_string',
+      required: false,
+      description: 'color of selected squares',
+      defaultValue: '#00ff00'
+    });
+    this.add({
+      name: 'do_select_click',
+      type: 't_boolean',
+      required: false,
+      description: 'should we select clicks',
+      defaultValue: false
+    });
+    this.add({
+      name: 'do_select_square',
+      type: 't_boolean',
+      required: false,
+      description: 'should we select squares',
+      defaultValue: true
+    });
+    this.add({
+      name: 'do_select_piece',
+      type: 't_boolean',
+      required: false,
+      description: 'should we select pieces',
+      defaultValue: true
+    });
+    this.add({
+      name: 'do_select_global',
+      type: 't_boolean',
+      required: false,
+      description: 'should we select pieces via the global variables',
+      defaultValue: false
+    });
+    this.add({
+      name: 'do_select_piecerec',
+      type: 't_boolean',
+      required: false,
+      description: 'should we select pieces via the global variables',
+      defaultValue: false
+    });
+    this.add({
+      name: 'do_letters',
+      type: 't_boolean',
+      required: false,
+      description: 'draw letters around the board',
+      defaultValue: true
+    });
+    this.add({
+      name: 'rec_stroke_color',
+      type: 't_string',
+      required: false,
+      description: 'rectangles stroke color',
+      defaultValue: 'black'
+    });
+    this.add({
+      name: 'rec_stroke_width',
+      type: 't_number',
+      required: false,
+      description: 'rectangles stroke width',
+      defaultValue: 0.1
+    });
+    this.add({
+      name: 'glow_width',
+      type: 't_number',
+      required: false,
+      description: 'glow width',
+      defaultValue: 7
+    });
+    this.add({
+      name: 'glow_fill',
+      type: 't_boolean',
+      required: false,
+      description: 'glow fill',
+      defaultValue: false
+    });
+    this.add({
+      name: 'glow_opacity',
+      type: 't_number',
+      required: false,
+      description: 'glow opacity',
+      defaultValue: 0.5
+    });
+    this.add({
+      name: 'glow_offsetx',
+      type: 't_number',
+      required: false,
+      description: 'glow offsetx',
+      defaultValue: 0
+    });
+    this.add({
+      name: 'glow_offsety',
+      type: 't_number',
+      required: false,
+      description: 'glow offsety',
+      defaultValue: 0
+    });
+    this.add({
+      name: 'glow_color',
+      type: 't_string',
+      required: false,
+      description: 'glow color',
+      defaultValue: 'black'
+    });
+    this.add({
+      name: 'partial',
+      type: 't_number',
+      required: false,
+      description: 'how many squares for borders',
+      defaultValue: 0.6
+    });
+  }
+});
+
+
+/**
+  The static singleton instance.
+  This is part of the singleton pattern.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+SvgConfigTmpl.instance = undefined;
+
+
+/**
+  The static singleton instance.
+  This is part of the singleton pattern.
+  @return {SvgConfigTmpl} the singleton SvgConfigTmpl instance.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+SvgConfigTmpl.getInstance = function() {
+  if (SvgConfigTmpl.instance === undefined) {
+    SvgConfigTmpl.instance = new SvgConfigTmpl();
+  }
+  return SvgConfigTmpl.instance;
+};
+/* vim:set filetype=javascript:*/
+/*jsl:import Utils.js*/
+/*global Class, Utils*/
+
+
+/**
+  @class Forward/Backwards controls.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var SvgControls = Class.create(/** @lends SvgControls.prototype */{
+  /**
+    creates a new instance
+    @param {Config} config configuration for this instance.
+    @return {SvgControls} the new instance.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function(config) {
+    Utils.pass(config);
+  }
+});
+/*global goog*/
+goog.provide('$');
+goog.provide('Ajax');
+goog.provide('Chess');
+goog.provide('Class');
+goog.provide('Raphael');
+goog.require('$');
+goog.require('Ajax');
+goog.require('Chess');
+goog.require('Class');
+goog.require('Raphael');
+/* vim:set filetype=javascript:*/
+/*global Class */
+
+
+/**
+  @class represents a piece on the board: color, type The instance also has
+  a data field that could be used for private data attached to the piece.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var BoardPiece = Class.create(/** @lends BoardPiece.prototype */{
+  /**
+    constructs a new object.
+    @this {BoardPiece}
+    @param {string} color color of this piece (black/white).
+    @param {string} type type of this piece
+    (rook/knight/bishop/queen/king/pawn).
+    @return {BoardPiece} the new object created.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function(color, type) {
+    this.color = color;
+    this.type = type;
+    this.data = undefined;
+  },
+  /**
+    toString method that allows you to get a nice printout for this type
+    @this {BoardPiece}
+    @return {string} string representation of this object.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  toString: function() {
+    return 'BoardPiece: ' + [this.color, this.type, this.data].join();
+  },
+  /**
+    Method to set secret data for this piece
+    @this {BoardPiece}
+    @param {anything} data the extra data to hold for this piece.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  setData: function(data) {
+    this.data = data;
+  },
+  /**
+    Method to get secret data for this piece
+    @this {BoardPiece}
+    @return {anything} the secret data associated with this piece.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  getData: function() {
+    return this.data;
+  },
+  /**
+    Method to unset secret data for this piece
+    @this {BoardPiece}
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  unsetData: function() {
+    this.data = undefined;
+  }
+});
+/* vim:set filetype=javascript:*/
+/*global Class */
+
+
+/**
+  @class represents a piece color (white,black)
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var PieceColor = Class.create(/** @lends PieceColor.prototype */{
+  /**
+    creates a new instance
+    @this {PieceColor}
+    @param {string} color string which represents
+    the color of the piece. Must be one of 'white' or 'black'.
+    @return {PieceColor} new instance of this class.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function(color) {
+    if (!(PieceColor.colors.hasOwnProperty(color))) {
+      throw 'illegal piecetype ' + color;
+    }
+    this.color = color;
+  },
+  /**
+    toString method that allows you to get a nice printout for this type
+    @this {PieceColor}
+    @return {string} string representation of this instance.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  toString: function() {
+    return this.color;
+  },
+  /**
+    Return whether the piece is white
+    @this {PieceColor}
+    @return {boolean} boolean indicating whether the piece is white.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  isWhite: function() {
+    return this.color === 'white';
+  },
+  /**
+    Return whether the piece is black
+    @this {PieceColor}
+    @return {boolean} boolean indicating whether the piece is black.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  isBlack: function() {
+    return this.color === 'black';
+  }
+});
+
+
+/**
+  Array of piece colors
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+PieceColor.colors = {
+  white: undefined,
+  black: undefined
+};
+/* vim:set filetype=javascript:*/
+/*jsl:import BoardPiece.js*/
+/*jsl:import PieceColor.js*/
+/*jsl:import PieceType.js*/
+/*jsl:import PiecePosition.js*/
+/*global Class, BoardPiece, PieceColor, PieceType, PiecePosition */
+
+
+/**
+  @class represents a full position of the board
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var BoardPosition = Class.create(/** @lends BoardPosition.prototype */{
+  /**
+    constructs a new object
+    @this {BoardPosition}
+    @return {BoardPosition} a new object of this type.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function() {
+    this.pieces = [];
+  },
+  /**
+    toString method that allows you to get a nice printout for this type
+    @this {BoardPosition}
+    @return {string} a string representation of this object.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  toString: function() {
+    return this.pieces.join();
+  },
+  /**
+    Add a piece to the position
+    @this {BoardPosition}
+    @param {string} color the color of the piece (black/white).
+    @param {string} type the type of the piece
+    (rook/knight/bishop/queen/king/pawn).
+    @param {number} x the x position of the piece [0..8).
+    @param {number} y the y position of the piece [0..8).
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  addPiece: function(color, type, x, y) {
+    var boardPiece = new BoardPiece(new PieceColor(color), new PieceType(type));
+    var piecePosition = new PiecePosition(x, y);
+    this.pieces.push([boardPiece, piecePosition]);
+  },
+  /**
+    Run a function for each piece in this position
+    @this {BoardPosition}
+    @param {function()} f function to run getting each piece in turn.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  forEachPiece: function(f) {
+    this.pieces.forEach(function(pieceAndPos) {
+      var boardPiece = pieceAndPos[0];
+      var position = pieceAndPos[1];
+      f(boardPiece, position);
+    });
+  }
+});
+
+
+/**
+  Static method that returns a starting position in standard chess.
+  @return {BoardPosition} A standard chess starting position.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+BoardPosition.startPos = function() {
+  /*
+  var newPos=new BoardPosition();
+  newPos.addPiece('white','rook',0,0);
+  newPos.addPiece('white','knight',1,0);
+  newPos.addPiece('white','bishop',2,0);
+  newPos.addPiece('white','queen',3,0);
+  newPos.addPiece('white','king',4,0);
+  newPos.addPiece('white','bishop',5,0);
+  newPos.addPiece('white','knight',6,0);
+  newPos.addPiece('white','rook',7,0);
+  newPos.addPiece('white','pawn',0,1);
+  newPos.addPiece('white','pawn',1,1);
+  newPos.addPiece('white','pawn',2,1);
+  newPos.addPiece('white','pawn',3,1);
+  newPos.addPiece('white','pawn',4,1);
+  newPos.addPiece('white','pawn',5,1);
+  newPos.addPiece('white','pawn',6,1);
+  newPos.addPiece('white','pawn',7,1);
+
+  newPos.addPiece('black','rook',0,7);
+  newPos.addPiece('black','knight',1,7);
+  newPos.addPiece('black','bishop',2,7);
+  newPos.addPiece('black','queen',3,7);
+  newPos.addPiece('black','king',4,7);
+  newPos.addPiece('black','bishop',5,7);
+  newPos.addPiece('black','knight',6,7);
+  newPos.addPiece('black','rook',7,7);
+  newPos.addPiece('black','pawn',0,6);
+  newPos.addPiece('black','pawn',1,6);
+  newPos.addPiece('black','pawn',2,6);
+  newPos.addPiece('black','pawn',3,6);
+  newPos.addPiece('black','pawn',4,6);
+  newPos.addPiece('black','pawn',5,6);
+  newPos.addPiece('black','pawn',6,6);
+  newPos.addPiece('black','pawn',7,6);
+  return newPos;
+  */
+  return BoardPosition.setupFEN(
+      'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+  );
+};
+
+
+/**
+  Setup a position according to FEN notation.
+  See Forsyth-Edwards Notation in wikipedia for more details.
+  Example of start position is:
+  'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+  @param {string} fen a string describing a chess board position in FEN
+  notation.
+  @return {BoardPosition} A position object corresponding to the FEN
+  notation given.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+  TODO
+  - add more sanity tests (regexp) for the whole input.
+  - parse the 5 other blocks after the position itself
+  (what do I do with that ?!?).
+*/
+BoardPosition.setupFEN = function(fen) {
+  var irank, iletter, rank, letter;
+  var blocks = fen.split(' ');
+  if (blocks.length !== 6) {
+    throw 'parse error - number of blocks is not 6';
+  }
+  var ranks = blocks[0].split('/');
+  if (ranks.length !== 8) {
+    throw 'parse error - number of ranks is not 8';
+  }
+  var newPos = new BoardPosition();
+  for (irank = 7; irank >= 0; irank--) {
+    rank = ranks[7 - irank];
+    for (iletter = 0; iletter < rank.length; iletter++) {
+      letter = rank[iletter];
+      switch (letter) {
+        case 'r':
+          newPos.addPiece('black', 'rook', iletter, irank);
+          break;
+        case 'R':
+          newPos.addPiece('white', 'rook', iletter, irank);
+          break;
+        case 'n':
+          newPos.addPiece('black', 'knight', iletter, irank);
+          break;
+        case 'N':
+          newPos.addPiece('white', 'knight', iletter, irank);
+          break;
+        case 'b':
+          newPos.addPiece('black', 'bishop', iletter, irank);
+          break;
+        case 'B':
+          newPos.addPiece('white', 'bishop', iletter, irank);
+          break;
+        case 'q':
+          newPos.addPiece('black', 'queen', iletter, irank);
+          break;
+        case 'Q':
+          newPos.addPiece('white', 'queen', iletter, irank);
+          break;
+        case 'k':
+          newPos.addPiece('black', 'king', iletter, irank);
+          break;
+        case 'K':
+          newPos.addPiece('white', 'king', iletter, irank);
+          break;
+        case 'p':
+          newPos.addPiece('black', 'pawn', iletter, irank);
+          break;
+        case 'P':
+          newPos.addPiece('white', 'pawn', iletter, irank);
+          break;
+        default:
+          iletter += Number(letter) - 1;
+          break;
+      }
+    }
+  }
+  return newPos;
+};
+/* vim:set filetype=javascript:*/
+/*jsl:import Utils.js*/
+/*global Utils, Class */
+
+
+/**
+  @class Type safe config class
+  This is a configuration template, it has, for each configuration key,
+  the following:
+  - the key itself (string).
+  - the type of the value for that key.
+  - the default value for the key (of the same type).
+  - an optional validation function.
+  - is this option required
+  - description of the option
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var ConfigTmpl = Class.create(/** @lends ConfigTmpl.prototype */{
+  /**
+    create a new instance of this class.
+    @this {ConfigTmpl}
+    @return {ConfigTmpl} a new instance of this class.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function() {
+    // the dictionary holding the current config
+    this.tuples = {};
+    this.tuplist = [];
+  },
+  /**
+    add another option to this template
+    @this {ConfigTmpl}
+    @param {object} s config option with all needed properties.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  add: function(s) {
+    Utils.checkEquals(s, ConfigTmpl.fullSet);
+    if (!(ConfigTmpl.types.hasOwnProperty(s.type))) {
+      throw 'bad type [' + s.type + ']';
+    }
+    if (this.tuples.hasOwnProperty(s.name)) {
+      throw 'repeat of key [' + s.name + ']';
+    }
+    this.tuples[s.name] = s;
+    this.tuplist.push(s);
+  },
+  /**
+    check that a key,value combo is ok
+    This method will throw an exception if it finds anything wrong.
+    @this {ConfigTmpl}
+    @param {string} key key to check.
+    @param {anything} value value to check.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  check: function(key, value) {
+    if (!(this.tuples.hasOwnProperty(key))) {
+      throw 'wrong key [' + key + ']';
+    }
+    var type_to_check = this.tuples[key].type;
+    var our_type = ConfigTmpl.types[type_to_check];
+    Utils.checkType(value, our_type);
+  },
+  /**
+    return whether the template has a key
+    @this {ConfigTmpl}
+    @param {string} key the key to check.
+    @return {boolean} is the key part of this config template.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  hasKey: function(key) {
+    return this.tuples.hasOwnProperty(key);
+  },
+  /**
+    return the default value for a key
+    @this {ConfigTmpl}
+    @param {string} key the key to fetch the value for.
+    @return {anything} the default value for the given key.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  getDefaultValue: function(key) {
+    return this.tuples[key].defaultValue;
+  },
+  /**
+    show HTML that lists all config options for the current template
+    @this {ConfigTmpl}
+    @return {string} HTML representation of this config template.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  getHTML: function() {
+    var shtml = '';
+    shtml += '<table border=\'1\'>';
+    shtml += '<tr>';
+    shtml += '<td>name</td>';
+    shtml += '<td>type</td>';
+    shtml += '<td>required</td>';
+    shtml += '<td>description</td>';
+    shtml += '<td>defaultValue</td>';
+    shtml += '</tr>';
+    this.tuplist.forEach(function(e) {
+      shtml += '<tr>';
+      shtml += '<td>' + e.name + '</td>';
+      shtml += '<td>' + e.type + '</td>';
+      shtml += '<td>' + e.required + '</td>';
+      shtml += '<td>' + e.description + '</td>';
+      shtml += '<td>' + e.defaultValue + '</td>';
+      shtml += '</tr>';
+    });
+    shtml += '</table>';
+    return shtml;
+  }
+});
+
+
+/**
+  All needed properties for each config option.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+ConfigTmpl.fullSet = {
+  name: undefined,
+  type: undefined,
+  required: undefined,
+  description: undefined,
+  defaultValue: undefined
+};
+
+
+/**
+  All allowed types for config options.
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+ConfigTmpl.types = {
+  t_string: 'string',
+  t_number: 'number',
+  t_boolean: 'boolean'
+};
+/* vim:set filetype=javascript:*/
+/*global Class, Raphael*/
+
+
+/**
+  @class Wrapper for Raphael.js set
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var WSet = Class.create(/** @lends WSet.prototype */{
+  /**
+    @this {WSet}
+    @param {set} set the raphael set that this wraps.
+    @param {wrapper} wrapper the raphael wrapper (with paper and all).
+    @return {WSet} a new instance of this class.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function(set, wrapper) {
+    this.set = set;
+    this.wrapper = wrapper;
+  },
+  /**
+    wrapper for the Raphael.js method of the same name.
+    Pass anything you want to raphael.
+    @this {WSet}
+    @return {anything} anything that Raphael.js returns from this method.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  push: function() {
+    var m = this.set.push;
+    var r = m.apply(this.set, arguments);
+    return r;
+  },
+  /**
+    wrapper for the Raphael.js method of the same name.
+    Pass anything you want to raphael.
+    @this {WSet}
+    @return {anything} anything that Raphael.js returns from this method.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  remove: function() {
+    var m = this.set.remove;
+    var r = m.apply(this.set, arguments);
+    return r;
+  },
+  /**
+    wrapper for the Raphael.js method of the same name.
+    Pass anything you want to raphael.
+    @this {WSet}
+    @return {anything} anything that Raphael.js returns from this method.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  forEach: function() {
+    var m = this.set.forEach;
+    var r = m.apply(this.set, arguments);
+    return r;
+  },
+  /**
+    make a set glow
+    @this {WSet}
+    @param {object} glow_obj parameters to pass to the Raphael.js glow method.
+    @return {set} the set of glow objects.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  glow: function(glow_obj) {
+    var nset = this.wrapper.set();
+    this.forEach(function(e) {
+      nset.push(e.glow(glow_obj));
+    },undefined);
+    return nset;
+  },
+  /**
+    setup events for this set
+    @this {WSet}
+    @param {function()} f callback. Callback should receive the type of the
+      event.
+    @param {object} names of events to register.
+    supported are: click, mouseover, mouseout, mousemove, mouseup,
+    mousedown.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  eventRegister: function(f, names) {
+    var that = this;
+    names.forEach(function(eventName) {
+      that.forEach(function(e) {
+        switch (eventName) {
+          case 'click':
+            e.click(function() {
+              f(eventName);
+            });
+            break;
+          case 'mouseover':
+            e.mouseover(function() {
+              f(eventName);
+            });
+            break;
+          case 'mouseout':
+            e.mouseout(function() {
+              f(eventName);
+            });
+            break;
+          case 'mousemove':
+            e.mousemove(function() {
+              f(eventName);
+            });
+            break;
+          case 'mouseup':
+            e.mouseup(function() {
+              f(eventName);
+            });
+            break;
+          case 'mousedown':
+            e.mousedown(function() {
+              f(eventName);
+            });
+            break;
+          default:
+            throw 'unknown event name ' + eventName;
+        }
+      });
+    });
+  }
+});
+
+
+/**
+  @class Wrapper for Raphael.js
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var WRaphael = Class.create(/** @lends WRaphael.prototype */{
+  /**
+    creates a new instance.
+    Pass anything you want to raphael.
+    @this {WRaphael}
+    @return {WRaphael} a new instance of this class.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function() {
+    this.r = Raphael.apply(undefined, arguments);
+  },
+  /**
+    create a rectangle on the paper.
+    Pass anything you want to raphael.
+    @this {WRaphael}
+    @return {rect} whatever Raphael returns.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  rect: function() {
+    var m = this.r.rect;
+    var r = m.apply(this.r, arguments);
+    return r;
+  },
+  /**
+    create a set on the paper.
+    Pass anything you want to raphael.
+    @this {WRaphael}
+    @return {set} our wrapper for Raphael sets.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  set: function() {
+    var m = this.r.set;
+    var r = m.apply(this.r, arguments);
+    return new WSet(r, this);
+  },
+  /**
+    create path on the paper.
+    Pass anything you want to raphael.
+    @this {WRaphael}
+    @return {path} whatever Raphael returns.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  path: function() {
+    var m = this.r.path;
+    var r = m.apply(this.r, arguments);
+    return r;
+  },
+  /**
+    create text on the paper.
+    Pass anything you want to raphael.
+    @this {WRaphael}
+    @return {text} whatever Raphael returns.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  text: function() {
+    var m = this.r.text;
+    var r = m.apply(this.r, arguments);
+    return r;
+  }
+});
+/* This file is a bunch of exten definitions to keep the google
+closure compiler happy */
+function Chess() {};
+function Ajax() {};
+function Raphael() {};
+function Class() {};
+function $() {};
+/* vim:set filetype=javascript:*/
+/*global Element, Class, $ */
+
+
+/**
+  @class A set of controls to control the game of chess.
+  Includes 6 buttons: goto_start, prev_move, prev_play, next_play, next_move,
+  goto_end
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var Controls = Class.create(/** @lends Controls.prototype */{
+  /**
+    creates a new instance of this class.
+    @this {Controls}
+    @param {object} dict A hash with initial values.
+    @return {Controls} new instance of this class.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function(dict) {
+    this.id = dict.id;
+    this.b_goto_start = new Element('button').update('goto_start');
+    this.b_prev_move = new Element('button').update('prev_move');
+    this.b_prev_play = new Element('button').update('prev_play');
+    this.b_next_play = new Element('button').update('next_play');
+    this.b_next_move = new Element('button').update('next_move');
+    this.b_goto_end = new Element('button').update('goto_end');
+    $(this.id).appendChild(this.b_goto_start);
+    $(this.id).appendChild(this.b_prev_move);
+    $(this.id).appendChild(this.b_prev_play);
+    $(this.id).appendChild(this.b_next_play);
+    $(this.id).appendChild(this.b_next_move);
+    $(this.id).appendChild(this.b_goto_end);
+  },
+  /**
+    toString method that allows you to get a nice printout for this type
+    @this {Controls}
+    @return {string} string representation of this instance.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  toString: function() {
+    return 'no toString for type Controls';
+  }
+});
+/* vim:set filetype=javascript:*/
+/*global Class*/
+
+
+/**
+  @class represents a piece type (rook,knight,bishop,queen,king,pawn)
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+var PieceType = Class.create(/** @lends PieceType.prototype */{
+  /**
+    creates a new instance
+    @this {PieceType}
+    @param {string} type the type of the piece.
+    @return {PieceType} the new instance.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  initialize: function(type) {
+    if (!(PieceType.types.hasOwnProperty(type))) {
+      throw 'illegal piecetype ' + type;
+    }
+    this.type = type;
+  },
+  /**
+    toString method that allows you to get a nice printout for this type
+    @this {PieceType}
+    @return {string} string representation of this instance.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  toString: function() {
+    return this.type;
+  },
+  /**
+    Return whether the piece is a rook
+    @this {PieceType}
+    @return {boolean} is this piece a rook.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  isRook: function() {
+    return this.type === 'rook';
+  },
+  /**
+    Return whether the piece is a knight
+    @this {PieceType}
+    @return {boolean} is this piece a knight.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  isKnight: function() {
+    return this.type === 'knight';
+  },
+  /**
+    Return whether the piece is a bishop
+    @this {PieceType}
+    @return {boolean} is this piece a bishop.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  isBishop: function() {
+    return this.type === 'bishop';
+  },
+  /**
+    Return whether the piece is a queen
+    @this {PieceType}
+    @return {boolean} is this piece a queen.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  isQueen: function() {
+    return this.type === 'queen';
+  },
+  /**
+    Return whether the piece is a king
+    @this {PieceType}
+    @return {boolean} is this piece a king.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  isKing: function() {
+    return this.type === 'king';
+  },
+  /**
+    Return whether the piece is a pawn
+    @this {PieceType}
+    @return {boolean} is this piece a pawn.
+    @author mark.veltzer@gmail.com (Mark Veltzer)
+  */
+  isPawn: function() {
+    return this.type === 'pawn';
+  }
+});
+
+
+/**
+  Array of piece types
+  @author mark.veltzer@gmail.com (Mark Veltzer)
+*/
+PieceType.types = {
+  rook: undefined,
+  knight: undefined,
+  bishop: undefined,
+  queen: undefined,
+  king: undefined,
+  pawn: undefined
 };

@@ -10,7 +10,7 @@ packages=[
     # for yui-compressor(1)
     "yui-compressor",
     # for jsdoc(1)
-    "jsdoc-toolkit",
+    # "jsdoc-toolkit", # gone
     # for gjslint(1)
     #"closure-linter",
     # for tidy(1)
