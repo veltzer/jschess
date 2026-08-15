@@ -35,7 +35,10 @@ JS_TEMPLATES:=$(shell find templates/out/src -type f -and -name "*.mako")
 # prerequisites and `zip` was handed no files, exiting 12. Each template
 # templates/out/src/X.js.mako renders to out/src/X.js, so strip the leading
 # templates/ and the trailing .mako.
-JS_SOURCES:=$(patsubst templates/%,%,$(basename $(JS_TEMPLATES)))
+# $(sort) also dedupes and, unlike the old find(1) output, gives a stable
+# order - $(JSFULL) is a plain `cat` of this list, so the order decides the
+# bytes of the published docs/jschess.js.
+JS_SOURCES:=$(sort $(patsubst templates/%,%,$(basename $(JS_TEMPLATES))))
 
 SOURCES_HTML_MAKO:=$(shell find templates/docs -type f -and -name "*.mako")
 SOURCES_HTML:=$(shell pymakehelper remove_folders $(SOURCES_HTML_MAKO))
@@ -75,6 +78,20 @@ endif # DO_CHECKHTML
 # do not touch this rule
 all: $(ALL)
 	@true
+
+# Render out/src/X.js from templates/out/src/X.js.mako.
+#
+# pydmt also knows how to render these (FeatureMako), but BuilderMake declares
+# only the Makefile as its source, so pydmt has no ordering constraint between
+# the two and is free to run make first - which is what happens in CI, leaving
+# every out/src/*.js missing and make stopping with "No rule to make target".
+# Owning the rule here makes the Makefile self-sufficient in either order.
+# PYTHONPATH=. so the templates' `import config.personal` resolves; pydmt sets
+# this up itself, but this rule has to stand on its own.
+out/src/%.js: templates/out/src/%.js.mako
+	$(info doing [$@])
+	$(Q)mkdir -p $(dir $@)
+	$(Q)PYTHONPATH=. mako-render $< > $@
 
 $(JSZIP): $(JS_SOURCES)
 	$(info doing [$@])
