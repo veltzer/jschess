@@ -29,7 +29,13 @@ JSPACKFULL:=$(DOCS)/$(PROJECT_NAME).pack.js
 JSPACKMIN:=$(DOCS)/$(PROJECT_NAME).pack.min.js
 JSZIP:=out/$(PROJECT_NAME).zip
 JS_TEMPLATES:=$(shell find templates/out/src -type f -and -name "*.mako")
-JS_SOURCES:=$(shell find out/src -type f -and -name "*.js")
+# Derived from the templates, not from a find(1) over out/src. out/ is
+# generated (and gitignored), so on a clean checkout the old find matched
+# nothing at parse time: JS_SOURCES came out empty, $(JSZIP) lost all its
+# prerequisites and `zip` was handed no files, exiting 12. Each template
+# templates/out/src/X.js.mako renders to out/src/X.js, so strip the leading
+# templates/ and the trailing .mako.
+JS_SOURCES:=$(patsubst templates/%,%,$(basename $(JS_TEMPLATES)))
 
 SOURCES_HTML_MAKO:=$(shell find templates/docs -type f -and -name "*.mako")
 SOURCES_HTML:=$(shell pymakehelper remove_folders $(SOURCES_HTML_MAKO))
