@@ -1,17 +1,16 @@
+{% set project = load_lua(path="config/project.lua") -%}
+{% set personal = load_lua(path="config/personal.lua") -%}
+{% set jschess = load_lua(path="config/jschess.lua") -%}
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>jschess - Showing controls</title>
+		<title>{{ project.NAME }} - Showing controls</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 
-		<script type="text/javascript" src="jschess.pack.min.js"></script>
+		{{ jschess.JSCHESS_JS_SECTION | safe }}
 
-		        <!-- highlight.js -->
-        <script type="text/javascript" src="third_party/highlight.min.js"></script>
-        <link href="third_party/highlight.min.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
-    
+		{{ jschess.JSCHESS_JS_SECTION_HIGHLIGHT | safe }}
 
 		<script type="text/javascript">
 			document.observe('dom:loaded', function() {
@@ -38,8 +37,8 @@
 		</p>
 		<div id="myid"></div>
 		<p>
-			Copyright Mark Veltzer © 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026
-			<a href="mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
+			Copyright {{ personal.FULLNAME }} © {{ copyright_years() }}
+			<a href="{{ personal.EMAIL }}">{{ personal.EMAIL }}</a>
 		</p>
 	</body>
 </html>

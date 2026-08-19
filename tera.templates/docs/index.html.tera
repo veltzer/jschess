@@ -1,45 +1,18 @@
+{% set project = load_lua(path="config/project.lua") -%}
+{% set personal = load_lua(path="config/personal.lua") -%}
+{% set jschess = load_lua(path="config/jschess.lua") -%}
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>jschess - main page</title>
+		<title>{{ project.NAME }} - main page</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
-		<meta name="Description" content="jschess is a JavaScript chess board written in pure JavaScript.
-It allows yo to create a chess board, have it show games in PGN
-notation from a server, moves pieces around, set up positions
-and more.
+		<meta name="Description" content="{{ project.DESCRIPTION_LONG }}"/>
+		<meta name="Keywords" content="{{ personal.FULLNAME }}, {{ personal.SLUG }}, {{ project.NAME }}, {{ project.KEYWORDS | join(sep=", ") }}"/>
 
-Technologies used
------------------
-* Prototype javascript library at http://prototypejs.org.
-* Raphael javascript library at http://raphaeljs.com.
-* chess.java javascript library at https://github.com/jhlywa/chess.js.
+		{{ jschess.JSCHESS_JS_SECTION | safe }}
 
-What makes jschess different?
------------------------------
-* Pure javascript.
-* No images - totally scalable graphics.
-* You can have your board at any size you want (because of scalable graphics).
-* As a result of being pure javascript totally controllable programatically.
-* Looks best.
-* Sits on top of good infrastructure (prototype.js,raphael.js,chess.js).
-
-Monetary contribution
----------------------
-If you'd like to see a feature added to jschess or would just like to show
-your appreciation you are welcome to contribute to it's development on it's website.
-
-I am ready to work with any chess organization wishing to incorporate jschess
-into their infrastructre and am already working with two such organizations..."/>
-		<meta name="Keywords" content="Mark Veltzer, veltzer, jschess, javascript, chess, board, chessboard"/>
-
-		<script type="text/javascript" src="jschess.pack.min.js"></script>
-
-		        <!-- highlight.js -->
-        <script type="text/javascript" src="third_party/highlight.min.js"></script>
-        <link href="third_party/highlight.min.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
-    
+		{{ jschess.JSCHESS_JS_SECTION_HIGHLIGHT | safe }}
 
 		<script type="text/javascript">
 			document.observe('dom:loaded', function() {
@@ -105,9 +78,9 @@ into their infrastructre and am already working with two such organizations..."/
 		</script>
 	</head>
 	<body>
-		<h1>Welcome to the <i>jschess</i> web site</h1>
+		<h1>Welcome to the <i>{{ project.NAME }}</i> web site</h1>
 		<p>
-			<b>jschess</b> is a pure JavaScript library that enables:
+			<b>{{ project.NAME }}</b> is a pure JavaScript library that enables:
 		</p>
 		<ul>
 			<li>Showing chess games in <a href="http://en.wikipedia.org/wiki/Portable_Game_Notation">PGN</a> format (hardcoded or coming from a server)</li>
@@ -119,7 +92,7 @@ into their infrastructre and am already working with two such organizations..."/
 			<li>Other things I did not think about</li>
 		</ul>
 		<p>
-			What makes <b>jschess</b> special:
+			What makes <b>{{ project.NAME }}</b> special:
 		</p>
 		<ul>
 			<li>Pure object oriented javascript</li>
@@ -133,7 +106,7 @@ into their infrastructre and am already working with two such organizations..."/
 			<li>Sits on top of <a href="https://github.com/jhlywa/chess.js">chess.js</a> to do game parsing and validation</li>
 		</ul>
 		<p>
-			Technologies used to develop <b>jschess</b>...
+			Technologies used to develop <b>{{ project.NAME }}</b>...
 		</p>
 		<ul>
 			<li><a href="http://www.javascriptlint.com/download.htm">jsl</a> to make sure javascript code is standards complient</li>
@@ -146,7 +119,7 @@ into their infrastructre and am already working with two such organizations..."/
 			<li><a href="http://www.javascriptlint.com">JavaScript Lint</a> is used for checking the source code</li>
 			<li><a href="https://developers.google.com/closure/utilities/docs/linter_howto">Closure Linter</a> is used for checking the source code</li>
 		</ul>
-		<p>The current version of <b>jschess</b> is 0.0.1
+		<p>The current version of <b>{{ project.NAME }}</b> is {{ version_str(path="config/version.lua") }}
 		</p>
 		<p>
 			<b>This is alpha material at the moment, use at your own risk! API is subject to change!</b>
@@ -155,17 +128,17 @@ into their infrastructre and am already working with two such organizations..."/
 			Some links:
 		</p>
 		<ul>
-			<li><b>jschess</b> API is <a href="jsdoc/index.html">here</a></li>
-			<li><b>jschess</b> github clone link is <a href="git://github.com/veltzer/jschess.git">here</a></li>
-			<li><b>jschess</b> github development is at <a href="https://github.com/veltzer/jschess">here</a></li>
-			<li><b>jschess</b> website is at <a href="https://veltzer.github.io/jschess">here</a></li>
-			<li>latest full build for <b>jschess</b> is <a href="https://veltzer.github.io/jschess/out/jschess.js">jschess.js</a></li>
-			<li>latest minified output for <b>jschess</b> is <a href="https://veltzer.github.io/jschess/out/jschess.min.js">jschess.min.js</a></li>
-			<li>latest package (with third parties) for <b>jschess</b> is <a href="https://veltzer.github.io/jschess/out/jschess.pack.js">jschess.pack.js</a></li>
-			<li>latest sources for <b>jschess</b> is <a href="https://veltzer.github.io/jschess/out/jschess.zip">jschess.zip</a></li>
+			<li><b>{{ project.NAME }}</b> API is <a href="jsdoc/index.html">here</a></li>
+			<li><b>{{ project.NAME }}</b> github clone link is <a href="git://github.com/{{ personal.GITHUB_USERNAME }}/{{ project.NAME }}.git">here</a></li>
+			<li><b>{{ project.NAME }}</b> github development is at <a href="https://github.com/{{ personal.GITHUB_USERNAME }}/{{ project.NAME }}">here</a></li>
+			<li><b>{{ project.NAME }}</b> website is at <a href="https://{{ personal.GITHUB_USERNAME }}.github.io/{{ project.NAME }}">here</a></li>
+			<li>latest full build for <b>{{ project.NAME }}</b> is <a href="https://{{ personal.GITHUB_USERNAME }}.github.io/{{ project.NAME }}/out/jschess.js">jschess.js</a></li>
+			<li>latest minified output for <b>{{ project.NAME }}</b> is <a href="https://{{ personal.GITHUB_USERNAME }}.github.io/{{ project.NAME }}/out/jschess.min.js">jschess.min.js</a></li>
+			<li>latest package (with third parties) for <b>{{ project.NAME }}</b> is <a href="https://{{ personal.GITHUB_USERNAME }}.github.io/{{ project.NAME }}/out/jschess.pack.js">jschess.pack.js</a></li>
+			<li>latest sources for <b>{{ project.NAME }}</b> is <a href="https://{{ personal.GITHUB_USERNAME }}.github.io/{{ project.NAME }}/out/jschess.zip">jschess.zip</a></li>
 		</ul>
 		<p>
-			Demos of <b>jschess</b>...
+			Demos of <b>{{ project.NAME }}</b>...
 		</p>
 		<ul>
 			<li><a href="demo_using_pack.html">Using the pack.js file</a></li>
@@ -178,11 +151,11 @@ into their infrastructre and am already working with two such organizations..."/
 			<li><a href="demo_wordpress.html">Using the Wordpress plugin</a></li>
 		</ul>
 		<p>
-			Misc pages that help develop <b>jschess</b> and possibly other things...
+			Misc pages that help develop <b>{{ project.NAME }}</b> and possibly other things...
 		</p>
 		<ul>
 			<li><a href="calc.html">SVG path calculator (comes in handy when doing SVG graphics)</a></li>
-			<li><a href="tests.html">jschess QUnit tests</a></li>
+			<li><a href="tests.html">{{ project.NAME }} QUnit tests</a></li>
 		</ul>
 		<p>
 			Here is a quick demo (go ahead and zoom it with Ctrl+[+/-] to see what SVG is all about...):
@@ -199,8 +172,8 @@ into their infrastructre and am already working with two such organizations..."/
 		<button id="glow">glow</button>
 		<button id="clear">clear</button>
 		<p>
-			Copyright Mark Veltzer © 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026
-			<a href="mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
+			Copyright {{ personal.FULLNAME }} © {{ copyright_years() }}
+			<a href="{{ personal.EMAIL }}">{{ personal.EMAIL }}</a>
 		</p>
 	</body>
 </html>

@@ -1,0 +1,26 @@
+{% set project = load_lua(path="config/project.lua") -%}
+{% set personal = load_lua(path="config/personal.lua") -%}
+{% set jschess = load_lua(path="config/jschess.lua") -%}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>{{ project.NAME }} - Showing a FEN position</title>
+		<link rel="shortcut icon" href="favicon.ico"/>
+
+		{{ jschess.JSCHESS_JS_SECTION | safe }}
+
+		{{ jschess.JSCHESS_JS_SECTION_HIGHLIGHT | safe }}
+
+	</head>
+	<body>
+		<h1>Showing a FEN position</h1>
+		<p>
+		TBD
+		</p>
+		<p>
+			Copyright {{ personal.FULLNAME }} © {{ copyright_years() }}
+			<a href="{{ personal.EMAIL }}">{{ personal.EMAIL }}</a>
+		</p>
+	</body>
+</html>

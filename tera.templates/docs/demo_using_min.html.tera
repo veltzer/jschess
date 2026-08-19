@@ -1,17 +1,16 @@
+{% set project = load_lua(path="config/project.lua") -%}
+{% set personal = load_lua(path="config/personal.lua") -%}
+{% set jschess = load_lua(path="config/jschess.lua") -%}
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>jschess - Using the min.js file</title>
+		<title>{{ project.NAME }} - Using the min.js file</title>
 		<link rel="shortcut icon" href="favicon.ico"/>
 
-		<script type="text/javascript" src="jschess.pack.min.js"></script>
+		{{ jschess.JSCHESS_JS_SECTION | safe }}
 
-		        <!-- highlight.js -->
-        <script type="text/javascript" src="third_party/highlight.min.js"></script>
-        <link href="third_party/highlight.min.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
-    
+		{{ jschess.JSCHESS_JS_SECTION_HIGHLIGHT | safe }}
 
 		<script type="text/javascript">
 			document.observe('dom:loaded', function() {
@@ -40,56 +39,30 @@
 				<td>debug from me</td>
 				<td>minified from me</td>
 			</tr>
-			
+			{% for dep in jschess.RUNTIMEDEPS %}
 			<tr>
-				<td>prototype</td>
-				<td>1.7.3</td>
-				
+				<td>{{ dep.name }}</td>
+				<td>{{ dep.version }}</td>
+				{% if dep.download_url %}
+				<td><a href="{{ dep.download_url }}">download</a></td>
+{% else %}
 				<td>Not available for download</td>
-
-				
-				<td><a href="https://ajax.googleapis.com/ajax/libs/prototype/1.7.3.0/prototype.js">download</a></td>
-
-				<td><a href="http://prototypejs.org/learn">link</a></td>
-				<td><a href="../out/web/third_party/prototype.js">my download</a></td>
-				<td><a href="../out/web/third_party/prototype.min.js">my download</a></td>
-			</tr>
-
-			<tr>
-				<td>raphael</td>
-				<td>2.2.0</td>
-				
-				<td><a href="https://raw.githubusercontent.com/DmitryBaranovskiy/raphael/master/raphael.min.js">download</a></td>
-
-				
-				<td><a href="https://raw.githubusercontent.com/DmitryBaranovskiy/raphael/master/raphael.js">download</a></td>
-
-				<td><a href="http://raphaeljs.com/reference.html">link</a></td>
-				<td><a href="../out/web/third_party/raphael.js">my download</a></td>
-				<td><a href="../out/web/third_party/raphael.min.js">my download</a></td>
-			</tr>
-
-			<tr>
-				<td>chess.js</td>
-				<td>0.10.2</td>
-				
+{% endif %}
+				{% if dep.download_url_debug %}
+				<td><a href="{{ dep.download_url_debug }}">download</a></td>
+{% else %}
 				<td>Not available for download</td>
-
-				
-				<td><a href="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js">download</a></td>
-
-				<td><a href="https://github.com/jhlywa/chess.js/blob/master/README.md">link</a></td>
-				<td><a href="../out/web/third_party/chess.js">my download</a></td>
-				<td><a href="../out/web/third_party/chess.min.js">my download</a></td>
+{% endif %}
+				<td><a href="{{ dep.documentation }}">link</a></td>
+				<td><a href="../{{ dep.my_file_debug }}">my download</a></td>
+				<td><a href="../{{ dep.my_file }}">my download</a></td>
 			</tr>
-
+{% endfor %}
 		</table>
 		<p>
 		Import them so:
 		</p>
-		<pre><code class="html">&lt;script type=&quot;text/javascript&quot; src=&quot;out/web/third_party/prototype.min.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;out/web/third_party/raphael.min.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;out/web/third_party/chess.min.js&quot;&gt;&lt;/script&gt;&gt;</code></pre>
+		<pre><code class="html">{{ jschess.JSCHESS_GETJSTHIRDPARTY_ESCAPED | safe }}&gt;</code></pre>
 		<p>
 		Then download the minified <b>jschess</b> file from <a title="jschess compressed download" href="../out/jschess.min.js">here</a>.
 		Place the file somewhere on your web server and import it from your HTML like this:
@@ -109,8 +82,8 @@ board.startPosition()</code></pre>
 		</p>
 		<div id="myid"></div>
 		<p>
-			Copyright Mark Veltzer © 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026
-			<a href="mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
+			Copyright {{ personal.FULLNAME }} © {{ copyright_years() }}
+			<a href="{{ personal.EMAIL }}">{{ personal.EMAIL }}</a>
 		</p>
 	</body>
 </html>

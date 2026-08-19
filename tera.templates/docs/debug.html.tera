@@ -1,45 +1,18 @@
+{% set project = load_lua(path="config/project.lua") -%}
+{% set personal = load_lua(path="config/personal.lua") -%}
+{% set jschess = load_lua(path="config/jschess.lua") -%}
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>jschess - debug page</title>
+	<title>{{ project.NAME }} - debug page</title>
 	<link rel="shortcut icon" href="favicon.ico"/>
-	<meta name="Description" content="jschess is a JavaScript chess board written in pure JavaScript.
-It allows yo to create a chess board, have it show games in PGN
-notation from a server, moves pieces around, set up positions
-and more.
+	<meta name="Description" content="{{ project.DESCRIPTION_LONG }}"/>
+	<meta name="Keywords" content="{{ personal.FULLNAME }}, {{ personal.SLUG }}, {{ project.NAME }}, {{ project.KEYWORDS | join(sep=", ") }}"/>
 
-Technologies used
------------------
-* Prototype javascript library at http://prototypejs.org.
-* Raphael javascript library at http://raphaeljs.com.
-* chess.java javascript library at https://github.com/jhlywa/chess.js.
+	{{ jschess.JSCHESS_JS_SECTION_DEBUG | safe }}
 
-What makes jschess different?
------------------------------
-* Pure javascript.
-* No images - totally scalable graphics.
-* You can have your board at any size you want (because of scalable graphics).
-* As a result of being pure javascript totally controllable programatically.
-* Looks best.
-* Sits on top of good infrastructure (prototype.js,raphael.js,chess.js).
-
-Monetary contribution
----------------------
-If you'd like to see a feature added to jschess or would just like to show
-your appreciation you are welcome to contribute to it's development on it's website.
-
-I am ready to work with any chess organization wishing to incorporate jschess
-into their infrastructre and am already working with two such organizations..."/>
-	<meta name="Keywords" content="Mark Veltzer, veltzer, jschess, javascript, chess, board, chessboard"/>
-
-	<script type="text/javascript" src="jschess.pack.js"></script>
-
-	        <!-- highlight.js -->
-        <script type="text/javascript" src="third_party/highlight.min.js"></script>
-        <link href="third_party/highlight.min.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
-    
+	{{ jschess.JSCHESS_JS_SECTION_HIGHLIGHT | safe }}
 
 	<script type="text/javascript">
 		document.observe('dom:loaded', function() {
@@ -117,8 +90,8 @@ into their infrastructre and am already working with two such organizations..."/
 		<button id="glow">glow</button>
 		<button id="clear">clear</button>
 		<p>
-			Copyright Mark Veltzer © 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026
-			<a href="mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>
+			Copyright {{ personal.FULLNAME }} © {{ copyright_years() }}
+			<a href="{{ personal.EMAIL }}">{{ personal.EMAIL }}</a>
 		</p>
 	</body>
 </html>

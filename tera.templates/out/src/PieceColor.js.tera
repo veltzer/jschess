@@ -1,0 +1,62 @@
+{% set personal = load_lua(path="config/personal.lua") -%}
+/* vim:set filetype=javascript:*/
+/*global Class */
+
+
+/**
+  @class represents a piece color (white,black)
+  @author {{ personal.JSDOC_AUTHOR }}
+*/
+var PieceColor = Class.create(/** @lends PieceColor.prototype */{
+  /**
+    creates a new instance
+    @this {PieceColor}
+    @param {string} color string which represents
+    the color of the piece. Must be one of 'white' or 'black'.
+    @return {PieceColor} new instance of this class.
+    @author {{ personal.JSDOC_AUTHOR }}
+  */
+  initialize: function(color) {
+    if (!(PieceColor.colors.hasOwnProperty(color))) {
+      throw 'illegal piecetype ' + color;
+    }
+    this.color = color;
+  },
+  /**
+    toString method that allows you to get a nice printout for this type
+    @this {PieceColor}
+    @return {string} string representation of this instance.
+    @author {{ personal.JSDOC_AUTHOR }}
+  */
+  toString: function() {
+    return this.color;
+  },
+  /**
+    Return whether the piece is white
+    @this {PieceColor}
+    @return {boolean} boolean indicating whether the piece is white.
+    @author {{ personal.JSDOC_AUTHOR }}
+  */
+  isWhite: function() {
+    return this.color === 'white';
+  },
+  /**
+    Return whether the piece is black
+    @this {PieceColor}
+    @return {boolean} boolean indicating whether the piece is black.
+    @author {{ personal.JSDOC_AUTHOR }}
+  */
+  isBlack: function() {
+    return this.color === 'black';
+  }
+});
+
+
+/**
+  Array of piece colors
+  @author {{ personal.JSDOC_AUTHOR }}
+*/
+PieceColor.colors = {
+  white: undefined,
+  black: undefined
+};
