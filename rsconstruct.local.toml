@@ -15,3 +15,22 @@ dep_inputs = [
     "config/version.lua",
     "config/jschess.lua",
 ]
+
+# The JS packaging pipeline the pydmt-era Makefile used to own: concatenate
+# the tera-rendered out/src/*.js into docs/jschess.js, minify it with
+# yuicompressor, produce the pack variants and out/jschess.zip, and generate
+# docs/jsdoc/ with jsdoc. The out/src/*.js glob matches the tera processor's
+# outputs, so tera renders before this runs. jsdoc output is deterministic
+# (support/jsdoc.json sets includeDate: false).
+[processor.explicit.jsbundle]
+command = "scripts/build_js.sh"
+inputs = ["package.json", "support/jsdoc.json"]
+input_globs = ["out/src/*.js"]
+output_files = [
+    "docs/jschess.js",
+    "docs/jschess.min.js",
+    "docs/jschess.pack.js",
+    "docs/jschess.pack.min.js",
+    "out/jschess.zip",
+]
+output_dirs = ["docs/jsdoc"]

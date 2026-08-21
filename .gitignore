@@ -23,7 +23,6 @@ metastore_db/
 *.so
 *.a
 *.dis
-/Makefile.bak
 *.o.ur-safe
 *.oo
 *.elf
