@@ -5,12 +5,6 @@
 
 [analyzer.tera]
 
-[analyzer.markdown]
-
-[analyzer.python]
-
-# ─── templating ──────────────────────────────────────────────────────────────
-
 # Convention: tera configs are Lua (config/*.lua). dep_auto entries are
 # silently skipped where absent. Repos still on config/*.py keep a
 # dep_inputs override in their local overlay until converted.
@@ -31,30 +25,6 @@ dep_inputs = [
     "config/jschess.lua",
 ]
 
-# ─── markdown ────────────────────────────────────────────────────────────────
-
-[processor.rumdl]
-src_dirs = ["docs"]
-
-[processor.zspell]
-src_dirs = ["docs"]
-
-# ─── python ──────────────────────────────────────────────────────────────────
-
-[processor.ruff]
-src_dirs = ["scripts", "config"]
-
-[processor.pylint]
-src_dirs = ["scripts", "config"]
-
-[processor.mypy]
-src_dirs = ["scripts", "config"]
-
-[processor.requirements]
-src_dirs = ["scripts", "config"]
-
-# ─── shell ───────────────────────────────────────────────────────────────────
-
 [processor.shellcheck]
 src_dirs = ["scripts", "docs", "config"]
 args = ["--severity=error", "--shell=bash"]
@@ -68,12 +38,6 @@ src_dirs = ["config"]
 
 [processor.taplo]
 src_dirs = ["."]
-
-[processor.eslint]
-src_dirs = ["config"]
-args = ["-c", "config/eslint.config.js"]
-
-# ─── merged from rsconstruct.local.toml ─────────────────────────────────────
 
 # The JS packaging pipeline the pydmt-era Makefile used to own: concatenate
 # the tera-rendered out/src/*.js into docs/jschess.js, minify it with
