@@ -1,8 +1,8 @@
-# *jschess* project by Mark Veltzer
+# *js-jschess* project by Mark Veltzer
 
 description: jschess is a JavaScript based chess board
 
-project website: https://veltzer.github.io/jschess
+project website: https://veltzer.github.io/js-jschess
 
 author: Mark Veltzer
 
@@ -12,11 +12,11 @@ version: 0.0.1
 
 ## github
 
-![License](https://img.shields.io/github/license/veltzer/jschess)
+![License](https://img.shields.io/github/license/veltzer/js-jschess)
 
 ## build
 
-![build](https://github.com/veltzer/jschess/workflows/build/badge.svg)
+![build](https://github.com/veltzer/js-jschess/workflows/build/badge.svg)
 
 ## contact me
 

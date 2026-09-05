@@ -1,4 +1,4 @@
-NAME = "jschess"
+NAME = "js-jschess"
 DESCRIPTION_SHORT = "jschess is a JavaScript based chess board"
 DESCRIPTION_LONG = [[jschess is a JavaScript chess board written in pure JavaScript.
 It allows yo to create a chess board, have it show games in PGN
